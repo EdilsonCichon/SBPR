@@ -52,6 +52,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jScrollPanePropriedades = new javax.swing.JScrollPane();
         jTablePropriedades = new javax.swing.JTable();
         jButtonAtualizar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonCancelar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
@@ -214,6 +215,8 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
 
         jButtonAtualizar.setText("Atualizar");
 
+        jButtonExcluir.setText("Excluir");
+
         javax.swing.GroupLayout jPanelPropriedadesLayout = new javax.swing.GroupLayout(jPanelPropriedades);
         jPanelPropriedades.setLayout(jPanelPropriedadesLayout);
         jPanelPropriedadesLayout.setHorizontalGroup(
@@ -224,7 +227,8 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelPropriedadesLayout.setVerticalGroup(
@@ -233,7 +237,9 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 .addComponent(jButtonAdicionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAtualizar)
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonExcluir)
+                .addContainerGap())
             .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -283,6 +289,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.ButtonGroup jButtonGroupSexo;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonSalvar;

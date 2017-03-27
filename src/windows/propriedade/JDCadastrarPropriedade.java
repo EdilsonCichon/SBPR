@@ -32,7 +32,6 @@ public class JDCadastrarPropriedade extends javax.swing.JDialog {
         jPanelPropriedade = new javax.swing.JPanel();
         jLabelResponsavel = new javax.swing.JLabel();
         jTextFieldResponsavel = new javax.swing.JTextField();
-        jButtonPesquisar = new javax.swing.JButton();
         jLabelNomePropriedade = new javax.swing.JLabel();
         jTextFieldNomePropriedade = new javax.swing.JTextField();
         jLabelReferencia = new javax.swing.JLabel();
@@ -50,8 +49,6 @@ public class JDCadastrarPropriedade extends javax.swing.JDialog {
         jPanelPropriedade.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedade"));
 
         jLabelResponsavel.setText("Responsável:");
-
-        jButtonPesquisar.setText("...");
 
         jLabelNomePropriedade.setText("Nome da Propriedadade:");
 
@@ -71,9 +68,7 @@ public class JDCadastrarPropriedade extends javax.swing.JDialog {
                     .addGroup(jPanelPropriedadeLayout.createSequentialGroup()
                         .addComponent(jLabelResponsavel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldResponsavel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldResponsavel))
                     .addGroup(jPanelPropriedadeLayout.createSequentialGroup()
                         .addComponent(jLabelNomePropriedade)
                         .addGap(18, 18, 18)
@@ -87,11 +82,10 @@ public class JDCadastrarPropriedade extends javax.swing.JDialog {
         jPanelPropriedadeLayout.setVerticalGroup(
             jPanelPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPropriedadeLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
+                .addGap(2, 2, 2)
                 .addGroup(jPanelPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelResponsavel)
-                    .addComponent(jTextFieldResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPesquisar))
+                    .addComponent(jTextFieldResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNomePropriedade)
@@ -203,7 +197,6 @@ public class JDCadastrarPropriedade extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonInserir;
-    private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JLabel jLabelNomePropriedade;
     private javax.swing.JLabel jLabelReferencia;
     private javax.swing.JLabel jLabelResponsavel;
