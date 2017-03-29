@@ -45,7 +45,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridLayout(0, 1));
 
         jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/iconSistema.png"))); // NOI18N
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-logo-reduzido.png"))); // NOI18N
         getContentPane().add(jLabelLogo);
 
         jPanelLogin.setBorder(javax.swing.BorderFactory.createEtchedBorder());

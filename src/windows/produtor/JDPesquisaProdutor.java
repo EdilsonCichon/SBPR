@@ -35,6 +35,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         jTextFieldFiltro = new javax.swing.JTextField();
         jScrollPaneProdutores = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanelRodape = new javax.swing.JPanel();
         jButtonAlterar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -69,12 +70,6 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         });
         jScrollPaneProdutores.setViewportView(jTable1);
 
-        jButtonAlterar.setText("Alterar");
-
-        jButtonExcluir.setText("Excluir");
-
-        jButtonCancelar.setText("Cancelar");
-
         javax.swing.GroupLayout jPanelPesquisarProdutorLayout = new javax.swing.GroupLayout(jPanelPesquisarProdutor);
         jPanelPesquisarProdutor.setLayout(jPanelPesquisarProdutorLayout);
         jPanelPesquisarProdutorLayout.setHorizontalGroup(
@@ -82,24 +77,16 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
             .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneProdutores)
                     .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
                         .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldFiltro)
+                        .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelFiltrar)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPaneProdutores, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                        .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jButtonAlterar)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonExcluir)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPesquisarProdutorLayout.setVerticalGroup(
             jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,12 +97,38 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
                     .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPaneProdutores, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(jScrollPaneProdutores, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+        );
+
+        jPanelRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButtonAlterar.setText("Alterar");
+
+        jButtonExcluir.setText("Excluir");
+
+        jButtonCancelar.setText("Cancelar");
+
+        javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
+        jPanelRodape.setLayout(jPanelRodapeLayout);
+        jPanelRodapeLayout.setHorizontalGroup(
+            jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRodapeLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(jButtonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAlterar)
+                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelRodapeLayout.setVerticalGroup(
+            jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRodapeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonExcluir)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonAlterar))
                 .addContainerGap())
         );
 
@@ -124,10 +137,14 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelPesquisarProdutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPesquisarProdutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelPesquisarProdutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -142,6 +159,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JPanel jPanelPesquisarProdutor;
+    private javax.swing.JPanel jPanelRodape;
     private javax.swing.JScrollPane jScrollPaneProdutores;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldFiltro;

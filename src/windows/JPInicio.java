@@ -1,5 +1,6 @@
 package windows;
 
+import javax.swing.JButton;
 import windows.FrmPrincipal;
 
 public class JPInicio extends javax.swing.JPanel {
@@ -21,16 +22,17 @@ public class JPInicio extends javax.swing.JPanel {
     private void initComponents() {
 
         jButtonProdutor = new javax.swing.JButton();
-        jButtonFuncionario = new javax.swing.JButton();
+        jButtonServico = new javax.swing.JButton();
         jButtonMaquina = new javax.swing.JButton();
         jButtonTipoMaquina = new javax.swing.JButton();
-        jButtonPropriedades = new javax.swing.JButton();
+        jButtonPropriedade = new javax.swing.JButton();
         jButtonTipoServico = new javax.swing.JButton();
-        jButtonServico = new javax.swing.JButton();
+        jButtonFuncionario = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(2, 4, 5, 5));
 
         jButtonProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-produtor-reduzido.png"))); // NOI18N
+        jButtonProdutor.setToolTipText("Produtor");
         jButtonProdutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProdutorActionPerformed(evt);
@@ -38,15 +40,17 @@ public class JPInicio extends javax.swing.JPanel {
         });
         add(jButtonProdutor);
 
-        jButtonFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-funcionario-reduzido.png"))); // NOI18N
-        jButtonFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-serviço-reduzido.png"))); // NOI18N
+        jButtonServico.setToolTipText("Serviços");
+        jButtonServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFuncionarioActionPerformed(evt);
+                jButtonServicoActionPerformed(evt);
             }
         });
-        add(jButtonFuncionario);
+        add(jButtonServico);
 
         jButtonMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-maquina-reduzido.png"))); // NOI18N
+        jButtonMaquina.setToolTipText("Máquinas");
         jButtonMaquina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMaquinaActionPerformed(evt);
@@ -55,6 +59,7 @@ public class JPInicio extends javax.swing.JPanel {
         add(jButtonMaquina);
 
         jButtonTipoMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-maquina-reduzido.png"))); // NOI18N
+        jButtonTipoMaquina.setToolTipText("Tipos de Máquinas");
         jButtonTipoMaquina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTipoMaquinaActionPerformed(evt);
@@ -62,15 +67,17 @@ public class JPInicio extends javax.swing.JPanel {
         });
         add(jButtonTipoMaquina);
 
-        jButtonPropriedades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-propriedade-reduzido-reduzido.png"))); // NOI18N
-        jButtonPropriedades.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPropriedade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-propriedade-reduzido.png"))); // NOI18N
+        jButtonPropriedade.setToolTipText("Propriedades");
+        jButtonPropriedade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPropriedadesActionPerformed(evt);
+                jButtonPropriedadeActionPerformed(evt);
             }
         });
-        add(jButtonPropriedades);
+        add(jButtonPropriedade);
 
-        jButtonTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-serviço-reduzido.png"))); // NOI18N
+        jButtonTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-servico-reduzido.png"))); // NOI18N
+        jButtonTipoServico.setToolTipText("Tipos de Serviços");
         jButtonTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTipoServicoActionPerformed(evt);
@@ -78,26 +85,23 @@ public class JPInicio extends javax.swing.JPanel {
         });
         add(jButtonTipoServico);
 
-        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-serviço-reduzido.png"))); // NOI18N
-        jButtonServico.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-funcionario-reduzido.png"))); // NOI18N
+        jButtonFuncionario.setToolTipText("Funcionários");
+        jButtonFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonServicoActionPerformed(evt);
+                jButtonFuncionarioActionPerformed(evt);
             }
         });
-        add(jButtonServico);
+        add(jButtonFuncionario);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonPropriedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPropriedadesActionPerformed
+    private void jButtonPropriedadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPropriedadeActionPerformed
         janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, 2));
-    }//GEN-LAST:event_jButtonPropriedadesActionPerformed
+    }//GEN-LAST:event_jButtonPropriedadeActionPerformed
 
     private void jButtonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServicoActionPerformed
         janelaPrincipal.trocarPanel(new JPServico(janelaPrincipal, 0));
     }//GEN-LAST:event_jButtonServicoActionPerformed
-
-    private void jButtonProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutorActionPerformed
-        janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, 1));
-    }//GEN-LAST:event_jButtonProdutorActionPerformed
 
     private void jButtonTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoMaquinaActionPerformed
         janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, 6));
@@ -115,12 +119,43 @@ public class JPInicio extends javax.swing.JPanel {
        janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, 5));
     }//GEN-LAST:event_jButtonTipoServicoActionPerformed
 
+    private void jButtonProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutorActionPerformed
+        janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, 1));
+    }//GEN-LAST:event_jButtonProdutorActionPerformed
+
+    public void setjButtonProdutor(java.awt.event.ActionEvent evt) {
+        jButtonProdutorActionPerformed(evt);
+    }
+    
+    public void setjButtonPropriedade(java.awt.event.ActionEvent evt) {
+        jButtonPropriedadeActionPerformed(evt);
+    }
+
+    public void setjButtonFuncionario(java.awt.event.ActionEvent evt) {
+        jButtonFuncionarioActionPerformed(evt);
+    }
+
+    public void setjButtonMaquina(java.awt.event.ActionEvent evt) {
+        jButtonMaquinaActionPerformed(evt);
+    }
+
+    public void setjButtonServico(java.awt.event.ActionEvent evt) {
+        jButtonServicoActionPerformed(evt);
+    }
+
+    public void setjButtonTipoMaquina(java.awt.event.ActionEvent evt) {
+        jButtonTipoMaquinaActionPerformed(evt);
+    }
+
+    public void setjButtonTipoServico(java.awt.event.ActionEvent evt) {
+        jButtonTipoServicoActionPerformed(evt);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonFuncionario;
     private javax.swing.JButton jButtonMaquina;
     private javax.swing.JButton jButtonProdutor;
-    private javax.swing.JButton jButtonPropriedades;
+    private javax.swing.JButton jButtonPropriedade;
     private javax.swing.JButton jButtonServico;
     private javax.swing.JButton jButtonTipoMaquina;
     private javax.swing.JButton jButtonTipoServico;

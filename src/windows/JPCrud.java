@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import windows.produtor.JDCadastroProdutor;
 import control.ControladoraInterfaces;
+import javax.swing.Icon;
+import javax.swing.JButton;
 
 /**
  *
@@ -25,7 +27,7 @@ public class JPCrud extends javax.swing.JPanel {
         initComponents();
         this.pai = pai;
         this.codInicio = num;
-        ControladoraInterfaces.setarTitulo(codInicio, this);
+        ControladoraInterfaces.iniciarCrud(codInicio, this);
     }
 
   
@@ -43,6 +45,7 @@ public class JPCrud extends javax.swing.JPanel {
 
         jButtonCadastrar.setText("Cadastrar");
         jButtonCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCadastrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastrarActionPerformed(evt);
@@ -51,6 +54,7 @@ public class JPCrud extends javax.swing.JPanel {
         add(jButtonCadastrar);
 
         jButtonAlterar.setText("Alterar");
+        jButtonAlterar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAlterarActionPerformed(evt);
@@ -59,6 +63,7 @@ public class JPCrud extends javax.swing.JPanel {
         add(jButtonAlterar);
 
         jButtonConsultar.setText("Consultar");
+        jButtonConsultar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConsultarActionPerformed(evt);
@@ -67,6 +72,7 @@ public class JPCrud extends javax.swing.JPanel {
         add(jButtonConsultar);
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
@@ -90,6 +96,22 @@ public class JPCrud extends javax.swing.JPanel {
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
        ControladoraInterfaces.identificarInicio(pai, codInicio, 2);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
+
+    public void setIconAlterar(Icon icone) {
+        this.jButtonAlterar.setIcon(icone);
+    }
+
+    public void setIconCadastrar(Icon icone) {
+        this.jButtonCadastrar.setIcon(icone);
+    }
+
+    public void setIconConsultar(Icon icone) {
+        this.jButtonConsultar.setIcon(icone);
+    }
+
+    public void setIconExcluir(Icon icone) {
+        this.jButtonExcluir.setIcon(icone);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -7,6 +7,8 @@ package windows;
 
 import control.ControladoraInterfaces;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
@@ -23,6 +25,7 @@ public class JPServico extends javax.swing.JPanel {
         this.pai = pai;
         this.codInicio = num;
         this.setBorder(BorderFactory.createTitledBorder("Gerenciar Serviços"));
+        ControladoraInterfaces.setarAtributosServico(this, "Serviços", "servico");
     }
 
     /**
@@ -34,14 +37,11 @@ public class JPServico extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton5 = new javax.swing.JButton();
         jButtonAgendar = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
         jButtonConsultar = new javax.swing.JButton();
         jButtonConcluir = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-
-        jButton5.setText("jButton5");
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setLayout(new java.awt.GridLayout(2, 2, 5, 5));
@@ -107,9 +107,27 @@ public class JPServico extends javax.swing.JPanel {
         ControladoraInterfaces.identificarInicio(pai, codInicio, 4);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    public void setIconAgendar(Icon icone) {
+        this.jButtonAgendar.setIcon(icone);
+    }
+
+    public void setIconAlterar(Icon icone) {
+        this.jButtonAlterar.setIcon(icone);
+    }
+
+    public void setIconConcluir(Icon icone) {
+        this.jButtonConcluir.setIcon(icone);
+    }
+
+    public void setIconConsultar(Icon icone) {
+        this.jButtonConsultar.setIcon(icone);
+    }
+
+    public void setIconCancelar(Icon icone) {
+        this.jButtonCancelar.setIcon(icone);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonAgendar;
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;

@@ -19,7 +19,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     
     JPInicio inicio; 
-
+    JDAjuda ajuda;
+    FrmValidarAcesso login;
+    JDRelatorio relatorio;
+    JDSuporte suporte;
     /**
      * Creates new form JanelaPrincipal
      */
@@ -49,13 +52,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanelMenuPrincipal = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jButtonInicio = new javax.swing.JButton();
-        jButtonServico = new javax.swing.JButton();
         jButtonProdutor = new javax.swing.JButton();
         jButtonPropriedade = new javax.swing.JButton();
+        jButtonServico = new javax.swing.JButton();
         jButtonMaquina = new javax.swing.JButton();
-        jButtonFuncionario = new javax.swing.JButton();
-        jButtonTipoServico = new javax.swing.JButton();
         jButtonTipoMaquina = new javax.swing.JButton();
+        jButtonTipoServico = new javax.swing.JButton();
+        jButtonFuncionario = new javax.swing.JButton();
         jButtonRelatorio = new javax.swing.JButton();
         jButtonAssistencia = new javax.swing.JButton();
         jButtonAjuda = new javax.swing.JButton();
@@ -82,6 +85,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jButtonInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-home-reduzido.png"))); // NOI18N
+        jButtonInicio.setToolTipText("Início");
         jButtonInicio.setFocusable(false);
         jButtonInicio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonInicio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -92,72 +96,137 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonInicio);
 
-        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-serviço-reduzido.png"))); // NOI18N
-        jButtonServico.setFocusable(false);
-        jButtonServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButtonServico);
-        jButtonServico.getAccessibleContext().setAccessibleDescription("");
-
         jButtonProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-produtor-reduzido.png"))); // NOI18N
+        jButtonProdutor.setToolTipText("Produtor");
         jButtonProdutor.setFocusable(false);
         jButtonProdutor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonProdutor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonProdutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProdutorActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonProdutor);
 
-        jButtonPropriedade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-propriedade-reduzido-reduzido.png"))); // NOI18N
+        jButtonPropriedade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-propriedade-reduzido.png"))); // NOI18N
+        jButtonPropriedade.setToolTipText("Propriedades");
         jButtonPropriedade.setFocusable(false);
         jButtonPropriedade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonPropriedade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonPropriedade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPropriedadeActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonPropriedade);
 
+        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-serviço-reduzido.png"))); // NOI18N
+        jButtonServico.setToolTipText("Serviços");
+        jButtonServico.setFocusable(false);
+        jButtonServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonServicoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonServico);
+        jButtonServico.getAccessibleContext().setAccessibleDescription("");
+
         jButtonMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-maquina-reduzido.png"))); // NOI18N
+        jButtonMaquina.setToolTipText("Máquinas");
         jButtonMaquina.setFocusable(false);
         jButtonMaquina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonMaquina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonMaquina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMaquinaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonMaquina);
 
-        jButtonFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-funcionario-reduzido.png"))); // NOI18N
-        jButtonFuncionario.setFocusable(false);
-        jButtonFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButtonFuncionario);
-
-        jButtonTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-serviço-reduzido.png"))); // NOI18N
-        jButtonTipoServico.setToolTipText("");
-        jButtonTipoServico.setFocusable(false);
-        jButtonTipoServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonTipoServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButtonTipoServico);
-
         jButtonTipoMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-maquina-reduzido.png"))); // NOI18N
+        jButtonTipoMaquina.setToolTipText("Tipos de Máquinas");
         jButtonTipoMaquina.setFocusable(false);
         jButtonTipoMaquina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonTipoMaquina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonTipoMaquina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTipoMaquinaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonTipoMaquina);
 
+        jButtonTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-servico-reduzido.png"))); // NOI18N
+        jButtonTipoServico.setToolTipText("Tipos de Serviços");
+        jButtonTipoServico.setFocusable(false);
+        jButtonTipoServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonTipoServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTipoServicoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonTipoServico);
+
+        jButtonFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-funcionario-reduzido.png"))); // NOI18N
+        jButtonFuncionario.setToolTipText("Funcionários");
+        jButtonFuncionario.setFocusable(false);
+        jButtonFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFuncionarioActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonFuncionario);
+
         jButtonRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-relatorio-reduzido.png"))); // NOI18N
+        jButtonRelatorio.setToolTipText("Relatórios");
         jButtonRelatorio.setFocusable(false);
         jButtonRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRelatorioActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonRelatorio);
 
         jButtonAssistencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-suporte-reduzido.png"))); // NOI18N
+        jButtonAssistencia.setToolTipText("Comunicação");
         jButtonAssistencia.setFocusable(false);
         jButtonAssistencia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonAssistencia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAssistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAssistenciaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonAssistencia);
 
         jButtonAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-ajuda-reduzido.png"))); // NOI18N
+        jButtonAjuda.setToolTipText("Ajuda");
         jButtonAjuda.setFocusable(false);
         jButtonAjuda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonAjuda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAjudaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonAjuda);
 
         jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-sair-reduzido.png"))); // NOI18N
+        jButtonSair.setToolTipText("Sair");
         jButtonSair.setFocusable(false);
         jButtonSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonSair);
 
         jPanelMenuPrincipal.add(jToolBar1);
@@ -240,6 +309,55 @@ public class FrmPrincipal extends javax.swing.JFrame {
         inicio = new JPInicio(this);
         trocarPanel(inicio);
     }//GEN-LAST:event_jButtonInicioActionPerformed
+
+    private void jButtonProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutorActionPerformed
+       inicio.setjButtonProdutor(evt);
+    }//GEN-LAST:event_jButtonProdutorActionPerformed
+
+    private void jButtonPropriedadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPropriedadeActionPerformed
+        inicio.setjButtonPropriedade(evt);
+    }//GEN-LAST:event_jButtonPropriedadeActionPerformed
+
+    private void jButtonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServicoActionPerformed
+        inicio.setjButtonServico(evt);
+    }//GEN-LAST:event_jButtonServicoActionPerformed
+
+    private void jButtonMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMaquinaActionPerformed
+        inicio.setjButtonMaquina(evt);
+    }//GEN-LAST:event_jButtonMaquinaActionPerformed
+
+    private void jButtonTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoServicoActionPerformed
+        inicio.setjButtonTipoServico(evt);
+    }//GEN-LAST:event_jButtonTipoServicoActionPerformed
+
+    private void jButtonTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoMaquinaActionPerformed
+        inicio.setjButtonTipoMaquina(evt);
+    }//GEN-LAST:event_jButtonTipoMaquinaActionPerformed
+
+    private void jButtonFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFuncionarioActionPerformed
+        inicio.setjButtonFuncionario(evt);
+    }//GEN-LAST:event_jButtonFuncionarioActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        login = new FrmValidarAcesso();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjudaActionPerformed
+        ajuda = new JDAjuda(this, true);
+        ajuda.setVisible(true);
+    }//GEN-LAST:event_jButtonAjudaActionPerformed
+
+    private void jButtonRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelatorioActionPerformed
+        relatorio = new JDRelatorio(this, true);
+        relatorio.setVisible(true);
+    }//GEN-LAST:event_jButtonRelatorioActionPerformed
+
+    private void jButtonAssistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssistenciaActionPerformed
+        suporte = new JDSuporte(this, true);
+        suporte.setVisible(true);
+    }//GEN-LAST:event_jButtonAssistenciaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAjuda;

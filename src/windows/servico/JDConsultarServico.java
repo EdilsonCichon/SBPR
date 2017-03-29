@@ -47,8 +47,8 @@ public class JDConsultarServico extends javax.swing.JDialog {
         jComboBoxSelecaoServico = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableResultadoServico = new javax.swing.JTable();
-        jPanelBotoes = new javax.swing.JPanel();
-        jButtonPesquisar = new javax.swing.JButton();
+        jPanelRodape = new javax.swing.JPanel();
+        jButtonConsultar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonConcluir = new javax.swing.JButton();
 
@@ -109,7 +109,7 @@ public class JDConsultarServico extends javax.swing.JDialog {
                         .addComponent(jLabelFiltrarPor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxChavePesquisa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
                 .addGap(13, 13, 13))
         );
         jPanelPesquisarProdutorLayout.setVerticalGroup(
@@ -200,7 +200,9 @@ public class JDConsultarServico extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButtonPesquisar.setText("Pesquisar");
+        jPanelRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButtonConsultar.setText("Consultar");
 
         jButtonCancelar.setText("Cancelar");
 
@@ -211,25 +213,25 @@ public class JDConsultarServico extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
-        jPanelBotoes.setLayout(jPanelBotoesLayout);
-        jPanelBotoesLayout.setHorizontalGroup(
-            jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBotoesLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jButtonPesquisar)
+        javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
+        jPanelRodape.setLayout(jPanelRodapeLayout);
+        jPanelRodapeLayout.setHorizontalGroup(
+            jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRodapeLayout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addComponent(jButtonConsultar)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConcluir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanelBotoesLayout.setVerticalGroup(
-            jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBotoesLayout.createSequentialGroup()
+        jPanelRodapeLayout.setVerticalGroup(
+            jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRodapeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonPesquisar)
+                .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConsultar)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonConcluir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -242,7 +244,7 @@ public class JDConsultarServico extends javax.swing.JDialog {
             .addComponent(jPanelPesquisarProdutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelSelecaoPropriedade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelPesquisarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelRodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,10 +255,8 @@ public class JDConsultarServico extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelPesquisarServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanelPesquisarProdutor.getAccessibleContext().setAccessibleName("Produtor");
 
         pack();
         setLocationRelativeTo(null);
@@ -321,7 +321,7 @@ public class JDConsultarServico extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConcluir;
-    private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton jButtonConsultar;
     private javax.swing.JComboBox<String> jComboBoxChavePesquisa;
     private javax.swing.JComboBox<String> jComboBoxSelecaoPropriedade;
     private javax.swing.JComboBox<String> jComboBoxSelecaoServico;
@@ -330,9 +330,9 @@ public class JDConsultarServico extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelPropriedade;
     private javax.swing.JLabel jLabelTipoServico;
     private javax.swing.JMenuItem jMenuItemAlterar;
-    private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelPesquisarProdutor;
     private javax.swing.JPanel jPanelPesquisarServico;
+    private javax.swing.JPanel jPanelRodape;
     private javax.swing.JPanel jPanelSelecaoPropriedade;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;

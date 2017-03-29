@@ -51,7 +51,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonAdicionar = new javax.swing.JButton();
         jScrollPanePropriedades = new javax.swing.JScrollPane();
         jTablePropriedades = new javax.swing.JTable();
-        jButtonAtualizar = new javax.swing.JButton();
+        jButtonAlterar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonCancelar = new javax.swing.JButton();
@@ -90,7 +90,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextFieldDataNascimento.setText("  /  /    ");
 
         try {
             jFormattedTextFieldCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -187,7 +186,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                     .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelSexo)
                         .addComponent(jRadioButtonFeminino)))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         getContentPane().add(jPanelDadosPessoais);
@@ -214,7 +213,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         });
         jScrollPanePropriedades.setViewportView(jTablePropriedades);
 
-        jButtonAtualizar.setText("Atualizar");
+        jButtonAlterar.setText("Alterar");
 
         jButtonExcluir.setText("Excluir");
 
@@ -227,7 +226,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -237,7 +236,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             .addGroup(jPanelPropriedadesLayout.createSequentialGroup()
                 .addComponent(jButtonAdicionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAtualizar)
+                .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonExcluir)
                 .addContainerGap())
@@ -288,7 +287,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
-    private javax.swing.JButton jButtonAtualizar;
+    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.ButtonGroup jButtonGroupSexo;
