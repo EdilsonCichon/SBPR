@@ -30,12 +30,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jPanelMenuPrincipal" max="32767" attributes="0"/>
+                  <Component id="jPanelMenuPrincipal" pref="760" max="32767" attributes="0"/>
                   <Component id="jPanelInfoSistema" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanelPrincipal" min="-2" pref="732" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanelPrincipal" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -97,6 +94,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="jButtonInicio">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-home-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="In&#xed;cio"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -108,6 +108,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonServico">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-servi&#xe7;o-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -116,6 +119,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonProdutor">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-produtor-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Produtor"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -124,6 +130,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonPropriedade">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-propriedade-reduzido-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Propriedade"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -132,6 +141,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonMaquina">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-maquina-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe1;quina"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -140,6 +152,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonFuncionario">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-funcionario-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -148,6 +163,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonTipoServico">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-tipo-servi&#xe7;o-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Tipo de Servi&#xe7;o"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -156,17 +174,20 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonTipoMaquina">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-tipo-maquina-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Tipo de M&#xe1;quina"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTipoMaquinaActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRelatorio">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-relatorio-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Relatorio"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -175,6 +196,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonAssistencia">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-suporte-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Assistencia"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -183,6 +207,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonAjuda">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-ajuda-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Ajuda"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -191,6 +218,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonSair">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/windows/icones/icone-sair-reduzido.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>

@@ -81,6 +81,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
+        jButtonInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-home-reduzido.png"))); // NOI18N
         jButtonInicio.setText("Início");
         jButtonInicio.setFocusable(false);
         jButtonInicio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -92,71 +93,77 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonInicio);
 
+        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-serviço-reduzido.png"))); // NOI18N
         jButtonServico.setText("Serviço");
         jButtonServico.setFocusable(false);
         jButtonServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonServico);
 
+        jButtonProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-produtor-reduzido.png"))); // NOI18N
         jButtonProdutor.setText("Produtor");
         jButtonProdutor.setFocusable(false);
         jButtonProdutor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonProdutor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonProdutor);
 
+        jButtonPropriedade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-propriedade-reduzido-reduzido.png"))); // NOI18N
         jButtonPropriedade.setText("Propriedade");
         jButtonPropriedade.setFocusable(false);
         jButtonPropriedade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonPropriedade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonPropriedade);
 
+        jButtonMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-maquina-reduzido.png"))); // NOI18N
         jButtonMaquina.setText("Máquina");
         jButtonMaquina.setFocusable(false);
         jButtonMaquina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonMaquina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonMaquina);
 
+        jButtonFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-funcionario-reduzido.png"))); // NOI18N
         jButtonFuncionario.setText("Funcionário");
         jButtonFuncionario.setFocusable(false);
         jButtonFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonFuncionario);
 
+        jButtonTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-serviço-reduzido.png"))); // NOI18N
         jButtonTipoServico.setText("Tipo de Serviço");
         jButtonTipoServico.setFocusable(false);
         jButtonTipoServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonTipoServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonTipoServico);
 
+        jButtonTipoMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-maquina-reduzido.png"))); // NOI18N
         jButtonTipoMaquina.setText("Tipo de Máquina");
         jButtonTipoMaquina.setFocusable(false);
         jButtonTipoMaquina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonTipoMaquina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonTipoMaquina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTipoMaquinaActionPerformed(evt);
-            }
-        });
         jToolBar1.add(jButtonTipoMaquina);
 
+        jButtonRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-relatorio-reduzido.png"))); // NOI18N
         jButtonRelatorio.setText("Relatorio");
         jButtonRelatorio.setFocusable(false);
         jButtonRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonRelatorio);
 
+        jButtonAssistencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-suporte-reduzido.png"))); // NOI18N
         jButtonAssistencia.setText("Assistencia");
         jButtonAssistencia.setFocusable(false);
         jButtonAssistencia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonAssistencia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonAssistencia);
 
+        jButtonAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-ajuda-reduzido.png"))); // NOI18N
         jButtonAjuda.setText("Ajuda");
         jButtonAjuda.setFocusable(false);
         jButtonAjuda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonAjuda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButtonAjuda);
 
+        jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-sair-reduzido.png"))); // NOI18N
         jButtonSair.setText("Sair");
         jButtonSair.setFocusable(false);
         jButtonSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -218,11 +225,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanelMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
                     .addComponent(jPanelInfoSistema, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanelPrincipal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -245,10 +250,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         inicio = new JPInicio(this);
         trocarPanel(inicio);
     }//GEN-LAST:event_jButtonInicioActionPerformed
-
-    private void jButtonTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoMaquinaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonTipoMaquinaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAjuda;
