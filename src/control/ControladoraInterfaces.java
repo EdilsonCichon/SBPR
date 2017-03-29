@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import windows.JPCrud;
 import windows.produtor.JDCadastroProdutor;
+import windows.produtor.JDPesquisaProdutor;
 import windows.propriedade.JDCadastrarPropriedade;
 import windows.servico.JDAgendarServico;
 import windows.servico.JDConsultarServico;
@@ -76,8 +77,13 @@ public class ControladoraInterfaces {
 
             JDCadastroProdutor cadastroProdutor = new JDCadastroProdutor(pai, true);
             cadastroProdutor.setVisible(true);
+            //SETAR ICONES AKI
 
         } else if (codCrud == 1) {
+            
+            JDPesquisaProdutor pesquisaProdutor = new JDPesquisaProdutor(pai, true);
+            pesquisaProdutor.setVisible(true);
+            
 
         } else if (codCrud == 2) {
 

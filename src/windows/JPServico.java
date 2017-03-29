@@ -22,6 +22,7 @@ public class JPServico extends javax.swing.JPanel {
         initComponents();
         this.pai = pai;
         this.codInicio = num;
+        this.setBorder(BorderFactory.createTitledBorder("Gerenciar Serviços"));
     }
 
     /**

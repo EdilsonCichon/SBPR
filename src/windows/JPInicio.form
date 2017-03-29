@@ -23,7 +23,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButtonProdutor">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Produtor"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/windows/icones/icone-produtor-reduzido.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonProdutorActionPerformed"/>
@@ -31,7 +33,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonFuncionario">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/windows/icones/icone-funcionario-reduzido.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFuncionarioActionPerformed"/>
@@ -39,7 +43,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonMaquina">
       <Properties>
-        <Property name="text" type="java.lang.String" value="M&#xe1;quina"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/windows/icones/icone-maquina-reduzido.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMaquinaActionPerformed"/>
@@ -47,7 +53,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonTipoMaquina">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo de M&#xe1;quina"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/windows/icones/icone-tipo-maquina-reduzido.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTipoMaquinaActionPerformed"/>
@@ -55,7 +63,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonPropriedades">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Propriedades"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/windows/icones/icone-propriedade-reduzido-reduzido.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPropriedadesActionPerformed"/>
@@ -63,7 +73,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonTipoServico">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo de Servi&#xe7;o"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/windows/icones/icone-tipo-servi&#xe7;o-reduzido.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTipoServicoActionPerformed"/>
@@ -71,7 +83,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonServico">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/windows/icones/icone-servi&#xe7;o-reduzido.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonServicoActionPerformed"/>

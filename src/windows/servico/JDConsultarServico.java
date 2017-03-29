@@ -71,13 +71,18 @@ public class JDConsultarServico extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Serviço");
 
-        jPanelPesquisarProdutor.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar Produtor"));
+        jPanelPesquisarProdutor.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtor"));
 
         jLabelNome.setText("Nome:");
 
         jLabelFiltrarPor.setText("Filtrar por:");
 
         jComboBoxChavePesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "RG" }));
+        jComboBoxChavePesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxChavePesquisaActionPerformed(evt);
+            }
+        });
 
         jTableResultadoProdutor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,17 +102,15 @@ public class JDConsultarServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(13, 13, 13))
-                    .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
                         .addComponent(jLabelNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNomeProdutor, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldNomeProdutor, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelFiltrarPor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxChavePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jComboBoxChavePesquisa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
+                .addGap(13, 13, 13))
         );
         jPanelPesquisarProdutorLayout.setVerticalGroup(
             jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +126,7 @@ public class JDConsultarServico extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelSelecaoPropriedade.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleção de Propriedade"));
+        jPanelSelecaoPropriedade.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedade"));
 
         jLabelPropriedade.setText("Propriedade:");
 
@@ -150,7 +153,7 @@ public class JDConsultarServico extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelPesquisarServico.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar Serviço"));
+        jPanelPesquisarServico.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviço"));
 
         jLabelTipoServico.setText("Tipo de Serviço:");
 
@@ -161,7 +164,7 @@ public class JDConsultarServico extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Tipo do Serviço", "Data Conclusão", "Tempo previsto", "Cancelado", "Concluido"
+                "Tipo do Serviço", "Data Conclusão", "Tempo previsto", "Situação"
             }
         ));
         jTableResultadoServico.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -188,7 +191,7 @@ public class JDConsultarServico extends javax.swing.JDialog {
         jPanelPesquisarServicoLayout.setVerticalGroup(
             jPanelPesquisarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPesquisarServicoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(2, 2, 2)
                 .addGroup(jPanelPesquisarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipoServico)
                     .addComponent(jComboBoxSelecaoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,23 +216,23 @@ public class JDConsultarServico extends javax.swing.JDialog {
         jPanelBotoesLayout.setHorizontalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBotoesLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(38, 38, 38)
                 .addComponent(jButtonPesquisar)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConcluir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelBotoesLayout.setVerticalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBotoesLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPesquisar)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonConcluir))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -250,9 +253,10 @@ public class JDConsultarServico extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelPesquisarServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanelPesquisarProdutor.getAccessibleContext().setAccessibleName("Produtor");
 
         pack();
         setLocationRelativeTo(null);
@@ -267,6 +271,10 @@ public class JDConsultarServico extends javax.swing.JDialog {
             jPopupMenu1.show(jTable1, evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jTableResultadoServicoMouseReleased
+
+    private void jComboBoxChavePesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxChavePesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxChavePesquisaActionPerformed
 
     /**
      * @param args the command line arguments
