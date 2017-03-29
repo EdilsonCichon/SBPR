@@ -42,6 +42,7 @@ public class JPCrud extends javax.swing.JPanel {
         setLayout(new java.awt.GridLayout(2, 2, 5, 5));
 
         jButtonCadastrar.setText("Cadastrar");
+        jButtonCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastrarActionPerformed(evt);
