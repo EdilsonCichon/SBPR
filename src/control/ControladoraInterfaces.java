@@ -45,16 +45,16 @@ public class ControladoraInterfaces {
             JDAgendarServico agendarServico = new JDAgendarServico(pai, true);
             agendarServico.setVisible(true);
         } else if (codCrud == 1) {
-            JDConsultarServico consultarServico = new JDConsultarServico(pai, true);
+            JDConsultarServico consultarServico = new JDConsultarServico(pai, true, codCrud);
             consultarServico.setVisible(true);
         } else if (codCrud == 2) {
-            JDConsultarServico consultarServico = new JDConsultarServico(pai, true);
+            JDConsultarServico consultarServico = new JDConsultarServico(pai, true, codCrud);
             consultarServico.setVisible(true);
         } else if (codCrud == 3) {
-            JDConsultarServico consultarServico = new JDConsultarServico(pai, true);
+            JDConsultarServico consultarServico = new JDConsultarServico(pai, true, codCrud);
             consultarServico.setVisible(true);
         } else if (codCrud == 4) {
-            JDConsultarServico consultarServico = new JDConsultarServico(pai, true);
+            JDConsultarServico consultarServico = new JDConsultarServico(pai, true, codCrud);
             consultarServico.setVisible(true);
         }
     }

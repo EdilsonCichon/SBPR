@@ -11,12 +11,16 @@ package windows.servico;
  */
 public class JDConsultarServico extends javax.swing.JDialog {
 
+    int codCrud;
     /**
      * Creates new form JDConsultarServico
      */
-    public JDConsultarServico(java.awt.Frame parent, boolean modal) {
+    
+    public JDConsultarServico(java.awt.Frame parent, boolean modal,int cod) {
         super(parent, modal);
         initComponents();
+        this.codCrud = cod;
+        botaoVisivel(codCrud);
     }
 
     /**
@@ -203,10 +207,13 @@ public class JDConsultarServico extends javax.swing.JDialog {
         jPanelRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButtonConsultar.setText("Consultar");
+        jButtonConsultar.setMaximumSize(new java.awt.Dimension(105, 23));
+        jButtonConsultar.setMinimumSize(new java.awt.Dimension(105, 23));
+        jButtonConsultar.setPreferredSize(new java.awt.Dimension(105, 23));
 
-        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setText("Cancelar Pedido");
 
-        jButtonConcluir.setText("Concluir");
+        jButtonConcluir.setText("Concluir Pedido");
         jButtonConcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConcluirActionPerformed(evt);
@@ -217,24 +224,24 @@ public class JDConsultarServico extends javax.swing.JDialog {
         jPanelRodape.setLayout(jPanelRodapeLayout);
         jPanelRodapeLayout.setHorizontalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRodapeLayout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addComponent(jButtonConsultar)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConcluir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
         jPanelRodapeLayout.setVerticalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRodapeLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConsultar)
+                    .addComponent(jButtonConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonConcluir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -262,6 +269,29 @@ public class JDConsultarServico extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botaoVisivel(int cod){
+        if(cod == 1){
+            jButtonConsultar.setVisible(true);
+            //jButtonConsultar.setVerticalAlignment((int) CENTER_ALIGNMENT);
+            //jButtonConsultar.setHorizontalAlignment((int)HEIGHT);
+            jButtonConcluir.setVisible(false);
+            jButtonCancelar.setVisible(false);
+        }else if(cod == 2){
+            jButtonConsultar.setVisible(true);
+            jButtonConcluir.setVisible(false);
+            jButtonCancelar.setVisible(false);
+        }else if(cod == 3){
+            jButtonConcluir.setVisible(true);
+            jButtonConsultar.setVisible(true);
+            jButtonCancelar.setVisible(false);
+        }else{
+            jButtonCancelar.setVisible(true);
+            jButtonConsultar.setVisible(true);
+            jButtonConcluir.setVisible(false);
+        }
+        
+    }
+    
     private void jButtonConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonConcluirActionPerformed
@@ -276,47 +306,6 @@ public class JDConsultarServico extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxChavePesquisaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDConsultarServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDConsultarServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDConsultarServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDConsultarServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JDConsultarServico dialog = new JDConsultarServico(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
