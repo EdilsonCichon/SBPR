@@ -9,12 +9,12 @@ package windows.propriedade;
  *
  * @author Chrysthian
  */
-public class JDCadastrarPropriedade extends javax.swing.JDialog {
+public class JDCadastroPropriedade extends javax.swing.JDialog {
 
     /**
      * Creates new form JDCadastroPropriedade
      */
-    public JDCadastrarPropriedade(java.awt.Frame parent, boolean modal) {
+    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(parent);
@@ -165,14 +165,18 @@ public class JDCadastrarPropriedade extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDCadastrarPropriedade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadastroPropriedade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDCadastrarPropriedade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadastroPropriedade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDCadastrarPropriedade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadastroPropriedade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDCadastrarPropriedade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadastroPropriedade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -181,7 +185,7 @@ public class JDCadastrarPropriedade extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDCadastrarPropriedade dialog = new JDCadastrarPropriedade(new javax.swing.JFrame(), true);
+                JDCadastroPropriedade dialog = new JDCadastroPropriedade(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

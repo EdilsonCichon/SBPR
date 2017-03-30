@@ -10,11 +10,14 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import windows.FrmValidarAcesso;
 import windows.JPCrud;
 import windows.JPServico;
+import windows.funcionario.JDCadastroFuncionario;
 import windows.produtor.JDCadastroProdutor;
 import windows.produtor.JDPesquisaProdutor;
-import windows.propriedade.JDCadastrarPropriedade;
+import windows.propriedade.JDCadastroPropriedade;
+import windows.propriedade.JDPesquisaPropriedade;
 import windows.servico.JDAgendarServico;
 import windows.servico.JDConsultarServico;
 
@@ -24,6 +27,15 @@ import windows.servico.JDConsultarServico;
  */
 public class ControladoraInterfaces {
 
+    public static void main(String args[]){
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrmValidarAcesso().setVisible(true);
+            }
+        });
+    }
+    
     public static void identificarInicio(JFrame pai, int codInicio, int codCrud) {
 
         switch (codInicio) {
@@ -71,13 +83,32 @@ public class ControladoraInterfaces {
             pesquisaProdutor = new JDPesquisaProdutor(pai, true);
             pesquisaProdutor.setVisible(true);
         } else if (codCrud == 2) {
-
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true);
+            pesquisaProdutor.setVisible(true);
         } else if (codCrud == 3) {
-
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true);
+            pesquisaProdutor.setVisible(true);
         }
     }
 
     public static void gerenciarPropriedade(int codCrud, JFrame pai) {
+        
+        JDCadastroPropriedade cadastroPropriedade;
+        JDPesquisaPropriedade pesquisaPropriedade;
+        
+        if (codCrud == 0) {
+            cadastroPropriedade = new JDCadastroPropriedade(pai, true);
+            cadastroPropriedade.setVisible(true);
+        } else if (codCrud == 1) {
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true);
+            pesquisaPropriedade.setVisible(true);
+        } else if (codCrud == 2) {
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true);
+            pesquisaPropriedade.setVisible(true);
+        } else if (codCrud == 3) {
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true);
+            pesquisaPropriedade.setVisible(true);
+        }
 
     }
 
@@ -86,7 +117,23 @@ public class ControladoraInterfaces {
     }
 
     public static void gerenciarFuncionario(int codCrud, JFrame pai) {
+        
+        JDCadastroFuncionario cadastroFuncionario;
+        //JDPesquisaFuncionario pesquisaFuncionario;
 
+        if (codCrud == 0) {
+            cadastroFuncionario = new JDCadastroFuncionario(pai, true);
+            cadastroFuncionario.setVisible(true);
+        } else if (codCrud == 1) {
+            //pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
+            //pesquisaFuncionario.setVisible(true);
+        } else if (codCrud == 2) {
+            //pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
+            //pesquisaFuncionario.setVisible(true);
+        } else if (codCrud == 3) {
+            //pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
+            //pesquisaFuncionario.setVisible(true);
+        }
     }
 
     public static void gerenciarTipoServico(int codCrud, JFrame pai) {
@@ -105,8 +152,8 @@ public class ControladoraInterfaces {
             case 2: setarAtributosCrud(crud, "Propriedades", "propriedade"); break;
             case 3: setarAtributosCrud(crud, "Máquinas", "maquina"); break;
             case 4: setarAtributosCrud(crud, "Funcionários", "funcionario"); break;
-            case 5: setarAtributosCrud(crud, "Tipos de Serviço", "tipo-servico"); break;
-            case 6: setarAtributosCrud(crud, "Tipos de Máquina", "tipo-maquina"); break;
+            case 5: setarAtributosCrud(crud, "Tipos de Serviço", "servico"); break;
+            case 6: setarAtributosCrud(crud, "Tipos de Máquina", "maquina"); break;
             default: break;
         }
     }

@@ -32,7 +32,10 @@ public class JPInicio extends javax.swing.JPanel {
         setLayout(new java.awt.GridLayout(2, 4, 5, 5));
 
         jButtonProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-produtor-reduzido.png"))); // NOI18N
-        jButtonProdutor.setToolTipText("Produtor");
+        jButtonProdutor.setText("Produtor");
+        jButtonProdutor.setToolTipText("");
+        jButtonProdutor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonProdutor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonProdutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProdutorActionPerformed(evt);
@@ -41,7 +44,10 @@ public class JPInicio extends javax.swing.JPanel {
         add(jButtonProdutor);
 
         jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-serviço-reduzido.png"))); // NOI18N
-        jButtonServico.setToolTipText("Serviços");
+        jButtonServico.setText("Serviços");
+        jButtonServico.setToolTipText("");
+        jButtonServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonServicoActionPerformed(evt);
@@ -50,7 +56,10 @@ public class JPInicio extends javax.swing.JPanel {
         add(jButtonServico);
 
         jButtonMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-maquina-reduzido.png"))); // NOI18N
-        jButtonMaquina.setToolTipText("Máquinas");
+        jButtonMaquina.setText("Máquinas");
+        jButtonMaquina.setToolTipText("");
+        jButtonMaquina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMaquina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonMaquina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMaquinaActionPerformed(evt);
@@ -59,7 +68,10 @@ public class JPInicio extends javax.swing.JPanel {
         add(jButtonMaquina);
 
         jButtonTipoMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-maquina-reduzido.png"))); // NOI18N
-        jButtonTipoMaquina.setToolTipText("Tipos de Máquinas");
+        jButtonTipoMaquina.setText("Tipos de Máquinas");
+        jButtonTipoMaquina.setToolTipText("");
+        jButtonTipoMaquina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonTipoMaquina.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonTipoMaquina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTipoMaquinaActionPerformed(evt);
@@ -68,7 +80,10 @@ public class JPInicio extends javax.swing.JPanel {
         add(jButtonTipoMaquina);
 
         jButtonPropriedade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-propriedade-reduzido.png"))); // NOI18N
-        jButtonPropriedade.setToolTipText("Propriedades");
+        jButtonPropriedade.setText("Propriedades");
+        jButtonPropriedade.setToolTipText("");
+        jButtonPropriedade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonPropriedade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonPropriedade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPropriedadeActionPerformed(evt);
@@ -77,7 +92,10 @@ public class JPInicio extends javax.swing.JPanel {
         add(jButtonPropriedade);
 
         jButtonTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-tipo-servico-reduzido.png"))); // NOI18N
-        jButtonTipoServico.setToolTipText("Tipos de Serviços");
+        jButtonTipoServico.setText("Tipos de Serviços");
+        jButtonTipoServico.setToolTipText("");
+        jButtonTipoServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonTipoServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTipoServicoActionPerformed(evt);
@@ -86,7 +104,10 @@ public class JPInicio extends javax.swing.JPanel {
         add(jButtonTipoServico);
 
         jButtonFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/windows/icones/icone-funcionario-reduzido.png"))); // NOI18N
-        jButtonFuncionario.setToolTipText("Funcionários");
+        jButtonFuncionario.setText("Funcionários");
+        jButtonFuncionario.setToolTipText("");
+        jButtonFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFuncionarioActionPerformed(evt);

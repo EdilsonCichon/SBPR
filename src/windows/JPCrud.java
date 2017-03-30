@@ -44,7 +44,7 @@ public class JPCrud extends javax.swing.JPanel {
         setLayout(new java.awt.GridLayout(2, 2, 5, 5));
 
         jButtonCadastrar.setText("Cadastrar");
-        jButtonCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButtonCadastrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,6 +54,7 @@ public class JPCrud extends javax.swing.JPanel {
         add(jButtonCadastrar);
 
         jButtonAlterar.setText("Alterar");
+        jButtonAlterar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButtonAlterar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +64,7 @@ public class JPCrud extends javax.swing.JPanel {
         add(jButtonAlterar);
 
         jButtonConsultar.setText("Consultar");
+        jButtonConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButtonConsultar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +74,7 @@ public class JPCrud extends javax.swing.JPanel {
         add(jButtonConsultar);
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButtonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
