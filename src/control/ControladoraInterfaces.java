@@ -20,6 +20,8 @@ import windows.propriedade.JDCadastroPropriedade;
 import windows.propriedade.JDPesquisaPropriedade;
 import windows.servico.JDAgendarServico;
 import windows.servico.JDConsultarServico;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -28,11 +30,28 @@ import windows.servico.JDConsultarServico;
 public class ControladoraInterfaces {
 
     public static void main(String args[]){
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }   
+        }catch(InstantiationException e){
+            
+        }catch (ClassNotFoundException e){
+            
+        }catch (IllegalAccessException e){
+            
+        }catch(UnsupportedLookAndFeelException e){
+            
+        }
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmValidarAcesso().setVisible(true);
-            }
+            }   
         });
     }
     
