@@ -22,6 +22,9 @@ import windows.servico.JDAgendarServico;
 import windows.servico.JDConsultarServico;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import window.tipoServico.JDCadastroTipoServico;
+import window.tipoServico.JDPesquisaTipoServico;
+import windows.funcionario.JDPesquisaFuncionario;
 
 /**
  *
@@ -90,6 +93,26 @@ public class ControladoraInterfaces {
         }
     }
 
+    public static void gerenciarTipoServico(int codCrud, JFrame pai) {
+        JDCadastroTipoServico cadastroTipoServico;
+        JDPesquisaTipoServico pesquisaTipoServico;
+
+        if (codCrud == 0) {
+            cadastroTipoServico = new JDCadastroTipoServico(pai, true);
+            cadastroTipoServico.setVisible(true);
+        } else if (codCrud > 0) {
+            pesquisaTipoServico = new JDPesquisaTipoServico(pai, true);
+            pesquisaTipoServico.setVisible(true);
+        }
+//        } else if (codCrud == 2) {
+//            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
+//            pesquisaFuncionario.setVisible(true);
+//        } else if (codCrud == 3) {
+//            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
+//            pesquisaFuncionario.setVisible(true);
+//        }
+    }
+    
     public static void gerenciarProdutor(int codCrud, JFrame pai) {
         
         JDCadastroProdutor cadastroProdutor;
@@ -138,25 +161,22 @@ public class ControladoraInterfaces {
     public static void gerenciarFuncionario(int codCrud, JFrame pai) {
         
         JDCadastroFuncionario cadastroFuncionario;
-        //JDPesquisaFuncionario pesquisaFuncionario;
+        JDPesquisaFuncionario pesquisaFuncionario;
 
         if (codCrud == 0) {
             cadastroFuncionario = new JDCadastroFuncionario(pai, true);
             cadastroFuncionario.setVisible(true);
-        } else if (codCrud == 1) {
-            //pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
-            //pesquisaFuncionario.setVisible(true);
-        } else if (codCrud == 2) {
-            //pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
-            //pesquisaFuncionario.setVisible(true);
-        } else if (codCrud == 3) {
-            //pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
-            //pesquisaFuncionario.setVisible(true);
+        } else if (codCrud > 0) {
+            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
+            pesquisaFuncionario.setVisible(true);
         }
-    }
-
-    public static void gerenciarTipoServico(int codCrud, JFrame pai) {
-
+//        } else if (codCrud == 2) {
+//            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
+//            pesquisaFuncionario.setVisible(true);
+//        } else if (codCrud == 3) {
+//            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
+//            pesquisaFuncionario.setVisible(true);
+//        }
     }
 
     public static void gerenciarTipoMaquina(int codCrud, JFrame pai) {
