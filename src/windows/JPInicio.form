@@ -26,7 +26,10 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/windows/icones/icone-produtor-reduzido.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Produtor"/>
+        <Property name="text" type="java.lang.String" value="Produtor"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonProdutorActionPerformed"/>
@@ -37,7 +40,10 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/windows/icones/icone-servi&#xe7;o-reduzido.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Servi&#xe7;os"/>
+        <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonServicoActionPerformed"/>
@@ -48,7 +54,10 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/windows/icones/icone-maquina-reduzido.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="M&#xe1;quinas"/>
+        <Property name="text" type="java.lang.String" value="M&#xe1;quinas"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMaquinaActionPerformed"/>
@@ -59,7 +68,10 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/windows/icones/icone-tipo-maquina-reduzido.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Tipos de M&#xe1;quinas"/>
+        <Property name="text" type="java.lang.String" value="Tipos de M&#xe1;quinas"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTipoMaquinaActionPerformed"/>
@@ -70,7 +82,10 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/windows/icones/icone-propriedade-reduzido.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Propriedades"/>
+        <Property name="text" type="java.lang.String" value="Propriedades"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPropriedadeActionPerformed"/>
@@ -81,7 +96,10 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/windows/icones/icone-tipo-servico-reduzido.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Tipos de Servi&#xe7;os"/>
+        <Property name="text" type="java.lang.String" value="Tipos de Servi&#xe7;os"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTipoServicoActionPerformed"/>
@@ -92,7 +110,10 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/windows/icones/icone-funcionario-reduzido.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Funcion&#xe1;rios"/>
+        <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFuncionarioActionPerformed"/>

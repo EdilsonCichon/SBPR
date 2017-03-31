@@ -395,6 +395,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         getContentPane().add(jPanelRodape);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
    
