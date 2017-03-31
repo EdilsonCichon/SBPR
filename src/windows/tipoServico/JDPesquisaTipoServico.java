@@ -1,4 +1,4 @@
-package window.tipoServico;
+package windows.tipoServico;
 
 /**
  *

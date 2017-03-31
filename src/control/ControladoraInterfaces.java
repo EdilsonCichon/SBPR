@@ -22,8 +22,8 @@ import windows.servico.JDAgendarServico;
 import windows.servico.JDConsultarServico;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import window.tipoServico.JDCadastroTipoServico;
-import window.tipoServico.JDPesquisaTipoServico;
+import windows.tipoServico.JDCadastroTipoServico;
+import windows.tipoServico.JDPesquisaTipoServico;
 import windows.funcionario.JDPesquisaFuncionario;
 
 /**
