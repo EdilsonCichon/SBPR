@@ -1,5 +1,9 @@
 package windows;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /*
@@ -20,6 +24,10 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
      */
     public FrmValidarAcesso() {
         initComponents();
+        //URL url = this.getClass().getResource("build/classes/windows/icones/icone-logo-reduzido.png");  
+        //Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);  
+        //this.setIconImage(iconeTitulo);
+        
     }
 
     /**

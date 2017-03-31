@@ -3,6 +3,7 @@ package windows;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import windows.JPInicio;
 
@@ -339,6 +340,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFuncionarioActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        JOptionPane.showConfirmDialog(null, "Deseja Sair ?");
         login = new FrmValidarAcesso();
         login.setVisible(true);
         this.dispose();

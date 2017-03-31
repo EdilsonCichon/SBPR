@@ -6,10 +6,8 @@
 package control;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import windows.FrmValidarAcesso;
 import windows.JPCrud;
 import windows.JPServico;
@@ -18,9 +16,8 @@ import windows.produtor.JDCadastroProdutor;
 import windows.produtor.JDPesquisaProdutor;
 import windows.propriedade.JDCadastroPropriedade;
 import windows.propriedade.JDPesquisaPropriedade;
-import windows.servico.JDAgendarServico;
-import windows.servico.JDConsultarServico;
-import javax.swing.UIManager;
+import windows.servico.JDCadastroServico;
+import windows.servico.JDPesquisaServico;
 import javax.swing.UnsupportedLookAndFeelException;
 import windows.tipoServico.JDCadastroTipoServico;
 import windows.tipoServico.JDPesquisaTipoServico;
@@ -76,19 +73,19 @@ public class ControladoraInterfaces {
     public static void gerenciarServico(int codCrud, JFrame pai) {
 
         if (codCrud == 0) {
-            JDAgendarServico agendarServico = new JDAgendarServico(pai, true);
+            JDCadastroServico agendarServico = new JDCadastroServico(pai, true);
             agendarServico.setVisible(true);
         } else if (codCrud == 1) {
-            JDConsultarServico consultarServico = new JDConsultarServico(pai, true, codCrud);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, codCrud);
             consultarServico.setVisible(true);
         } else if (codCrud == 2) {
-            JDConsultarServico consultarServico = new JDConsultarServico(pai, true, codCrud);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, codCrud);
             consultarServico.setVisible(true);
         } else if (codCrud == 3) {
-            JDConsultarServico consultarServico = new JDConsultarServico(pai, true, codCrud);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, codCrud);
             consultarServico.setVisible(true);
         } else if (codCrud == 4) {
-            JDConsultarServico consultarServico = new JDConsultarServico(pai, true, codCrud);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, codCrud);
             consultarServico.setVisible(true);
         }
     }
