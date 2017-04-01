@@ -11,15 +11,13 @@ package windows.servico;
  */
 public class JDPesquisaServico extends javax.swing.JDialog {
 
-    int codCrud;
     /**
      * Creates new form JDConsultarServico
      */
     
-    public JDPesquisaServico(java.awt.Frame parent, boolean modal,int cod) {
+    public JDPesquisaServico(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.codCrud = cod;
     }
 
     /**

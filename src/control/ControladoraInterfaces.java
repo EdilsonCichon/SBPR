@@ -76,16 +76,16 @@ public class ControladoraInterfaces {
             JDCadastroServico agendarServico = new JDCadastroServico(pai, true);
             agendarServico.setVisible(true);
         } else if (codCrud == 1) {
-            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, codCrud);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true);
             consultarServico.setVisible(true);
         } else if (codCrud == 2) {
-            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, codCrud);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true);
             consultarServico.setVisible(true);
         } else if (codCrud == 3) {
-            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, codCrud);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true);
             consultarServico.setVisible(true);
         } else if (codCrud == 4) {
-            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, codCrud);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true);
             consultarServico.setVisible(true);
         }
     }
