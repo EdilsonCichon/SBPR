@@ -5,18 +5,21 @@
  */
 package windows.servico;
 
+import control.ControlInterfaces;
+
 /**
  *
  * @author Erick
  */
 public class JDPesquisaServico extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDConsultarServico
      */
     
-    public JDPesquisaServico(java.awt.Frame parent, boolean modal) {
+    public JDPesquisaServico(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
     }
 

@@ -1,17 +1,20 @@
 package windows.funcionario;
 
+import control.ControlInterfaces;
+
 
 /**
  *
  * @author Edilson Cichon
  */
 public class JDPesquisaFuncionario extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDAlterarProdutor
      */
-    public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal) {
+    public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
     }
 

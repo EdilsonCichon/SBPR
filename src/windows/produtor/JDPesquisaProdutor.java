@@ -5,17 +5,20 @@
  */
 package windows.produtor;
 
+import control.ControlInterfaces;
+
 /**
  *
  * @author Chrysthian
  */
 public class JDPesquisaProdutor extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDAlterarProdutor
      */
-    public JDPesquisaProdutor(java.awt.Frame parent, boolean modal) {
+    public JDPesquisaProdutor(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
     }
 

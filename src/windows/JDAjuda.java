@@ -5,17 +5,20 @@
  */
 package windows;
 
+import control.ControlInterfaces;
+
 /**
  *
  * @author Chrysthian
  */
 public class JDAjuda extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDAjuda
      */
-    public JDAjuda(java.awt.Frame parent, boolean modal) {
+    public JDAjuda(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
     }
 

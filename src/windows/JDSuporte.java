@@ -5,6 +5,7 @@
  */
 package windows;
 
+import control.ControlInterfaces;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -16,12 +17,13 @@ import services.EnvioEmail;
  * @author Chrysthian
  */
 public class JDSuporte extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDSuporte
      */
-    public JDSuporte(java.awt.Frame parent, boolean modal) {
+    public JDSuporte(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
     }
 

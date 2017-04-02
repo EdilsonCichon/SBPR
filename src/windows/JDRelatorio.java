@@ -5,17 +5,20 @@
  */
 package windows;
 
+import control.ControlInterfaces;
+
 /**
  *
  * @author Chrysthian
  */
 public class JDRelatorio extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDRelatorio
      */
-    public JDRelatorio(java.awt.Frame parent, boolean modal) {
+    public JDRelatorio(java.awt.Frame parent, boolean modal,  ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
     }
 

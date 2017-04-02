@@ -1,16 +1,19 @@
 package windows.tipoServico;
 
+import control.ControlInterfaces;
+
 /**
  *
  * @author Edilson Cichon
  */
 public class JDPesquisaTipoServico extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDAlterarProdutor
      */
-    public JDPesquisaTipoServico(java.awt.Frame parent, boolean modal) {
+    public JDPesquisaTipoServico(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
     }
 

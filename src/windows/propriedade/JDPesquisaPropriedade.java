@@ -5,6 +5,7 @@
  */
 package windows.propriedade;
 
+import control.ControlInterfaces;
 import windows.produtor.*;
 
 /**
@@ -12,12 +13,13 @@ import windows.produtor.*;
  * @author Chrysthian
  */
 public class JDPesquisaPropriedade extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDAlterarProdutor
      */
-    public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal) {
+    public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
     }
 

@@ -5,17 +5,20 @@
  */
 package windows.propriedade;
 
+import control.ControlInterfaces;
+
 /**
  *
  * @author Chrysthian
  */
 public class JDCadastroPropriedade extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form JDCadastroPropriedade
      */
-    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal) {
+    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
         this.setLocationRelativeTo(parent);
     }

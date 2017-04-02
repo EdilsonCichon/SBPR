@@ -1,5 +1,7 @@
 package windows.produtor;
 
+import control.ControlInterfaces;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +13,13 @@ package windows.produtor;
  * @author 1547816
  */
 public class JDCadastroProdutor extends javax.swing.JDialog {
-
+    private ControlInterfaces controlInterfaces;
     /**
      * Creates new form FrmCadCliente
      */
-    public JDCadastroProdutor(java.awt.Frame parent, boolean modal) {
+    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
         super(parent, modal);
+        this.controlInterfaces = controlInterfaces;
         initComponents();
         this.setLocationRelativeTo(parent);
     }
