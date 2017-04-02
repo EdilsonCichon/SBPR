@@ -9,6 +9,7 @@ import windows.JPServico;
  * @author Chrysthian
  */
 public class ControlInterfaces {
+    
     private ControlGeral controlGeral;
     private ControlFuncionario controlFuncionario;
     private ControlMaquina controlMaquina;
@@ -74,6 +75,9 @@ public class ControlInterfaces {
         controlGeral.iniciarSistema();
     }
     
+    public void encerrarSessao() {
+        controlGeral.encerrarSessao();
+    }
     public void validarAcesso(String login, String senha) {
         controlGeral.validarAcesso(login, senha);
     }

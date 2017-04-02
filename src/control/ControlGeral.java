@@ -26,6 +26,12 @@ public class ControlGeral {
          frmValidarAcesso.setVisible(true);
     }
     
+    public void encerrarSessao() {
+        frmValidarAcesso = new FrmValidarAcesso(controlInterfaces);
+        frmValidarAcesso.setVisible(true);
+        frmPrincipal.dispose();
+    }
+    
     public void validarAcesso(String login, String senha) {
         if ( login.equals("") && senha.equals("") ) {
             if ( frmPrincipal == null )
