@@ -43,7 +43,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Pesquisar Propriedade");
+        setTitle("Filtro de Propriedade");
         setResizable(false);
 
         jPanelPesquisarPropriedade.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));

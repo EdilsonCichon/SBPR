@@ -46,7 +46,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         jButtonAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Propriedade");
+        setTitle("Cadastro de Tipo de Serviço");
         setResizable(false);
 
         jPanelConteudo.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro Tipo de Serviço"));
