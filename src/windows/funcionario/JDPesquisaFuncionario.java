@@ -22,12 +22,12 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelPesquisar = new javax.swing.JPanel();
+        jPanelPesquisarFuncionario = new javax.swing.JPanel();
         jLabelFiltrar = new javax.swing.JLabel();
         jComboBoxFiltro = new javax.swing.JComboBox<>();
         jTextFieldFiltro = new javax.swing.JTextField();
         jScrollPane = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableFuncionario = new javax.swing.JTable();
         jPanelRodape = new javax.swing.JPanel();
         jButtonAlterar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -36,13 +36,13 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         setTitle("Filtro de Funcionário");
         setResizable(false);
 
-        jPanelPesquisar.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
+        jPanelPesquisarFuncionario.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
         jLabelFiltrar.setText("Filtrar por:");
 
         jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "RG", "Cargo" }));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -58,17 +58,17 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane.setViewportView(jTable1);
+        jScrollPane.setViewportView(jTableFuncionario);
 
-        javax.swing.GroupLayout jPanelPesquisarLayout = new javax.swing.GroupLayout(jPanelPesquisar);
-        jPanelPesquisar.setLayout(jPanelPesquisarLayout);
-        jPanelPesquisarLayout.setHorizontalGroup(
-            jPanelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPesquisarLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelPesquisarFuncionarioLayout = new javax.swing.GroupLayout(jPanelPesquisarFuncionario);
+        jPanelPesquisarFuncionario.setLayout(jPanelPesquisarFuncionarioLayout);
+        jPanelPesquisarFuncionarioLayout.setHorizontalGroup(
+            jPanelPesquisarFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPesquisarFuncionarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelPesquisarFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                    .addGroup(jPanelPesquisarLayout.createSequentialGroup()
+                    .addGroup(jPanelPesquisarFuncionarioLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addGap(10, 10, 10)
                         .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -76,10 +76,10 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                         .addComponent(jTextFieldFiltro)))
                 .addContainerGap())
         );
-        jPanelPesquisarLayout.setVerticalGroup(
-            jPanelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPesquisarLayout.createSequentialGroup()
-                .addGroup(jPanelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanelPesquisarFuncionarioLayout.setVerticalGroup(
+            jPanelPesquisarFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPesquisarFuncionarioLayout.createSequentialGroup()
+                .addGroup(jPanelPesquisarFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelFiltrar)
                     .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -118,13 +118,13 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelPesquisarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelPesquisarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelRodape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -140,10 +140,10 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
-    private javax.swing.JPanel jPanelPesquisar;
+    private javax.swing.JPanel jPanelPesquisarFuncionario;
     private javax.swing.JPanel jPanelRodape;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableFuncionario;
     private javax.swing.JTextField jTextFieldFiltro;
     // End of variables declaration//GEN-END:variables
 }
