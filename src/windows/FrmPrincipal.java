@@ -35,7 +35,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelPrincipal = new javax.swing.JPanel();
         jPanelMenuPrincipal = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jButtonInicio = new javax.swing.JButton();
@@ -50,6 +49,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jButtonAssistencia = new javax.swing.JButton();
         jButtonAjuda = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
+        jPanelPrincipal = new javax.swing.JPanel();
         jPanelInfoSistema = new javax.swing.JPanel();
         jLabelUsuario = new javax.swing.JLabel();
         jLabelVersao = new javax.swing.JLabel();
@@ -59,11 +59,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
-
-        jPanelPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelPrincipal.setPreferredSize(new java.awt.Dimension(600, 250));
-        jPanelPrincipal.setLayout(new java.awt.GridLayout(1, 0));
+        setMaximumSize(new java.awt.Dimension(705, 495));
+        setMinimumSize(new java.awt.Dimension(705, 495));
+        setPreferredSize(new java.awt.Dimension(705, 495));
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
         jPanelMenuPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanelMenuPrincipal.setLayout(new java.awt.GridLayout(1, 0));
@@ -218,7 +217,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jPanelMenuPrincipal.add(jToolBar1);
 
+        getContentPane().add(jPanelMenuPrincipal);
+
+        jPanelPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelPrincipal.setMinimumSize(new java.awt.Dimension(684, 300));
+        jPanelPrincipal.setPreferredSize(new java.awt.Dimension(684, 300));
+        jPanelPrincipal.setLayout(new java.awt.GridLayout(1, 0));
+        getContentPane().add(jPanelPrincipal);
+
         jPanelInfoSistema.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelInfoSistema.setMinimumSize(new java.awt.Dimension(684, 94));
+        jPanelInfoSistema.setPreferredSize(new java.awt.Dimension(684, 94));
 
         jLabelUsuario.setText("Usuário:");
 
@@ -264,29 +273,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanelMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
-                    .addComponent(jPanelInfoSistema, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelPrincipal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelInfoSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanelInfoSistema);
 
         pack();
         setLocationRelativeTo(null);
