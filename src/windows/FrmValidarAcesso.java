@@ -1,6 +1,7 @@
 package windows;
 
 import control.ControlInterfaces;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,6 +18,8 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     public FrmValidarAcesso(ControlInterfaces controlInterfaces) {
         this.controlInterfaces = controlInterfaces;
         initComponents();
+        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
     }
 
     @SuppressWarnings("unchecked")
