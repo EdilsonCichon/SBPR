@@ -1,6 +1,6 @@
 package cih.funcionario;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 
 
 /**
@@ -8,13 +8,13 @@ import cci.ControlInterfaces;
  * @author Edilson Cichon
  */
 public class JDPesquisaFuncionario extends javax.swing.JDialog {
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
     /**
      * Creates new form JDAlterarProdutor
      */
-    public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
+    public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
         super(parent, modal);
-        this.controlInterfaces = controlInterfaces;
+        this.controlInterface = controlInterfaces;
         initComponents();
     }
 

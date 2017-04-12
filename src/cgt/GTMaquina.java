@@ -9,21 +9,21 @@ package cgt;
  *
  * @author Chrysthian
  */
-public class GTProdutor {
+public class GTMaquina {
     
-    public int cadastrarProdutor(){
+    public int cadastrarMaquina(){
         return 0;
     }
     
-    public int alterarProdutor(){
+    public int alterarMaquina(){
         return 0;
     }
     
-    public int consultarProdutor(){
+    public int consultarMaquina(){
         return 0;
     }
     
-    public int excluirProdutor(){
+    public int excluirMaquina(){
         return 0;
-    } 
+    }    
 }

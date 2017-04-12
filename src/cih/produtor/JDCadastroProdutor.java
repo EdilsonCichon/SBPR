@@ -1,6 +1,6 @@
 package cih.produtor;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,13 +13,13 @@ import cci.ControlInterfaces;
  * @author 1547816
  */
 public class JDCadastroProdutor extends javax.swing.JDialog {
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
     /**
      * Creates new form FrmCadCliente
      */
-    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
+    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
         super(parent, modal);
-        this.controlInterfaces = controlInterfaces;
+        this.controlInterface = controlInterfaces;
         initComponents();
         this.setLocationRelativeTo(parent);
     }
@@ -254,6 +254,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonCancelar.setPreferredSize(new java.awt.Dimension(57, 23));
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.setPreferredSize(new java.awt.Dimension(57, 23));
@@ -286,6 +291,10 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        controlInterface.getControlProdutor().cadastrarProdutor();
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,7 +1,7 @@
 
 package cih.maquina;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 
 /**
  *
@@ -9,12 +9,12 @@ import cci.ControlInterfaces;
  */
 public class JDPesquisarMaquina extends javax.swing.JDialog {
     
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
     
-    public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
+    public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
         super(parent, modal);
         initComponents();
-        this.controlInterfaces = controlInterfaces;
+        this.controlInterface = controlInterfaces;
     }
 
     @SuppressWarnings("unchecked")

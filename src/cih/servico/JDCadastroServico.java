@@ -5,20 +5,20 @@
  */
 package cih.servico;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 
 /**
  *
  * @author Erick
  */
 public class JDCadastroServico extends javax.swing.JDialog {
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
     /**
      * Creates new form JDAgendarServico
      */
-    public JDCadastroServico(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
+    public JDCadastroServico(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
         super(parent, modal);
-        this.controlInterfaces = controlInterfaces;
+        this.controlInterface = controlInterfaces;
         initComponents();
         jPanelConcluir.setVisible(false);
         jPanelCancelar.setVisible(false);

@@ -1,6 +1,6 @@
 package cih;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 import javax.swing.ImageIcon;
 
 /**
@@ -10,13 +10,13 @@ import javax.swing.ImageIcon;
 public class FrmValidarAcesso extends javax.swing.JFrame {
 
     FrmPrincipal janelaPrincipal;
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
 
     /**
      * Creates new form JFValidarAcesso
      */
-    public FrmValidarAcesso(ControlInterfaces controlInterfaces) {
-        this.controlInterfaces = controlInterfaces;
+    public FrmValidarAcesso(ControlInterface controlInterfaces) {
+        this.controlInterface = controlInterfaces;
         initComponents();
         ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
@@ -98,7 +98,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-        controlInterfaces.getControlGeral().validarAcesso(jTextFieldLogin.getText(), jPasswordFieldSenha.getText());
+        controlInterface.getControlGeral().validarAcesso(jTextFieldLogin.getText(), jPasswordFieldSenha.getText());
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**

@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  *
  * @author Chrysthian
  */
-public class ControlInterfaces {
+public class ControlInterface{
     
     private ControlGeral controlGeral;
     private ControlFuncionario controlFuncionario;
@@ -21,7 +21,7 @@ public class ControlInterfaces {
     private ControlTipoMaquina controlTipoMaquina;
     private ControlTipoServico controlTipoServico;
 
-    public ControlInterfaces() {
+    public ControlInterface() {
         controlGeral = new ControlGeral(this);
         controlFuncionario = new ControlFuncionario(this);
         controlMaquina = new ControlMaquina(this);
@@ -45,7 +45,7 @@ public class ControlInterfaces {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ControlInterfaces();
+                new ControlInterface();
             }   
         });
     }

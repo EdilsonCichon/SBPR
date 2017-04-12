@@ -5,7 +5,7 @@
  */
 package cih;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 
 /**
  *

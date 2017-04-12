@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  */
 public class ControlGeral {
     
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
     private FrmValidarAcesso frmValidarAcesso;
     private FrmPrincipal frmPrincipal;
     private JDAjuda ajuda;
@@ -28,8 +28,8 @@ public class ControlGeral {
     private JDSuporte suporte;
     private JPInicio inicio; 
 
-    public ControlGeral(ControlInterfaces controlInterfaces) {
-        this.controlInterfaces = controlInterfaces;
+    public ControlGeral(ControlInterface controlInterfaces) {
+        this.controlInterface = controlInterfaces;
     }
     
     public void trocarPanel(JPanel principal, JPanel jPanel) {
@@ -39,13 +39,13 @@ public class ControlGeral {
     }
 
     public void iniciarSistema() {
-         frmValidarAcesso = new FrmValidarAcesso(controlInterfaces);
+         frmValidarAcesso = new FrmValidarAcesso(controlInterface);
          frmValidarAcesso.setVisible(true);
     }
     
     public void encerrarSessao() {
         //JOptionPane.showConfirmDialog(null, "Deseja sair ?");
-        frmValidarAcesso = new FrmValidarAcesso(controlInterfaces);
+        frmValidarAcesso = new FrmValidarAcesso(controlInterface);
         frmValidarAcesso.setVisible(true);
         frmPrincipal.dispose();
     }
@@ -53,7 +53,7 @@ public class ControlGeral {
     public void validarAcesso(String login, String senha) {
         if ( login.equals("") && senha.equals("") ) {
             if ( frmPrincipal == null )
-                frmPrincipal = new FrmPrincipal(controlInterfaces);
+                frmPrincipal = new FrmPrincipal(controlInterface);
             frmPrincipal.setVisible(true);
             frmValidarAcesso.dispose();
         } else {
@@ -63,7 +63,7 @@ public class ControlGeral {
     
     public JPInicio abrirInicio(FrmPrincipal pai){
         
-        inicio = new JPInicio(pai, controlInterfaces); 
+        inicio = new JPInicio(pai, controlInterface); 
         //JPanel principal = pai.getjPanelPrincipal();
         //trocarPanel(principal, inicio);
         return inicio;

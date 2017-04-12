@@ -1,6 +1,6 @@
 package cih;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 import javax.swing.JPanel;
 
 /**
@@ -10,17 +10,16 @@ import javax.swing.JPanel;
 public class FrmPrincipal extends javax.swing.JFrame {    
     JPInicio inicio; 
     JDAjuda ajuda;
-    FrmValidarAcesso login;
     JDRelatorio relatorio;
     JDSuporte suporte;
     
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
 
     /**
      * Creates new form JanelaPrincipal
      */
-    public FrmPrincipal(ControlInterfaces controlInterfaces) {
-        this.controlInterfaces = controlInterfaces;
+    public FrmPrincipal(ControlInterface controlInterfaces) {
+        this.controlInterface = controlInterfaces;
         initComponents();
         //controlInterfaces.getControlGeral().abrirInicio(this); 
         jButtonInicioActionPerformed(null);
@@ -279,7 +278,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
-        inicio = controlInterfaces.getControlGeral().abrirInicio(this);
+        inicio = controlInterface.getControlGeral().abrirInicio(this);
         trocarPanel(inicio);
     }//GEN-LAST:event_jButtonInicioActionPerformed
 
@@ -312,19 +311,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFuncionarioActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        controlInterfaces.getControlGeral().encerrarSessao();
+        controlInterface.getControlGeral().encerrarSessao();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjudaActionPerformed
-        controlInterfaces.getControlGeral().abrirAjuda(this);    
+        controlInterface.getControlGeral().abrirAjuda(this);    
     }//GEN-LAST:event_jButtonAjudaActionPerformed
 
     private void jButtonRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelatorioActionPerformed
-        controlInterfaces.getControlGeral().abrirRelatorio(this);    
+        controlInterface.getControlGeral().abrirRelatorio(this);    
     }//GEN-LAST:event_jButtonRelatorioActionPerformed
 
     private void jButtonAssistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssistenciaActionPerformed
-        controlInterfaces.getControlGeral().abrirSuporte(this);    
+        controlInterface.getControlGeral().abrirSuporte(this);    
     }//GEN-LAST:event_jButtonAssistenciaActionPerformed
 
     public JPanel getjPanelPrincipal() {

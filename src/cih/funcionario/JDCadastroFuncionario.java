@@ -1,19 +1,19 @@
 package cih.funcionario;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 
 /**
  *
  * @author Edilson Cichon
  */
 public class JDCadastroFuncionario extends javax.swing.JDialog {
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
     /**
      * Creates new form FrmCadCliente
      */
-    public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
+    public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
         super(parent, modal);
-        this.controlInterfaces = controlInterfaces;
+        this.controlInterface = controlInterfaces;
         initComponents();
     }
 

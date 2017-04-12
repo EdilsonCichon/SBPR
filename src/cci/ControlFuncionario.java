@@ -1,5 +1,6 @@
 package cci;
 
+import cgt.GTFuncionario;
 import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
@@ -10,10 +11,12 @@ import cih.funcionario.JDPesquisaFuncionario;
  */
 public class ControlFuncionario {
     
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
+    private GTFuncionario gtFuncionario;
 
-    public ControlFuncionario(ControlInterfaces controlInterfaces) {
-        this.controlInterfaces = controlInterfaces;
+    public ControlFuncionario(ControlInterface controlInterfaces) {
+        this.controlInterface = controlInterfaces;
+        //gtFuncionario = new GTFuncionario();
     }
     
     public void gerenciarFuncionario(int codCrud, JFrame pai) {
@@ -22,19 +25,35 @@ public class ControlFuncionario {
         JDPesquisaFuncionario pesquisaFuncionario;
 
         if (codCrud == 0) {
-            cadastroFuncionario = new JDCadastroFuncionario(pai, true, controlInterfaces);
+            cadastroFuncionario = new JDCadastroFuncionario(pai, true, controlInterface);
             cadastroFuncionario.setVisible(true);
         } else if (codCrud > 0) {
-            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, controlInterfaces);
+            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, controlInterface);
             pesquisaFuncionario.setVisible(true);
         }
-//        } else if (codCrud == 2) {
+//         else if (codCrud == 2) {
 //            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
 //            pesquisaFuncionario.setVisible(true);
 //        } else if (codCrud == 3) {
 //            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
 //            pesquisaFuncionario.setVisible(true);
 //        }
+    }
+    
+    public void cadastrarFuncionario(){
+        int i = gtFuncionario.cadastrarFuncionario();
+    }
+    
+    public void alterarFuncionario(){
+        int i = gtFuncionario.alterarFuncionario();
+    }
+    
+    public void consultarFuncionario(){
+        int i = gtFuncionario.consultarFuncionario();
+    }
+    
+    public void excluirFuncionario(){
+        int i = gtFuncionario.excluirFuncionario();
     }
     
 }

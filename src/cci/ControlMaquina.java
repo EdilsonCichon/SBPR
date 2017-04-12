@@ -1,5 +1,6 @@
 package cci;
 
+import cgt.GTMaquina;
 import javax.swing.JFrame;
 import cih.maquina.JDCadastroMaquina;
 import cih.maquina.JDPesquisarMaquina;
@@ -10,21 +11,39 @@ import cih.maquina.JDPesquisarMaquina;
  */
 public class ControlMaquina {
     
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
+    private GTMaquina gtMaquina;
 
-    public ControlMaquina(ControlInterfaces controlInterfaces) {
-        this.controlInterfaces = controlInterfaces;
+    public ControlMaquina(ControlInterface controlInterfaces) {
+        this.controlInterface = controlInterfaces;
+        //gtMaquina = new GTMaquina();
     }
     
     public void gerenciarMaquina(int codCrud, JFrame pai) {
         JDCadastroMaquina cadastroMaquina;
         JDPesquisarMaquina pesquisaMaquina; 
         if (codCrud == 0) {
-            cadastroMaquina = new JDCadastroMaquina(pai, true, controlInterfaces);
+            cadastroMaquina = new JDCadastroMaquina(pai, true, controlInterface);
             cadastroMaquina.setVisible(true);
         } else if (codCrud > 0) {
-            pesquisaMaquina = new JDPesquisarMaquina(pai, true, controlInterfaces);
+            pesquisaMaquina = new JDPesquisarMaquina(pai, true, controlInterface);
             pesquisaMaquina.setVisible(true);
         }
+    }
+
+    public void cadastrarMaquina(){
+        int i = gtMaquina.cadastrarMaquina();
+    }
+    
+    public void alterarMaquina(){
+        int i = gtMaquina.alterarMaquina();
+    }
+    
+    public void consultarMaquina(){
+        int i = gtMaquina.consultarMaquina();
+    }
+    
+    public void excluirMaquina(){
+        int i = gtMaquina.excluirMaquina();
     }    
 }

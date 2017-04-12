@@ -9,21 +9,22 @@ package cgt;
  *
  * @author Chrysthian
  */
-public class GTProdutor {
+public class GTTipoServico {
     
-    public int cadastrarProdutor(){
+    public int cadastrarTipoServico(){
         return 0;
     }
     
-    public int alterarProdutor(){
+    public int alterarTipoServico(){
         return 0;
     }
     
-    public int consultarProdutor(){
+    public int consultarTipoServico(){
         return 0;
     }
     
-    public int excluirProdutor(){
+    public int excluirTipoServico(){
         return 0;
     } 
+    
 }

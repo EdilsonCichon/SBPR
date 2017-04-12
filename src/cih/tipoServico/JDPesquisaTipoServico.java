@@ -1,19 +1,19 @@
 package cih.tipoServico;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 
 /**
  *
  * @author Edilson Cichon
  */
 public class JDPesquisaTipoServico extends javax.swing.JDialog {
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
     /**
      * Creates new form JDAlterarProdutor
      */
-    public JDPesquisaTipoServico(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
+    public JDPesquisaTipoServico(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
         super(parent, modal);
-        this.controlInterfaces = controlInterfaces;
+        this.controlInterface = controlInterfaces;
         initComponents();
     }
 

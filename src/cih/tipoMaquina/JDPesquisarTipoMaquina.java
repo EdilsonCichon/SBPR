@@ -1,21 +1,21 @@
 
 package cih.tipoMaquina;
 
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 
 /**
  *
  * @author Erick
  */
 public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
-    private ControlInterfaces controlInterfaces;
+    private ControlInterface controlInterface;
     /**
      * Creates new form JDConsultarTipoMaquina
      */
-    public JDPesquisarTipoMaquina(java.awt.Frame parent, boolean modal, ControlInterfaces controlInterfaces) {
+    public JDPesquisarTipoMaquina(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
         super(parent, modal);
         initComponents();
-        this.controlInterfaces = controlInterfaces;
+        this.controlInterface = controlInterfaces;
     }
 
     @SuppressWarnings("unchecked")

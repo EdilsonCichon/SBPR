@@ -9,7 +9,7 @@ import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import cih.produtor.JDCadastroProdutor;
-import cci.ControlInterfaces;
+import cci.ControlInterface;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
@@ -27,14 +27,14 @@ public class JPCrud extends javax.swing.JPanel {
    JDCadastroProdutor cadastro;
    JFrame pai;
    int codInicio;
-   private ControlInterfaces controlInterfaces;
+   private ControlInterface controlInterface;
    
-    public JPCrud(JFrame pai, int num, ControlInterfaces controlInterfaces) {
+    public JPCrud(JFrame pai, int inicio, ControlInterface controlInterfaces) {
         initComponents();
         this.pai = pai;
-        this.codInicio = num;
-        this.controlInterfaces = controlInterfaces;
-        this.controlInterfaces.iniciarCrud(codInicio, this);
+        this.codInicio = inicio;
+        this.controlInterface = controlInterfaces;
+        this.controlInterface.iniciarCrud(codInicio, this);
     }
 
   
@@ -92,19 +92,19 @@ public class JPCrud extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-       controlInterfaces.identificarInicio(pai, codInicio, excluir);
+       controlInterface.identificarInicio(pai, codInicio, excluir);
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-       controlInterfaces.identificarInicio(pai, codInicio, cadastrar);
+       controlInterface.identificarInicio(pai, codInicio, cadastrar);
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-       controlInterfaces.identificarInicio(pai, codInicio, alterar);
+       controlInterface.identificarInicio(pai, codInicio, alterar);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-       controlInterfaces.identificarInicio(pai, codInicio, consultar);
+       controlInterface.identificarInicio(pai, codInicio, consultar);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     public void setIconAlterar(Icon icone) {
