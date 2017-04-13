@@ -1,38 +1,40 @@
 package cci;
 
-import cgt.GTTipoMaquina;
 import javax.swing.JFrame;
+import cgt.GTTipoMaquina;
 import cih.tipoMaquina.JDCadastroTipoMaquina;
 import cih.tipoMaquina.JDPesquisarTipoMaquina;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Edilson
- */
 public class CITipoMaquina {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private GTTipoMaquina gtTipoMaquina;
 
-    public CITipoMaquina(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public CITipoMaquina(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
         gtTipoMaquina = new GTTipoMaquina();
     }
     
-        public void gerenciarTipoMaquina(int codCrud, JFrame pai) {
+    public void gerenciarTipoMaquina(int codCrud, JFrame pai) {
         JDCadastroTipoMaquina cadastroTipoMaquina;
         JDPesquisarTipoMaquina pesquisaTipoMaquina; 
         if (codCrud == 0) {
-            cadastroTipoMaquina = new JDCadastroTipoMaquina(pai, true, controlInterface);
+            cadastroTipoMaquina = new JDCadastroTipoMaquina(pai, true, ciInterface);
             cadastroTipoMaquina.setVisible(true);
         } else if (codCrud > 0) {
-            pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, controlInterface);
+            pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, ciInterface);
             pesquisaTipoMaquina.setVisible(true);
         }
     }
         
-    public void cadastrarTipoMaquina(){
-         int i = gtTipoMaquina.cadastrarTipoMaquina();
+    public void cadastrarTipoMaquina(String nome, String descricao) {
+        try {
+            gtTipoMaquina.cadastrarTipoMaquina(nome, descricao);
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+        }
     }
     
     public void alterarTipoMaquina(){

@@ -2,6 +2,7 @@
 package cih.tipoMaquina;
 
 import cci.CIInterface;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,12 +10,12 @@ import cci.CIInterface;
  */
 public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
 
-    public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface controlInterfaces) {
+    public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface ciInterfaces) {
         super(parent, modal);
         initComponents();
-        this.controlInterface = controlInterfaces;
+        this.ciInterface = ciInterfaces;
     }
 
     @SuppressWarnings("unchecked")
@@ -158,13 +159,23 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        // TODO add your handling code here:
+        try {
+            validarCampos( jTextFieldNome.getText(), jTextAreaDescricao.getText() );
+            ciInterface.getCiTipoMaquina().cadastrarTipoMaquina(jTextFieldNome.getText(), jTextAreaDescricao.getText());
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    private void validarCampos(String nome, String descricao) throws Exception {
+        // MELHORAR ESSA VALIDAÇÃO, FOI FEITA SOMENTE PARA COMEÇAR.
+        if (nome.equals("") || descricao.equals(""))
+            throw new Exception("Favor preencher os campos!");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
