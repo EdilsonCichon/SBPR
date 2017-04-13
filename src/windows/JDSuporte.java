@@ -9,6 +9,7 @@ import control.ControlInterfaces;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import services.EnvioEmail;
 
@@ -25,6 +26,8 @@ public class JDSuporte extends javax.swing.JDialog {
         super(parent, modal);
         this.controlInterfaces = controlInterfaces;
         initComponents();
+        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
     }
 
     /**

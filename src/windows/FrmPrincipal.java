@@ -1,6 +1,7 @@
 package windows;
 
 import control.ControlInterfaces;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -23,6 +24,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.controlInterfaces = controlInterfaces;
         initComponents();
         jButtonInicioActionPerformed(null);    
+        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
     }
     
     public void trocarPanel(JPanel jPanel) {

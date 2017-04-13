@@ -6,6 +6,7 @@
 package windows.propriedade;
 
 import control.ControlInterfaces;
+import javax.swing.ImageIcon;
 import windows.produtor.*;
 
 /**
@@ -21,6 +22,8 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         super(parent, modal);
         this.controlInterfaces = controlInterfaces;
         initComponents();
+        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
     }
 
     /**

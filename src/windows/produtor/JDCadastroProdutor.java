@@ -1,6 +1,7 @@
 package windows.produtor;
 
 import control.ControlInterfaces;
+import javax.swing.ImageIcon;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,6 +23,8 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         this.controlInterfaces = controlInterfaces;
         initComponents();
         this.setLocationRelativeTo(parent);
+        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
     }
 
     /**

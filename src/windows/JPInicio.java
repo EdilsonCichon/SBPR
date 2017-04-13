@@ -2,6 +2,7 @@ package windows;
 
 import control.ControlInterfaces;
 
+
 public class JPInicio extends javax.swing.JPanel {
     private ControlInterfaces controlInterfaces;
     private FrmPrincipal janelaPrincipal;

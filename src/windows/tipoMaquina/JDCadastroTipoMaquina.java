@@ -2,6 +2,7 @@
 package windows.tipoMaquina;
 
 import control.ControlInterfaces;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -14,6 +15,8 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.controlInterfaces = controlInterfaces;
+        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
     }
 
     @SuppressWarnings("unchecked")

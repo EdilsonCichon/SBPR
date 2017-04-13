@@ -6,6 +6,7 @@
 package windows;
 
 import control.ControlInterfaces;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,6 +21,8 @@ public class JDAjuda extends javax.swing.JDialog {
         super(parent, modal);
         this.controlInterfaces = controlInterfaces;
         initComponents();
+        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
     }
 
     /**

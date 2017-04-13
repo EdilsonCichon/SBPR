@@ -6,6 +6,7 @@
 package windows.servico;
 
 import control.ControlInterfaces;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,6 +23,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
         initComponents();
         jPanelConcluir.setVisible(false);
         jPanelCancelar.setVisible(false);
+        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
     }
 
     /**
