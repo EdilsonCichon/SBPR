@@ -3,20 +3,12 @@ package cih;
 import cci.CIInterface;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Erick Cuzin (pepeca ñ eh tudo)
- */
 public class FrmValidarAcesso extends javax.swing.JFrame {
 
-    private FrmPrincipal janelaPrincipal;
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
 
-    /**
-     * Creates new form JFValidarAcesso
-     */
-    public FrmValidarAcesso(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public FrmValidarAcesso(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
         initComponents();
         ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
@@ -98,12 +90,9 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-        controlInterface.getCiGeral().validarAcesso(jTextFieldLogin.getText(), jPasswordFieldSenha.getText());
+        ciInterface.getCiGeral().validarAcesso(jTextFieldLogin.getText(), jPasswordFieldSenha.getText());
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEntrar;

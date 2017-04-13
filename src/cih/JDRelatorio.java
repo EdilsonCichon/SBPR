@@ -4,17 +4,14 @@ import javax.swing.ImageIcon;
 import cci.CIInterface;
 
 public class JDRelatorio extends javax.swing.JDialog {
-    /**
-     * Creates new form JDRelatorio
-     */
+
     public JDRelatorio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
     }
-
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

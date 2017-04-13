@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cih;
 
 import java.awt.Component;
@@ -13,10 +8,6 @@ import cci.CIInterface;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
-/**
- *
- * @author 2015122760084
- */
 public class JPCrud extends javax.swing.JPanel {
     
     private final int cadastrar = 0;
@@ -24,19 +15,17 @@ public class JPCrud extends javax.swing.JPanel {
     private final int consultar = 2;
     private final int excluir = 3;
 
-    private JDCadastroProdutor cadastro;
     private JFrame pai;
     private int codInicio;
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
    
-    public JPCrud(JFrame pai, int inicio, CIInterface controlInterfaces) {
+    public JPCrud(JFrame pai, int inicio, CIInterface ciInterface) {
         initComponents();
         this.pai = pai;
         this.codInicio = inicio;
-        this.controlInterface = controlInterfaces;
-        this.controlInterface.iniciarCrud(codInicio, this);
+        this.ciInterface = ciInterface;
+        this.ciInterface.iniciarCrud(codInicio, this);
     }
-
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -92,19 +81,19 @@ public class JPCrud extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-       controlInterface.identificarInicio(pai, codInicio, excluir);
+       ciInterface.identificarInicio(pai, codInicio, excluir);
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-       controlInterface.identificarInicio(pai, codInicio, cadastrar);
+       ciInterface.identificarInicio(pai, codInicio, cadastrar);
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-       controlInterface.identificarInicio(pai, codInicio, alterar);
+       ciInterface.identificarInicio(pai, codInicio, alterar);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-       controlInterface.identificarInicio(pai, codInicio, consultar);
+       ciInterface.identificarInicio(pai, codInicio, consultar);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     public void setIconAlterar(Icon icone) {

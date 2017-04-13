@@ -6,13 +6,9 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-/**
- *
- * @author Edilson Cichon
- */
 public class JPServico extends javax.swing.JPanel {
 
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private JFrame pai;
     private int codInicio;
     
@@ -22,13 +18,13 @@ public class JPServico extends javax.swing.JPanel {
     private final int concluir = 3;
     private final int cancelar = 4;
 
-    public JPServico(JFrame pai, int num, CIInterface controlInterfaces) {
+    public JPServico(JFrame pai, int num, CIInterface ciInterface) {
         initComponents();
-        this.controlInterface = controlInterfaces;
+        this.ciInterface = ciInterface;
         this.pai = pai;
         this.codInicio = num;
         this.setBorder(BorderFactory.createTitledBorder("Gerenciar Serviços"));
-        controlInterfaces.setarAtributosServico(this, "Serviços", "servico");
+        ciInterface.setarAtributosServico(this, "Serviços", "servico");
     }
 
     @SuppressWarnings("unchecked")
@@ -86,23 +82,23 @@ public class JPServico extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarActionPerformed
-        controlInterface.identificarInicio(pai, codInicio, cadastrar);
+        ciInterface.identificarInicio(pai, codInicio, cadastrar);
     }//GEN-LAST:event_jButtonAgendarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        controlInterface.identificarInicio(pai, codInicio, alterar);
+        ciInterface.identificarInicio(pai, codInicio, alterar);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        controlInterface.identificarInicio(pai, codInicio, consultar);
+        ciInterface.identificarInicio(pai, codInicio, consultar);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     private void jButtonConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluirActionPerformed
-        controlInterface.identificarInicio(pai, codInicio, concluir);
+        ciInterface.identificarInicio(pai, codInicio, concluir);
     }//GEN-LAST:event_jButtonConcluirActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        controlInterface.identificarInicio(pai, codInicio, cancelar);
+        ciInterface.identificarInicio(pai, codInicio, cancelar);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public void setIconAgendar(Icon icone) {

@@ -2,7 +2,6 @@ package cih;
 
 import cci.CIInterface;
 
-
 public class JPInicio extends javax.swing.JPanel {
     
     private final int servico = 0;
@@ -13,13 +12,13 @@ public class JPInicio extends javax.swing.JPanel {
     private final int tipoServico = 5;
     private final int tipoMaquina = 6;
     
-    private CIInterface controlInterface;
-    private FrmPrincipal janelaPrincipal;
+    private CIInterface ciInterface;
+    private FrmPrincipal frmPrincipal;
 
-    public JPInicio(FrmPrincipal janelaPrincipal, CIInterface controlInterfaces) {
+    public JPInicio(FrmPrincipal frmPrincipal, CIInterface ciInterface) {
         initComponents();
-        this.controlInterface = controlInterfaces;
-        this.janelaPrincipal = janelaPrincipal;
+        this.ciInterface = ciInterface;
+        this.frmPrincipal = frmPrincipal;
     }
 
     @SuppressWarnings("unchecked")
@@ -122,31 +121,31 @@ public class JPInicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPropriedadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPropriedadeActionPerformed
-        janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, propriedade, controlInterface));
+        frmPrincipal.trocarPanel(new JPCrud(frmPrincipal, propriedade, ciInterface));
     }//GEN-LAST:event_jButtonPropriedadeActionPerformed
 
     private void jButtonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServicoActionPerformed
-        janelaPrincipal.trocarPanel(new JPServico(janelaPrincipal, servico, controlInterface));
+        frmPrincipal.trocarPanel(new JPServico(frmPrincipal, servico, ciInterface));
     }//GEN-LAST:event_jButtonServicoActionPerformed
 
     private void jButtonTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoMaquinaActionPerformed
-        janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, tipoMaquina, controlInterface));
+        frmPrincipal.trocarPanel(new JPCrud(frmPrincipal, tipoMaquina, ciInterface));
     }//GEN-LAST:event_jButtonTipoMaquinaActionPerformed
 
     private void jButtonFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFuncionarioActionPerformed
-        janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, funcionario, controlInterface));
+        frmPrincipal.trocarPanel(new JPCrud(frmPrincipal, funcionario, ciInterface));
     }//GEN-LAST:event_jButtonFuncionarioActionPerformed
 
     private void jButtonMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMaquinaActionPerformed
-        janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, maquina, controlInterface));
+        frmPrincipal.trocarPanel(new JPCrud(frmPrincipal, maquina, ciInterface));
     }//GEN-LAST:event_jButtonMaquinaActionPerformed
 
     private void jButtonTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoServicoActionPerformed
-       janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, tipoServico, controlInterface));
+       frmPrincipal.trocarPanel(new JPCrud(frmPrincipal, tipoServico, ciInterface));
     }//GEN-LAST:event_jButtonTipoServicoActionPerformed
 
     private void jButtonProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutorActionPerformed
-        janelaPrincipal.trocarPanel(new JPCrud(janelaPrincipal, produtor, controlInterface));
+        frmPrincipal.trocarPanel(new JPCrud(frmPrincipal, produtor, ciInterface));
     }//GEN-LAST:event_jButtonProdutorActionPerformed
 
     public void setjButtonProdutor(java.awt.event.ActionEvent evt) {
