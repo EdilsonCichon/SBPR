@@ -1,11 +1,9 @@
 package cih.funcionario;
 
-<<<<<<< HEAD:src/windows/funcionario/JDPesquisaFuncionario.java
-import control.ControlInterfaces;
 import javax.swing.ImageIcon;
-=======
+
 import cci.CIInterface;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/funcionario/JDPesquisaFuncionario.java
+
 
 
 /**
@@ -20,7 +18,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         super(parent, modal);
         this.controlInterface = controlInterfaces;
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
     }
 

@@ -1,31 +1,19 @@
 
 package cih.maquina;
 
-<<<<<<< HEAD:src/windows/maquina/JDPesquisarMaquina.java
-import control.ControlInterfaces;
 import javax.swing.ImageIcon;
-=======
 import cci.CIInterface;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/maquina/JDPesquisarMaquina.java
 
-/**
- *
- * @author Erick Doido
- */
 public class JDPesquisarMaquina extends javax.swing.JDialog {
     
     private CIInterface controlInterface;
     
-    public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
+    public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, CIInterface controlInterface) {
         super(parent, modal);
         initComponents();
-<<<<<<< HEAD:src/windows/maquina/JDPesquisarMaquina.java
-        this.controlInterfaces = controlInterfaces;
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        this.controlInterface = controlInterface;
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
-=======
-        this.controlInterface = controlInterfaces;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/maquina/JDPesquisarMaquina.java
     }
 
     @SuppressWarnings("unchecked")

@@ -1,18 +1,9 @@
-
 package cih.tipoMaquina;
 
-<<<<<<< HEAD:src/windows/tipoMaquina/JDCadastroTipoMaquina.java
-import control.ControlInterfaces;
 import javax.swing.ImageIcon;
-=======
 import cci.CIInterface;
 import javax.swing.JOptionPane;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/tipoMaquina/JDCadastroTipoMaquina.java
 
-/**
- *
- * @author Erick Gostoso piroca de mel
- */
 public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
@@ -20,13 +11,9 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface ciInterfaces) {
         super(parent, modal);
         initComponents();
-<<<<<<< HEAD:src/windows/tipoMaquina/JDCadastroTipoMaquina.java
-        this.controlInterfaces = controlInterfaces;
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
-=======
         this.ciInterface = ciInterfaces;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/tipoMaquina/JDCadastroTipoMaquina.java
     }
 
     @SuppressWarnings("unchecked")

@@ -24,7 +24,7 @@ public class JDSuporte extends javax.swing.JDialog {
     public JDSuporte(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
     }
 

@@ -1,31 +1,18 @@
-
 package cih.tipoMaquina;
 
-<<<<<<< HEAD:src/windows/tipoMaquina/JDPesquisarTipoMaquina.java
-import control.ControlInterfaces;
 import javax.swing.ImageIcon;
-=======
 import cci.CIInterface;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/tipoMaquina/JDPesquisarTipoMaquina.java
 
-/**
- *
- * @author Erick
- */
 public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     
     private CIInterface controlInterface;
     
-    public JDPesquisarTipoMaquina(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
+    public JDPesquisarTipoMaquina(java.awt.Frame parent, boolean modal, CIInterface controlInterface) {
         super(parent, modal);
         initComponents();
-<<<<<<< HEAD:src/windows/tipoMaquina/JDPesquisarTipoMaquina.java
-        this.controlInterfaces = controlInterfaces;
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        this.controlInterface = controlInterface;
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
-=======
-        this.controlInterface = controlInterfaces;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/tipoMaquina/JDPesquisarTipoMaquina.java
     }
 
     @SuppressWarnings("unchecked")

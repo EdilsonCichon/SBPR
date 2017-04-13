@@ -1,22 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cih.tipoServico;
 
-<<<<<<< HEAD:src/windows/tipoServico/JDCadastroTipoServico.java
-import control.ControlInterfaces;
 import javax.swing.ImageIcon;
-import windows.propriedade.*;
-=======
 import cci.CIInterface;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/tipoServico/JDCadastroTipoServico.java
 
-/**
- *
- * @author Chrysthian
- */
 public class JDCadastroTipoServico extends javax.swing.JDialog {
     
     private CIInterface controlInterface;
@@ -26,7 +13,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         this.controlInterface = controlInterfaces;
         initComponents();
         this.setLocationRelativeTo(parent);
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
     }
 

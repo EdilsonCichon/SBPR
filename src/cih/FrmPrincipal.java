@@ -1,17 +1,9 @@
 package cih;
 
-<<<<<<< HEAD:src/windows/FrmPrincipal.java
-import control.ControlInterfaces;
 import javax.swing.ImageIcon;
-=======
 import cci.CIInterface;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/FrmPrincipal.java
 import javax.swing.JPanel;
 
-/**
- *
- * @author Edilson Cichon
- */
 public class FrmPrincipal extends javax.swing.JFrame {    
     private JPInicio inicio; 
     private JDAjuda ajuda;
@@ -26,14 +18,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
         initComponents();
-<<<<<<< HEAD:src/windows/FrmPrincipal.java
         jButtonInicioActionPerformed(null);    
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
-=======
         //controlInterfaces.getControlGeral().abrirInicio(this); 
         jButtonInicioActionPerformed(null);
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/FrmPrincipal.java
     }
     
     public void trocarPanel(JPanel jPanel) {

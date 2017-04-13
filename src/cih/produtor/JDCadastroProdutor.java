@@ -1,22 +1,8 @@
 package cih.produtor;
 
-<<<<<<< HEAD:src/windows/produtor/JDCadastroProdutor.java
-import control.ControlInterfaces;
 import javax.swing.ImageIcon;
-=======
 import cci.CIInterface;
->>>>>>> a3efe03670a4322d6922c06e4894179190c93818:src/cih/produtor/JDCadastroProdutor.java
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author 1547816
- */
 public class JDCadastroProdutor extends javax.swing.JDialog {
     
     private CIInterface controlInterface;
@@ -26,7 +12,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         this.controlInterface = controlInterfaces;
         initComponents();
         this.setLocationRelativeTo(parent);
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
     }
 

@@ -18,7 +18,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     public FrmValidarAcesso(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/windows/icones/icone-logo-reduzido.png");
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
     }
 
