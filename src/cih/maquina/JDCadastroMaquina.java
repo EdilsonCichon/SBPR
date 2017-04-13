@@ -1,20 +1,18 @@
-
 package cih.maquina;
+
 import javax.swing.ImageIcon;
 import cci.CIInterface;
 
 public class JDCadastroMaquina extends javax.swing.JDialog {
 
-    private CIInterface controlInterface; 
+    private CIInterface ciInterface; 
     
-    public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface controlInterface) {
+    public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
         initComponents();
-
-        this.controlInterface = controlInterface;
         ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
-        this.controlInterface = controlInterface;
+        this.ciInterface = ciInterface;
     }
 
     @SuppressWarnings("unchecked")

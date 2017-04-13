@@ -5,11 +5,11 @@ import cci.CIInterface;
 
 public class JDPesquisaTipoServico extends javax.swing.JDialog {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     
-    public JDPesquisaTipoServico(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
+    public JDPesquisaTipoServico(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
-        this.controlInterface = controlInterfaces;
+        this.ciInterface = ciInterface;
         initComponents();
         ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());

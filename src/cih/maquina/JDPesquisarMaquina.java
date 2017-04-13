@@ -6,12 +6,12 @@ import cci.CIInterface;
 
 public class JDPesquisarMaquina extends javax.swing.JDialog {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     
-    public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, CIInterface controlInterface) {
+    public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
         initComponents();
-        this.controlInterface = controlInterface;
+        this.ciInterface = ciInterface;
         ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
     }

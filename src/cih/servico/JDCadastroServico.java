@@ -1,4 +1,3 @@
-
 package cih.servico;
 
 import javax.swing.ImageIcon;
@@ -6,11 +5,11 @@ import javax.swing.ImageIcon;
 import cci.CIInterface;
 public class JDCadastroServico extends javax.swing.JDialog {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
    
-    public JDCadastroServico(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
+    public JDCadastroServico(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
-        this.controlInterface = controlInterfaces;
+        this.ciInterface = ciInterface;
         initComponents();
         jPanelConcluir.setVisible(false);
         jPanelCancelar.setVisible(false);
@@ -417,9 +416,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldQtHrsReaisActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

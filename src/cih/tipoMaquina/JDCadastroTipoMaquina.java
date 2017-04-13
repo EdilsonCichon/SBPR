@@ -8,12 +8,12 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
 
-    public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface ciInterfaces) {
+    public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface ciInterface) {
         super(parent, modal);
         initComponents();
         ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
-        this.ciInterface = ciInterfaces;
+        this.ciInterface = ciInterface;
     }
 
     @SuppressWarnings("unchecked")

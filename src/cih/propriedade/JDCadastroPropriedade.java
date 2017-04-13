@@ -7,11 +7,11 @@ import cci.CIInterface;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
    
-    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, CIInterface controlInterface) {
+    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
-        this.controlInterface = controlInterface;
+        this.ciInterface = ciInterface;
         initComponents();
         this.setLocationRelativeTo(parent);
         ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");

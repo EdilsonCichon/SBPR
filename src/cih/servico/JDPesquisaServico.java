@@ -6,11 +6,11 @@ import cci.CIInterface;
 
 public class JDPesquisaServico extends javax.swing.JDialog {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     
-    public JDPesquisaServico(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
+    public JDPesquisaServico(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
-        this.controlInterface = controlInterfaces;
+        this.ciInterface = ciInterface;
         initComponents();
         ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
         setIconImage(icone.getImage());
@@ -215,12 +215,9 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
     private void jComboBoxChavePesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxChavePesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxChavePesquisaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
