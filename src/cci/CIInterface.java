@@ -10,27 +10,27 @@ import javax.swing.ImageIcon;
  *
  * @author Chrysthian
  */
-public class ControlInterface{
+public class CIInterface{
     
-    private ControlGeral controlGeral;
-    private ControlFuncionario controlFuncionario;
-    private ControlMaquina controlMaquina;
-    private ControlProdutor controlProdutor;
-    private ControlPropriedade controlPropriedade;
-    private ControlServico controlServico;
-    private ControlTipoMaquina controlTipoMaquina;
-    private ControlTipoServico controlTipoServico;
+    private CIGeral ciGeral;
+    private CIFuncionario ciFuncionario;
+    private CIMaquina ciMaquina;
+    private CIProdutor ciProdutor;
+    private CIPropriedade ciPropriedade;
+    private CIServico ciServico;
+    private CITipoMaquina ciTipoMaquina;
+    private CITipoServico ciTipoServico;
 
-    public ControlInterface() {
-        controlGeral = new ControlGeral(this);
-        controlFuncionario = new ControlFuncionario(this);
-        controlMaquina = new ControlMaquina(this);
-        controlProdutor = new ControlProdutor(this);
-        controlPropriedade = new ControlPropriedade(this);
-        controlServico = new ControlServico(this);
-        controlTipoMaquina = new ControlTipoMaquina(this);
-        controlTipoServico = new ControlTipoServico(this);
-        controlGeral.iniciarSistema();
+    public CIInterface() {
+        ciGeral = new CIGeral(this);
+        ciFuncionario = new CIFuncionario(this);
+        ciMaquina = new CIMaquina(this);
+        ciProdutor = new CIProdutor(this);
+        ciPropriedade = new CIPropriedade(this);
+        ciServico = new CIServico(this);
+        ciTipoMaquina = new CITipoMaquina(this);
+        ciTipoServico = new CITipoServico(this);
+        ciGeral.iniciarSistema();
     }
     
     public static void main(String args[]){
@@ -45,7 +45,7 @@ public class ControlInterface{
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ControlInterface();
+                new CIInterface();
             }   
         });
     }
@@ -54,13 +54,13 @@ public class ControlInterface{
 
         switch (codInicio) {
 
-            case 0: controlServico.gerenciarServico(codCrud, pai); break;
-            case 1: controlProdutor.gerenciarProdutor(codCrud, pai); break;
-            case 2: controlPropriedade.gerenciarPropriedade(codCrud, pai); break;
-            case 3: controlMaquina.gerenciarMaquina(codCrud, pai); break;
-            case 4: controlFuncionario.gerenciarFuncionario(codCrud, pai); break;
-            case 5: controlTipoServico.gerenciarTipoServico(codCrud, pai); break;
-            case 6: controlTipoMaquina.gerenciarTipoMaquina(codCrud, pai); break;
+            case 0: ciServico.gerenciarServico(codCrud, pai); break;
+            case 1: ciProdutor.gerenciarProdutor(codCrud, pai); break;
+            case 2: ciPropriedade.gerenciarPropriedade(codCrud, pai); break;
+            case 3: ciMaquina.gerenciarMaquina(codCrud, pai); break;
+            case 4: ciFuncionario.gerenciarFuncionario(codCrud, pai); break;
+            case 5: ciTipoServico.gerenciarTipoServico(codCrud, pai); break;
+            case 6: ciTipoMaquina.gerenciarTipoMaquina(codCrud, pai); break;
             default: break;
         }
     }   
@@ -94,35 +94,35 @@ public class ControlInterface{
         serv.setBorder(BorderFactory.createTitledBorder("Gerenciar " +titulo));
     }
 
-    public ControlGeral getControlGeral() {
-        return controlGeral;
+    public CIGeral getCiGeral() {
+        return ciGeral;
     }
 
-    public ControlFuncionario getControlFuncionario() {
-        return controlFuncionario;
+    public CIFuncionario getCiFuncionario() {
+        return ciFuncionario;
     }
 
-    public ControlMaquina getControlMaquina() {
-        return controlMaquina;
+    public CIMaquina getCiMaquina() {
+        return ciMaquina;
     }
 
-    public ControlProdutor getControlProdutor() {
-        return controlProdutor;
+    public CIProdutor getCiProdutor() {
+        return ciProdutor;
     }
 
-    public ControlPropriedade getControlPropriedade() {
-        return controlPropriedade;
+    public CIPropriedade getCiPropriedade() {
+        return ciPropriedade;
     }
 
-    public ControlServico getControlServico() {
-        return controlServico;
+    public CIServico getCiServico() {
+        return ciServico;
     }
 
-    public ControlTipoMaquina getControlTipoMaquina() {
-        return controlTipoMaquina;
+    public CITipoMaquina getCiTipoMaquina() {
+        return ciTipoMaquina;
     }
 
-    public ControlTipoServico getControlTipoServico() {
-        return controlTipoServico;
+    public CITipoServico getCiTipoServico() {
+        return ciTipoServico;
     }
 }

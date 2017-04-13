@@ -1,6 +1,6 @@
 package cih.produtor;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,11 +13,10 @@ import cci.ControlInterface;
  * @author 1547816
  */
 public class JDCadastroProdutor extends javax.swing.JDialog {
-    private ControlInterface controlInterface;
-    /**
-     * Creates new form FrmCadCliente
-     */
-    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
+    
+    private CIInterface controlInterface;
+   
+    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
         super(parent, modal);
         this.controlInterface = controlInterfaces;
         initComponents();
@@ -293,7 +292,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        controlInterface.getControlProdutor().cadastrarProdutor();
+        controlInterface.getCiProdutor().cadastrarProdutor();
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
    

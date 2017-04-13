@@ -1,32 +1,75 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cdp;
 
-/**
- *
- * @author Chrysthian
- */
-public class Funcionario extends Pessoa{
-    
-    public String rua;
-    public String bairro;
-    public String numero;
-    public String cidade;
-    public String estado;
-    public String cep;
-    public String habilitacao;
+import cdp.endereco.Endereco;
+import java.util.Date;
+import java.util.LinkedList;
 
-    public Funcionario(String rua, String bairro, String numero, String cidade, String estado, String cep, String habilitacao, String nome, String dt_nasc, String cpf, String rg, char sexo) {
-        super(nome, dt_nasc, cpf, rg, sexo);
-        this.rua = rua;
-        this.bairro = bairro;
-        this.numero = numero;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.cep = cep;
+public class Funcionario extends Pessoa {
+    
+    private Endereco endereco;
+    private Habilitacao habilitacao;
+    private Usuario usuario;
+    private String email;
+    private Cargo cargo;
+    private LinkedList<TipoServico> tipoServicos;
+
+    public Funcionario(Endereco endereco, Habilitacao habilitacao, Usuario usuario, 
+            String email, Cargo cargo, String nome, Date dt_nasc, String cpf, String rg, 
+            char sexo, String telefone, LinkedList<TipoServico> tipoServicos) {
+        super(nome, dt_nasc, cpf, rg, sexo, telefone);
+        this.endereco = endereco;
         this.habilitacao = habilitacao;
+        this.usuario = usuario;
+        this.cargo = cargo;
+        this.email = email;
+        this.tipoServicos = tipoServicos;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Habilitacao getHabilitacao() {
+        return habilitacao;
+    }
+
+    public void setHabilitacao(Habilitacao habilitacao) {
+        this.habilitacao = habilitacao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public LinkedList<TipoServico> getTipoServicos() {
+        return tipoServicos;
+    }
+
+    public void setTipoServicos(LinkedList<TipoServico> tipoServicos) {
+        this.tipoServicos = tipoServicos;
     }
 }

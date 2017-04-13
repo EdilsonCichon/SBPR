@@ -9,7 +9,7 @@ import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import cih.produtor.JDCadastroProdutor;
-import cci.ControlInterface;
+import cci.CIInterface;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
@@ -24,12 +24,12 @@ public class JPCrud extends javax.swing.JPanel {
     private final int consultar = 2;
     private final int excluir = 3;
 
-   JDCadastroProdutor cadastro;
-   JFrame pai;
-   int codInicio;
-   private ControlInterface controlInterface;
+    private JDCadastroProdutor cadastro;
+    private JFrame pai;
+    private int codInicio;
+    private CIInterface controlInterface;
    
-    public JPCrud(JFrame pai, int inicio, ControlInterface controlInterfaces) {
+    public JPCrud(JFrame pai, int inicio, CIInterface controlInterfaces) {
         initComponents();
         this.pai = pai;
         this.codInicio = inicio;

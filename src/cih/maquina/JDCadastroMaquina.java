@@ -1,7 +1,7 @@
 
 package cih.maquina;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 
 /**
  *
@@ -9,9 +9,9 @@ import cci.ControlInterface;
  */
 public class JDCadastroMaquina extends javax.swing.JDialog {
 
-    private ControlInterface controlInterface; 
+    private CIInterface controlInterface; 
     
-    public JDCadastroMaquina(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
+    public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
         super(parent, modal);
         initComponents();
         this.controlInterface = controlInterfaces;

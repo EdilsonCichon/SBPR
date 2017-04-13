@@ -5,18 +5,17 @@
  */
 package cih.propriedade;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 
 /**
  *
  * @author Chrysthian
  */
 public class JDCadastroPropriedade extends javax.swing.JDialog {
-    private ControlInterface controlInterface;
-    /**
-     * Creates new form JDCadastroPropriedade
-     */
-    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
+    
+    private CIInterface controlInterface;
+   
+    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
         super(parent, modal);
         this.controlInterface = controlInterfaces;
         initComponents();

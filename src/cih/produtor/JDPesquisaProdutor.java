@@ -5,18 +5,18 @@
  */
 package cih.produtor;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 
 /**
  *
  * @author Chrysthian
  */
 public class JDPesquisaProdutor extends javax.swing.JDialog {
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     /**
      * Creates new form JDAlterarProdutor
      */
-    public JDPesquisaProdutor(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
+    public JDPesquisaProdutor(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
         super(parent, modal);
         this.controlInterface = controlInterfaces;
         initComponents();

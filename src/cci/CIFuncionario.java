@@ -9,14 +9,14 @@ import cih.funcionario.JDPesquisaFuncionario;
  *
  * @author Edilson
  */
-public class ControlFuncionario {
+public class CIFuncionario {
     
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     private GTFuncionario gtFuncionario;
 
-    public ControlFuncionario(ControlInterface controlInterfaces) {
+    public CIFuncionario(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
-        //gtFuncionario = new GTFuncionario();
+        gtFuncionario = new GTFuncionario();
     }
     
     public void gerenciarFuncionario(int codCrud, JFrame pai) {

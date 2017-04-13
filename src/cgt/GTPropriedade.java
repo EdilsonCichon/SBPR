@@ -5,26 +5,33 @@
  */
 package cgt;
 
-/**
- *
- * @author Chrysthian
- */
+import cgd.GDPropriedade;
+
 public class GTPropriedade {
     
+    private GDPropriedade gdPropriedade;
+
+    public GTPropriedade() {
+        gdPropriedade = new GDPropriedade();
+    }
+    
     public int cadastrarPropriedade(){
+        gdPropriedade.cadastrar();
         return 0;
     }
     
     public int alterarPropriedade(){
+        gdPropriedade.alterar();
         return 0;
     }
     
     public int consultarPropriedade(){
+        gdPropriedade.consultar();
         return 0;
     }
     
     public int excluirPropriedade(){
+        gdPropriedade.excluir();
         return 0;
     } 
-    
 }

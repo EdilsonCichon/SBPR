@@ -9,14 +9,14 @@ import cih.propriedade.JDPesquisaPropriedade;
  *
  * @author Edilson
  */
-public class ControlPropriedade {
+public class CIPropriedade {
     
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     private GTPropriedade gtPropriedade;
 
-    public ControlPropriedade(ControlInterface controlInterfaces) {
+    public CIPropriedade(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
-        //gtPropriedade = new GTPropriedade();
+        gtPropriedade = new GTPropriedade();
     }
     
     public void gerenciarPropriedade(int codCrud, JFrame pai) {

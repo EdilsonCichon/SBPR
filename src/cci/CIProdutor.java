@@ -9,14 +9,14 @@ import cih.produtor.JDPesquisaProdutor;
  *
  * @author Edilson
  */
-public class ControlProdutor {
+public class CIProdutor {
     
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     private GTProdutor gtProdutor;
 
-    public ControlProdutor(ControlInterface controlInterfaces) {
+    public CIProdutor(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
-        //gtProdutor = new GTProdutor();
+        gtProdutor = new GTProdutor();
     }
     
     public void gerenciarProdutor(int codCrud, JFrame pai) {

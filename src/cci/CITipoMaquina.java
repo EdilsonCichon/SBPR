@@ -9,14 +9,14 @@ import cih.tipoMaquina.JDPesquisarTipoMaquina;
  *
  * @author Edilson
  */
-public class ControlTipoMaquina {
+public class CITipoMaquina {
     
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     private GTTipoMaquina gtTipoMaquina;
 
-    public ControlTipoMaquina(ControlInterface controlInterfaces) {
+    public CITipoMaquina(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
-        //gtTipoMaquina = new GTTipoMaquina();
+        gtTipoMaquina = new GTTipoMaquina();
     }
     
         public void gerenciarTipoMaquina(int codCrud, JFrame pai) {

@@ -1,6 +1,6 @@
 package cih;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -12,9 +12,9 @@ import javax.swing.JFrame;
  */
 public class JPServico extends javax.swing.JPanel {
 
-    private ControlInterface controlInterface;
-    JFrame pai;
-    int codInicio;
+    private CIInterface controlInterface;
+    private JFrame pai;
+    private int codInicio;
     
     private final int cadastrar = 0;
     private final int alterar = 1;
@@ -22,7 +22,7 @@ public class JPServico extends javax.swing.JPanel {
     private final int concluir = 3;
     private final int cancelar = 4;
 
-    public JPServico(JFrame pai, int num, ControlInterface controlInterfaces) {
+    public JPServico(JFrame pai, int num, CIInterface controlInterfaces) {
         initComponents();
         this.controlInterface = controlInterfaces;
         this.pai = pai;

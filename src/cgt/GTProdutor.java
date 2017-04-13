@@ -5,25 +5,33 @@
  */
 package cgt;
 
-/**
- *
- * @author Chrysthian
- */
+import cgd.GDProdutor;
+
 public class GTProdutor {
     
+    private GDProdutor gdProdutor;
+
+    public GTProdutor() {
+        gdProdutor = new GDProdutor();
+    }
+    
     public int cadastrarProdutor(){
+        gdProdutor.cadastrar();
         return 0;
     }
     
     public int alterarProdutor(){
+        gdProdutor.alterar();
         return 0;
     }
     
     public int consultarProdutor(){
+        gdProdutor.consultar();
         return 0;
     }
     
     public int excluirProdutor(){
+        gdProdutor.excluir();
         return 0;
     } 
 }

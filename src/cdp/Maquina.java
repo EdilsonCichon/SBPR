@@ -1,23 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cdp;
 
-import java.util.logging.Logger;
-
-/**
- *
- * @author Chrysthian
- */
 public class Maquina {
     
     private String modelo;
     private String placa;
+    private TipoMaquina tipoMaquina;
 
-    public Maquina(String modelo, String placa) {
+    public Maquina(String modelo, String placa, TipoMaquina tipoMaquina) {
         this.modelo = modelo;
         this.placa = placa;
-    } 
+        this.tipoMaquina = tipoMaquina;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public TipoMaquina getTipoMaquina() {
+        return tipoMaquina;
+    }
+
+    public void setTipoMaquina(TipoMaquina tipoMaquina) {
+        this.tipoMaquina = tipoMaquina;
+    }
 }

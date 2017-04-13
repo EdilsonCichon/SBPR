@@ -5,7 +5,7 @@
  */
 package cih;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;

@@ -1,6 +1,6 @@
 package cih;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 
 public class JPInicio extends javax.swing.JPanel {
     
@@ -12,10 +12,10 @@ public class JPInicio extends javax.swing.JPanel {
     private final int tipoServico = 5;
     private final int tipoMaquina = 6;
     
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     private FrmPrincipal janelaPrincipal;
 
-    public JPInicio(FrmPrincipal janelaPrincipal, ControlInterface controlInterfaces) {
+    public JPInicio(FrmPrincipal janelaPrincipal, CIInterface controlInterfaces) {
         initComponents();
         this.controlInterface = controlInterfaces;
         this.janelaPrincipal = janelaPrincipal;

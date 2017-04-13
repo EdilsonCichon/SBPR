@@ -5,26 +5,33 @@
  */
 package cgt;
 
-/**
- *
- * @author Chrysthian
- */
+import cgd.GDTipoMaquina;
+
 public class GTTipoMaquina {
     
+    private GDTipoMaquina gdTipoMaquina;
+
+    public GTTipoMaquina() {
+        gdTipoMaquina = new GDTipoMaquina();
+    }
+    
     public int cadastrarTipoMaquina(){
+        gdTipoMaquina.cadastrar();
         return 0;
     }
     
     public int alterarTipoMaquina(){
+        gdTipoMaquina.alterar();
         return 0;
     }
     
     public int consultarTipoMaquina(){
+        gdTipoMaquina.consultar();
         return 0;
     }
     
     public int excluirTipoMaquina(){
+        gdTipoMaquina.excluir();
         return 0;
     } 
-    
 }

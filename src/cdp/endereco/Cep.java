@@ -1,22 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cdp.endereco;
 
-/**
- *
- * @author Chrysthian
- */
+import java.util.LinkedList;
+
 public class Cep {
     
     private String cep;
-    private Logradouro logradouro;
+    private LinkedList<Logradouro> logradouros;
 
-    public Cep(String cep, Logradouro logradouro) {
+    public Cep(String cep, LinkedList<Logradouro> logradouros) {
         this.cep = cep;
-        this.logradouro = logradouro;
+        this.logradouros = logradouros;
     }  
 
     public String getCep() {
@@ -27,11 +20,11 @@ public class Cep {
         this.cep = cep;
     }
 
-    public Logradouro getLogradouro() {
-        return logradouro;
+    public LinkedList<Logradouro> getLogradouros() {
+        return logradouros;
     }
 
-    public void setLogradouro(Logradouro logradouro) {
-        this.logradouro = logradouro;
+    public void setLogradouros(LinkedList<Logradouro> logradouros) {
+        this.logradouros = logradouros;
     }
 }

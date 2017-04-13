@@ -1,23 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cdp;
 
-import java.util.List;
+import java.util.Date;
+import java.util.LinkedList;
 
-/**
- *
- * @author Chrysthian
- */
 public class Produtor extends Pessoa{
     
     private String inscricao_estadual;
-    //private List<Propriedade> prop;
+    private LinkedList<Propriedade> propriedades;
 
-    public Produtor(String inscricao_estadual, String nome, String dt_nasc, String cpf, String rg, char sexo) {
-        super(nome, dt_nasc, cpf, rg, sexo);
+    public Produtor(String inscricao_estadual, String nome, Date dt_nasc, String cpf, String rg, char sexo, String telefone, LinkedList<Propriedade> propriedades) {
+        super(nome, dt_nasc, cpf, rg, sexo, telefone);
         this.inscricao_estadual = inscricao_estadual;
+        this.propriedades = propriedades;
+    }
+
+    public String getInscricao_estadual() {
+        return inscricao_estadual;
+    }
+
+    public void setInscricao_estadual(String inscricao_estadual) {
+        this.inscricao_estadual = inscricao_estadual;
+    }
+
+    public LinkedList<Propriedade> getPropriedades() {
+        return propriedades;
+    }
+
+    public void setPropriedades(LinkedList<Propriedade> propriedades) {
+        this.propriedades = propriedades;
     }
 }

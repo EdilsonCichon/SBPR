@@ -5,18 +5,17 @@
  */
 package cih.tipoServico;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 
 /**
  *
  * @author Chrysthian
  */
 public class JDCadastroTipoServico extends javax.swing.JDialog {
-    private ControlInterface controlInterface;
-    /**
-     * Creates new form JDCadastroPropriedade
-     */
-    public JDCadastroTipoServico(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
+    
+    private CIInterface controlInterface;
+    
+    public JDCadastroTipoServico(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
         super(parent, modal);
         this.controlInterface = controlInterfaces;
         initComponents();

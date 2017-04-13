@@ -9,14 +9,14 @@ import cih.maquina.JDPesquisarMaquina;
  *
  * @author Edilson
  */
-public class ControlMaquina {
+public class CIMaquina {
     
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     private GTMaquina gtMaquina;
 
-    public ControlMaquina(ControlInterface controlInterfaces) {
+    public CIMaquina(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
-        //gtMaquina = new GTMaquina();
+        gtMaquina = new GTMaquina();
     }
     
     public void gerenciarMaquina(int codCrud, JFrame pai) {

@@ -18,9 +18,9 @@ import javax.swing.JPanel;
  *
  * @author Edilson
  */
-public class ControlGeral {
+public class CIGeral {
     
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     private FrmValidarAcesso frmValidarAcesso;
     private FrmPrincipal frmPrincipal;
     private JDAjuda ajuda;
@@ -28,7 +28,7 @@ public class ControlGeral {
     private JDSuporte suporte;
     private JPInicio inicio; 
 
-    public ControlGeral(ControlInterface controlInterfaces) {
+    public CIGeral(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
     }
     

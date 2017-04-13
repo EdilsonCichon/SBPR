@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cdp.endereco;
 
-/**
- *
- * @author Chrysthian
- */
+import java.util.LinkedList;
+
 public class Logradouro {
     
     private String nome;
     private String tipo;
-    private Bairro bairro;
+    private LinkedList<Bairro> bairros;
 
-    public Logradouro(String nome, String tipo, Bairro bairro) {
+    public Logradouro(String nome, String tipo, LinkedList<Bairro> bairros) {
         this.nome = nome;
         this.tipo = tipo;
-        this.bairro = bairro;
+        this.bairros = bairros;
     }
 
     public String getNome() {
@@ -37,11 +30,11 @@ public class Logradouro {
         this.tipo = tipo;
     }
 
-    public Bairro getBairro() {
-        return bairro;
+    public LinkedList<Bairro> getBairros() {
+        return bairros;
     }
 
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
+    public void setBairros(LinkedList<Bairro> bairros) {
+        this.bairros = bairros;
     } 
 }

@@ -5,18 +5,17 @@
  */
 package cih.propriedade;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 
 /**
  *
  * @author Chrysthian
  */
 public class JDPesquisaPropriedade extends javax.swing.JDialog {
-    private ControlInterface controlInterface;
-    /**
-     * Creates new form JDAlterarProdutor
-     */
-    public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, ControlInterface controlInterfaces) {
+    
+    private CIInterface controlInterface;
+    
+    public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, CIInterface controlInterfaces) {
         super(parent, modal);
         this.controlInterface = controlInterfaces;
         initComponents();

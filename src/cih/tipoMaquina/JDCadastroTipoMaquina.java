@@ -1,16 +1,17 @@
 
 package cih.tipoMaquina;
 
-import cci.ControlInterface;
+import cci.CIInterface;
 
 /**
  *
  * @author Erick Gostoso piroca de mel
  */
 public class JDCadastroTipoMaquina extends javax.swing.JDialog {
-    private ControlInterface controlInterface;
+    
+    private CIInterface controlInterface;
 
-    public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,ControlInterface controlInterfaces) {
+    public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface controlInterfaces) {
         super(parent, modal);
         initComponents();
         this.controlInterface = controlInterfaces;

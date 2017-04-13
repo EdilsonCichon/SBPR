@@ -9,14 +9,14 @@ import cih.tipoServico.JDPesquisaTipoServico;
  *
  * @author Edilson
  */
-public class ControlTipoServico {
+public class CITipoServico {
     
-    private ControlInterface controlInterface;
+    private CIInterface controlInterface;
     private GTTipoServico gtTipoServico;
 
-    public ControlTipoServico(ControlInterface controlInterfaces) {
+    public CITipoServico(CIInterface controlInterfaces) {
         this.controlInterface = controlInterfaces;
-        //gtTipoServico = new GTTipoServico();
+        gtTipoServico = new GTTipoServico();
     }
     
     public void gerenciarTipoServico(int codCrud, JFrame pai) {
