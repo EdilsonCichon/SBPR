@@ -9,7 +9,19 @@ public class ServicoConcluido extends Servico {
     private double qtd_hrs_real;
     private Maquina maquina;
 
-    public ServicoConcluido(Date data_conclusao, double valor_total, double qtd_hrs_real, Maquina maquina, Date data_solicitacao, Date data_agendamento, double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {
+    public ServicoConcluido(Date data_conclusao, double valor_total, double qtd_hrs_real, Maquina maquina, int id, Date data_solicitacao, 
+            Date data_agendamento, double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {
+        
+        super(id, data_solicitacao, data_agendamento, qtd_hrs_prevista, produtor, propriedade, tipoServico);
+        this.data_conclusao = data_conclusao;
+        this.valor_total = valor_total;
+        this.qtd_hrs_real = qtd_hrs_real;
+        this.maquina = maquina;
+    }
+    
+    public ServicoConcluido(Date data_conclusao, double valor_total, double qtd_hrs_real, Maquina maquina, Date data_solicitacao, 
+            Date data_agendamento, double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {
+        
         super(data_solicitacao, data_agendamento, qtd_hrs_prevista, produtor, propriedade, tipoServico);
         this.data_conclusao = data_conclusao;
         this.valor_total = valor_total;

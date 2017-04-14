@@ -2,10 +2,19 @@ package cdp.endereco;
 
 public class Endereco {
     
+    private int id;
     private String numero;
     private String tipo;
     private String complemento;
     private Cep cep;
+
+    public Endereco(int id, String numero, String tipo, String complemento, Cep cep) {
+        this.id = id;
+        this.numero = numero;
+        this.tipo = tipo;
+        this.complemento = complemento;
+        this.cep = cep;
+    }
 
     public Endereco(String numero, String tipo, String complemento, Cep cep) {
         this.numero = numero;

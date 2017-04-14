@@ -5,17 +5,13 @@ import javax.swing.JFrame;
 import cih.maquina.JDCadastroMaquina;
 import cih.maquina.JDPesquisarMaquina;
 
-/**
- *
- * @author Edilson
- */
 public class CIMaquina {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private GTMaquina gtMaquina;
 
-    public CIMaquina(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public CIMaquina(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
         gtMaquina = new GTMaquina();
     }
     
@@ -23,10 +19,10 @@ public class CIMaquina {
         JDCadastroMaquina cadastroMaquina;
         JDPesquisarMaquina pesquisaMaquina; 
         if (codCrud == 0) {
-            cadastroMaquina = new JDCadastroMaquina(pai, true, controlInterface);
+            cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface);
             cadastroMaquina.setVisible(true);
         } else if (codCrud > 0) {
-            pesquisaMaquina = new JDPesquisarMaquina(pai, true, controlInterface);
+            pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface);
             pesquisaMaquina.setVisible(true);
         }
     }

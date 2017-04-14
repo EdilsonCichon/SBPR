@@ -2,9 +2,17 @@ package cdp;
 
 public class Maquina {
     
+    private int id;
     private String modelo;
     private String placa;
     private TipoMaquina tipoMaquina;
+
+    public Maquina(int id, String modelo, String placa, TipoMaquina tipoMaquina) {
+        this.id = id;
+        this.modelo = modelo;
+        this.placa = placa;
+        this.tipoMaquina = tipoMaquina;
+    }
 
     public Maquina(String modelo, String placa, TipoMaquina tipoMaquina) {
         this.modelo = modelo;

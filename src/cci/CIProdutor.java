@@ -5,17 +5,13 @@ import javax.swing.JFrame;
 import cih.produtor.JDCadastroProdutor;
 import cih.produtor.JDPesquisaProdutor;
 
-/**
- *
- * @author Edilson
- */
 public class CIProdutor {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private GTProdutor gtProdutor;
 
-    public CIProdutor(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public CIProdutor(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
         gtProdutor = new GTProdutor();
     }
     
@@ -25,16 +21,16 @@ public class CIProdutor {
         JDPesquisaProdutor pesquisaProdutor;
 
         if (codCrud == 0) {
-            cadastroProdutor = new JDCadastroProdutor(pai, true, controlInterface);
+            cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface);
             cadastroProdutor.setVisible(true);
         } else if (codCrud == 1) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, controlInterface);
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface);
             pesquisaProdutor.setVisible(true);
         } else if (codCrud == 2) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, controlInterface);
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface);
             pesquisaProdutor.setVisible(true);
         } else if (codCrud == 3) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, controlInterface);
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface);
             pesquisaProdutor.setVisible(true);
         }
     }

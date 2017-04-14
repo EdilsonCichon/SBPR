@@ -2,8 +2,15 @@ package cdp;
 
 public class TipoMaquina {
     
+    private int id;
     public String nome;
     public String descricao;
+
+    public TipoMaquina(int id, String nome, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+    }
 
     public TipoMaquina(String nome, String descricao) {
         this.nome = nome;

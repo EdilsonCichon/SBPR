@@ -4,12 +4,23 @@ import java.util.Date;
 
 public abstract class Pessoa {
     
+    private int id;
     private String nome;
     private Date dt_nasc;
     private String cpf;
     private String rg;
     private char sexo;
     private String telefone;
+
+    public Pessoa(int id, String nome, Date dt_nasc, String cpf, String rg, char sexo, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.dt_nasc = dt_nasc;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.sexo = sexo;
+        this.telefone = telefone;
+    }
 
     public Pessoa(String nome, Date dt_nasc, String cpf, String rg, char sexo, String telefone) {
         this.nome = nome;

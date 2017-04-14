@@ -5,17 +5,13 @@ import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
 
-/**
- *
- * @author Edilson
- */
 public class CIFuncionario {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private GTFuncionario gtFuncionario;
 
-    public CIFuncionario(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public CIFuncionario(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
         gtFuncionario = new GTFuncionario();
     }
     
@@ -25,10 +21,10 @@ public class CIFuncionario {
         JDPesquisaFuncionario pesquisaFuncionario;
 
         if (codCrud == 0) {
-            cadastroFuncionario = new JDCadastroFuncionario(pai, true, controlInterface);
+            cadastroFuncionario = new JDCadastroFuncionario(pai, true, ciInterface);
             cadastroFuncionario.setVisible(true);
         } else if (codCrud > 0) {
-            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, controlInterface);
+            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface);
             pesquisaFuncionario.setVisible(true);
         }
 //         else if (codCrud == 2) {

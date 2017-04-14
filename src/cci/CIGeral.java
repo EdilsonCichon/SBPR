@@ -14,13 +14,9 @@ import cih.JPServico;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Edilson
- */
 public class CIGeral {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private FrmValidarAcesso frmValidarAcesso;
     private FrmPrincipal frmPrincipal;
     private JDAjuda ajuda;
@@ -28,8 +24,8 @@ public class CIGeral {
     private JDSuporte suporte;
     private JPInicio inicio; 
 
-    public CIGeral(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public CIGeral(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
     }
     
     public void trocarPanel(JPanel principal, JPanel jPanel) {
@@ -39,13 +35,13 @@ public class CIGeral {
     }
 
     public void iniciarSistema() {
-         frmValidarAcesso = new FrmValidarAcesso(controlInterface);
+         frmValidarAcesso = new FrmValidarAcesso(ciInterface);
          frmValidarAcesso.setVisible(true);
     }
     
     public void encerrarSessao() {
         //JOptionPane.showConfirmDialog(null, "Deseja sair ?");
-        frmValidarAcesso = new FrmValidarAcesso(controlInterface);
+        frmValidarAcesso = new FrmValidarAcesso(ciInterface);
         frmValidarAcesso.setVisible(true);
         frmPrincipal.dispose();
     }
@@ -53,7 +49,7 @@ public class CIGeral {
     public void validarAcesso(String login, String senha) {
         if ( login.equals("") && senha.equals("") ) {
             if ( frmPrincipal == null )
-                frmPrincipal = new FrmPrincipal(controlInterface);
+                frmPrincipal = new FrmPrincipal(ciInterface);
             frmPrincipal.setVisible(true);
             frmValidarAcesso.dispose();
         } else {
@@ -63,7 +59,7 @@ public class CIGeral {
     
     public JPInicio abrirInicio(FrmPrincipal pai){
         
-        inicio = new JPInicio(pai, controlInterface); 
+        inicio = new JPInicio(pai, ciInterface); 
         //JPanel principal = pai.getjPanelPrincipal();
         //trocarPanel(principal, inicio);
         return inicio;

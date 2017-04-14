@@ -5,36 +5,32 @@ import javax.swing.JFrame;
 import cih.servico.JDCadastroServico;
 import cih.servico.JDPesquisaServico;
 
-/**
- *
- * @author Edilson
- */
 public class CIServico {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private GTServico gtServico;
 
-    public CIServico(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public CIServico(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
         gtServico = new GTServico();
     }
     
      public void gerenciarServico(int codCrud, JFrame pai) {
 
         if (codCrud == 0) {
-            JDCadastroServico agendarServico = new JDCadastroServico(pai, true, controlInterface);
+            JDCadastroServico agendarServico = new JDCadastroServico(pai, true, ciInterface);
             agendarServico.setVisible(true);
         } else if (codCrud == 1) {
-            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, controlInterface);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
         } else if (codCrud == 2) {
-            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, controlInterface);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
         } else if (codCrud == 3) {
-            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, controlInterface);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
         } else if (codCrud == 4) {
-            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, controlInterface);
+            JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
         }
     }

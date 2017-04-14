@@ -5,17 +5,13 @@ import javax.swing.JFrame;
 import cih.propriedade.JDCadastroPropriedade;
 import cih.propriedade.JDPesquisaPropriedade;
 
-/**
- *
- * @author Edilson
- */
 public class CIPropriedade {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private GTPropriedade gtPropriedade;
 
-    public CIPropriedade(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public CIPropriedade(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
         gtPropriedade = new GTPropriedade();
     }
     
@@ -25,16 +21,16 @@ public class CIPropriedade {
         JDPesquisaPropriedade pesquisaPropriedade;
         
         if (codCrud == 0) {
-            cadastroPropriedade = new JDCadastroPropriedade(pai, true, controlInterface);
+            cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface);
             cadastroPropriedade.setVisible(true);
         } else if (codCrud == 1) {
-            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, controlInterface);
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
             pesquisaPropriedade.setVisible(true);
         } else if (codCrud == 2) {
-            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, controlInterface);
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
             pesquisaPropriedade.setVisible(true);
         } else if (codCrud == 3) {
-            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, controlInterface);
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
             pesquisaPropriedade.setVisible(true);
         }
 

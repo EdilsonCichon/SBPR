@@ -7,7 +7,17 @@ public class ServicoCancelado extends Servico {
     private Date data_cancelamento;
     private double valor_multa;
 
-    public ServicoCancelado(Date data_cancelamento, double valor_multa, Date data_solicitacao, Date data_agendamento, double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {
+    public ServicoCancelado(Date data_cancelamento, double valor_multa, int id, Date data_solicitacao, Date data_agendamento, 
+            double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {
+        
+        super(id, data_solicitacao, data_agendamento, qtd_hrs_prevista, produtor, propriedade, tipoServico);
+        this.data_cancelamento = data_cancelamento;
+        this.valor_multa = valor_multa;
+    }
+
+    public ServicoCancelado(Date data_cancelamento, double valor_multa, Date data_solicitacao, Date data_agendamento, 
+            double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {
+        
         super(data_solicitacao, data_agendamento, qtd_hrs_prevista, produtor, propriedade, tipoServico);
         this.data_cancelamento = data_cancelamento;
         this.valor_multa = valor_multa;

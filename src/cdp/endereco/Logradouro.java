@@ -4,9 +4,17 @@ import java.util.LinkedList;
 
 public class Logradouro {
     
+    private int id;
     private String nome;
     private String tipo;
     private LinkedList<Bairro> bairros;
+
+    public Logradouro(int id, String nome, String tipo, LinkedList<Bairro> bairros) {
+        this.id = id;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.bairros = bairros;
+    }
 
     public Logradouro(String nome, String tipo, LinkedList<Bairro> bairros) {
         this.nome = nome;

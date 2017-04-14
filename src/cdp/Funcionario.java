@@ -14,8 +14,22 @@ public class Funcionario extends Pessoa {
     private LinkedList<TipoServico> tipoServicos;
 
     public Funcionario(Endereco endereco, Habilitacao habilitacao, Usuario usuario, 
+            String email, Cargo cargo, LinkedList<TipoServico> tipoServicos, int id, 
+            String nome, Date dt_nasc, String cpf, String rg, char sexo, String telefone) {
+        
+        super(id, nome, dt_nasc, cpf, rg, sexo, telefone);
+        this.endereco = endereco;
+        this.habilitacao = habilitacao;
+        this.usuario = usuario;
+        this.email = email;
+        this.cargo = cargo;
+        this.tipoServicos = tipoServicos;
+    }
+   
+    public Funcionario(Endereco endereco, Habilitacao habilitacao, Usuario usuario, 
             String email, Cargo cargo, String nome, Date dt_nasc, String cpf, String rg, 
             char sexo, String telefone, LinkedList<TipoServico> tipoServicos) {
+        
         super(nome, dt_nasc, cpf, rg, sexo, telefone);
         this.endereco = endereco;
         this.habilitacao = habilitacao;

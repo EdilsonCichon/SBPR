@@ -4,6 +4,7 @@ import java.util.Date;
 
 public abstract class Servico {
     
+    private int id;
     private Date data_solicitacao;
     private Date data_agendamento;
     private double qtd_hrs_prevista;
@@ -11,6 +12,16 @@ public abstract class Servico {
     private Propriedade propriedade;
     private TipoServico tipoServico;
 
+    public Servico(int id, Date data_solicitacao, Date data_agendamento, double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {
+        this.id = id;
+        this.data_solicitacao = data_solicitacao;
+        this.data_agendamento = data_agendamento;
+        this.qtd_hrs_prevista = qtd_hrs_prevista;
+        this.produtor = produtor;
+        this.propriedade = propriedade;
+        this.tipoServico = tipoServico;
+    }
+   
     public Servico(Date data_solicitacao, Date data_agendamento, double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {
         this.data_solicitacao = data_solicitacao;
         this.data_agendamento = data_agendamento;

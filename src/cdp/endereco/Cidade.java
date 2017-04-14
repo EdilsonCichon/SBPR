@@ -2,8 +2,15 @@ package cdp.endereco;
 
 public class Cidade {
     
+    private int id;
     private String nome;
     private Estado estado;
+
+    public Cidade(int id, String nome, Estado estado) {
+        this.id = id;
+        this.nome = nome;
+        this.estado = estado;
+    }
 
     public Cidade(String nome, Estado estado) {
         this.nome = nome;

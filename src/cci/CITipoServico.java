@@ -5,17 +5,13 @@ import javax.swing.JFrame;
 import cih.tipoServico.JDCadastroTipoServico;
 import cih.tipoServico.JDPesquisaTipoServico;
 
-/**
- *
- * @author Edilson
- */
 public class CITipoServico {
     
-    private CIInterface controlInterface;
+    private CIInterface ciInterface;
     private GTTipoServico gtTipoServico;
 
-    public CITipoServico(CIInterface controlInterfaces) {
-        this.controlInterface = controlInterfaces;
+    public CITipoServico(CIInterface ciInterface) {
+        this.ciInterface = ciInterface;
         gtTipoServico = new GTTipoServico();
     }
     
@@ -24,10 +20,10 @@ public class CITipoServico {
         JDPesquisaTipoServico pesquisaTipoServico;
 
         if (codCrud == 0) {
-            cadastroTipoServico = new JDCadastroTipoServico(pai, true, controlInterface);
+            cadastroTipoServico = new JDCadastroTipoServico(pai, true, ciInterface);
             cadastroTipoServico.setVisible(true);
         } else if (codCrud > 0) {
-            pesquisaTipoServico = new JDPesquisaTipoServico(pai, true, controlInterface);
+            pesquisaTipoServico = new JDPesquisaTipoServico(pai, true, ciInterface);
             pesquisaTipoServico.setVisible(true);
         }
 //        } else if (codCrud == 2) {

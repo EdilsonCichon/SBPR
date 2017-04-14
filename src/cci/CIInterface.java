@@ -6,10 +6,6 @@ import cih.JPServico;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Chrysthian
- */
 public class CIInterface{
     
     private CIGeral ciGeral;

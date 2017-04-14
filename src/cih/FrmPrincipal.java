@@ -1,6 +1,7 @@
 package cih;
 
 import cci.CIInterface;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class FrmPrincipal extends javax.swing.JFrame {    
@@ -11,6 +12,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
         initComponents();
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        setIconImage(icone.getImage());
         jButtonInicioActionPerformed(null);
     }
     

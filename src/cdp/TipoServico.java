@@ -2,10 +2,19 @@ package cdp;
 
 public class TipoServico {
     
+    private int id;
     public String nome;
     public String descricao;
     public double valor_hr;
     public TipoMaquina tipoMaquina;
+
+    public TipoServico(int id, String nome, String descricao, double valor_hr, TipoMaquina tipoMaquina) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.valor_hr = valor_hr;
+        this.tipoMaquina = tipoMaquina;
+    }
 
     public TipoServico(String nome, String descricao, double valor_hr, TipoMaquina tipoMaquina) {
         this.nome = nome;
