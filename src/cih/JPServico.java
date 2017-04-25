@@ -24,7 +24,7 @@ public class JPServico extends javax.swing.JPanel {
         this.pai = pai;
         this.codInicio = num;
         this.setBorder(BorderFactory.createTitledBorder("Gerenciar Serviços"));
-        ciInterface.setarAtributosServico(this, "Serviços", "servico");
+        ciInterface.iniciarServico(this);
     }
 
     @SuppressWarnings("unchecked")

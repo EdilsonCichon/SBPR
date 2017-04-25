@@ -12,7 +12,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         super(parent, modal);
         this.ciInterface = ciInterface;
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
 
@@ -65,7 +65,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
             .addGroup(jPanelPesquisarFuncionarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPesquisarFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                    .addComponent(jScrollPane)
                     .addGroup(jPanelPesquisarFuncionarioLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addGap(10, 10, 10)

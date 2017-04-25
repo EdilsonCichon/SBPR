@@ -14,7 +14,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         this.ciInterface = ciInterface;
         initComponents();
         this.setLocationRelativeTo(parent);
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
 
@@ -37,7 +37,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jButtonAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Propriedade");
+        setTitle("Cadastrar Propriedade");
         setResizable(false);
 
         jPanelPropriedade.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedade"));

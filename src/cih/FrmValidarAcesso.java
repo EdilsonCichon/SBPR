@@ -10,7 +10,7 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     public FrmValidarAcesso(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
 

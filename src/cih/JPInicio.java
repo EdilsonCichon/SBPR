@@ -47,7 +47,7 @@ public class JPInicio extends javax.swing.JPanel {
         });
         add(jButtonProdutor);
 
-        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-serviço-reduzido.png"))); // NOI18N
+        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-servico-reduzido.png"))); // NOI18N
         jButtonServico.setText("Serviços");
         jButtonServico.setToolTipText("");
         jButtonServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

@@ -59,7 +59,12 @@ public class CIInterface{
             case 6: ciTipoMaquina.gerenciarTipoMaquina(codCrud, pai); break;
             default: break;
         }
-    }   
+    }
+    
+    public ImageIcon setarIconesJanela(){  
+        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-janela.jpg");
+        return icone;
+    }
     
      public void iniciarCrud(int codInicio, JPCrud crud) {
         switch (codInicio) {
@@ -67,11 +72,15 @@ public class CIInterface{
             case 2: setarAtributosCrud(crud, "Propriedades", "propriedade"); break;
             case 3: setarAtributosCrud(crud, "Máquinas", "maquina"); break;
             case 4: setarAtributosCrud(crud, "Funcionários", "funcionario"); break;
-            case 5: setarAtributosCrud(crud, "Tipos de Serviços", "servico"); break;
-            case 6: setarAtributosCrud(crud, "Tipos de Máquinas", "maquina"); break;
+            case 5: setarAtributosCrud(crud, "Tipos de Serviços", "tipo-servico"); break;
+            case 6: setarAtributosCrud(crud, "Tipos de Máquinas", "tipo-maquina"); break;
             default: break;
         }
     }
+     
+     public void iniciarServico(JPServico serv){   
+         setarAtributosServico(serv, "Serviços", "servico");  
+     }
     
     public void setarAtributosCrud(JPCrud crud, String titulo, String tipo) {
         crud.setIconCadastrar(new ImageIcon("build/classes/cih/icones/icone-" +tipo + "-cadastrar-reduzido.png"));
@@ -85,7 +94,7 @@ public class CIInterface{
         serv.setIconAgendar(new ImageIcon("build/classes/cih/icones/icone-" +tipo + "-cadastrar-reduzido.png"));
         serv.setIconAlterar(new ImageIcon("build/classes/cih/icones/icone-" +tipo + "-alterar-reduzido.png"));
         serv.setIconConsultar(new ImageIcon("build/classes/cih/icones/icone-" +tipo + "-consultar-reduzido.png"));
-        serv.setIconConcluir(new ImageIcon("build/classes/cih/icones/icone-" +tipo + "-concluido-reduzido.png"));
+        serv.setIconConcluir(new ImageIcon("build/classes/cih/icones/icone-" +tipo + "-concluir-reduzido.png"));
         serv.setIconCancelar(new ImageIcon("build/classes/cih/icones/icone-" +tipo + "-excluir-reduzido.png"));
         serv.setBorder(BorderFactory.createTitledBorder("Gerenciar " +titulo));
     }

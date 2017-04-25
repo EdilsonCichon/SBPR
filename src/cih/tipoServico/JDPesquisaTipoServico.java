@@ -11,7 +11,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         super(parent, modal);
         this.ciInterface = ciInterface;
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
         
     }

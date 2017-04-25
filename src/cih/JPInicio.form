@@ -38,7 +38,7 @@
     <Component class="javax.swing.JButton" name="jButtonServico">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/cih/icones/icone-servi&#xe7;o-reduzido.png"/>
+          <Image iconType="3" name="/cih/icones/icone-servico-reduzido.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>

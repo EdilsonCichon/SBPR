@@ -10,7 +10,7 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
     public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
         this.ciInterface = ciInterface;
     }
@@ -34,6 +34,7 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
         jFormattedTextFieldPlaca = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Máquina");
 
         jPanelTipo.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo"));
 

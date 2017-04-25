@@ -4,11 +4,13 @@ import javax.swing.ImageIcon;
 import cci.CIInterface;
 
 public class JDRelatorio extends javax.swing.JDialog {
-
+    
+    private CIInterface ciInterface;
+    
     public JDRelatorio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
     

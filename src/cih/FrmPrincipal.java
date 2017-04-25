@@ -12,7 +12,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
         jButtonInicioActionPerformed(null);
     }
@@ -96,7 +96,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonPropriedade);
 
-        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-serviço-reduzido.png"))); // NOI18N
+        jButtonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-servico-reduzido.png"))); // NOI18N
         jButtonServico.setToolTipText("Serviços");
         jButtonServico.setFocusable(false);
         jButtonServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

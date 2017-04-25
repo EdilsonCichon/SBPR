@@ -13,7 +13,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         initComponents();
         jPanelConcluir.setVisible(false);
         jPanelCancelar.setVisible(false);
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
 
@@ -59,7 +59,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Serviço");
+        setTitle("Cadastrar de Serviço");
 
         jPanelPesquisarProdutor.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtor"));
 

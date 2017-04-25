@@ -11,7 +11,7 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface ciInterface) {
         super(parent, modal);
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
         this.ciInterface = ciInterface;
     }
@@ -32,6 +32,7 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
         jTextAreaDescricao = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Tipo de Máquina");
 
         jPanelBotoes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -73,7 +74,7 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
                 .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanelBotoesLayout.setVerticalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +87,7 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelTipoDeMaquina.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Maquina"));
+        jPanelTipoDeMaquina.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar"));
 
         jLabelNome.setText("Nome:");
 

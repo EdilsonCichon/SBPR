@@ -12,7 +12,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         super(parent, modal);
         this.ciInterface = ciInterface;
         initComponents();
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
 
@@ -66,7 +66,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jButtonLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Funcionários");
+        setTitle("Cadastrar Funcionário");
         setResizable(false);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 

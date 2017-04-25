@@ -11,7 +11,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.ciInterface = ciInterface;
-        ImageIcon icone = new ImageIcon("build/classes/cih/icones/icone-logo-reduzido.png");
+        ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
 
@@ -29,8 +29,9 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Filtro de Tipo de Máquina");
 
-        jPanelTipoMaquina.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo deMaquina"));
+        jPanelTipoMaquina.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
         jTableTipoDeMaquina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
