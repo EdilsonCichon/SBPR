@@ -21,7 +21,7 @@ public class GDProdutor {
         
     }
     
-    public void excluir(){
+    public void excluir(int id){
        
     } 
 }

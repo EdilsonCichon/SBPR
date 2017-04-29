@@ -3,19 +3,27 @@ package cih.produtor;
 import javax.swing.ImageIcon;
 
 import cci.CIInterface;
+import cdp.Produtor;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class JDPesquisaProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private int cenario;
+    private final int alterar = 1;
+    private final int consultar = 2;
+    private final int excluir = 3;
 
-    public JDPesquisaProdutor(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+    public JDPesquisaProdutor(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int cenario) {
         super(parent, modal);
+        this.cenario = cenario;
         this.ciInterface = ciInterface;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
-
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -138,6 +146,22 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
+        int linha = jTableProdutor.getSelectedRow();
+        int coluna = 0;
+        
+        if ( linha >= 0 ){
+            
+            Produtor produtor = (Produtor) jTableProdutor.getValueAt(linha, coluna);
+            
+            if(cenario == alterar)
+                ciInterface.getCiProdutor().alterarProdutor(produtor.getId());
+            if(cenario == consultar)
+                ciInterface.getCiProdutor().consultarProdutor(produtor.getId());
+            if(cenario == excluir)
+                ciInterface.getCiProdutor().excluirProdutor(produtor.getId());      
+        }else{ 
+            JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }    
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

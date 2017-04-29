@@ -2,6 +2,8 @@ package cih.produtor;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cdp.Produtor;
+import cdp.Propriedade;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -357,15 +359,21 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         
-        /*int linha = jTablePropriedades.getSelectedRow();
+        int linha = jTablePropriedades.getSelectedRow();
         int coluna = 0;
         
-        String nome = jTablePropriedades.getValueAt(linha, coluna++).toString();
-        String referencia = jTablePropriedades.getValueAt(linha, coluna++).toString();*/
+        if ( linha >= 0 ){
+            Propriedade propriedade = (Propriedade) jTablePropriedades.getValueAt(linha, coluna);
+            String nome = jTablePropriedades.getValueAt(linha, coluna++).toString();
+            String referencia = jTablePropriedades.getValueAt(linha, coluna++).toString();
         
-        // CRIAR NOVO CONSTRUTOR DE CADASTRAR PROPRIEDADE PARA RECEBER ESTES PARAMETROS
+            // CRIAR NOVO CONSTRUTOR DE CADASTRAR PROPRIEDADE PARA RECEBER ESTES PARAMETROS
         
-        ciInterface.getCiPropriedade().gerenciarPropriedade(0, pai);
+            ciInterface.getCiPropriedade().gerenciarPropriedade(0, pai);
+        }else{ 
+            JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);
+        }
+        
         
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 

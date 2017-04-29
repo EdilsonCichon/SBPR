@@ -10,6 +10,10 @@ public class CIProdutor {
     
     private CIInterface ciInterface;
     private GTProdutor gtProdutor;
+    private final int cadastrar = 0;
+    private final int alterar = 1;
+    private final int consultar = 2;
+    private final int excluir = 3;
 
     public CIProdutor(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -21,11 +25,17 @@ public class CIProdutor {
         JDCadastroProdutor cadastroProdutor;
         JDPesquisaProdutor pesquisaProdutor;
 
-        if (codCrud == 0) {
+        if (codCrud == cadastrar) {
             cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface);
             cadastroProdutor.setVisible(true);
-        } else if (codCrud >= 1) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface);
+        } else if (codCrud == alterar) {
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, alterar);
+            pesquisaProdutor.setVisible(true);
+        }else if (codCrud == consultar) {
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, consultar);
+            pesquisaProdutor.setVisible(true);
+        }else if (codCrud == excluir) {
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, excluir);
             pesquisaProdutor.setVisible(true);
         }
     }
@@ -40,15 +50,21 @@ public class CIProdutor {
         }  
     }
     
-    public void alterarProdutor(){
-       int i = gtProdutor.alterarProdutor();
+    public void alterarProdutor(int id){
+      
     }
     
-    public void consultarProdutor(){
-       int i = gtProdutor.consultarProdutor();
+    public void consultarProdutor(int id){
+      
     }
     
-    public void excluirProdutor(){
-       int i = gtProdutor.excluirProdutor();
+    public void excluirProdutor(int id){
+        
+        try{   
+          gtProdutor.excluirProdutor(id);
+          JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
+        }    
     }
 }

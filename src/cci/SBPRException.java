@@ -18,17 +18,6 @@ public class SBPRException extends Exception {
         msgsErro[2] = "Campo CPF inválido";
         msgsErro[3] = "Campo DATA inválido";  
         
-        
-        
-        
-        msgsErro[19] = "Erro ao converter foto!";
-        
-
-        msgsErro[20] = "Pedido sem lanche!";
-
-        msgsErro[50] = "Classe de BD não encontrada!";
-
-        
     }
     
     @Override
