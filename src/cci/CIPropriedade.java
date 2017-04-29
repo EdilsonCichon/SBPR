@@ -4,6 +4,7 @@ import cgt.GTPropriedade;
 import javax.swing.JFrame;
 import cih.propriedade.JDCadastroPropriedade;
 import cih.propriedade.JDPesquisaPropriedade;
+import javax.swing.JOptionPane;
 
 public class CIPropriedade {
     
@@ -50,5 +51,6 @@ public class CIPropriedade {
     
     public void excluirPropriedade(){
         int i = gtPropriedade.excluirPropriedade();
+        JOptionPane.showMessageDialog(null, "Propriedade excluída com sucesso");
     }    
 }

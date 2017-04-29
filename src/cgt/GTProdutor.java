@@ -5,33 +5,57 @@
  */
 package cgt;
 
+import cci.SBPRException;
+import cdp.Produtor;
 import cgd.GDProdutor;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GTProdutor {
-    
+
     private GDProdutor gdProdutor;
 
     public GTProdutor() {
         gdProdutor = new GDProdutor();
     }
-    
-    public int cadastrarProdutor(){
-        gdProdutor.cadastrar();
-        return 0;
+
+    public void cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
+            
+        validarCampos(nome, cpf, data_nasc);
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = formato.parse(data_nasc);
+        
+        Produtor produtor = new Produtor(nome, cpf, data, inscricao, rg, telefone, sexo);
+        gdProdutor.cadastrar(produtor);
+
     }
-    
-    public int alterarProdutor(){
+
+    public int alterarProdutor() {
         gdProdutor.alterar();
         return 0;
     }
-    
-    public int consultarProdutor(){
+
+    public int consultarProdutor() {
         gdProdutor.consultar();
         return 0;
     }
-    
-    public int excluirProdutor(){
+
+    public int excluirProdutor() {
         gdProdutor.excluir();
         return 0;
-    } 
+    }
+
+    private void validarCampos(String nome, String cpf, String data) throws Exception {
+        
+        if(!GTValidaCampos.validarNome(nome))
+            throw new SBPRException(1);
+        if(!GTValidaCampos.validarCpf(cpf))
+            throw new SBPRException(2);
+        if(!GTValidaCampos.validarDataNasc(data))
+            throw new SBPRException(3);            
+    }
 }

@@ -9,7 +9,7 @@ public class GDProdutor {
   
     }
     
-    public void cadastrar(){
+    public void cadastrar(Produtor produtor){
           
     }
     

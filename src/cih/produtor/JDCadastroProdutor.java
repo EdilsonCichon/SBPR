@@ -2,14 +2,20 @@ package cih.produtor;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import java.util.Date;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class JDCadastroProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
-   
+    private JFrame pai;
+
     public JDCadastroProdutor(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
         this.ciInterface = ciInterface;
+        this.pai = (JFrame) parent;
         initComponents();
         this.setLocationRelativeTo(parent);
         ImageIcon icone = ciInterface.setarIconesJanela();
@@ -70,9 +76,12 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jLabelInscricaoEstadual.setText("Inscrição Estadual:");
 
         jButtonGroupSexo.add(jRadioButtonFeminino);
+        jRadioButtonFeminino.setMnemonic('f');
+        jRadioButtonFeminino.setSelected(true);
         jRadioButtonFeminino.setText("Feminino");
 
         jButtonGroupSexo.add(jRadioButtonMasculino);
+        jRadioButtonMasculino.setMnemonic('m');
         jRadioButtonMasculino.setText("Masculino");
 
         try {
@@ -184,6 +193,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jPanelPropriedades.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedades"));
 
         jButtonAdicionar.setText("Adicionar");
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarActionPerformed(evt);
+            }
+        });
 
         jTablePropriedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,8 +218,18 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jScrollPanePropriedades.setViewportView(jTablePropriedades);
 
         jButtonAlterar.setText("Alterar");
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPropriedadesLayout = new javax.swing.GroupLayout(jPanelPropriedades);
         jPanelPropriedades.setLayout(jPanelPropriedadesLayout);
@@ -239,6 +263,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setPreferredSize(new java.awt.Dimension(57, 23));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +278,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
 
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.setPreferredSize(new java.awt.Dimension(57, 23));
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -280,9 +314,74 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        ciInterface.getCiProdutor().cadastrarProdutor();
+        
+        String nome = jTextFieldNome.getText();
+        
+        String cpf = jFormattedTextFieldCpf.getText();  
+        cpf = cpf.replace(".", "");
+        cpf = cpf.replace("-", "");
+        
+        String data_nasc = jFormattedTextFieldDataNascimento.getText();
+        String inscricao = jFormattedTextFieldInscricaoEstadual.getText();
+        String rg = jFormattedTextFieldRg.getText();
+        System.out.println(rg);
+        String telefone = jFormattedTextFieldTelefone.getText();
+        char sexo = (char) jButtonGroupSexo.getSelection().getMnemonic();
+        
+        try {
+            validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
+            ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        
+        jTextFieldNome.setText("");
+        jFormattedTextFieldCpf.setText("");
+        jFormattedTextFieldDataNascimento.setText("");
+        jFormattedTextFieldInscricaoEstadual.setText("");
+        jFormattedTextFieldRg.setText("");
+        jFormattedTextFieldTelefone.setText("");
+        jRadioButtonFeminino.setSelected(true);
+    }//GEN-LAST:event_jButtonLimparActionPerformed
+
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+       ciInterface.getCiPropriedade().gerenciarPropriedade(0, pai);
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+        
+        /*int linha = jTablePropriedades.getSelectedRow();
+        int coluna = 0;
+        
+        String nome = jTablePropriedades.getValueAt(linha, coluna++).toString();
+        String referencia = jTablePropriedades.getValueAt(linha, coluna++).toString();*/
+        
+        // CRIAR NOVO CONSTRUTOR DE CADASTRAR PROPRIEDADE PARA RECEBER ESTES PARAMETROS
+        
+        ciInterface.getCiPropriedade().gerenciarPropriedade(0, pai);
+        
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        
+        /*int linha = jTablePropriedades.getSelectedRow();
+        ( (DefaultTableModel) jTablePropriedades.getModel() ).removeRow(linha);*/
+        ciInterface.getCiPropriedade().excluirPropriedade();
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+  
+    public void validarCampos(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone) throws Exception{
+        
+        if (nome.equals("") || cpf.equals("") || data_nasc.equals("") || inscricao.equals("") || rg.equals("") || telefone.equals(""))
+            throw new Exception("Campos Vazios");
+  
+    } 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
