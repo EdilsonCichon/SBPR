@@ -12,7 +12,7 @@ public class GDProdutor {
   
     }
     
-    public void cadastrar(){
+    public void cadastrar(Produtor produtor){
           
     }
     
@@ -20,7 +20,11 @@ public class GDProdutor {
        
     }
     
-    public LinkedList<Produtor> consultar(String colunaFiltro, String valorFiltro) {
+    public void consultar() {
+       
+    }
+    
+    public LinkedList<Produtor> filtrar(String colunaFiltro, String valorFiltro) {
         //ESSES DADOS DEVEM SER RETORNADOS DO BANCO.
         LinkedList lista = new LinkedList();
         lista.add( new Produtor("12345", null, 0, "Edilson", new Date("10/10/1992"), "23053109873", "12345", 'M', "98423044") );
@@ -29,7 +33,7 @@ public class GDProdutor {
         return lista;
     }
     
-    public void excluir(){
+    public void excluir(int id){
        
     } 
 }

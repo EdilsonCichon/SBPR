@@ -1,9 +1,11 @@
 
 package cgd;
 
+import cdp.Propriedade;
+
 public class GDPropriedade {
     
-    public void cadastrar(){
+    public void cadastrar(Propriedade propriedade){
           
     }
     

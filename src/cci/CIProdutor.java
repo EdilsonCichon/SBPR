@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import cih.produtor.JDCadastroProdutor;
 import cih.produtor.JDPesquisaProdutor;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 public class CIProdutor {
     
@@ -32,19 +33,36 @@ public class CIProdutor {
         }
     }
     
-    public void cadastrarProdutor(){
-        int i = gtProdutor.cadastrarProdutor();
+    public void cadastrarProdutor(JDCadastroProdutor cadastroProdutor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
+        
+        try{   
+          gtProdutor.cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo); 
+          JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+          cadastroProdutor.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+        }  
     }
     
-    public void alterarProdutor(){
-       int i = gtProdutor.alterarProdutor();
+    public void alterarProdutor(int id){
+      
     }
     
-    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String filtro){
-       return gtProdutor.consultarProdutor(colunaFiltro, filtro);
+    public void consultarProdutor(int id) {
+       
     }
     
-    public void excluirProdutor(){
-       int i = gtProdutor.excluirProdutor();
+    public void excluirProdutor(int id){
+        
+        try{   
+          gtProdutor.excluirProdutor(id);
+          JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
+        }    
+    }
+    
+    public LinkedList<Produtor> filtroProdutores(String colunaFiltro, String filtro){
+       return gtProdutor.filtrarProdutores(colunaFiltro, filtro);
     }
 }

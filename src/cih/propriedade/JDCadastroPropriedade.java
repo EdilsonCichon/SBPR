@@ -4,21 +4,37 @@ package cih.propriedade;
 import javax.swing.ImageIcon;
 
 import cci.CIInterface;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private JFrame pai;
    
     public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+        super(parent, modal);
+        this.ciInterface = ciInterface;
+        this.pai = (JFrame) parent;
+        initComponents();
+        this.setLocationRelativeTo(parent);
+        ImageIcon icone = ciInterface.setarIconesJanela();
+        setIconImage(icone.getImage());
+        jTextFieldResponsavel.setEditable(false);
+    }
+    
+    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, String responsavel){
         super(parent, modal);
         this.ciInterface = ciInterface;
         initComponents();
         this.setLocationRelativeTo(parent);
         ImageIcon icone = ciInterface.setarIconesJanela();
-        setIconImage(icone.getImage());
+        setIconImage(icone.getImage());  
+        jTextFieldResponsavel.setText(responsavel);
+        jTextFieldResponsavel.setEditable(false);
+        jButtonPesquisarProdutor.setEnabled(false);
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,6 +47,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jLabelReferencia = new javax.swing.JLabel();
         jScrollPaneReferencia = new javax.swing.JScrollPane();
         jTextAreaReferencia = new javax.swing.JTextArea();
+        jButtonPesquisarProdutor = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonCancelar = new javax.swing.JButton();
         jButtonConfirmar = new javax.swing.JButton();
@@ -52,6 +69,13 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jTextAreaReferencia.setRows(5);
         jScrollPaneReferencia.setViewportView(jTextAreaReferencia);
 
+        jButtonPesquisarProdutor.setText("...");
+        jButtonPesquisarProdutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPesquisarProdutorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPropriedadeLayout = new javax.swing.GroupLayout(jPanelPropriedade);
         jPanelPropriedade.setLayout(jPanelPropriedadeLayout);
         jPanelPropriedadeLayout.setHorizontalGroup(
@@ -60,26 +84,29 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelPropriedadeLayout.createSequentialGroup()
-                        .addComponent(jLabelResponsavel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldResponsavel))
-                    .addGroup(jPanelPropriedadeLayout.createSequentialGroup()
                         .addComponent(jLabelNomePropriedade)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldNomePropriedade))
+                    .addComponent(jScrollPaneReferencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                     .addGroup(jPanelPropriedadeLayout.createSequentialGroup()
                         .addComponent(jLabelReferencia)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPaneReferencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
+                    .addGroup(jPanelPropriedadeLayout.createSequentialGroup()
+                        .addComponent(jLabelResponsavel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldResponsavel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonPesquisarProdutor)))
                 .addContainerGap())
         );
         jPanelPropriedadeLayout.setVerticalGroup(
             jPanelPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPropriedadeLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
+                .addGap(1, 1, 1)
                 .addGroup(jPanelPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelResponsavel)
-                    .addComponent(jTextFieldResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonPesquisarProdutor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNomePropriedade)
@@ -94,11 +121,26 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setPreferredSize(new java.awt.Dimension(57, 23));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonAlterar.setText("Limpar");
         jButtonAlterar.setPreferredSize(new java.awt.Dimension(57, 23));
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -142,11 +184,44 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
+        String responsavel = jTextFieldResponsavel.getText();
+        String nome = jTextFieldNomePropriedade.getText();
+        String referencia = jTextAreaReferencia.getText();
+        
+        try {
+            validarCampos(responsavel, nome, referencia);
+            ciInterface.getCiPropriedade().cadastrarPropriedade(this, responsavel, nome, referencia);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } 
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+        jTextFieldNomePropriedade.setText("");
+        jTextAreaReferencia.setText(""); 
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonPesquisarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutorActionPerformed
+        ciInterface.getCiProdutor().gerenciarProdutor(2, pai);
+    }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
+
+    public void validarCampos(String responsavel, String nome, String referencia) throws Exception{
+        
+        if (responsavel.equals("") || nome.equals("") || referencia.equals(""))
+            throw new Exception("Campos Vazios");
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonPesquisarProdutor;
     private javax.swing.JLabel jLabelNomePropriedade;
     private javax.swing.JLabel jLabelReferencia;
     private javax.swing.JLabel jLabelResponsavel;

@@ -20,10 +20,6 @@ public class GDTipoMaquina {
     
     public void excluir(){
        
-    } 
-
-    public void cadastrar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+   
 }

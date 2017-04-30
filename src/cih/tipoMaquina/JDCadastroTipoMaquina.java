@@ -154,26 +154,29 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
+        String nome = jTextFieldNome.getText();
+        String descricao = jTextAreaDescricao.getText();
+        
         try {
-            validarCampos( jTextFieldNome.getText(), jTextAreaDescricao.getText() );
-            ciInterface.getCiTipoMaquina().cadastrarTipoMaquina(jTextFieldNome.getText(), jTextAreaDescricao.getText());
+            validarCampos(nome, descricao);
+            ciInterface.getCiTipoMaquina().cadastrarTipoMaquina(nome, descricao);
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void validarCampos(String nome, String descricao) throws Exception {
-        // MELHORAR ESSA VALIDAÇÃO, FOI FEITA SOMENTE PARA COMEÇAR.
         if (nome.equals("") || descricao.equals(""))
-            throw new Exception("Favor preencher os campos!");
+            throw new Exception("Campos Vazios");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

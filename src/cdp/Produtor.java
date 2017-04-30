@@ -24,6 +24,11 @@ public class Produtor extends Pessoa{
         this.propriedades = propriedades;
     }
 
+    public Produtor(String nome, String cpf, Date dt_nasc, String inscricao_estadual, String rg, String telefone, char sexo) {
+        super(nome, dt_nasc, cpf, rg, sexo, telefone);
+        this.inscricao_estadual = inscricao_estadual;
+    }
+
     public String getInscricao_estadual() {
         return inscricao_estadual;
     }
@@ -38,5 +43,9 @@ public class Produtor extends Pessoa{
 
     public void setPropriedades(LinkedList<Propriedade> propriedades) {
         this.propriedades = propriedades;
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this, getCpf(), getRg(), getDt_nasc("dd/MM/yyyy") };
     }
 }

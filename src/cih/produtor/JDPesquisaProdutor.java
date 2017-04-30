@@ -1,33 +1,28 @@
 package cih.produtor;
 
-import javax.swing.ImageIcon;
-
-import java.awt.Frame;
-import cci.CIInterface;
 import cdp.Produtor;
+import cci.util.Crud;
+import cci.CIInterface;
 import cih.util.JTableUtil;
+import java.awt.Frame;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class JDPesquisaProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
-    /**
-     * Correspondente a uma operação da classe 'cci.util.Crud'.
-     */
-    private int operacaoCrudSelecionada;
+    private int cenario;
 
-    public JDPesquisaProdutor(Frame parent, boolean modal, CIInterface ciInterface, int operacaoCrudSelecionada) {
+    public JDPesquisaProdutor(Frame parent, boolean modal, CIInterface ciInterface, int cenario) {
         super(parent, modal);
+        this.cenario = cenario;
         this.ciInterface = ciInterface;
-        this.operacaoCrudSelecionada = operacaoCrudSelecionada;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
-
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -163,25 +158,30 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        // PEGAR O PRODUTOR SELECIONADO E REPASSAR PARA A CCI EXECUTAR A OPERAÇÃO (CRUD)
+
         try {
-            Object object = JTableUtil.getRowDataSelected(jTableProdutor);
-            System.out.println(object);
+            Produtor produtor = (Produtor) JTableUtil.getRowDataSelected(jTableProdutor);
+            JOptionPane.showMessageDialog(this, produtor.getId());
+            if(cenario == Crud.ALTERAR)
+                ciInterface.getCiProdutor().alterarProdutor(produtor.getId());
+            if(cenario == Crud.CONSULTAR)
+                ciInterface.getCiProdutor().consultarProdutor(produtor.getId());
+            if(cenario == Crud.EXCLUIR)
+                ciInterface.getCiProdutor().excluirProdutor(produtor.getId());
+            
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         
         //TODO Validações seriam colocadas aqui.
-        LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().consultarProdutor((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
+        LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().filtroProdutores((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
         JTableUtil.cleanAll(jTableProdutor);
         
         listaProdutores.forEach((produtor) -> {
-            JTableUtil.addRow(jTableProdutor, new Object[]
-                { produtor.getNome(), produtor.getCpf(), produtor.getRg(), produtor.getDt_nasc("dd/MM/yyyy") }
-            );
+            JTableUtil.addRow( jTableProdutor, produtor.toArray() );
         });
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
