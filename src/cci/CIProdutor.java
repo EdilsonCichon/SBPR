@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Crud;
 import cgt.GTProdutor;
 import javax.swing.JFrame;
 import cih.produtor.JDCadastroProdutor;
@@ -20,17 +21,11 @@ public class CIProdutor {
         JDCadastroProdutor cadastroProdutor;
         JDPesquisaProdutor pesquisaProdutor;
 
-        if (codCrud == 0) {
+        if (codCrud == Crud.CADASTRAR) {
             cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface);
             cadastroProdutor.setVisible(true);
-        } else if (codCrud == 1) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface);
-            pesquisaProdutor.setVisible(true);
-        } else if (codCrud == 2) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface);
-            pesquisaProdutor.setVisible(true);
-        } else if (codCrud == 3) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface);
+        } else {
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, codCrud);
             pesquisaProdutor.setVisible(true);
         }
     }
