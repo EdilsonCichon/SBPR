@@ -5,7 +5,9 @@
  */
 package cgt;
 
+import cdp.Produtor;
 import cgd.GDProdutor;
+import java.util.LinkedList;
 
 public class GTProdutor {
     
@@ -25,9 +27,8 @@ public class GTProdutor {
         return 0;
     }
     
-    public int consultarProdutor(){
-        gdProdutor.consultar();
-        return 0;
+    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String valorFiltro) {
+        return gdProdutor.consultar(colunaFiltro, valorFiltro);
     }
     
     public int excluirProdutor(){

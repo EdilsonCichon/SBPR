@@ -1,5 +1,6 @@
 package cdp;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class Pessoa {
@@ -42,6 +43,11 @@ public abstract class Pessoa {
     public Date getDt_nasc() {
         return dt_nasc;
     }
+    
+    public String getDt_nasc(String formato) {
+        SimpleDateFormat fmt = new SimpleDateFormat(formato);
+        return fmt.format(getDt_nasc());
+    }
 
     public void setDt_nasc(Date dt_nasc) {
         this.dt_nasc = dt_nasc;
@@ -77,5 +83,10 @@ public abstract class Pessoa {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    
+    @Override
+    public String toString() {
+        return getNome();
     }
 }

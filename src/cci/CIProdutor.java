@@ -1,10 +1,12 @@
 package cci;
 
 import cci.util.Crud;
+import cdp.Produtor;
 import cgt.GTProdutor;
 import javax.swing.JFrame;
 import cih.produtor.JDCadastroProdutor;
 import cih.produtor.JDPesquisaProdutor;
+import java.util.LinkedList;
 
 public class CIProdutor {
     
@@ -38,8 +40,8 @@ public class CIProdutor {
        int i = gtProdutor.alterarProdutor();
     }
     
-    public void consultarProdutor(){
-       int i = gtProdutor.consultarProdutor();
+    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String filtro){
+       return gtProdutor.consultarProdutor(colunaFiltro, filtro);
     }
     
     public void excluirProdutor(){
