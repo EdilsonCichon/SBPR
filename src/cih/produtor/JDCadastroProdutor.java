@@ -332,7 +332,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         
         try {
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
-            ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            ciInterface.getCiProdutor().cadastrarProdutor(this, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         } 
@@ -354,7 +354,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-       ciInterface.getCiPropriedade().gerenciarPropriedade(0, pai);
+       ciInterface.getCiPropriedade().gerenciarPropriedade(pai, jTextFieldNome.getText());
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed

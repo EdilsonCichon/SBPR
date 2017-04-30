@@ -5,6 +5,7 @@
  */
 package cgt;
 
+import cdp.Propriedade;
 import cgd.GDPropriedade;
 
 public class GTPropriedade {
@@ -15,9 +16,12 @@ public class GTPropriedade {
         gdPropriedade = new GDPropriedade();
     }
     
-    public int cadastrarPropriedade(){
-        gdPropriedade.cadastrar();
-        return 0;
+    public void cadastrarPropriedade(String responsavel, String nome, String referencia){
+        
+        Propriedade propriedade = new Propriedade(nome, referencia);
+        
+        gdPropriedade.cadastrar(propriedade);
+        
     }
     
     public int alterarPropriedade(){

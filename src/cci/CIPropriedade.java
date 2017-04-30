@@ -37,8 +37,24 @@ public class CIPropriedade {
 
     }
     
-    public void cadastrarPropriedade(){
-        int i = gtPropriedade.cadastrarPropriedade();
+    public void gerenciarPropriedade(JFrame pai, String responsavel) {
+        
+        JDCadastroPropriedade cadastroPropriedade;
+        
+            cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, responsavel);
+            cadastroPropriedade.setVisible(true);
+    }
+    
+    
+    public void cadastrarPropriedade(JDCadastroPropriedade cadastroPropriedade, String responsavel, String nome, String referencia){
+        
+        try{   
+          gtPropriedade.cadastrarPropriedade(responsavel, nome, referencia);
+          JOptionPane.showMessageDialog(null, "Cadastrada com sucesso!");
+          cadastroPropriedade.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+        }    
     }
     
     public void alterarPropriedade(){

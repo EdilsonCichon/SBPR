@@ -40,11 +40,12 @@ public class CIProdutor {
         }
     }
     
-    public void cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
+    public void cadastrarProdutor(JDCadastroProdutor cadastroProdutor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
         
         try{   
           gtProdutor.cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo); 
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+          cadastroProdutor.dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
         }  
