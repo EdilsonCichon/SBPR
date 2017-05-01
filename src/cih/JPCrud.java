@@ -1,6 +1,6 @@
 package cih;
 
-import cci.util.Crud;
+import cci.util.Constante;
 import cci.CIInterface;
 import javax.swing.Icon;
 import javax.swing.JFrame;
@@ -72,19 +72,19 @@ public class JPCrud extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-       ciInterface.identificarInicio(pai, codInicio, Crud.EXCLUIR);
+       ciInterface.identificarInicio(pai, codInicio, Constante.EXCLUIR);
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-       ciInterface.identificarInicio(pai, codInicio, Crud.CADASTRAR);
+       ciInterface.identificarInicio(pai, codInicio, Constante.CADASTRAR);
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-       ciInterface.identificarInicio(pai, codInicio, Crud.ALTERAR);
+       ciInterface.identificarInicio(pai, codInicio, Constante.ALTERAR);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-       ciInterface.identificarInicio(pai, codInicio, Crud.CONSULTAR);
+       ciInterface.identificarInicio(pai, codInicio, Constante.CONSULTAR);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     public void setIconAlterar(Icon icone) {

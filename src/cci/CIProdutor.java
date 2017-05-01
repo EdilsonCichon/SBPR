@@ -1,11 +1,12 @@
 package cci;
 
-import cci.util.Crud;
+import cci.util.Constante;
 import cdp.Produtor;
 import cgt.GTProdutor;
 import javax.swing.JFrame;
 import cih.produtor.JDCadastroProdutor;
 import cih.produtor.JDPesquisaProdutor;
+import cih.propriedade.JDPesquisaPropriedade;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -24,23 +25,30 @@ public class CIProdutor {
         JDCadastroProdutor cadastroProdutor;
         JDPesquisaProdutor pesquisaProdutor;
 
-        if (codCrud == Crud.CADASTRAR) {
+        if (codCrud == Constante.CADASTRAR) {
             cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface);
             cadastroProdutor.setVisible(true);
-        } else {
+        } else if(codCrud == Constante.ALTERAR){
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, codCrud);
+            pesquisaProdutor.setVisible(true);
+        }else if (codCrud == Constante.CONSULTAR) {
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, codCrud);
+            pesquisaProdutor.setVisible(true);
+        } else if (codCrud == Constante.EXCLUIR) {
             pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, codCrud);
             pesquisaProdutor.setVisible(true);
         }
     }
     
-    public void cadastrarProdutor(JDCadastroProdutor cadastroProdutor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
+    public boolean cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
         
         try{   
           gtProdutor.cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo); 
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-          cadastroProdutor.dispose();
+          return true;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            return false;
         }  
     }
     

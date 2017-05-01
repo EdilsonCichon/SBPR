@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Constante;
 import javax.swing.JFrame;
 import cih.JPCrud;
 import cih.JPServico;
@@ -50,13 +51,13 @@ public class CIInterface{
 
         switch (codInicio) {
 
-            case 0: ciServico.gerenciarServico(codCrud, pai); break;
-            case 1: ciProdutor.gerenciarProdutor(codCrud, pai); break;
-            case 2: ciPropriedade.gerenciarPropriedade(codCrud, pai); break;
-            case 3: ciMaquina.gerenciarMaquina(codCrud, pai); break;
-            case 4: ciFuncionario.gerenciarFuncionario(codCrud, pai); break;
-            case 5: ciTipoServico.gerenciarTipoServico(codCrud, pai); break;
-            case 6: ciTipoMaquina.gerenciarTipoMaquina(codCrud, pai); break;
+            case Constante.SERVICO: ciServico.gerenciarServico(codCrud, pai); break;
+            case Constante.PRODUTOR: ciProdutor.gerenciarProdutor(codCrud, pai); break;
+            case Constante.PROPRIEDADE: ciPropriedade.gerenciarPropriedade(codCrud, pai); break;
+            case Constante.MAQUINA: ciMaquina.gerenciarMaquina(codCrud, pai); break;
+            case Constante.FUNCIONARIO: ciFuncionario.gerenciarFuncionario(codCrud, pai); break;
+            case Constante.TIPO_SERVICO: ciTipoServico.gerenciarTipoServico(codCrud, pai); break;
+            case Constante.TIPO_MAQUINA: ciTipoMaquina.gerenciarTipoMaquina(codCrud, pai); break;
             default: break;
         }
     }
@@ -68,12 +69,12 @@ public class CIInterface{
     
      public void iniciarCrud(int codInicio, JPCrud crud) {
         switch (codInicio) {
-            case 1: setarAtributosCrud(crud, "Produtores", "produtor"); break;
-            case 2: setarAtributosCrud(crud, "Propriedades", "propriedade"); break;
-            case 3: setarAtributosCrud(crud, "Máquinas", "maquina"); break;
-            case 4: setarAtributosCrud(crud, "Funcionários", "funcionario"); break;
-            case 5: setarAtributosCrud(crud, "Tipos de Serviços", "tipo-servico"); break;
-            case 6: setarAtributosCrud(crud, "Tipos de Máquinas", "tipo-maquina"); break;
+            case Constante.PRODUTOR: setarAtributosCrud(crud, "Produtores", "produtor"); break;
+            case Constante.PROPRIEDADE: setarAtributosCrud(crud, "Propriedades", "propriedade"); break;
+            case Constante.MAQUINA: setarAtributosCrud(crud, "Máquinas", "maquina"); break;
+            case Constante.FUNCIONARIO: setarAtributosCrud(crud, "Funcionários", "funcionario"); break;
+            case Constante.TIPO_SERVICO: setarAtributosCrud(crud, "Tipos de Serviços", "tipo-servico"); break;
+            case Constante.TIPO_MAQUINA: setarAtributosCrud(crud, "Tipos de Máquinas", "tipo-maquina"); break;
             default: break;
         }
     }

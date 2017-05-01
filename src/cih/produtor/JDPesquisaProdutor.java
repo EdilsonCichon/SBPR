@@ -1,9 +1,9 @@
 package cih.produtor;
 
 import cdp.Produtor;
-import cci.util.Crud;
+import cci.util.Constante;
 import cci.CIInterface;
-import cih.util.JTableUtil;
+import cci.util.JTableUtil;
 import java.awt.Frame;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
@@ -116,6 +116,11 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -158,15 +163,16 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-
+    
         try {
+            
             Produtor produtor = (Produtor) JTableUtil.getRowDataSelected(jTableProdutor);
             JOptionPane.showMessageDialog(this, produtor.getId());
-            if(cenario == Crud.ALTERAR)
+            if(cenario == Constante.ALTERAR)
                 ciInterface.getCiProdutor().alterarProdutor(produtor.getId());
-            if(cenario == Crud.CONSULTAR)
+            if(cenario == Constante.CONSULTAR)
                 ciInterface.getCiProdutor().consultarProdutor(produtor.getId());
-            if(cenario == Crud.EXCLUIR)
+            if(cenario == Constante.EXCLUIR)
                 ciInterface.getCiProdutor().excluirProdutor(produtor.getId());
             
         } catch (Exception ex) {
@@ -184,6 +190,10 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
             JTableUtil.addRow( jTableProdutor, produtor.toArray() );
         });
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

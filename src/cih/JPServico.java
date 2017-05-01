@@ -1,6 +1,7 @@
 package cih;
 
 import cci.CIInterface;
+import cci.util.Constante;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -12,12 +13,6 @@ public class JPServico extends javax.swing.JPanel {
     private JFrame pai;
     private int codInicio;
     
-    private final int cadastrar = 0;
-    private final int alterar = 1;
-    private final int consultar = 2;
-    private final int concluir = 3;
-    private final int cancelar = 4;
-
     public JPServico(JFrame pai, int num, CIInterface ciInterface) {
         initComponents();
         this.ciInterface = ciInterface;
@@ -82,23 +77,23 @@ public class JPServico extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, cadastrar);
+        ciInterface.identificarInicio(pai, codInicio, Constante.AGENDAR);
     }//GEN-LAST:event_jButtonAgendarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, alterar);
+        ciInterface.identificarInicio(pai, codInicio, Constante.ALTERAR);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, consultar);
+        ciInterface.identificarInicio(pai, codInicio, Constante.CONSULTAR);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     private void jButtonConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluirActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, concluir);
+        ciInterface.identificarInicio(pai, codInicio, Constante.CONCLUIR);
     }//GEN-LAST:event_jButtonConcluirActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, cancelar);
+        ciInterface.identificarInicio(pai, codInicio, Constante.CANCELAR);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public void setIconAgendar(Icon icone) {

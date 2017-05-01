@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Constante;
 import cgt.GTServico;
 import javax.swing.JFrame;
 import cih.servico.JDCadastroServico;
@@ -17,19 +18,19 @@ public class CIServico {
     
      public void gerenciarServico(int codCrud, JFrame pai) {
 
-        if (codCrud == 0) {
+        if (codCrud == Constante.AGENDAR) {
             JDCadastroServico agendarServico = new JDCadastroServico(pai, true, ciInterface);
             agendarServico.setVisible(true);
-        } else if (codCrud == 1) {
+        } else if (codCrud == Constante.ALTERAR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
-        } else if (codCrud == 2) {
+        } else if (codCrud == Constante.CONSULTAR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
-        } else if (codCrud == 3) {
+        } else if (codCrud == Constante.CONCLUIR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
-        } else if (codCrud == 4) {
+        } else if (codCrud == Constante.CANCELAR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
         }

@@ -27,12 +27,6 @@ public class CIGeral {
     public CIGeral(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
     }
-    
-    public void trocarPanel(JPanel principal, JPanel jPanel) {
-        principal.removeAll();
-        principal.add(jPanel);
-        principal.validate();
-    }
 
     public void iniciarSistema() {
          frmValidarAcesso = new FrmValidarAcesso(ciInterface);

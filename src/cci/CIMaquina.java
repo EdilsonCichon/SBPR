@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Constante;
 import cgt.GTMaquina;
 import javax.swing.JFrame;
 import cih.maquina.JDCadastroMaquina;
@@ -18,10 +19,16 @@ public class CIMaquina {
     public void gerenciarMaquina(int codCrud, JFrame pai) {
         JDCadastroMaquina cadastroMaquina;
         JDPesquisarMaquina pesquisaMaquina; 
-        if (codCrud == 0) {
+        if (codCrud == Constante.CADASTRAR) {
             cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface);
             cadastroMaquina.setVisible(true);
-        } else if (codCrud > 0) {
+        } else if (codCrud == Constante.ALTERAR) {
+            pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface);
+            pesquisaMaquina.setVisible(true);
+        }else if (codCrud == Constante.CONSULTAR) {
+            pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface);
+            pesquisaMaquina.setVisible(true);
+        }else if (codCrud == Constante.EXCLUIR) {
             pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface);
             pesquisaMaquina.setVisible(true);
         }

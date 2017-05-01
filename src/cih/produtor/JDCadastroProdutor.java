@@ -2,6 +2,8 @@ package cih.produtor;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.util.Constante;
+import cci.util.JTableUtil;
 import cdp.Produtor;
 import cdp.Propriedade;
 import java.util.Date;
@@ -22,6 +24,9 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         this.setLocationRelativeTo(parent);
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
+        jButtonAdicionar.setEnabled(false);
+        jButtonAlterar.setEnabled(false);
+        jButtonExcluir.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -332,7 +337,8 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         
         try {
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
-            ciInterface.getCiProdutor().cadastrarProdutor(this, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            boolean resposta = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            habilitarBotoes(resposta);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         } 
@@ -343,7 +349,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        
+    
         jTextFieldNome.setText("");
         jFormattedTextFieldCpf.setText("");
         jFormattedTextFieldDataNascimento.setText("");
@@ -351,37 +357,44 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jFormattedTextFieldRg.setText("");
         jFormattedTextFieldTelefone.setText("");
         jRadioButtonFeminino.setSelected(true);
+        
     }//GEN-LAST:event_jButtonLimparActionPerformed
-
+  
+    public void habilitarBotoes(boolean resposta){
+        if(resposta){
+            jButtonAdicionar.setEnabled(true);
+            jButtonAlterar.setEnabled(true);
+            jButtonExcluir.setEnabled(true);
+        }    
+    }
+    
+    
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
        ciInterface.getCiPropriedade().gerenciarPropriedade(pai, jTextFieldNome.getText());
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        
-        int linha = jTablePropriedades.getSelectedRow();
-        int coluna = 0;
-        
-        if ( linha >= 0 ){
-            Propriedade propriedade = (Propriedade) jTablePropriedades.getValueAt(linha, coluna);
-            String nome = jTablePropriedades.getValueAt(linha, coluna++).toString();
-            String referencia = jTablePropriedades.getValueAt(linha, coluna++).toString();
-        
-            // CRIAR NOVO CONSTRUTOR DE CADASTRAR PROPRIEDADE PARA RECEBER ESTES PARAMETROS
-        
-            ciInterface.getCiPropriedade().gerenciarPropriedade(0, pai);
-        }else{ 
+         
+        try {
+            
+            Propriedade propriedade = (Propriedade) JTableUtil.getRowDataSelected(jTablePropriedades);
+            ciInterface.getCiPropriedade().gerenciarPropriedade(Constante.ALTERAR, pai);
+            
+        }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        
+        }        
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         
-        /*int linha = jTablePropriedades.getSelectedRow();
-        ( (DefaultTableModel) jTablePropriedades.getModel() ).removeRow(linha);*/
-        ciInterface.getCiPropriedade().excluirPropriedade();
+        try {
+            
+            Propriedade propriedade = (Propriedade) JTableUtil.getRowDataSelected(jTablePropriedades);
+            ciInterface.getCiPropriedade().excluirPropriedade();
+            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);
+        }  
     }//GEN-LAST:event_jButtonExcluirActionPerformed
   
     public void validarCampos(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone) throws Exception{

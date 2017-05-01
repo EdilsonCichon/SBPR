@@ -192,7 +192,9 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         
         try {
             validarCampos(responsavel, nome, referencia);
-            ciInterface.getCiPropriedade().cadastrarPropriedade(this, responsavel, nome, referencia);
+            boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(responsavel, nome, referencia);
+            if(resposta)
+                this.dispose();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         } 

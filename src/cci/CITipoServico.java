@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Constante;
 import cgt.GTTipoServico;
 import javax.swing.JFrame;
 import cih.tipoServico.JDCadastroTipoServico;
@@ -16,23 +17,23 @@ public class CITipoServico {
     }
     
     public void gerenciarTipoServico(int codCrud, JFrame pai) {
+        
         JDCadastroTipoServico cadastroTipoServico;
         JDPesquisaTipoServico pesquisaTipoServico;
 
-        if (codCrud == 0) {
+        if (codCrud == Constante.CADASTRAR) {
             cadastroTipoServico = new JDCadastroTipoServico(pai, true, ciInterface);
             cadastroTipoServico.setVisible(true);
-        } else if (codCrud > 0) {
+        } else if (codCrud > Constante.ALTERAR) {
+            pesquisaTipoServico = new JDPesquisaTipoServico(pai, true, ciInterface);
+            pesquisaTipoServico.setVisible(true);
+        } else if (codCrud == Constante.CONSULTAR) {
+            pesquisaTipoServico = new JDPesquisaTipoServico(pai, true, ciInterface);
+            pesquisaTipoServico.setVisible(true);
+        } else if (codCrud == Constante.EXCLUIR) {
             pesquisaTipoServico = new JDPesquisaTipoServico(pai, true, ciInterface);
             pesquisaTipoServico.setVisible(true);
         }
-//        } else if (codCrud == 2) {
-//            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
-//            pesquisaFuncionario.setVisible(true);
-//        } else if (codCrud == 3) {
-//            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true);
-//            pesquisaFuncionario.setVisible(true);
-//        }
     }
     
     public void cadastrarTipoServico(){

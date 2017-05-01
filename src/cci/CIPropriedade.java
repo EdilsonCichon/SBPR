@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Constante;
 import cgt.GTPropriedade;
 import javax.swing.JFrame;
 import cih.propriedade.JDCadastroPropriedade;
@@ -21,16 +22,16 @@ public class CIPropriedade {
         JDCadastroPropriedade cadastroPropriedade;
         JDPesquisaPropriedade pesquisaPropriedade;
         
-        if (codCrud == 0) {
+        if (codCrud == Constante.CADASTRAR) {
             cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface);
             cadastroPropriedade.setVisible(true);
-        } else if (codCrud == 1) {
+        } else if (codCrud == Constante.ALTERAR) {
             pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
             pesquisaPropriedade.setVisible(true);
-        } else if (codCrud == 2) {
+        } else if (codCrud == Constante.CONSULTAR) {
             pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
             pesquisaPropriedade.setVisible(true);
-        } else if (codCrud == 3) {
+        } else if (codCrud == Constante.EXCLUIR) {
             pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
             pesquisaPropriedade.setVisible(true);
         }
@@ -46,14 +47,15 @@ public class CIPropriedade {
     }
     
     
-    public void cadastrarPropriedade(JDCadastroPropriedade cadastroPropriedade, String responsavel, String nome, String referencia){
+    public boolean cadastrarPropriedade(String responsavel, String nome, String referencia){
         
         try{   
           gtPropriedade.cadastrarPropriedade(responsavel, nome, referencia);
           JOptionPane.showMessageDialog(null, "Cadastrada com sucesso!");
-          cadastroPropriedade.dispose();
+          return true;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            return false;
         }    
     }
     

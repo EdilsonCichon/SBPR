@@ -1,16 +1,9 @@
-package cih.util;
+package cci.util;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * Coleção de comandos úteis para trabalhar com JTables do Java.
- * 
- * Isso não seria necessário se a sintaxe do JTable não fosse horrível!
- * 
- * @author Edilson Cichon
- */
-public class JTableUtil extends JTable {
+public class JTableUtil {
     
     public static DefaultTableModel getModel(JTable jTable) {
         return ((DefaultTableModel) jTable.getModel());
