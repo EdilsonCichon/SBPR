@@ -13,12 +13,12 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private JFrame pai;
-    private int codCrud;
+    private int cenario;
     private Produtor produtor;
 
-    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int codCrud, Produtor produtor) {
+    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int cenario, Produtor produtor) {
         super(parent, modal);
-        this.codCrud = codCrud;
+        this.cenario = cenario;
         this.produtor = produtor; // Informe NULL caso o cenário seja cadastro.
         this.ciInterface = ciInterface;
         this.pai = (JFrame) parent;
@@ -326,23 +326,35 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
         String nome = jTextFieldNome.getText();
-        
-        String cpf = jFormattedTextFieldCpf.getText();  
+
+        String cpf = jFormattedTextFieldCpf.getText();
         cpf = cpf.replace(".", "");
         cpf = cpf.replace("-", "");
-        
+
         String data_nasc = jFormattedTextFieldDataNascimento.getText();
         String inscricao = jFormattedTextFieldInscricaoEstadual.getText();
         String rg = jFormattedTextFieldRg.getText();
         System.out.println(rg);
         String telefone = jFormattedTextFieldTelefone.getText();
         char sexo = (char) jButtonGroupSexo.getSelection().getMnemonic();
-        
+
         try {
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
-            boolean resposta = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-            habilitarBotoes(resposta);
-        }catch (Exception e){
+            
+            if (cenario == Constante.CADASTRAR) {
+                boolean resposta = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                habilitarBotoes(resposta);
+            } else if (cenario == Constante.ALTERAR) {
+                boolean resposta = ciInterface.getCiProdutor().alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                habilitarBotoes(resposta);
+            } else if (cenario == Constante.CONSULTAR){
+                this.dispose(); 
+            }else if (cenario == Constante.EXCLUIR){
+                ciInterface.getCiProdutor().excluirProdutor(produtor);
+                this.dispose();
+            }
+ 
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
@@ -364,7 +376,14 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     public void identificarCenario() {
-        if ( codCrud == Constante.CONSULTAR ) {
+        
+        if ( cenario == Constante.CONSULTAR ) {
+            modoSomenteLeitura(true);
+            setarCamposComInstancia(produtor);
+        }else if (cenario == Constante.ALTERAR) {
+            modoSomenteLeitura(false);
+            setarCamposComInstancia(produtor);
+        }else if(cenario == Constante.EXCLUIR){
             modoSomenteLeitura(true);
             setarCamposComInstancia(produtor);
         }
@@ -382,6 +401,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jRadioButtonMasculino.setEnabled(condicao);
         jButtonConfirmar.setEnabled(condicao);
         jButtonLimpar.setEnabled(condicao);
+        habilitarBotoes(condicao);
     }
     
     public void setarCamposComInstancia(Produtor produtor) {
@@ -416,7 +436,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         try {
             
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            ciInterface.getCiPropriedade().gerenciarPropriedade(Constante.ALTERAR, pai);
+            ciInterface.getCiPropriedade().alterarPropriedade(propriedade, pai);
             
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);

@@ -13,12 +13,12 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private int cenario;
-    private Frame parent;
+    private Frame pai;
 
     public JDPesquisaProdutor(Frame parent, boolean modal, CIInterface ciInterface, int cenario) {
         super(parent, modal);
         this.cenario = cenario;
-        this.parent = parent;
+        this.pai = parent;
         this.ciInterface = ciInterface;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
@@ -165,17 +165,20 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
         try {
             Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
+            
             if ( cenario == Constante.ALTERAR ) {
-                ciInterface.getCiProdutor().alterarProdutor(produtor);
+                ciInterface.getCiProdutor().alterarProdutor(produtor, pai);
+                
+            }else if ( cenario == Constante.CONSULTAR ) {
+                ciInterface.getCiProdutor().consultarProdutor(produtor, pai);
+                
+            }else if ( cenario == Constante.EXCLUIR ) {
+                ciInterface.getCiProdutor().excluirProdutor(produtor, pai);
             }
-            if ( cenario == Constante.CONSULTAR ) {
-                ciInterface.getCiProdutor().consultarProdutor(produtor, parent);
-            }
-            if ( cenario == Constante.EXCLUIR ) {
-                ciInterface.getCiProdutor().excluirProdutor(produtor);
-            }
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
         }

@@ -25,26 +25,29 @@ public class GTProdutor {
         
         Produtor produtor = new Produtor(nome, cpf, data, inscricao, rg, telefone, sexo);
         gdProdutor.cadastrar(produtor);
-
     }
 
-    public int alterarProdutor() {
-        gdProdutor.alterar();
-        return 0;
+    public void alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws Exception {
+        
+        validarCampos(nome, cpf, data_nasc);
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = formato.parse(data_nasc);
+        
+        Produtor produtor = new Produtor(nome, cpf, data, inscricao, rg, telefone, sexo);
+        gdProdutor.alterar();   
     }
 
     public LinkedList<Produtor> filtrarProdutores(String colunaFiltro, String valorFiltro) {
         return gdProdutor.filtrar(colunaFiltro, valorFiltro);
     }
 
-    public int consultarProdutor() {
-        gdProdutor.consultar();
-        return 0;
+    public void consultarProdutor() {
+        gdProdutor.consultar();    
     }
 
-    public int excluirProdutor(Produtor produtor) {
+    public void excluirProdutor(Produtor produtor) {
         gdProdutor.excluir(produtor);
-        return 0;
     }
 
     private void validarCampos(String nome, String cpf, String data) throws Exception {

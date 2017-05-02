@@ -1,27 +1,28 @@
 package cci;
 
 import cci.util.Constante;
+import cdp.Propriedade;
 import cgt.GTPropriedade;
 import javax.swing.JFrame;
 import cih.propriedade.JDCadastroPropriedade;
 import cih.propriedade.JDPesquisaPropriedade;
+import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 public class CIPropriedade {
     
     private CIInterface ciInterface;
     private GTPropriedade gtPropriedade;
-
+    JDCadastroPropriedade cadastroPropriedade;
+    JDPesquisaPropriedade pesquisaPropriedade;
+        
     public CIPropriedade(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
         gtPropriedade = new GTPropriedade();
     }
     
     public void gerenciarPropriedade(int codCrud, JFrame pai) {
-        
-        JDCadastroPropriedade cadastroPropriedade;
-        JDPesquisaPropriedade pesquisaPropriedade;
-        
+ 
         if (codCrud == Constante.CADASTRAR) {
             cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface);
             cadastroPropriedade.setVisible(true);
@@ -40,8 +41,6 @@ public class CIPropriedade {
     
     public void gerenciarPropriedade(JFrame pai, String responsavel) {
         
-        JDCadastroPropriedade cadastroPropriedade;
-        
             cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, responsavel);
             cadastroPropriedade.setVisible(true);
     }
@@ -59,8 +58,9 @@ public class CIPropriedade {
         }    
     }
     
-    public void alterarPropriedade(){
-        int i = gtPropriedade.alterarPropriedade();
+    public void alterarPropriedade(Propriedade propriedade, Frame pai){
+        cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface);
+        cadastroPropriedade.setVisible(true);
     }
     
     public void consultarPropriedade(){
