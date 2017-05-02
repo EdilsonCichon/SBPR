@@ -13,10 +13,12 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private int cenario;
+    private Frame parent;
 
     public JDPesquisaProdutor(Frame parent, boolean modal, CIInterface ciInterface, int cenario) {
         super(parent, modal);
         this.cenario = cenario;
+        this.parent = parent;
         this.ciInterface = ciInterface;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
@@ -33,7 +35,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         jTextFieldFiltro = new javax.swing.JTextField();
         jScrollPaneProdutores = new javax.swing.JScrollPane();
         jTableProdutor = new javax.swing.JTable();
-        jButtonPesquisar = new javax.swing.JButton();
+        jButtonFiltrar = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -66,11 +68,11 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         });
         jScrollPaneProdutores.setViewportView(jTableProdutor);
 
-        jButtonPesquisar.setText("🔍");
-        jButtonPesquisar.setToolTipText("Buscar");
-        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFiltrar.setText("🔍");
+        jButtonFiltrar.setToolTipText("Filtrar");
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPesquisarActionPerformed(evt);
+                jButtonFiltrarActionPerformed(evt);
             }
         });
 
@@ -89,7 +91,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonPesquisar)
+                        .addComponent(jButtonFiltrar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -97,7 +99,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
             jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
                 .addGroup(jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelFiltrar)
@@ -163,24 +165,23 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-    
         try {
-            
             Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
-            JOptionPane.showMessageDialog(this, produtor.getId());
-            if(cenario == Constante.ALTERAR)
-                ciInterface.getCiProdutor().alterarProdutor(produtor.getId());
-            if(cenario == Constante.CONSULTAR)
-                ciInterface.getCiProdutor().consultarProdutor(produtor.getId());
-            if(cenario == Constante.EXCLUIR)
-                ciInterface.getCiProdutor().excluirProdutor(produtor.getId());
-            
+            if ( cenario == Constante.ALTERAR ) {
+                ciInterface.getCiProdutor().alterarProdutor(produtor);
+            }
+            if ( cenario == Constante.CONSULTAR ) {
+                ciInterface.getCiProdutor().consultarProdutor(produtor, parent);
+            }
+            if ( cenario == Constante.EXCLUIR ) {
+                ciInterface.getCiProdutor().excluirProdutor(produtor);
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         
         //TODO Validações seriam colocadas aqui.
         LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().filtroProdutores((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
@@ -189,7 +190,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         listaProdutores.forEach((produtor) -> {
             JTableUtil.addLinha(jTableProdutor, produtor.toArray() );
         });
-    }//GEN-LAST:event_jButtonPesquisarActionPerformed
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.dispose();
@@ -198,7 +199,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JPanel jPanelPesquisarProdutor;

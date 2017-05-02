@@ -1,23 +1,25 @@
 package cih.produtor;
 
-import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cdp.Propriedade;
 import cci.util.Constante;
 import cci.util.JTableUtil;
 import cdp.Produtor;
-import cdp.Propriedade;
-import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.ImageIcon;
 
 public class JDCadastroProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private JFrame pai;
+    private int codCrud;
+    private Produtor produtor;
 
-    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int codCrud, Produtor produtor) {
         super(parent, modal);
+        this.codCrud = codCrud;
+        this.produtor = produtor; // Informe NULL caso o cenário seja cadastro.
         this.ciInterface = ciInterface;
         this.pai = (JFrame) parent;
         initComponents();
@@ -27,6 +29,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonAdicionar.setEnabled(false);
         jButtonAlterar.setEnabled(false);
         jButtonExcluir.setEnabled(false);
+        identificarCenario();
     }
 
     @SuppressWarnings("unchecked")
@@ -359,7 +362,43 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jRadioButtonFeminino.setSelected(true);
         
     }//GEN-LAST:event_jButtonLimparActionPerformed
-  
+
+    public void identificarCenario() {
+        if ( codCrud == Constante.CONSULTAR ) {
+            modoSomenteLeitura(true);
+            setarCamposComInstancia(produtor);
+        }
+    }
+    
+    public void modoSomenteLeitura(boolean condicao) {
+        condicao = !condicao;
+        jTextFieldNome.setEditable(condicao);
+        jFormattedTextFieldCpf.setEditable(condicao);
+        jFormattedTextFieldRg.setEditable(condicao);
+        jFormattedTextFieldInscricaoEstadual.setEditable(condicao);
+        jFormattedTextFieldDataNascimento.setEditable(condicao);
+        jFormattedTextFieldTelefone.setEditable(condicao);
+        jRadioButtonFeminino.setEnabled(condicao);
+        jRadioButtonMasculino.setEnabled(condicao);
+        jButtonConfirmar.setEnabled(condicao);
+        jButtonLimpar.setEnabled(condicao);
+    }
+    
+    public void setarCamposComInstancia(Produtor produtor) {
+        jTextFieldNome.setText(produtor.getNome());
+        jFormattedTextFieldCpf.setText(produtor.getCpf());
+        jFormattedTextFieldRg.setText(produtor.getRg());
+        jFormattedTextFieldInscricaoEstadual.setText(produtor.getInscricao_estadual());
+        jFormattedTextFieldDataNascimento.setText(produtor.getDt_nasc("dd/MM/yyyy"));
+        jFormattedTextFieldTelefone.setText(produtor.getTelefone());
+        if ( produtor.getSexo() == 'M' )
+            jRadioButtonMasculino.setSelected(true);
+        
+        for (Propriedade propriedade : produtor.getPropriedades()) {
+            JTableUtil.addLinha(jTablePropriedades, propriedade.toArray());
+        }
+    }
+    
     public void habilitarBotoes(boolean resposta){
         if(resposta){
             jButtonAdicionar.setEnabled(true);
@@ -367,7 +406,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             jButtonExcluir.setEnabled(true);
         }    
     }
-    
     
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
        ciInterface.getCiPropriedade().gerenciarPropriedade(pai, jTextFieldNome.getText());

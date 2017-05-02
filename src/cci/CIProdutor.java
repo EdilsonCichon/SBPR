@@ -6,7 +6,7 @@ import cgt.GTProdutor;
 import javax.swing.JFrame;
 import cih.produtor.JDCadastroProdutor;
 import cih.produtor.JDPesquisaProdutor;
-import cih.propriedade.JDPesquisaPropriedade;
+import java.awt.Frame;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -26,7 +26,7 @@ public class CIProdutor {
         JDPesquisaProdutor pesquisaProdutor;
 
         if (codCrud == Constante.CADASTRAR) {
-            cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface);
+            cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, codCrud, null);
             cadastroProdutor.setVisible(true);
         } else if(codCrud == Constante.ALTERAR){
             pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, codCrud);
@@ -52,18 +52,19 @@ public class CIProdutor {
         }  
     }
     
-    public void alterarProdutor(int id){
+    public void alterarProdutor(Produtor produtor){
       
     }
     
-    public void consultarProdutor(int id) {
-       
+    public void consultarProdutor(Produtor produtor, Frame pai) {
+       JDCadastroProdutor cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, Constante.CONSULTAR, produtor);
+       cadastroProdutor.setVisible(true);
     }
     
-    public void excluirProdutor(int id){
+    public void excluirProdutor(Produtor produtor){
         
         try{   
-          gtProdutor.excluirProdutor(id);
+          gtProdutor.excluirProdutor(produtor);
           JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());

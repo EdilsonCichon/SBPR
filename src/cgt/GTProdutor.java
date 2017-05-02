@@ -42,8 +42,8 @@ public class GTProdutor {
         return 0;
     }
 
-    public int excluirProdutor(int id) {
-        gdProdutor.excluir(id);
+    public int excluirProdutor(Produtor produtor) {
+        gdProdutor.excluir(produtor);
         return 0;
     }
 

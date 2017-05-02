@@ -63,7 +63,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jTextFieldFiltro" min="-2" pref="259" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButtonPesquisar" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonFiltrar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -75,7 +75,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButtonPesquisar" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="jButtonFiltrar" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jComboBoxFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -158,13 +158,13 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButtonPesquisar">
+        <Component class="javax.swing.JButton" name="jButtonFiltrar">
           <Properties>
             <Property name="text" type="java.lang.String" value="\ud83d\udd0d" containsInvalidXMLChars="true"/>
-            <Property name="toolTipText" type="java.lang.String" value="Buscar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Filtrar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPesquisarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFiltrarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

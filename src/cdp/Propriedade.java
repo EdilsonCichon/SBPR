@@ -16,4 +16,13 @@ public class Propriedade {
         this.nome_propriedade = nome_propriedade;
         this.referencia = referencia;
     }    
+
+    @Override
+    public String toString() {
+        return nome_propriedade;
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this, referencia };
+    }
 }
