@@ -377,7 +377,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
          
         try {
             
-            Propriedade propriedade = (Propriedade) JTableUtil.getRowDataSelected(jTablePropriedades);
+            Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
             ciInterface.getCiPropriedade().gerenciarPropriedade(Constante.ALTERAR, pai);
             
         }catch (Exception e){
@@ -389,7 +389,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         
         try {
             
-            Propriedade propriedade = (Propriedade) JTableUtil.getRowDataSelected(jTablePropriedades);
+            Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
             ciInterface.getCiPropriedade().excluirPropriedade();
             
         }catch (Exception e){

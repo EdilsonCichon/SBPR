@@ -166,7 +166,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     
         try {
             
-            Produtor produtor = (Produtor) JTableUtil.getRowDataSelected(jTableProdutor);
+            Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
             JOptionPane.showMessageDialog(this, produtor.getId());
             if(cenario == Constante.ALTERAR)
                 ciInterface.getCiProdutor().alterarProdutor(produtor.getId());
@@ -184,10 +184,10 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         
         //TODO Validações seriam colocadas aqui.
         LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().filtroProdutores((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
-        JTableUtil.cleanAll(jTableProdutor);
+        JTableUtil.limparTabela(jTableProdutor);
         
         listaProdutores.forEach((produtor) -> {
-            JTableUtil.addRow( jTableProdutor, produtor.toArray() );
+            JTableUtil.addLinha(jTableProdutor, produtor.toArray() );
         });
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 

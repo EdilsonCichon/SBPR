@@ -5,26 +5,51 @@ import javax.swing.table.DefaultTableModel;
 
 public class JTableUtil {
     
+    /**
+     * Retorna o model do jTable convertido para (DefaultTableModel).
+     * @param jTable
+     * @return (DefaultTableModel) model
+     */
     public static DefaultTableModel getModel(JTable jTable) {
         return ((DefaultTableModel) jTable.getModel());
     }
     
-    public static int getRowIndexSelected(JTable jTable) {
+    /**
+     * Obtem o indice da linha selecionada.
+     * @param jTable
+     * @return int
+     */
+    public static int getIndiceLinhaSelecionada(JTable jTable) {
         return jTable.getSelectedRow();
     }
     
-    public static Object getRowDataSelected(JTable jTable) throws Exception {
+    /**
+     * Obtem os dados (Object) da linha selecionada.
+     * @param jTable
+     * @return Object
+     * @throws Exception 
+     */
+    public static Object getDadosLinhaSelecionada(JTable jTable) throws Exception {
         int rowSelected = jTable.getSelectedRow();
         if ( rowSelected < 0 )
             throw new Exception("Nenhuma linha selecionada.");
         return getModel(jTable).getValueAt(rowSelected, 0);
     }
     
-    public static void addRow(JTable jTable, Object[] rowData) {
-        getModel(jTable).addRow(rowData);
+    /**
+     * Insere uma nova linha no final da jTable.
+     * @param jTable
+     * @param dadosLinha 
+     */
+    public static void addLinha(JTable jTable, Object[] dadosLinha) {
+        getModel(jTable).addRow(dadosLinha);
     }
     
-    public static void cleanAll(JTable jTable) {
+    /**
+     * Apaga todas as linhas da tabela.
+     * @param jTable 
+     */
+    public static void limparTabela(JTable jTable) {
         int qtdLinhas = jTable.getRowCount() - 1;
         for (int i = qtdLinhas; i >= 0; i--)
             getModel(jTable).removeRow(i);
