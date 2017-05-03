@@ -1,20 +1,17 @@
 package cih;
 
 import cci.CIInterface;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.MessagingException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import cgt.util.EnvioEmail;
 
 public class JDSuporte extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     
-    public JDSuporte(java.awt.Frame parent, boolean modal) {
+    public JDSuporte(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
         initComponents();
+        this.ciInterface = ciInterface;
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }

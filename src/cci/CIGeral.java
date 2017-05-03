@@ -59,17 +59,17 @@ public class CIGeral {
     }
     
     public void abrirAjuda(JFrame pai){
-        ajuda = new JDAjuda(pai, true);
+        ajuda = new JDAjuda(pai, true, ciInterface);
         ajuda.setVisible(true);      
     }
     
     public void abrirRelatorio(JFrame pai){
-        relatorio = new JDRelatorio(pai, true);
+        relatorio = new JDRelatorio(pai, true, ciInterface);
         relatorio.setVisible(true);
     }
     
     public void abrirSuporte(JFrame pai){
-        suporte = new JDSuporte(pai, true);
+        suporte = new JDSuporte(pai, true, ciInterface);
         suporte.setVisible(true);  
     }
     
