@@ -1,4 +1,4 @@
-package services;
+package cgt.util;
 
 import java.util.*;
 import javax.mail.*;

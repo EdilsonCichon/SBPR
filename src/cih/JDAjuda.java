@@ -7,9 +7,10 @@ public class JDAjuda extends javax.swing.JDialog {
     
      private CIInterface ciInterface;
 
-    public JDAjuda(java.awt.Frame parent, boolean modal) {
+    public JDAjuda(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
         initComponents();
+        this.ciInterface = ciInterface;
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
