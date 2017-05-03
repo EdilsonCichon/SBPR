@@ -5,6 +5,7 @@
  */
 package cgt;
 
+import cdp.Produtor;
 import cdp.Propriedade;
 import cgd.GDPropriedade;
 import java.util.LinkedList;
@@ -17,17 +18,16 @@ public class GTPropriedade {
         gdPropriedade = new GDPropriedade();
     }
     
-    public void cadastrarPropriedade(String responsavel, String nome, String referencia){
+    public void cadastrarPropriedade(Produtor responsavel, String nome, String referencia){
         
-        Propriedade propriedade = new Propriedade(nome, referencia);
+        Propriedade propriedade = new Propriedade(nome, referencia, responsavel);
         
         gdPropriedade.cadastrar(propriedade);
         
     }
     
-    public int alterarPropriedade(){
-        gdPropriedade.alterar();
-        return 0;
+    public void alterarPropriedade(Propriedade propriedade) {
+        gdPropriedade.alterar(propriedade);
     }
     
     public int consultarPropriedade(){

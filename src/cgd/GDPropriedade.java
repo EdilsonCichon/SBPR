@@ -12,8 +12,8 @@ public class GDPropriedade {
           
     }
     
-    public void alterar(){
-       
+    public void alterar(Propriedade propriedade) {
+       //FAZER OPERAÇÃO NO BANCO DE ALTERAR A PROPRIEDADE
     }
     
     public void consultar(){

@@ -14,11 +14,28 @@ public class Propriedade {
         this.responsavel = responsavel;
     }
 
-    public Propriedade(String nome_propriedade, String referencia) {
+    public Propriedade(String nome_propriedade, String referencia, Produtor responsavel) {
         this.nome_propriedade = nome_propriedade;
         this.referencia = referencia;
+        this.responsavel = responsavel;
     }    
 
+    public int getId() {
+        return id;
+    }
+
+    public String getNome_propriedade() {
+        return nome_propriedade;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public Produtor getResponsavel() {
+        return responsavel;
+    }
+    
     @Override
     public String toString() {
         return nome_propriedade;

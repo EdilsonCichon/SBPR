@@ -1,40 +1,35 @@
-
 package cih.propriedade;
 
 import javax.swing.ImageIcon;
 
 import cci.CIInterface;
+import cci.util.Constante;
+import cci.util.JTableUtil;
+import cdp.Produtor;
+import cdp.Propriedade;
+import java.awt.Frame;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
     
-    private CIInterface ciInterface;
+    private int cenario;
     private JFrame pai;
-   
-    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
-        super(parent, modal);
-        this.ciInterface = ciInterface;
-        this.pai = (JFrame) parent;
-        initComponents();
-        this.setLocationRelativeTo(parent);
-        ImageIcon icone = ciInterface.setarIconesJanela();
-        setIconImage(icone.getImage());
-        jTextFieldResponsavel.setEditable(false);
-    }
+    private CIInterface ciInterface;
+    private Propriedade propriedade;
     
-    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, String responsavel){
+    public JDCadastroPropriedade(Frame parent, boolean modal, CIInterface ciInterface, int cenario, Propriedade propriedade) {
         super(parent, modal);
         this.ciInterface = ciInterface;
         initComponents();
         this.setLocationRelativeTo(parent);
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());  
-        jTextFieldResponsavel.setText(responsavel);
-        jTextFieldResponsavel.setEditable(false);
-        jButtonPesquisarProdutor.setEnabled(false);
+        this.propriedade = propriedade;
+        this.cenario = cenario;
+        identificarCenario();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -51,7 +46,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jPanelRodape = new javax.swing.JPanel();
         jButtonCancelar = new javax.swing.JButton();
         jButtonConfirmar = new javax.swing.JButton();
-        jButtonAlterar = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Propriedade");
@@ -60,6 +55,8 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jPanelPropriedade.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedade"));
 
         jLabelResponsavel.setText("Responsável:");
+
+        jTextFieldResponsavel.setEditable(false);
 
         jLabelNomePropriedade.setText("Nome da Propriedadade:");
 
@@ -134,11 +131,11 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             }
         });
 
-        jButtonAlterar.setText("Limpar");
-        jButtonAlterar.setPreferredSize(new java.awt.Dimension(57, 23));
-        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLimpar.setText("Limpar");
+        jButtonLimpar.setPreferredSize(new java.awt.Dimension(57, 23));
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAlterarActionPerformed(evt);
+                jButtonLimparActionPerformed(evt);
             }
         });
 
@@ -150,7 +147,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                 .addGap(92, 92, 92)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -162,7 +159,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar)
-                    .addComponent(jButtonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -186,24 +183,23 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
-        String responsavel = jTextFieldResponsavel.getText();
         String nome = jTextFieldNomePropriedade.getText();
         String referencia = jTextAreaReferencia.getText();
         
         try {
-            validarCampos(responsavel, nome, referencia);
-            boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(responsavel, nome, referencia);
+            validarCampos(nome, referencia);
+            boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
             if(resposta)
                 this.dispose();
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
         jTextFieldNomePropriedade.setText("");
         jTextAreaReferencia.setText(""); 
-    }//GEN-LAST:event_jButtonAlterarActionPerformed
+    }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.dispose();
@@ -213,16 +209,46 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         ciInterface.getCiProdutor().gerenciarProdutor(2, pai);
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
-    public void validarCampos(String responsavel, String nome, String referencia) throws Exception{
+    public void identificarCenario() {
+        if ( cenario == Constante.CONSULTAR ) {
+           // CARTÃO CONSULTAR
+        } 
+        else if ( cenario == Constante.ALTERAR ) {
+            setarCamposComInstancia();
+        }
+        else if ( cenario == Constante.CADASTRAR ) {
+            // CARTÃO CADASTRAR
+        }
+        else if ( cenario == Constante.EXCLUIR ) {
+            // CARTÃO EXCLUIR
+        }
+    }
+    
+    public void setarCamposComInstancia() {
+        jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
+        jTextFieldNomePropriedade.setText(propriedade.getNome_propriedade());
+        jTextAreaReferencia.setText(propriedade.getReferencia());
+    }
+    
+    public void modoSomenteLeitura(boolean condicao) {
+        condicao = !condicao;
+        jTextFieldNomePropriedade.setEditable(condicao);
+        jTextFieldResponsavel.setEditable(condicao);
+        jButtonPesquisarProdutor.setEnabled(condicao);
+        jButtonConfirmar.setEnabled(condicao);
+        jButtonLimpar.setEnabled(condicao);
+    }
+    
+    public void validarCampos(String nome, String referencia) throws Exception{
         
-        if (responsavel.equals("") || nome.equals("") || referencia.equals(""))
+        if (nome.equals("") || referencia.equals(""))
             throw new Exception("Campos Vazios");
     } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonPesquisarProdutor;
     private javax.swing.JLabel jLabelNomePropriedade;
     private javax.swing.JLabel jLabelReferencia;

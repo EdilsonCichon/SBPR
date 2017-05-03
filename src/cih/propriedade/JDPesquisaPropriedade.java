@@ -2,18 +2,24 @@
 package cih.propriedade;
 
 import cci.CIInterface;
+import cci.util.Constante;
 import cdp.Propriedade;
 import cci.util.JTableUtil;
+import cdp.Produtor;
+import java.awt.Frame;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class JDPesquisaPropriedade extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private int cenario;
     
-    public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+    public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int cenario) {
         super(parent, modal);
         this.ciInterface = ciInterface;
+        this.cenario = cenario;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
@@ -104,8 +110,18 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,6 +172,30 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
             JTableUtil.addLinha(jTablePropriedades, propriedade.toArray() );
         });
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        try {
+            Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
+            if ( cenario == Constante.ALTERAR ) {
+                ciInterface.getCiPropriedade().telaAlterarPropriedade((Frame)getParent(), propriedade);
+                this.dispose();
+            }
+            if ( cenario == Constante.CONSULTAR ) {
+                //CARTÃO DO MOISEYS (VULGO CRYSTIAN)
+                //ciInterface.getCiProdutor().consultarProdutor(produtor, parent);
+            }
+            if ( cenario == Constante.EXCLUIR ) {
+                // OUTRO CARTÃO...
+                //ciInterface.getCiProdutor().excluirProdutor(produtor);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Selecione uma propriedade", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

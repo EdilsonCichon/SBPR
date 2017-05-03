@@ -408,7 +408,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }
     
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-       ciInterface.getCiPropriedade().gerenciarPropriedade(pai, jTextFieldNome.getText());
+       ciInterface.getCiPropriedade().gerenciarPropriedade(codCrud, pai);
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
