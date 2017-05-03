@@ -14,32 +14,39 @@ public class CIProdutor {
     
     private CIInterface ciInterface;
     private GTProdutor gtProdutor;
-
+    JDCadastroProdutor cadastroProdutor;
+    JDPesquisaProdutor pesquisaProdutor;
+    
     public CIProdutor(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
         gtProdutor = new GTProdutor();
     }
     
-    public void gerenciarProdutor(int codCrud, JFrame pai) {
-        
-        JDCadastroProdutor cadastroProdutor;
-        JDPesquisaProdutor pesquisaProdutor;
-
-        if (codCrud == Constante.CADASTRAR) {
-            cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, codCrud, null);
+    public void gerenciarProdutor(int cenario, JFrame pai) {
+       
+        if (cenario == Constante.CADASTRAR) {
+            cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, cenario, null);
             cadastroProdutor.setVisible(true);
-        } else if(codCrud == Constante.ALTERAR){
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, codCrud);
-            pesquisaProdutor.setVisible(true);
-        }else if (codCrud == Constante.CONSULTAR) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, codCrud);
-            pesquisaProdutor.setVisible(true);
-        } else if (codCrud == Constante.EXCLUIR) {
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, codCrud);
+        } else{
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, cenario);
             pesquisaProdutor.setVisible(true);
         }
     }
     
+     public void instanciarTelaCadastroProdutor(Produtor produtor, Frame pai, int cenario){
+        cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, cenario, produtor);
+        cadastroProdutor.setVisible(true);
+    }
+     
+     public Produtor instanciarTelaFiltroProdutor(Frame pai, int cenario){
+         
+        Produtor produtorSelecionado = null;
+        
+        pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, cenario, produtorSelecionado);
+        pesquisaProdutor.setVisible(true);
+        return produtorSelecionado;
+     }
+
     public boolean cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
         
         try{   
@@ -52,22 +59,30 @@ public class CIProdutor {
         }  
     }
     
-    public void alterarProdutor(Produtor produtor){
-      
+    public boolean alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) { //Erick
+        try {
+            gtProdutor.alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
+            return false;
+        }
     }
     
     public void consultarProdutor(Produtor produtor, Frame pai) {
-       JDCadastroProdutor cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, Constante.CONSULTAR, produtor);
-       cadastroProdutor.setVisible(true);
+       
     }
-    
-    public void excluirProdutor(Produtor produtor){
+
+    public boolean excluirProdutor(Produtor produtor){
         
         try{   
-          gtProdutor.excluirProdutor(produtor);
-          JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+            gtProdutor.excluirProdutor(produtor);
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+            return true;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
+            return false;
         }    
     }
     

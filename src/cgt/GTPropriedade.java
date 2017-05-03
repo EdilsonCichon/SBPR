@@ -18,24 +18,23 @@ public class GTPropriedade {
     
     public void cadastrarPropriedade(String responsavel, String nome, String referencia){
         
-        Propriedade propriedade = new Propriedade(nome, referencia);
+        Propriedade propriedade = new Propriedade(nome, referencia, null);
         
         gdPropriedade.cadastrar(propriedade);
         
     }
     
-    public int alterarPropriedade(){
+    public void alterarPropriedade(){
         gdPropriedade.alterar();
-        return 0;
+        
     }
     
-    public int consultarPropriedade(){
+    public void consultarPropriedade(){
         gdPropriedade.consultar();
-        return 0;
     }
     
-    public int excluirPropriedade(){
+    public void excluirPropriedade(){
         gdPropriedade.excluir();
-        return 0;
+        
     } 
 }

@@ -1,49 +1,40 @@
 package cci;
 
 import cci.util.Constante;
+import cdp.Propriedade;
 import cgt.GTPropriedade;
 import javax.swing.JFrame;
 import cih.propriedade.JDCadastroPropriedade;
 import cih.propriedade.JDPesquisaPropriedade;
+import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 public class CIPropriedade {
     
     private CIInterface ciInterface;
     private GTPropriedade gtPropriedade;
-
+    JDCadastroPropriedade cadastroPropriedade;
+    JDPesquisaPropriedade pesquisaPropriedade;
+        
     public CIPropriedade(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
         gtPropriedade = new GTPropriedade();
     }
     
-    public void gerenciarPropriedade(int codCrud, JFrame pai) {
+    public void gerenciarPropriedade(int cenario, JFrame pai) {
         
-        JDCadastroPropriedade cadastroPropriedade;
-        JDPesquisaPropriedade pesquisaPropriedade;
-        
-        if (codCrud == Constante.CADASTRAR) {
-            cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface);
+        if (cenario == Constante.CADASTRAR) {
+            cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, cenario, null);
             cadastroPropriedade.setVisible(true);
-        } else if (codCrud == Constante.ALTERAR) {
-            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
-            pesquisaPropriedade.setVisible(true);
-        } else if (codCrud == Constante.CONSULTAR) {
-            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
-            pesquisaPropriedade.setVisible(true);
-        } else if (codCrud == Constante.EXCLUIR) {
-            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface);
+        } else{
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface, cenario);
             pesquisaPropriedade.setVisible(true);
         }
-
     }
     
-    public void gerenciarPropriedade(JFrame pai, String responsavel) {
-        
-        JDCadastroPropriedade cadastroPropriedade;
-        
-            cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, responsavel);
-            cadastroPropriedade.setVisible(true);
+    public void instanciarTelaCadastroPropriedade(Propriedade propriedade, Frame pai, int cenario) {
+        cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, cenario, propriedade);
+        cadastroPropriedade.setVisible(true);
     }
     
     
@@ -60,15 +51,15 @@ public class CIPropriedade {
     }
     
     public void alterarPropriedade(){
-        int i = gtPropriedade.alterarPropriedade();
+        gtPropriedade.alterarPropriedade();
     }
     
     public void consultarPropriedade(){
-        int i = gtPropriedade.consultarPropriedade();
+        gtPropriedade.consultarPropriedade();
     }
     
     public void excluirPropriedade(){
-        int i = gtPropriedade.excluirPropriedade();
+        gtPropriedade.excluirPropriedade();
         JOptionPane.showMessageDialog(null, "Propriedade excluída com sucesso");
     }    
 }

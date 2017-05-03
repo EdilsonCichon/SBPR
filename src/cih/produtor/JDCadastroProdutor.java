@@ -13,22 +13,19 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private JFrame pai;
-    private int codCrud;
+    private int cenario;
     private Produtor produtor;
 
-    public JDCadastroProdutor(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int codCrud, Produtor produtor) {
-        super(parent, modal);
-        this.codCrud = codCrud;
+    public JDCadastroProdutor(java.awt.Frame pai, boolean modal, CIInterface ciInterface, int cenario, Produtor produtor) {
+        super(pai, modal);
+        this.cenario = cenario;
         this.produtor = produtor; // Informe NULL caso o cenário seja cadastro.
         this.ciInterface = ciInterface;
-        this.pai = (JFrame) parent;
+        this.pai = (JFrame) pai;
         initComponents();
-        this.setLocationRelativeTo(parent);
+        this.setLocationRelativeTo(pai);
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
-        jButtonAdicionar.setEnabled(false);
-        jButtonAlterar.setEnabled(false);
-        jButtonExcluir.setEnabled(false);
         identificarCenario();
     }
 
@@ -324,9 +321,9 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        
+    
         String nome = jTextFieldNome.getText();
-        
+
         String cpf = jFormattedTextFieldCpf.getText();  
         cpf = cpf.replace(".", "");
         cpf = cpf.replace("-", "");
@@ -334,14 +331,30 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         String data_nasc = jFormattedTextFieldDataNascimento.getText();
         String inscricao = jFormattedTextFieldInscricaoEstadual.getText();
         String rg = jFormattedTextFieldRg.getText();
-        System.out.println(rg);
         String telefone = jFormattedTextFieldTelefone.getText();
         char sexo = (char) jButtonGroupSexo.getSelection().getMnemonic();
         
         try {
+            
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
-            boolean resposta = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-            habilitarBotoes(resposta);
+            
+            if(cenario == Constante.CADASTRAR){
+                boolean resposta = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                habilitarBotoes(resposta);
+                
+            } else if (cenario == Constante.ALTERAR){
+                boolean resposta = ciInterface.getCiProdutor().alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                if(resposta)
+                    this.dispose();
+                
+            } else if(cenario == Constante.CONSULTAR){
+                this.dispose();
+                
+            } else if(cenario == Constante.EXCLUIR){
+                boolean resposta = ciInterface.getCiProdutor().excluirProdutor(produtor);
+                if(resposta)
+                    this.dispose();
+            }          
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         } 
@@ -364,7 +377,13 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     public void identificarCenario() {
-        if ( codCrud == Constante.CONSULTAR ) {
+        
+        if(cenario == Constante.CADASTRAR){
+            habilitarBotoes(false);
+        }else if(cenario == Constante.ALTERAR){    
+            modoSomenteLeitura(false);
+            setarCamposComInstancia(produtor);
+        }else{  // CONSULTAR OU EXCLUIR
             modoSomenteLeitura(true);
             setarCamposComInstancia(produtor);
         }
@@ -380,8 +399,9 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jFormattedTextFieldTelefone.setEditable(condicao);
         jRadioButtonFeminino.setEnabled(condicao);
         jRadioButtonMasculino.setEnabled(condicao);
-        jButtonConfirmar.setEnabled(condicao);
+        //jButtonConfirmar.setEnabled(condicao);
         jButtonLimpar.setEnabled(condicao);
+        habilitarBotoes(condicao);
     }
     
     public void setarCamposComInstancia(Produtor produtor) {
@@ -400,15 +420,13 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }
     
     public void habilitarBotoes(boolean resposta){
-        if(resposta){
-            jButtonAdicionar.setEnabled(true);
-            jButtonAlterar.setEnabled(true);
-            jButtonExcluir.setEnabled(true);
-        }    
+        jButtonAdicionar.setEnabled(resposta);
+        jButtonAlterar.setEnabled(resposta);
+        jButtonExcluir.setEnabled(resposta);
     }
     
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-       ciInterface.getCiPropriedade().gerenciarPropriedade(pai, jTextFieldNome.getText());
+       ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(null, pai, Constante.ADICIONAR);
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
@@ -434,13 +452,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);
         }  
     }//GEN-LAST:event_jButtonExcluirActionPerformed
-  
+   
     public void validarCampos(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone) throws Exception{
-        
         if (nome.equals("") || cpf.equals("") || data_nasc.equals("") || inscricao.equals("") || rg.equals("") || telefone.equals(""))
             throw new Exception("Campos Vazios");
-  
-    } 
+    }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;

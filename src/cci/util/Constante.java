@@ -16,5 +16,7 @@ public abstract class Constante {
     public static final int FUNCIONARIO = 11;
     public static final int TIPO_SERVICO = 12;
     public static final int TIPO_MAQUINA = 13;
+    public static final int SELECIONAR = 14;
+    public static final int ADICIONAR = 14;
     
 }

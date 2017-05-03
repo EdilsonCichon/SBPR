@@ -13,13 +13,25 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private int cenario;
-    private Frame parent;
+    private Frame pai;
+    private Produtor produtorSelecionado;
 
-    public JDPesquisaProdutor(Frame parent, boolean modal, CIInterface ciInterface, int cenario) {
-        super(parent, modal);
+    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int cenario) {
+        super(pai, modal);
         this.cenario = cenario;
-        this.parent = parent;
+        this.pai = pai;
         this.ciInterface = ciInterface;
+        initComponents();
+        ImageIcon icone = ciInterface.setarIconesJanela();
+        setIconImage(icone.getImage());
+    }
+    
+    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int cenario, Produtor produtorSelecionado) {
+        super(pai, modal);
+        this.cenario = cenario;
+        this.pai = pai;
+        this.ciInterface = ciInterface;
+        this.produtorSelecionado = produtorSelecionado;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
@@ -68,7 +80,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         });
         jScrollPaneProdutores.setViewportView(jTableProdutor);
 
-        jButtonFiltrar.setText("🔍");
+        jButtonFiltrar.setText("OK");
         jButtonFiltrar.setToolTipText("Filtrar");
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +103,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonFiltrar)
+                        .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -166,24 +178,23 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         try {
+            
             Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
-            if ( cenario == Constante.ALTERAR ) {
-                ciInterface.getCiProdutor().alterarProdutor(produtor);
-            }
-            if ( cenario == Constante.CONSULTAR ) {
-                ciInterface.getCiProdutor().consultarProdutor(produtor, parent);
-            }
-            if ( cenario == Constante.EXCLUIR ) {
-                ciInterface.getCiProdutor().excluirProdutor(produtor);
-            }
+            
+            if(cenario == Constante.CADASTRAR){
+               produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
+               if(produtorSelecionado != null)
+                   this.dispose();      
+            }else{
+                 ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtor, pai, cenario);
+            }           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
-        
-        //TODO Validações seriam colocadas aqui.
+       
         LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().filtroProdutores((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
         JTableUtil.limparTabela(jTableProdutor);
         

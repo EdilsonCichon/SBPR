@@ -54,15 +54,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jScrollPanePropriedades" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jLabelFiltrar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Component id="jComboBoxFiltro" min="-2" pref="89" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextFieldFiltro" max="32767" attributes="0"/>
+                          <Component id="jTextFieldFiltro" min="-2" pref="249" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButtonFiltrar" min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPanePropriedades" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -75,6 +77,7 @@
                       <Component id="jComboBoxFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPanePropriedades" pref="149" max="32767" attributes="0"/>
@@ -151,6 +154,11 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="jButtonFiltrar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="OK"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel1">
