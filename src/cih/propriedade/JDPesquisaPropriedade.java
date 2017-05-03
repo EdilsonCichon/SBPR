@@ -1,8 +1,11 @@
 
 package cih.propriedade;
 
-import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cdp.Propriedade;
+import cci.util.JTableUtil;
+import java.util.LinkedList;
+import javax.swing.ImageIcon;
 
 public class JDPesquisaPropriedade extends javax.swing.JDialog {
     
@@ -26,6 +29,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         jTextFieldFiltro = new javax.swing.JTextField();
         jScrollPanePropriedades = new javax.swing.JScrollPane();
         jTablePropriedades = new javax.swing.JTable();
+        jButtonFiltrar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -45,7 +49,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Responsável", "Referência"
+                "Nome", "Referência", "Responsável"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -57,6 +61,14 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
             }
         });
         jScrollPanePropriedades.setViewportView(jTablePropriedades);
+
+        jButtonFiltrar.setText("...");
+        jButtonFiltrar.setToolTipText("Buscar");
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFiltrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPesquisarPropriedadeLayout = new javax.swing.GroupLayout(jPanelPesquisarPropriedade);
         jPanelPesquisarPropriedade.setLayout(jPanelPesquisarPropriedadeLayout);
@@ -70,8 +82,10 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
                         .addGap(10, 10, 10)
                         .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldFiltro))
-                    .addComponent(jScrollPanePropriedades))
+                        .addComponent(jTextFieldFiltro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelPesquisarPropriedadeLayout.setVerticalGroup(
@@ -80,7 +94,8 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
                 .addGroup(jPanelPesquisarPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelFiltrar)
-                    .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFiltrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addGap(1, 1, 1))
@@ -132,9 +147,20 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
+        //TODO Validações seriam colocadas aqui.
+        LinkedList<Propriedade> listaPropriedades = ciInterface.getCiPropriedade().filtroProdutores((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
+        JTableUtil.limparTabela(jTablePropriedades);
+        
+        listaPropriedades.forEach((propriedade) -> {
+            JTableUtil.addLinha(jTablePropriedades, propriedade.toArray() );
+        });
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JPanel jPanel1;

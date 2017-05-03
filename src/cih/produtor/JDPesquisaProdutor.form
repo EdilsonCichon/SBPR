@@ -61,9 +61,9 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jComboBoxFiltro" min="-2" pref="89" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jTextFieldFiltro" min="-2" pref="259" max="-2" attributes="0"/>
+                          <Component id="jTextFieldFiltro" min="-2" pref="271" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButtonFiltrar" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonFiltrar" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -160,7 +160,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="jButtonFiltrar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="\ud83d\udd0d" containsInvalidXMLChars="true"/>
+            <Property name="text" type="java.lang.String" value="..."/>
             <Property name="toolTipText" type="java.lang.String" value="Filtrar"/>
           </Properties>
           <Events>

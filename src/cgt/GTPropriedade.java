@@ -7,6 +7,7 @@ package cgt;
 
 import cdp.Propriedade;
 import cgd.GDPropriedade;
+import java.util.LinkedList;
 
 public class GTPropriedade {
     
@@ -38,4 +39,8 @@ public class GTPropriedade {
         gdPropriedade.excluir();
         return 0;
     } 
+    
+    public LinkedList<Propriedade> filtrarProdutores(String colunaFiltro, String valorFiltro) {
+        return gdPropriedade.filtrar(colunaFiltro, valorFiltro);
+    }
 }

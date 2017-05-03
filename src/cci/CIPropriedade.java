@@ -1,10 +1,12 @@
 package cci;
 
 import cci.util.Constante;
+import cdp.Propriedade;
 import cgt.GTPropriedade;
 import javax.swing.JFrame;
 import cih.propriedade.JDCadastroPropriedade;
 import cih.propriedade.JDPesquisaPropriedade;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 public class CIPropriedade {
@@ -45,8 +47,7 @@ public class CIPropriedade {
             cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, responsavel);
             cadastroPropriedade.setVisible(true);
     }
-    
-    
+        
     public boolean cadastrarPropriedade(String responsavel, String nome, String referencia){
         
         try{   
@@ -70,5 +71,9 @@ public class CIPropriedade {
     public void excluirPropriedade(){
         int i = gtPropriedade.excluirPropriedade();
         JOptionPane.showMessageDialog(null, "Propriedade excluída com sucesso");
-    }    
+    }
+    
+    public LinkedList<Propriedade> filtroProdutores(String colunaFiltro, String filtro) {
+        return gtPropriedade.filtrarProdutores(colunaFiltro, filtro);
+    }
 }
