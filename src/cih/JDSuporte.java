@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import services.EnvioEmail;
+import cgt.util.EnvioEmail;
 
 public class JDSuporte extends javax.swing.JDialog {
     
