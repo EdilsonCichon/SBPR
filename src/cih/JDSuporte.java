@@ -121,8 +121,9 @@ public class JDSuporte extends javax.swing.JDialog {
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
         try {
-            new EnvioEmail(jTextFieldEmail.getText(), jTextAreaMensagem.getText(), jTextFieldTelefone.getText());
+            ciInterface.getCiGeral().enviarEmail(jTextFieldEmail.getText(), jTextAreaMensagem.getText(), jTextFieldTelefone.getText());
             JOptionPane.showMessageDialog(this, "Aguarde e confie que nosso suporte entrará em contato! ;)");
+            this.dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao enviar o e-mail: " + ex.getMessage());
         }
