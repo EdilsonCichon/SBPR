@@ -1,7 +1,7 @@
 package cih;
 
 import cci.CIInterface;
-import cci.util.Constante;
+import cci.util.Cenario;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JFrame;
@@ -10,13 +10,13 @@ public class JPServico extends javax.swing.JPanel {
 
     private CIInterface ciInterface;
     private JFrame pai;
-    private int codInicio;
+    private int MODULO;
     
-    public JPServico(JFrame pai, int num, CIInterface ciInterface) {
+    public JPServico(JFrame pai, int MODULO, CIInterface ciInterface) {
         initComponents();
         this.ciInterface = ciInterface;
         this.pai = pai;
-        this.codInicio = num;
+        this.MODULO = MODULO;
         this.setBorder(BorderFactory.createTitledBorder("Gerenciar Serviços"));
         ciInterface.iniciarServico(this);
     }
@@ -76,23 +76,23 @@ public class JPServico extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, Constante.AGENDAR);
+        ciInterface.identificarModulo(pai, MODULO, Cenario.AGENDAR);
     }//GEN-LAST:event_jButtonAgendarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, Constante.ALTERAR);
+        ciInterface.identificarModulo(pai, MODULO, Cenario.ALTERAR);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, Constante.CONSULTAR);
+        ciInterface.identificarModulo(pai, MODULO, Cenario.CONSULTAR);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     private void jButtonConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluirActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, Constante.CONCLUIR);
+        ciInterface.identificarModulo(pai, MODULO, Cenario.CONCLUIR);
     }//GEN-LAST:event_jButtonConcluirActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        ciInterface.identificarInicio(pai, codInicio, Constante.CANCELAR);
+        ciInterface.identificarModulo(pai, MODULO, Cenario.CANCELAR);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public void setIconAgendar(Icon icone) {

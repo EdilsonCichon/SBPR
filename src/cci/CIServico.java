@@ -1,6 +1,6 @@
 package cci;
 
-import cci.util.Constante;
+import cci.util.Cenario;
 import cgt.GTServico;
 import javax.swing.JFrame;
 import cih.servico.JDCadastroServico;
@@ -16,21 +16,21 @@ public class CIServico {
         gtServico = new GTServico();
     }
     
-     public void gerenciarServico(int codCrud, JFrame pai) {
+     public void gerenciarServico(int CENARIO, JFrame pai) {
 
-        if (codCrud == Constante.AGENDAR) {
+        if (CENARIO == Cenario.AGENDAR) {
             JDCadastroServico agendarServico = new JDCadastroServico(pai, true, ciInterface);
             agendarServico.setVisible(true);
-        } else if (codCrud == Constante.ALTERAR) {
+        } else if (CENARIO == Cenario.ALTERAR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
-        } else if (codCrud == Constante.CONSULTAR) {
+        } else if (CENARIO == Cenario.CONSULTAR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
-        } else if (codCrud == Constante.CONCLUIR) {
+        } else if (CENARIO == Cenario.CONCLUIR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
-        } else if (codCrud == Constante.CANCELAR) {
+        } else if (CENARIO == Cenario.CANCELAR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
             consultarServico.setVisible(true);
         }

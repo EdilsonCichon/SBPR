@@ -1,9 +1,9 @@
 package cci;
 
-import cci.util.Constante;
-import javax.swing.JFrame;
 import cih.JPCrud;
 import cih.JPServico;
+import cci.util.Modulo;
+import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
@@ -47,17 +47,17 @@ public class CIInterface{
         });
     }
     
-    public void identificarInicio(JFrame pai, int codInicio, int codCrud) {
+    public void identificarModulo(JFrame pai, int MODULO, int CENARIO) {
 
-        switch (codInicio) {
+        switch (MODULO) {
 
-            case Constante.SERVICO: ciServico.gerenciarServico(codCrud, pai); break;
-            case Constante.PRODUTOR: ciProdutor.gerenciarProdutor(codCrud, pai); break;
-            case Constante.PROPRIEDADE: ciPropriedade.gerenciarPropriedade(codCrud, pai); break;
-            case Constante.MAQUINA: ciMaquina.gerenciarMaquina(codCrud, pai); break;
-            case Constante.FUNCIONARIO: ciFuncionario.gerenciarFuncionario(codCrud, pai); break;
-            case Constante.TIPO_SERVICO: ciTipoServico.gerenciarTipoServico(codCrud, pai); break;
-            case Constante.TIPO_MAQUINA: ciTipoMaquina.gerenciarTipoMaquina(codCrud, pai); break;
+            case Modulo.SERVICO: ciServico.gerenciarServico(CENARIO, pai); break;
+            case Modulo.PRODUTOR: ciProdutor.gerenciarProdutor(CENARIO, pai); break;
+            case Modulo.PROPRIEDADE: ciPropriedade.gerenciarPropriedade(CENARIO, pai); break;
+            case Modulo.MAQUINA: ciMaquina.gerenciarMaquina(CENARIO, pai); break;
+            case Modulo.FUNCIONARIO: ciFuncionario.gerenciarFuncionario(CENARIO, pai); break;
+            case Modulo.TIPO_SERVICO: ciTipoServico.gerenciarTipoServico(CENARIO, pai); break;
+            case Modulo.TIPO_MAQUINA: ciTipoMaquina.gerenciarTipoMaquina(CENARIO, pai); break;
             default: break;
         }
     }
@@ -67,14 +67,14 @@ public class CIInterface{
         return icone;
     }
     
-     public void iniciarCrud(int codInicio, JPCrud crud) {
-        switch (codInicio) {
-            case Constante.PRODUTOR: setarAtributosCrud(crud, "Produtores", "produtor"); break;
-            case Constante.PROPRIEDADE: setarAtributosCrud(crud, "Propriedades", "propriedade"); break;
-            case Constante.MAQUINA: setarAtributosCrud(crud, "Máquinas", "maquina"); break;
-            case Constante.FUNCIONARIO: setarAtributosCrud(crud, "Funcionários", "funcionario"); break;
-            case Constante.TIPO_SERVICO: setarAtributosCrud(crud, "Tipos de Serviços", "tipo-servico"); break;
-            case Constante.TIPO_MAQUINA: setarAtributosCrud(crud, "Tipos de Máquinas", "tipo-maquina"); break;
+     public void iniciarCrud(int MODULO, JPCrud crud) {
+        switch (MODULO) {
+            case Modulo.PRODUTOR: setarAtributosCrud(crud, "Produtores", "produtor"); break;
+            case Modulo.PROPRIEDADE: setarAtributosCrud(crud, "Propriedades", "propriedade"); break;
+            case Modulo.MAQUINA: setarAtributosCrud(crud, "Máquinas", "maquina"); break;
+            case Modulo.FUNCIONARIO: setarAtributosCrud(crud, "Funcionários", "funcionario"); break;
+            case Modulo.TIPO_SERVICO: setarAtributosCrud(crud, "Tipos de Serviços", "tipo-servico"); break;
+            case Modulo.TIPO_MAQUINA: setarAtributosCrud(crud, "Tipos de Máquinas", "tipo-maquina"); break;
             default: break;
         }
     }

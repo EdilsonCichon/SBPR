@@ -3,7 +3,7 @@ package cih.produtor;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cci.CIInterface;
-import cci.util.Constante;
+import cci.util.Cenario;
 import cci.util.JTableUtil;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -13,12 +13,12 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private JFrame pai;
-    private int cenario;
+    private int CENARIO;
     private Produtor produtor;
 
-    public JDCadastroProdutor(java.awt.Frame pai, boolean modal, CIInterface ciInterface, int cenario, Produtor produtor) {
+    public JDCadastroProdutor(java.awt.Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtor) {
         super(pai, modal);
-        this.cenario = cenario;
+        this.CENARIO = CENARIO;
         this.produtor = produtor; // Informe NULL caso o cenário seja cadastro.
         this.ciInterface = ciInterface;
         this.pai = (JFrame) pai;
@@ -338,19 +338,19 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
             
-            if(cenario == Constante.CADASTRAR){
+            if(CENARIO == Cenario.CADASTRAR){
                 boolean resposta = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
                 habilitarBotoes(resposta);
                 
-            } else if (cenario == Constante.ALTERAR){
+            } else if (CENARIO == Cenario.ALTERAR){
                 boolean resposta = ciInterface.getCiProdutor().alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
                 if(resposta)
                     this.dispose();
                 
-            } else if(cenario == Constante.CONSULTAR){
+            } else if(CENARIO == Cenario.CONSULTAR){
                 this.dispose();
                 
-            } else if(cenario == Constante.EXCLUIR){
+            } else if(CENARIO == Cenario.EXCLUIR){
                 boolean resposta = ciInterface.getCiProdutor().excluirProdutor(produtor);
                 if(resposta)
                     this.dispose();
@@ -378,10 +378,10 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
 
     public void identificarCenario() {
         
-        if ( cenario == Constante.CADASTRAR ) {
+        if ( CENARIO == Cenario.CADASTRAR ) {
             habilitarBotoes(false);
         }
-        else if ( cenario == Constante.ALTERAR ) {
+        else if ( CENARIO == Cenario.ALTERAR ) {
             modoSomenteLeitura(false);
             setarCamposComInstancia(produtor);
         }
@@ -429,13 +429,13 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }
     
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-        ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(null, pai, Constante.ADICIONAR);
+        ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(null, pai, Cenario.ADICIONAR);
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         try {
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, Constante.ALTERAR);
+            ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, Cenario.ALTERAR);
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: "+ e.getMessage(), "Aviso", JOptionPane.INFORMATION_MESSAGE);

@@ -2,7 +2,7 @@
 package cih.propriedade;
 
 import cci.CIInterface;
-import cci.util.Constante;
+import cci.util.Cenario;
 import cdp.Propriedade;
 import cci.util.JTableUtil;
 import java.awt.Frame;
@@ -15,13 +15,13 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private JFrame pai;
-    private int cenario;
+    private int CENARIO;
     
-    public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int cenario) {
+    public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
         this.ciInterface = ciInterface;
         this.pai = (JFrame) parent;
-        this.cenario = cenario;
+        this.CENARIO = CENARIO;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
@@ -69,6 +69,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
             }
         });
         jScrollPanePropriedades.setViewportView(jTablePropriedades);
+
         jButtonFiltrar.setText("...");
         jButtonFiltrar.setToolTipText("Buscar");
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +77,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
                 jButtonFiltrarActionPerformed(evt);
             }
         });
+
         javax.swing.GroupLayout jPanelPesquisarPropriedadeLayout = new javax.swing.GroupLayout(jPanelPesquisarPropriedade);
         jPanelPesquisarPropriedade.setLayout(jPanelPesquisarPropriedadeLayout);
         jPanelPesquisarPropriedadeLayout.setHorizontalGroup(
@@ -91,8 +93,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
+                        .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelPesquisarPropriedadeLayout.setVerticalGroup(
@@ -181,15 +182,15 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         try {
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            if ( cenario == Constante.ALTERAR ) {
+            if ( CENARIO == Cenario.ALTERAR ) {
                 ciInterface.getCiPropriedade().telaAlterarPropriedade((Frame)getParent(), propriedade);
                 this.dispose();
             }
-            if ( cenario == Constante.CONSULTAR ) {
+            if ( CENARIO == Cenario.CONSULTAR ) {
                 //CARTÃO DO MOISEYS (VULGO CRYSTIAN)
                 //ciInterface.getCiProdutor().consultarProdutor(produtor, parent);
             }
-            if ( cenario == Constante.EXCLUIR ) {
+            if ( CENARIO == Cenario.EXCLUIR ) {
                 // OUTRO CARTÃO...
                 //ciInterface.getCiProdutor().excluirProdutor(produtor);
             }

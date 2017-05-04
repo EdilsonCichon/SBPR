@@ -1,7 +1,7 @@
 package cih.produtor;
 
 import cdp.Produtor;
-import cci.util.Constante;
+import cci.util.Cenario;
 import cci.CIInterface;
 import cci.util.JTableUtil;
 import java.awt.Frame;
@@ -12,13 +12,13 @@ import javax.swing.JOptionPane;
 public class JDPesquisaProdutor extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
-    private int cenario;
+    private int CENARIO;
     private Frame pai;
     private Produtor produtorSelecionado;
 
-    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int cenario) {
+    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(pai, modal);
-        this.cenario = cenario;
+        this.CENARIO = CENARIO;
         this.pai = pai;
         this.ciInterface = ciInterface;
         initComponents();
@@ -28,7 +28,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     
     public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int cenario, Produtor produtorSelecionado) {
         super(pai, modal);
-        this.cenario = cenario;
+        this.CENARIO = cenario;
         this.pai = pai;
         this.ciInterface = ciInterface;
         this.produtorSelecionado = produtorSelecionado;
@@ -180,12 +180,12 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
             
             Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
             
-            if(cenario == Constante.CADASTRAR){
+            if(CENARIO == Cenario.CADASTRAR){
                produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
                if(produtorSelecionado != null)
                    this.dispose();      
             }else{
-                 ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtor, pai, cenario);
+                 ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtor, pai, CENARIO);
             }           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);

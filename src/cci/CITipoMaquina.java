@@ -1,6 +1,6 @@
 package cci;
 
-import cci.util.Constante;
+import cci.util.Cenario;
 import javax.swing.JFrame;
 import cgt.GTTipoMaquina;
 import cih.tipoMaquina.JDCadastroTipoMaquina;
@@ -17,19 +17,19 @@ public class CITipoMaquina {
         gtTipoMaquina = new GTTipoMaquina();
     }
     
-    public void gerenciarTipoMaquina(int codCrud, JFrame pai) {
+    public void gerenciarTipoMaquina(int CENARIO, JFrame pai) {
         JDCadastroTipoMaquina cadastroTipoMaquina;
         JDPesquisarTipoMaquina pesquisaTipoMaquina; 
-        if (codCrud == Constante.CADASTRAR) {
+        if (CENARIO == Cenario.CADASTRAR) {
             cadastroTipoMaquina = new JDCadastroTipoMaquina(pai, true, ciInterface);
             cadastroTipoMaquina.setVisible(true);
-        } else if (codCrud > Constante.ALTERAR) {
+        } else if (CENARIO > Cenario.ALTERAR) {
             pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, ciInterface);
             pesquisaTipoMaquina.setVisible(true);
-        }else if (codCrud > Constante.CONSULTAR) {
+        }else if (CENARIO > Cenario.CONSULTAR) {
             pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, ciInterface);
             pesquisaTipoMaquina.setVisible(true);
-        }else if (codCrud > Constante.EXCLUIR) {
+        }else if (CENARIO > Cenario.EXCLUIR) {
             pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, ciInterface);
             pesquisaTipoMaquina.setVisible(true);
         }

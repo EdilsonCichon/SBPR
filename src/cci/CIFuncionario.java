@@ -1,6 +1,6 @@
 package cci;
 
-import cci.util.Constante;
+import cci.util.Cenario;
 import cgt.GTFuncionario;
 import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
@@ -16,21 +16,21 @@ public class CIFuncionario {
         gtFuncionario = new GTFuncionario();
     }
     
-    public void gerenciarFuncionario(int codCrud, JFrame pai) {
+    public void gerenciarFuncionario(int CENARIO, JFrame pai) {
         
         JDCadastroFuncionario cadastroFuncionario;
         JDPesquisaFuncionario pesquisaFuncionario;
 
-        if (codCrud == Constante.CADASTRAR) {
+        if (CENARIO == Cenario.CADASTRAR) {
             cadastroFuncionario = new JDCadastroFuncionario(pai, true, ciInterface);
             cadastroFuncionario.setVisible(true);
-        } else if (codCrud > Constante.ALTERAR) {
+        } else if (CENARIO > Cenario.ALTERAR) {
             pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface);
             pesquisaFuncionario.setVisible(true);
-        }else if (codCrud == Constante.CONSULTAR) {
+        }else if (CENARIO == Cenario.CONSULTAR) {
             pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface);
             pesquisaFuncionario.setVisible(true);
-        } else if (codCrud == Constante.EXCLUIR) {
+        } else if (CENARIO == Cenario.EXCLUIR) {
            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface);
             pesquisaFuncionario.setVisible(true);
         }

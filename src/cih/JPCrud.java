@@ -1,21 +1,21 @@
 package cih;
 
-import cci.util.Constante;
+import cci.util.Cenario;
 import cci.CIInterface;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 
 public class JPCrud extends javax.swing.JPanel {
     private JFrame pai;
-    private int codInicio;
+    private int MODULO;
     private CIInterface ciInterface;
    
-    public JPCrud(JFrame pai, int inicio, CIInterface ciInterface) {
+    public JPCrud(JFrame pai, int MODULO, CIInterface ciInterface) {
         initComponents();
         this.pai = pai;
-        this.codInicio = inicio;
+        this.MODULO = MODULO;
         this.ciInterface = ciInterface;
-        this.ciInterface.iniciarCrud(codInicio, this);
+        this.ciInterface.iniciarCrud(MODULO, this);
     }
   
     @SuppressWarnings("unchecked")
@@ -72,19 +72,19 @@ public class JPCrud extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-       ciInterface.identificarInicio(pai, codInicio, Constante.EXCLUIR);
+       ciInterface.identificarModulo(pai, MODULO, Cenario.EXCLUIR);
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-       ciInterface.identificarInicio(pai, codInicio, Constante.CADASTRAR);
+       ciInterface.identificarModulo(pai, MODULO, Cenario.CADASTRAR);
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-       ciInterface.identificarInicio(pai, codInicio, Constante.ALTERAR);
+       ciInterface.identificarModulo(pai, MODULO, Cenario.ALTERAR);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-       ciInterface.identificarInicio(pai, codInicio, Constante.CONSULTAR);
+       ciInterface.identificarModulo(pai, MODULO, Cenario.CONSULTAR);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     public void setIconAlterar(Icon icone) {

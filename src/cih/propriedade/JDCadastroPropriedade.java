@@ -1,7 +1,7 @@
 package cih.propriedade;
 
 import cci.CIInterface;
-import cci.util.Constante;
+import cci.util.Cenario;
 import cdp.Produtor;
 import cdp.Propriedade;
 import java.awt.Frame;
@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
     
-    private int cenario;
+    private int CENARIO;
     private JFrame pai;
     private CIInterface ciInterface;
     private Propriedade propriedade;
     Produtor produtorSelecionado;
     
-    public JDCadastroPropriedade(Frame parent, boolean modal, CIInterface ciInterface, int cenario, Propriedade propriedade) {
+    public JDCadastroPropriedade(Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Propriedade propriedade) {
         super(parent, modal);
         this.ciInterface = ciInterface;
         initComponents();
@@ -25,7 +25,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());  
         this.propriedade = propriedade;
-        this.cenario = cenario;
+        this.CENARIO = CENARIO;
         identificarCenario();
     }
     
@@ -189,17 +189,17 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
 
         try {
             validarCampos(nome, referencia);
-            if ( cenario == Constante.CADASTRAR ) {
+            if ( CENARIO == Cenario.CADASTRAR ) {
                 boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
                 if ( resposta )
                     this.dispose(); 
-            } else if ( cenario == Constante.ALTERAR ) {
+            } else if ( CENARIO == Cenario.ALTERAR ) {
                 boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedade);
                 if ( alterado )
                     this.dispose();
-            } else if ( cenario == Constante.CONSULTAR ) {
+            } else if ( CENARIO == Cenario.CONSULTAR ) {
                 //CARTÃO CONSULTAR
-            } else if ( cenario == Constante.EXCLUIR ) {
+            } else if ( CENARIO == Cenario.EXCLUIR ) {
                 //CARTÃO EXCLUIR
             }
         }catch (Exception e){
@@ -217,26 +217,26 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonPesquisarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutorActionPerformed
-        produtorSelecionado = ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, cenario); 
+        produtorSelecionado = ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, CENARIO); 
         jTextFieldResponsavel.setText("PRODUTOR NULO");
         if(produtorSelecionado != null)
             jTextFieldResponsavel.setText(produtorSelecionado.getNome());
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
     private void identificarCenario() {
-        if ( cenario == Constante.CONSULTAR ) {
+        if ( CENARIO == Cenario.CONSULTAR ) {
            // CARTÃO CONSULTAR
         } 
-        else if ( cenario == Constante.ALTERAR ) {
+        else if ( CENARIO == Cenario.ALTERAR ) {
             setarCamposComInstancia();
         }
-        else if ( cenario == Constante.CADASTRAR ) {
+        else if ( CENARIO == Cenario.CADASTRAR ) {
             jButtonPesquisarProdutor.setEnabled(true);
         }
-        else if ( cenario == Constante.EXCLUIR ) {
+        else if ( CENARIO == Cenario.EXCLUIR ) {
             // CARTÃO EXCLUIR
         }
-        else if ( cenario == Constante.ADICIONAR ) {
+        else if ( CENARIO == Cenario.ADICIONAR ) {
             jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
         }
     }
