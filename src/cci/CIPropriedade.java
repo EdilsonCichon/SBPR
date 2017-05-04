@@ -1,20 +1,22 @@
 package cci;
 
-import cci.util.Constante;
+import cdp.Produtor;
 import cdp.Propriedade;
 import cgt.GTPropriedade;
-import javax.swing.JFrame;
+import cci.util.Constante;
 import cih.propriedade.JDCadastroPropriedade;
 import cih.propriedade.JDPesquisaPropriedade;
 import java.awt.Frame;
+import javax.swing.JFrame;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 public class CIPropriedade {
     
     private CIInterface ciInterface;
     private GTPropriedade gtPropriedade;
-    JDCadastroPropriedade cadastroPropriedade;
-    JDPesquisaPropriedade pesquisaPropriedade;
+    private JDCadastroPropriedade cadastroPropriedade;
+    private JDPesquisaPropriedade pesquisaPropriedade;
         
     public CIPropriedade(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -24,7 +26,7 @@ public class CIPropriedade {
     public void gerenciarPropriedade(int cenario, JFrame pai) {
         
         if (cenario == Constante.CADASTRAR) {
-            cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, cenario, null);
+            cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, Constante.CADASTRAR, null);
             cadastroPropriedade.setVisible(true);
         } else{
             pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface, cenario);
@@ -37,9 +39,8 @@ public class CIPropriedade {
         cadastroPropriedade.setVisible(true);
     }
     
-    
-    public boolean cadastrarPropriedade(String responsavel, String nome, String referencia){
-        
+    public boolean cadastrarPropriedade(Produtor responsavel, String nome, String referencia){
+
         try{   
           gtPropriedade.cadastrarPropriedade(responsavel, nome, referencia);
           JOptionPane.showMessageDialog(null, "Cadastrada com sucesso!");
@@ -50,8 +51,14 @@ public class CIPropriedade {
         }    
     }
     
-    public void alterarPropriedade(){
-        gtPropriedade.alterarPropriedade();
+    public void telaAlterarPropriedade(Frame pai, Propriedade propriedade) {
+        JDCadastroPropriedade cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, Constante.ALTERAR, propriedade);
+        cadastroPropriedade.setVisible(true);
+        //alterar título do Frame p/ "Alterar Propriedade"
+    }
+    
+    public void alterarPropriedade(Propriedade propriedade) {
+        gtPropriedade.alterarPropriedade(propriedade);
     }
     
     public void consultarPropriedade(){
@@ -61,5 +68,9 @@ public class CIPropriedade {
     public void excluirPropriedade(){
         gtPropriedade.excluirPropriedade();
         JOptionPane.showMessageDialog(null, "Propriedade excluída com sucesso");
-    }    
+    }
+    
+    public LinkedList<Propriedade> filtroProdutores(String colunaFiltro, String filtro) {
+        return gtPropriedade.filtrarProdutores(colunaFiltro, filtro);
+    }
 }

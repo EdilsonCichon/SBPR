@@ -1,35 +1,34 @@
 package cih.propriedade;
 
-import javax.swing.ImageIcon;
-
 import cci.CIInterface;
 import cci.util.Constante;
 import cdp.Produtor;
 import cdp.Propriedade;
+import java.awt.Frame;
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
-
-    private CIInterface ciInterface;
-    private JFrame pai;
+    
     private int cenario;
+    private JFrame pai;
+    private CIInterface ciInterface;
     private Propriedade propriedade;
     Produtor produtorSelecionado;
-
-    public JDCadastroPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int cenario, Propriedade propriedade) {
+    
+    public JDCadastroPropriedade(Frame parent, boolean modal, CIInterface ciInterface, int cenario, Propriedade propriedade) {
         super(parent, modal);
         this.ciInterface = ciInterface;
-        this.pai = (JFrame) parent;
-        this.cenario = cenario;
-        this.propriedade = propriedade;
         initComponents();
         this.setLocationRelativeTo(parent);
         ImageIcon icone = ciInterface.setarIconesJanela();
-        setIconImage(icone.getImage());
+        setIconImage(icone.getImage());  
+        this.propriedade = propriedade;
+        this.cenario = cenario;
         identificarCenario();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -190,12 +189,11 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
 
         try {
             validarCampos(nome, referencia);
-            boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(responsavel, nome, referencia);
-            if (resposta) {
+            boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
+            if(resposta)
                 this.dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -215,40 +213,35 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             jTextFieldResponsavel.setText(produtorSelecionado.getNome());
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
-    public void identificarCenario() {
-        
-        System.out.println(cenario);
-        if (propriedade != null) { 
-            System.out.println("ENTREI NO IF");
-            if (cenario == Constante.ADICIONAR) {
-                jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
-
-            } else if (cenario == Constante.CADASTRAR) {
-                jButtonPesquisarProdutor.setEnabled(true);
-
-            } else if (cenario == Constante.ALTERAR) {
-                setarCamposComInstancia();
-                modoSomenteLeitura(false);
-
-            } else { // CONSULTAR OU EXCLUIR
-  
-            }
-        }else{
+    private void identificarCenario() {
+        if ( cenario == Constante.CONSULTAR ) {
+           // CARTÃO CONSULTAR
+        } 
+        else if ( cenario == Constante.ALTERAR ) {
+            setarCamposComInstancia();
+        }
+        else if ( cenario == Constante.CADASTRAR ) {
             jButtonPesquisarProdutor.setEnabled(true);
         }
+        else if ( cenario == Constante.EXCLUIR ) {
+            // CARTÃO EXCLUIR
+        }
+        else if ( cenario == Constante.ADICIONAR ) {
+            jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
+        }
     }
-
+    
     public void setarCamposComInstancia() {
         jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
         jTextFieldNomePropriedade.setText(propriedade.getNome_propriedade());
         jTextAreaReferencia.setText(propriedade.getReferencia());
     }
-
+    
     public void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jTextFieldNomePropriedade.setEditable(condicao);
-        //jTextFieldResponsavel.setEditable(condicao);
-        //jButtonPesquisarProdutor.setEnabled(condicao);
+        jTextFieldResponsavel.setEditable(condicao);
+        jButtonPesquisarProdutor.setEnabled(condicao);
         jButtonConfirmar.setEnabled(condicao);
         jButtonLimpar.setEnabled(condicao);
     }

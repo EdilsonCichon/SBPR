@@ -1,13 +1,13 @@
 package cih.produtor;
 
-import cci.CIInterface;
+import cdp.Produtor;
 import cdp.Propriedade;
+import cci.CIInterface;
 import cci.util.Constante;
 import cci.util.JTableUtil;
-import cdp.Produtor;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class JDCadastroProdutor extends javax.swing.JDialog {
     
@@ -378,12 +378,15 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
 
     public void identificarCenario() {
         
-        if(cenario == Constante.CADASTRAR){
+        if ( cenario == Constante.CADASTRAR ) {
             habilitarBotoes(false);
-        }else if(cenario == Constante.ALTERAR){    
+        }
+        else if ( cenario == Constante.ALTERAR ) {
             modoSomenteLeitura(false);
             setarCamposComInstancia(produtor);
-        }else{  // CONSULTAR OU EXCLUIR
+        }
+        else {
+            // CONSULTAR OU EXCLUIR
             modoSomenteLeitura(true);
             setarCamposComInstancia(produtor);
         }
@@ -414,9 +417,9 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         if ( produtor.getSexo() == 'M' )
             jRadioButtonMasculino.setSelected(true);
         
-        for (Propriedade propriedade : produtor.getPropriedades()) {
+        produtor.getPropriedades().forEach((propriedade) -> {
             JTableUtil.addLinha(jTablePropriedades, propriedade.toArray());
-        }
+        });
     }
     
     public void habilitarBotoes(boolean resposta){
@@ -426,7 +429,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }
     
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-       ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(null, pai, Constante.ADICIONAR);
+        ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(null, pai, Constante.ADICIONAR);
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
@@ -434,7 +437,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         try {
             
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            ciInterface.getCiPropriedade().gerenciarPropriedade(Constante.ALTERAR, pai);
+            // Antes das alterações do Moiseys estava assim...
+            // ciInterface.getCiPropriedade().gerenciarPropriedade(Constante.ALTERAR, pai);
+            
+            // Com as alterações do Moiseys vai ficar assim...
+            // ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(null, pai, Constante.ALTERAR);
             
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);

@@ -7,10 +7,11 @@ public class Propriedade {
     private String referencia;
     private Produtor responsavel;
 
-    public Propriedade(int id, String nome_propriedade, String referencia) {
+    public Propriedade(int id, String nome_propriedade, String referencia, Produtor responsavel) {
         this.id = id;
         this.nome_propriedade = nome_propriedade;
         this.referencia = referencia;
+        this.responsavel = responsavel;
     }
 
     public Propriedade(String nome_propriedade, String referencia, Produtor responsavel) {
@@ -41,6 +42,6 @@ public class Propriedade {
     }
     
     public Object[] toArray() {
-        return new Object[] { this, referencia };
+        return new Object[] { this, referencia, responsavel };
     }
 }
