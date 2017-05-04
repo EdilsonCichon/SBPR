@@ -189,9 +189,19 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
 
         try {
             validarCampos(nome, referencia);
-            boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
-            if(resposta)
-                this.dispose();
+            if ( cenario == Constante.CADASTRAR ) {
+                boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
+                if ( resposta )
+                    this.dispose(); 
+            } else if ( cenario == Constante.ALTERAR ) {
+                boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedade);
+                if ( alterado )
+                    this.dispose();
+            } else if ( cenario == Constante.CONSULTAR ) {
+                //CARTÃO CONSULTAR
+            } else if ( cenario == Constante.EXCLUIR ) {
+                //CARTÃO EXCLUIR
+            }
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

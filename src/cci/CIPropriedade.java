@@ -9,6 +9,7 @@ import cih.propriedade.JDPesquisaPropriedade;
 import java.awt.Frame;
 import javax.swing.JFrame;
 import java.util.LinkedList;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class CIPropriedade {
@@ -35,8 +36,7 @@ public class CIPropriedade {
     }
     
     public void instanciarTelaCadastroPropriedade(Propriedade propriedade, Frame pai, int cenario) {
-        cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, cenario, propriedade);
-        cadastroPropriedade.setVisible(true);
+        getInstanciaJDCadProp(pai, true, cenario, propriedade).setVisible(true);
     }
     
     public boolean cadastrarPropriedade(Produtor responsavel, String nome, String referencia){
@@ -57,8 +57,15 @@ public class CIPropriedade {
         //alterar título do Frame p/ "Alterar Propriedade"
     }
     
-    public void alterarPropriedade(Propriedade propriedade) {
-        gtPropriedade.alterarPropriedade(propriedade);
+    public boolean alterarPropriedade(Propriedade propriedade) {
+        try {
+            gtPropriedade.alterarPropriedade(propriedade);
+            JOptionPane.showMessageDialog(cadastroPropriedade, "Alterada com sucesso!");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(cadastroPropriedade, "Erro ao alterar: " + e.getMessage());
+            return false;
+        }  
     }
     
     public void consultarPropriedade(){
@@ -72,5 +79,17 @@ public class CIPropriedade {
     
     public LinkedList<Propriedade> filtroProdutores(String colunaFiltro, String filtro) {
         return gtPropriedade.filtrarProdutores(colunaFiltro, filtro);
+    }
+    
+    private JDCadastroPropriedade getInstanciaJDCadProp(Frame pai, boolean ehModal, int cenario, Propriedade propriedade) {
+        if ( cadastroPropriedade == null )
+            cadastroPropriedade = new JDCadastroPropriedade(pai, ehModal, ciInterface, cenario, propriedade);
+        return cadastroPropriedade;
+    }
+    
+    private JDPesquisaPropriedade getInstanciaJDPesqProp(Frame pai, boolean ehModal, int cenario, Propriedade propriedade) {
+        if ( pesquisaPropriedade == null )
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, ehModal, ciInterface, cenario);
+        return pesquisaPropriedade;
     }
 }
