@@ -433,19 +433,13 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-         
         try {
-            
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            // Antes das alterações do Moiseys estava assim...
-            // ciInterface.getCiPropriedade().gerenciarPropriedade(Constante.ALTERAR, pai);
+            ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, Constante.ALTERAR);
             
-            // Com as alterações do Moiseys vai ficar assim...
-            // ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(null, pai, Constante.ALTERAR);
-            
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);
-        }        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro: "+ e.getMessage(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed

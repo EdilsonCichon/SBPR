@@ -4,7 +4,6 @@ import cci.CIInterface;
 import cci.util.Constante;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class JPServico extends javax.swing.JPanel {
