@@ -5,20 +5,22 @@ import cci.CIInterface;
 import cci.util.Constante;
 import cdp.Propriedade;
 import cci.util.JTableUtil;
-import cdp.Produtor;
 import java.awt.Frame;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 public class JDPesquisaPropriedade extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private JFrame pai;
     private int cenario;
     
     public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int cenario) {
         super(parent, modal);
         this.ciInterface = ciInterface;
+        this.pai = (JFrame) parent;
         this.cenario = cenario;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
@@ -67,7 +69,6 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
             }
         });
         jScrollPanePropriedades.setViewportView(jTablePropriedades);
-
         jButtonFiltrar.setText("...");
         jButtonFiltrar.setToolTipText("Buscar");
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,14 +76,14 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
                 jButtonFiltrarActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout jPanelPesquisarPropriedadeLayout = new javax.swing.GroupLayout(jPanelPesquisarPropriedade);
         jPanelPesquisarPropriedade.setLayout(jPanelPesquisarPropriedadeLayout);
         jPanelPesquisarPropriedadeLayout.setHorizontalGroup(
             jPanelPesquisarPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPesquisarPropriedadeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelPesquisarPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelPesquisarPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPanePropriedades)
                     .addGroup(jPanelPesquisarPropriedadeLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addGap(10, 10, 10)

@@ -1,12 +1,13 @@
 package cci;
 
-import cci.util.Constante;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cgt.GTPropriedade;
+import cci.util.Constante;
 import cih.propriedade.JDCadastroPropriedade;
 import cih.propriedade.JDPesquisaPropriedade;
 import java.awt.Frame;
+import javax.swing.JFrame;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -14,28 +15,32 @@ public class CIPropriedade {
     
     private CIInterface ciInterface;
     private GTPropriedade gtPropriedade;
-
+    private JDCadastroPropriedade cadastroPropriedade;
+    private JDPesquisaPropriedade pesquisaPropriedade;
+        
     public CIPropriedade(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
         gtPropriedade = new GTPropriedade();
     }
     
-    public void gerenciarPropriedade(int codCrud, Frame pai) {
+    public void gerenciarPropriedade(int cenario, JFrame pai) {
         
-        JDCadastroPropriedade cadastroPropriedade;
-        JDPesquisaPropriedade pesquisaPropriedade;
-        
-        if (codCrud == Constante.CADASTRAR) {
+        if (cenario == Constante.CADASTRAR) {
             cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, Constante.CADASTRAR, null);
             cadastroPropriedade.setVisible(true);
-        } else {
-            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface, codCrud);
+        } else{
+            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface, cenario);
             pesquisaPropriedade.setVisible(true);
         }
     }
     
+    public void instanciarTelaCadastroPropriedade(Propriedade propriedade, Frame pai, int cenario) {
+        cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, cenario, propriedade);
+        cadastroPropriedade.setVisible(true);
+    }
+    
     public boolean cadastrarPropriedade(Produtor responsavel, String nome, String referencia){
-        
+
         try{   
           gtPropriedade.cadastrarPropriedade(responsavel, nome, referencia);
           JOptionPane.showMessageDialog(null, "Cadastrada com sucesso!");
@@ -57,11 +62,11 @@ public class CIPropriedade {
     }
     
     public void consultarPropriedade(){
-        int i = gtPropriedade.consultarPropriedade();
+        gtPropriedade.consultarPropriedade();
     }
     
     public void excluirPropriedade(){
-        int i = gtPropriedade.excluirPropriedade();
+        gtPropriedade.excluirPropriedade();
         JOptionPane.showMessageDialog(null, "Propriedade excluída com sucesso");
     }
     

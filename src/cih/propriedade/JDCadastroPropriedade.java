@@ -1,14 +1,12 @@
 package cih.propriedade;
 
-import javax.swing.ImageIcon;
-
 import cci.CIInterface;
 import cci.util.Constante;
-import cci.util.JTableUtil;
 import cdp.Produtor;
 import cdp.Propriedade;
 import java.awt.Frame;
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
@@ -17,6 +15,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
     private JFrame pai;
     private CIInterface ciInterface;
     private Propriedade propriedade;
+    Produtor produtorSelecionado;
     
     public JDCadastroPropriedade(Frame parent, boolean modal, CIInterface ciInterface, int cenario, Propriedade propriedade) {
         super(parent, modal);
@@ -67,6 +66,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jScrollPaneReferencia.setViewportView(jTextAreaReferencia);
 
         jButtonPesquisarProdutor.setText("...");
+        jButtonPesquisarProdutor.setEnabled(false);
         jButtonPesquisarProdutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPesquisarProdutorActionPerformed(evt);
@@ -182,10 +182,11 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        
+
+        String responsavel = jTextFieldResponsavel.getText();
         String nome = jTextFieldNomePropriedade.getText();
         String referencia = jTextAreaReferencia.getText();
-        
+
         try {
             validarCampos(nome, referencia);
             boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
@@ -193,12 +194,12 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                 this.dispose();
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
-        } 
+        }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
         jTextFieldNomePropriedade.setText("");
-        jTextAreaReferencia.setText(""); 
+        jTextAreaReferencia.setText("");
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -206,10 +207,13 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonPesquisarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutorActionPerformed
-        ciInterface.getCiProdutor().gerenciarProdutor(2, pai);
+        produtorSelecionado = ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, cenario); 
+        jTextFieldResponsavel.setText("PRODUTOR NULO");
+        if(produtorSelecionado != null)
+            jTextFieldResponsavel.setText(produtorSelecionado.getNome());
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
-    public void identificarCenario() {
+    private void identificarCenario() {
         if ( cenario == Constante.CONSULTAR ) {
            // CARTÃO CONSULTAR
         } 
@@ -217,10 +221,13 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             setarCamposComInstancia();
         }
         else if ( cenario == Constante.CADASTRAR ) {
-            // CARTÃO CADASTRAR
+            jButtonPesquisarProdutor.setEnabled(true);
         }
         else if ( cenario == Constante.EXCLUIR ) {
             // CARTÃO EXCLUIR
+        }
+        else if ( cenario == Constante.ADICIONAR ) {
+            jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
         }
     }
     
@@ -238,12 +245,13 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jButtonConfirmar.setEnabled(condicao);
         jButtonLimpar.setEnabled(condicao);
     }
-    
-    public void validarCampos(String nome, String referencia) throws Exception{
-        
-        if (nome.equals("") || referencia.equals(""))
+
+    public void validarCampos(String nome, String referencia) throws Exception {
+
+        if (nome.equals("") || referencia.equals("")) {
             throw new Exception("Campos Vazios");
-    } 
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

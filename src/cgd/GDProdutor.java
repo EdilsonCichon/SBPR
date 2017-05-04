@@ -16,7 +16,7 @@ public class GDProdutor {
           
     }
     
-    public void alterar(){
+    public void alterar(Produtor produtor){
        
     }
     
