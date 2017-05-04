@@ -201,7 +201,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                     this.dispose();
                 }
             } else if (CENARIO == Cenario.CONSULTAR) {
-                //CARTÃO CONSULTAR
+                this.dispose();
             } else if (CENARIO == Cenario.EXCLUIR) {
                 //CARTÃO EXCLUIR
             } else if (CENARIO == Cenario.ADICIONAR) {
@@ -237,12 +237,17 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         if (propriedade != null) {
 
             if (propriedade.getResponsavel() != null) {
+                
                 if (CENARIO == Cenario.CONSULTAR) {
-                    // CARTÃO CONSULTAR
+                    setarCamposComInstancia();
+                    modoSomenteLeitura(true);
+                    
                 } else if (CENARIO == Cenario.ALTERAR) {
                     setarCamposComInstancia();
+                    
                 } else if (CENARIO == Cenario.CADASTRAR) {
                     jButtonPesquisarProdutor.setEnabled(true);
+                    
                 } else if (CENARIO == Cenario.EXCLUIR) {
                     // CARTÃO EXCLUIR
                 } else if (CENARIO == Cenario.ADICIONAR) {
@@ -266,8 +271,8 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         condicao = !condicao;
         jTextFieldNomePropriedade.setEditable(condicao);
         jTextFieldResponsavel.setEditable(condicao);
+        jTextAreaReferencia.setEditable(condicao);
         jButtonPesquisarProdutor.setEnabled(condicao);
-        jButtonConfirmar.setEnabled(condicao);
         jButtonLimpar.setEnabled(condicao);
     }
 

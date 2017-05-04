@@ -189,8 +189,8 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
                 ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
             }
             if ( CENARIO == Cenario.CONSULTAR ) {
-                //CARTÃO DO MOISEYS (VULGO CRYSTIAN)
-                //ciInterface.getCiProdutor().consultarProdutor(produtor, parent);
+                
+                ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
             }
             if ( CENARIO == Cenario.EXCLUIR ) {
                 // OUTRO CARTÃO...
