@@ -10,25 +10,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
-    
+
     private int CENARIO;
     private JFrame pai;
     private CIInterface ciInterface;
     private Propriedade propriedade;
     Produtor produtorSelecionado;
-    
+
     public JDCadastroPropriedade(Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Propriedade propriedade) {
         super(parent, modal);
         this.ciInterface = ciInterface;
         initComponents();
         this.setLocationRelativeTo(parent);
         ImageIcon icone = ciInterface.setarIconesJanela();
-        setIconImage(icone.getImage());  
+        setIconImage(icone.getImage());
         this.propriedade = propriedade;
         this.CENARIO = CENARIO;
         identificarCenario();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -189,20 +189,28 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
 
         try {
             validarCampos(nome, referencia);
-            if ( CENARIO == Cenario.CADASTRAR ) {
-                boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
-                if ( resposta )
-                    this.dispose(); 
-            } else if ( CENARIO == Cenario.ALTERAR ) {
-                boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedade);
-                if ( alterado )
+            if (CENARIO == Cenario.CADASTRAR) {
+                Produtor produtorVazio = new Produtor();
+                boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(produtorVazio, nome, referencia);
+                if (resposta) {
                     this.dispose();
-            } else if ( CENARIO == Cenario.CONSULTAR ) {
+                }
+            } else if (CENARIO == Cenario.ALTERAR) {
+                boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedade);
+                if (alterado) {
+                    this.dispose();
+                }
+            } else if (CENARIO == Cenario.CONSULTAR) {
                 //CARTÃO CONSULTAR
-            } else if ( CENARIO == Cenario.EXCLUIR ) {
+            } else if (CENARIO == Cenario.EXCLUIR) {
                 //CARTÃO EXCLUIR
+            } else if (CENARIO == Cenario.ADICIONAR) {
+                boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
+                if (resposta) {
+                    this.dispose();
+                }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
@@ -217,36 +225,43 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonPesquisarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutorActionPerformed
-        produtorSelecionado = ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, CENARIO); 
-        jTextFieldResponsavel.setText("PRODUTOR NULO");
-        if(produtorSelecionado != null)
+        produtorSelecionado = ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, CENARIO);
+        jTextFieldResponsavel.setText("PRODUTOR NULO 2");
+        if (produtorSelecionado != null) {
             jTextFieldResponsavel.setText(produtorSelecionado.getNome());
+        }
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
     private void identificarCenario() {
-        if ( CENARIO == Cenario.CONSULTAR ) {
-           // CARTÃO CONSULTAR
-        } 
-        else if ( CENARIO == Cenario.ALTERAR ) {
-            setarCamposComInstancia();
-        }
-        else if ( CENARIO == Cenario.CADASTRAR ) {
+
+        if (propriedade != null) {
+
+            if (propriedade.getResponsavel() != null) {
+                if (CENARIO == Cenario.CONSULTAR) {
+                    // CARTÃO CONSULTAR
+                } else if (CENARIO == Cenario.ALTERAR) {
+                    setarCamposComInstancia();
+                } else if (CENARIO == Cenario.CADASTRAR) {
+                    jButtonPesquisarProdutor.setEnabled(true);
+                } else if (CENARIO == Cenario.EXCLUIR) {
+                    // CARTÃO EXCLUIR
+                } else if (CENARIO == Cenario.ADICIONAR) {
+                    jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
+                }
+            } else {
+                jTextFieldResponsavel.setText("PRODUTOR NULO");
+            }
+        } else {
             jButtonPesquisarProdutor.setEnabled(true);
         }
-        else if ( CENARIO == Cenario.EXCLUIR ) {
-            // CARTÃO EXCLUIR
-        }
-        else if ( CENARIO == Cenario.ADICIONAR ) {
-            jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
-        }
     }
-    
+
     public void setarCamposComInstancia() {
         jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
         jTextFieldNomePropriedade.setText(propriedade.getNome_propriedade());
         jTextAreaReferencia.setText(propriedade.getReferencia());
     }
-    
+
     public void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jTextFieldNomePropriedade.setEditable(condicao);

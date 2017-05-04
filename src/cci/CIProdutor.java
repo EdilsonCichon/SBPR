@@ -47,15 +47,15 @@ public class CIProdutor {
         return produtorSelecionado;
      }
 
-    public boolean cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
+    public Produtor cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
         
         try{   
-          gtProdutor.cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo); 
+          Produtor produtor = gtProdutor.cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo); 
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-          return true;
+          return produtor;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return false;
+            return null;
         }  
     }
     
@@ -70,10 +70,10 @@ public class CIProdutor {
         }
     }
     
-    public void consultarProdutor(Produtor produtor, Frame pai) {
-       
+    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String filtro){
+       return gtProdutor.consultarProdutor(colunaFiltro, filtro);
     }
-
+    
     public boolean excluirProdutor(Produtor produtor){
         
         try{   
@@ -84,9 +84,5 @@ public class CIProdutor {
             JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
             return false;
         }    
-    }
-    
-    public LinkedList<Produtor> filtroProdutores(String colunaFiltro, String filtro){
-       return gtProdutor.filtrarProdutores(colunaFiltro, filtro);
     }
 }

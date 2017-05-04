@@ -180,11 +180,11 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
             
             Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
             
-            if(CENARIO == Cenario.CADASTRAR){
+            if(CENARIO == Cenario.CADASTRAR){ // PESQUISANDO PRODUTOR PARA CADASTRAR PROPRIEDADE
                produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
                if(produtorSelecionado != null)
                    this.dispose();      
-            }else{
+            }else{ // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE PRODUTOR
                  ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtor, pai, CENARIO);
             }           
         } catch (Exception ex) {
@@ -194,7 +194,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
        
-        LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().filtroProdutores((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
+        LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().consultarProdutor((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
         JTableUtil.limparTabela(jTableProdutor);
         
         listaProdutores.forEach((produtor) -> {

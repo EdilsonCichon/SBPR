@@ -167,7 +167,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         //TODO Validações seriam colocadas aqui.
-        LinkedList<Propriedade> listaPropriedades = ciInterface.getCiPropriedade().filtroProdutores((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
+        LinkedList<Propriedade> listaPropriedades = ciInterface.getCiPropriedade().consultarProdutor((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
         JTableUtil.limparTabela(jTablePropriedades);
         
         listaPropriedades.forEach((propriedade) -> {
@@ -180,11 +180,13 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
         try {
+            
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
+            
             if ( CENARIO == Cenario.ALTERAR ) {
-                ciInterface.getCiPropriedade().telaAlterarPropriedade((Frame)getParent(), propriedade);
-                this.dispose();
+                ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
             }
             if ( CENARIO == Cenario.CONSULTAR ) {
                 //CARTÃO DO MOISEYS (VULGO CRYSTIAN)

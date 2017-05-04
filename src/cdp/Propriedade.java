@@ -40,7 +40,23 @@ public class Propriedade {
     public String toString() {
         return nome_propriedade;
     }
-    
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome_propriedade(String nome_propriedade) {
+        this.nome_propriedade = nome_propriedade;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
+    public void setResponsavel(Produtor responsavel) {
+        this.responsavel = responsavel;
+    }
+     
     public Object[] toArray() {
         return new Object[] { this, referencia, responsavel };
     }

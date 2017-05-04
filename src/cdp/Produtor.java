@@ -8,6 +8,9 @@ public class Produtor extends Pessoa{
     private String inscricao_estadual;
     private LinkedList<Propriedade> propriedades;
 
+    public Produtor() {
+    }
+    
     public Produtor(String inscricao_estadual, LinkedList<Propriedade> propriedades, int id, 
             String nome, Date dt_nasc, String cpf, String rg, char sexo, String telefone) {
         

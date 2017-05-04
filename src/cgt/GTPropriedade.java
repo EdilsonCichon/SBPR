@@ -18,20 +18,23 @@ public class GTPropriedade {
         gdPropriedade.cadastrar(propriedade);
     }
     
+    public Propriedade instanciarPropriedadeVazia(Produtor responsavel){
+        
+        Propriedade propriedade = new Propriedade("", "", responsavel);
+        
+        return propriedade;
+    }
+    
     public void alterarPropriedade(Propriedade propriedade) {
         gdPropriedade.alterar(propriedade);
     }
-    
-    public void consultarPropriedade(){
-        gdPropriedade.consultar();
-    }
-    
+      
     public void excluirPropriedade(){
         gdPropriedade.excluir();
         
     } 
     
-    public LinkedList<Propriedade> filtrarProdutores(String colunaFiltro, String valorFiltro) {
-        return gdPropriedade.filtrar(colunaFiltro, valorFiltro);
+    public LinkedList<Propriedade> consultarProdutor(String colunaFiltro, String valorFiltro) {
+        return gdPropriedade.consultar(colunaFiltro, valorFiltro);
     }
 }

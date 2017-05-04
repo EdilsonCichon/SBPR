@@ -15,6 +15,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     private JFrame pai;
     private int CENARIO;
     private Produtor produtor;
+    private Produtor produtorAtual;
 
     public JDCadastroProdutor(java.awt.Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtor) {
         super(pai, modal);
@@ -339,8 +340,9 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
             
             if(CENARIO == Cenario.CADASTRAR){
-                boolean resposta = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-                habilitarBotoes(resposta);
+                produtorAtual = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                if(produtorAtual != null)
+                    habilitarBotoes(true);
                 
             } else if (CENARIO == Cenario.ALTERAR){
                 boolean resposta = ciInterface.getCiProdutor().alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
@@ -429,7 +431,8 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }
     
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-        ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(null, pai, Cenario.ADICIONAR);
+        Propriedade propriedadeVazia = ciInterface.getCiPropriedade().instanciarPropriedadeVazia(produtorAtual);
+        ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedadeVazia, pai, Cenario.ADICIONAR);
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed

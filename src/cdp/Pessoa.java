@@ -13,6 +13,9 @@ public abstract class Pessoa {
     private char sexo;
     private String telefone;
 
+    public Pessoa() {
+    }
+ 
     public Pessoa(int id, String nome, Date dt_nasc, String cpf, String rg, char sexo, String telefone) {
         this.id = id;
         this.nome = nome;

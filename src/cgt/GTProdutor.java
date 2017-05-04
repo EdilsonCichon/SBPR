@@ -16,7 +16,7 @@ public class GTProdutor {
         gdProdutor = new GDProdutor();
     }
 
-    public void cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
+    public Produtor cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
             
         validarCampos(nome, cpf, data_nasc);
         
@@ -25,6 +25,8 @@ public class GTProdutor {
         
         Produtor produtor = new Produtor(nome, cpf, data, inscricao, rg, telefone, sexo);
         gdProdutor.cadastrar(produtor);
+        
+        return produtor;
 
     }
 
@@ -38,13 +40,8 @@ public class GTProdutor {
         gdProdutor.alterar(produtor);
     }
 
-    public LinkedList<Produtor> filtrarProdutores(String colunaFiltro, String valorFiltro) {
-        return gdProdutor.filtrar(colunaFiltro, valorFiltro);
-    }
-
-    public int consultarProdutor() {
-        gdProdutor.consultar();
-        return 0;
+    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String valorFiltro) {
+        return gdProdutor.consultar(colunaFiltro, valorFiltro);
     }
 
     public int excluirProdutor(Produtor produtor) {

@@ -19,12 +19,8 @@ public class GDProdutor {
     public void alterar(Produtor produtor){
        
     }
-    
-    public void consultar() {
        
-    }
-    
-    public LinkedList<Produtor> filtrar(String colunaFiltro, String valorFiltro) {
+    public LinkedList<Produtor> consultar(String colunaFiltro, String valorFiltro) {
         
         //ESSES DADOS DEVEM SER RETORNADOS DO BANCO
         Produtor edilson = new Produtor("12345", null, 0, "Edilson", new Date("10/10/1992"), "23053109873", "12345", 'M', "98423044");
