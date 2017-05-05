@@ -29,8 +29,8 @@ public class GTPropriedade {
         gdPropriedade.alterar(propriedade);
     }
       
-    public void excluirPropriedade(){
-        gdPropriedade.excluir();
+    public void excluirPropriedade(Propriedade propriedade){
+        gdPropriedade.excluir(propriedade);
         
     } 
     

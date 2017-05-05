@@ -193,8 +193,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
                 ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
             }
             if ( CENARIO == Cenario.EXCLUIR ) {
-                // OUTRO CARTÃO...
-                //ciInterface.getCiProdutor().excluirProdutor(produtor);
+                ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione uma propriedade", "ERRO", JOptionPane.ERROR_MESSAGE);

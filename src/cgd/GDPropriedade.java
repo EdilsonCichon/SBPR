@@ -29,7 +29,7 @@ public class GDPropriedade {
         return listaPropriedades;
     }
     
-    public void excluir(){
+    public void excluir(Propriedade propriedade){
        
     }  
 }

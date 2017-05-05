@@ -203,7 +203,10 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             } else if (CENARIO == Cenario.CONSULTAR) {
                 this.dispose();
             } else if (CENARIO == Cenario.EXCLUIR) {
-                //CARTÃO EXCLUIR
+                boolean excluido = ciInterface.getCiPropriedade().excluirPropriedade(propriedade);
+                if (excluido) {
+                    this.dispose();
+                }
             } else if (CENARIO == Cenario.ADICIONAR) {
                 boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedade.getResponsavel(), nome, referencia);
                 if (resposta) {
@@ -249,7 +252,8 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                     jButtonPesquisarProdutor.setEnabled(true);
                     
                 } else if (CENARIO == Cenario.EXCLUIR) {
-                    // CARTÃO EXCLUIR
+                    setarCamposComInstancia();
+                    modoSomenteLeitura(true);
                 } else if (CENARIO == Cenario.ADICIONAR) {
                     jTextFieldResponsavel.setText(propriedade.getResponsavel().getNome());
                 }
