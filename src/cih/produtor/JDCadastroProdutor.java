@@ -380,17 +380,19 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
 
     public void identificarCenario() {
         
-        if ( CENARIO == Cenario.CADASTRAR ) {
-            habilitarBotoes(false);
-        }
-        else if ( CENARIO == Cenario.ALTERAR ) {
-            modoSomenteLeitura(false);
-            setarCamposComInstancia(produtor);
-        }
-        else {
-            // CONSULTAR OU EXCLUIR
-            modoSomenteLeitura(true);
-            setarCamposComInstancia(produtor);
+        switch (CENARIO) {
+            
+            case Cenario.CADASTRAR:
+                habilitarBotoes(false);
+                break;
+            case Cenario.ALTERAR:
+                modoSomenteLeitura(false);
+                setarCamposComInstancia(produtor);
+                break;
+            default:// CONSULTAR OU EXCLUIR
+                modoSomenteLeitura(true);
+                setarCamposComInstancia(produtor);
+                break;
         }
     }
     
@@ -404,7 +406,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jFormattedTextFieldTelefone.setEditable(condicao);
         jRadioButtonFeminino.setEnabled(condicao);
         jRadioButtonMasculino.setEnabled(condicao);
-        //jButtonConfirmar.setEnabled(condicao);
         jButtonLimpar.setEnabled(condicao);
         habilitarBotoes(condicao);
     }

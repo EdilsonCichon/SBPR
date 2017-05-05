@@ -13,6 +13,9 @@ public class Funcionario extends Pessoa {
     private Cargo cargo;
     private LinkedList<TipoServico> tipoServicos;
 
+    public Funcionario() {
+    }
+
     public Funcionario(Endereco endereco, Habilitacao habilitacao, Usuario usuario, 
             String email, Cargo cargo, LinkedList<TipoServico> tipoServicos, int id, 
             String nome, Date dt_nasc, String cpf, String rg, char sexo, String telefone) {
@@ -85,5 +88,9 @@ public class Funcionario extends Pessoa {
 
     public void setTipoServicos(LinkedList<TipoServico> tipoServicos) {
         this.tipoServicos = tipoServicos;
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this, getCpf(), getRg(), getDt_nasc("dd/MM/yyyy") };
     }
 }

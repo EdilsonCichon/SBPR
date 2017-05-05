@@ -3,14 +3,24 @@ package cih.funcionario;
 import javax.swing.ImageIcon;
 
 import cci.CIInterface;
+import cci.util.Cenario;
+import cci.util.JTableUtil;
+import cdp.Funcionario;
+import java.awt.Frame;
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 public class JDPesquisaFuncionario extends javax.swing.JDialog {
-    
-    private CIInterface ciInterface;
 
-    public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+    private CIInterface ciInterface;
+    private int CENARIO;
+    private Frame pai;
+
+    public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
         this.ciInterface = ciInterface;
+        this.CENARIO = CENARIO;
+        this.pai = parent;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
@@ -26,8 +36,9 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         jTextFieldFiltro = new javax.swing.JTextField();
         jScrollPane = new javax.swing.JScrollPane();
         jTableFuncionario = new javax.swing.JTable();
+        jButtonFiltrar = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
-        jButtonAlterar = new javax.swing.JButton();
+        jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -58,6 +69,13 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         });
         jScrollPane.setViewportView(jTableFuncionario);
 
+        jButtonFiltrar.setText("...");
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFiltrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPesquisarFuncionarioLayout = new javax.swing.GroupLayout(jPanelPesquisarFuncionario);
         jPanelPesquisarFuncionario.setLayout(jPanelPesquisarFuncionarioLayout);
         jPanelPesquisarFuncionarioLayout.setHorizontalGroup(
@@ -65,13 +83,15 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
             .addGroup(jPanelPesquisarFuncionarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPesquisarFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addGroup(jPanelPesquisarFuncionarioLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addGap(10, 10, 10)
-                        .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldFiltro)))
+                        .addComponent(jTextFieldFiltro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonFiltrar)))
                 .addContainerGap())
         );
         jPanelPesquisarFuncionarioLayout.setVerticalGroup(
@@ -80,16 +100,28 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                 .addGroup(jPanelPesquisarFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelFiltrar)
-                    .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFiltrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButtonAlterar.setText("Confirmar");
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -97,7 +129,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRodapeLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -108,7 +140,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonAlterar))
+                    .addComponent(jButtonConfirmar))
                 .addContainerGap())
         );
 
@@ -133,9 +165,43 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
+
+        String tipoFiltro = (String)jComboBoxFiltro.getSelectedItem();
+        String texto = jTextFieldFiltro.getText();
+        
+        LinkedList<Funcionario> listaFuncionarios = ciInterface.getCiFuncionario().consultarFuncionario(tipoFiltro, texto);
+        JTableUtil.limparTabela(jTableFuncionario);
+        
+        listaFuncionarios.forEach((funcionario) -> {
+            JTableUtil.addLinha(jTableFuncionario, funcionario.toArray() );
+        });
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
+        try {
+            
+            Funcionario funcionario = (Funcionario) JTableUtil.getDadosLinhaSelecionada(jTableFuncionario);
+            
+            if(CENARIO == Cenario.CADASTRAR){
+               
+            }else{ // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE FUNCIONARIO
+                 ciInterface.getCiFuncionario().instanciarTelaCadastroFuncionario(funcionario, pai, CENARIO);
+            }           
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }    
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JPanel jPanelPesquisarFuncionario;

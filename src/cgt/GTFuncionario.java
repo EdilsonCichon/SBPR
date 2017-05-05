@@ -1,6 +1,8 @@
 package cgt;
 
+import cdp.Funcionario;
 import cgd.GDFuncionario;
+import java.util.LinkedList;
 
 public class GTFuncionario {
     
@@ -20,9 +22,8 @@ public class GTFuncionario {
         return 0;
     }
     
-    public int consultarFuncionario(){
-        gdFuncionario.consultar();
-        return 0;
+    public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String texto){
+        return gdFuncionario.consultar(tipoFiltro, texto);
     }
     
     public int excluirFuncionario(){

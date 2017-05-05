@@ -3,17 +3,25 @@ package cih.funcionario;
 import javax.swing.ImageIcon;
 
 import cci.CIInterface;
+import cci.util.Cenario;
+import cdp.Funcionario;
+import javax.swing.JOptionPane;
 
 public class JDCadastroFuncionario extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private int CENARIO;
+    private Funcionario funcionario;
     
-    public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+    public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Funcionario funcionario) {
         super(parent, modal);
         this.ciInterface = ciInterface;
+        this.CENARIO = CENARIO;
+        this.funcionario = funcionario;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
+        identificarCenario();
     }
 
     @SuppressWarnings("unchecked")
@@ -363,8 +371,18 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setPreferredSize(new java.awt.Dimension(57, 23));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.setPreferredSize(new java.awt.Dimension(57, 23));
@@ -414,6 +432,67 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
+        // DA PRA MELHORAR ESSA LOGICA USANDO SWITCH CASE AO INVEZ DE ELSE IF
+        
+        try { 
+            if(CENARIO == Cenario.CONSULTAR){
+                this.dispose();     
+            }          
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } 
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    public void identificarCenario() {
+        
+        switch (CENARIO) {
+            
+            case Cenario.CADASTRAR:break;  
+            case Cenario.ALTERAR:break; 
+            default: // CONSULTAR OU EXCLUIR
+                modoSomenteLeitura(true);
+                setarCamposComInstancia(funcionario);
+                break;
+        }
+    }
+    
+    public void modoSomenteLeitura(boolean condicao) {
+        condicao = !condicao;
+        jTextFieldNome.setEditable(condicao);
+        jTextFieldEmail.setEditable(condicao);
+        jTextFieldBairro.setEditable(condicao);
+        jTextFieldCidade.setEditable(condicao);
+        jTextFieldEstado.setEditable(condicao);
+        jTextFieldLogradouro.setEditable(condicao);
+        jTextFieldNumero.setEditable(condicao);
+        jFormattedTextFieldCep.setEditable(condicao);
+        jFormattedTextFieldCpf.setEditable(condicao);
+        jFormattedTextFieldRg.setEditable(condicao);
+        jFormattedTextFieldDataNascimento.setEditable(condicao);
+        jFormattedTextFieldTelefone.setEditable(condicao);
+        jRadioButtonFeminino.setEnabled(condicao);
+        jRadioButtonMasculino.setEnabled(condicao);
+        jCheckBoxAcessarSistema.setEnabled(condicao);
+        jComboBoxCargo.setEnabled(condicao);
+        jComboBoxHabilitacao.setEnabled(condicao);
+        jButtonLimpar.setEnabled(condicao);
+    }
+    
+    public void setarCamposComInstancia(Funcionario funcionario) {
+        jTextFieldNome.setText(funcionario.getNome());
+        jFormattedTextFieldCpf.setText(funcionario.getCpf());
+        jFormattedTextFieldRg.setText(funcionario.getRg());
+        jFormattedTextFieldDataNascimento.setText(funcionario.getDt_nasc("dd/MM/yyyy"));
+        jFormattedTextFieldTelefone.setText(funcionario.getTelefone());
+        if ( funcionario.getSexo() == 'M' )
+            jRadioButtonMasculino.setSelected(true);
+    }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

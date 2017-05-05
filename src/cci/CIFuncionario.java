@@ -1,15 +1,20 @@
 package cci;
 
 import cci.util.Cenario;
+import cdp.Funcionario;
 import cgt.GTFuncionario;
 import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
+import java.awt.Frame;
+import java.util.LinkedList;
 
 public class CIFuncionario {
     
     private CIInterface ciInterface;
     private GTFuncionario gtFuncionario;
+    JDCadastroFuncionario cadastroFuncionario;
+    JDPesquisaFuncionario pesquisaFuncionario;
 
     public CIFuncionario(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -17,23 +22,19 @@ public class CIFuncionario {
     }
     
     public void gerenciarFuncionario(int CENARIO, JFrame pai) {
-        
-        JDCadastroFuncionario cadastroFuncionario;
-        JDPesquisaFuncionario pesquisaFuncionario;
-
+       
         if (CENARIO == Cenario.CADASTRAR) {
-            cadastroFuncionario = new JDCadastroFuncionario(pai, true, ciInterface);
+            cadastroFuncionario = new JDCadastroFuncionario(pai, true, ciInterface, CENARIO, null);
             cadastroFuncionario.setVisible(true);
-        } else if (CENARIO > Cenario.ALTERAR) {
-            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface);
-            pesquisaFuncionario.setVisible(true);
-        }else if (CENARIO == Cenario.CONSULTAR) {
-            pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface);
-            pesquisaFuncionario.setVisible(true);
-        } else if (CENARIO == Cenario.EXCLUIR) {
-           pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface);
+        } else {
+           pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface, CENARIO);
             pesquisaFuncionario.setVisible(true);
         }
+    }
+    
+    public void instanciarTelaCadastroFuncionario(Funcionario funcionario, Frame pai, int CENARIO){
+        cadastroFuncionario = new JDCadastroFuncionario(pai, true, ciInterface, CENARIO, funcionario);
+        cadastroFuncionario.setVisible(true);
     }
     
     public void cadastrarFuncionario(){
@@ -44,8 +45,8 @@ public class CIFuncionario {
         int i = gtFuncionario.alterarFuncionario();
     }
     
-    public void consultarFuncionario(){
-        int i = gtFuncionario.consultarFuncionario();
+    public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String texto){
+        return gtFuncionario.consultarFuncionario(tipoFiltro, texto);
     }
     
     public void excluirFuncionario(){
