@@ -26,8 +26,8 @@ public class GTFuncionario {
         return gdFuncionario.consultar(tipoFiltro, texto);
     }
     
-    public int excluirFuncionario(){
-        gdFuncionario.excluir();
+    public int excluirFuncionario(Funcionario funcionario){
+        gdFuncionario.excluir(funcionario);
         return 0;
     } 
 }

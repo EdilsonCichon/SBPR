@@ -8,6 +8,7 @@ import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
 import java.awt.Frame;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 public class CIFuncionario {
     
@@ -49,8 +50,15 @@ public class CIFuncionario {
         return gtFuncionario.consultarFuncionario(tipoFiltro, texto);
     }
     
-    public void excluirFuncionario(){
-        int i = gtFuncionario.excluirFuncionario();
-    }
-    
+    public boolean excluirFuncionario(Funcionario funcionario){
+        
+         try{   
+            gtFuncionario.excluirFuncionario(funcionario);
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+            return true;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
+            return false;
+        }
+    }  
 }

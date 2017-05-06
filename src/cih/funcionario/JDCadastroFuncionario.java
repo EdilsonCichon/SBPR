@@ -439,7 +439,11 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         try { 
             if(CENARIO == Cenario.CONSULTAR){
                 this.dispose();     
-            }          
+            }else if(CENARIO == Cenario.EXCLUIR){
+                boolean resposta = ciInterface.getCiFuncionario().excluirFuncionario(funcionario);
+                if(resposta)
+                    this.dispose();
+            }    
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         } 

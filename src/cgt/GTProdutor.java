@@ -44,9 +44,8 @@ public class GTProdutor {
         return gdProdutor.consultar(colunaFiltro, valorFiltro);
     }
 
-    public int excluirProdutor(Produtor produtor) {
+    public void excluirProdutor(Produtor produtor) {
         gdProdutor.excluir(produtor);
-        return 0;
     }
 
     private void validarCampos(String nome, String cpf, String data) throws Exception {

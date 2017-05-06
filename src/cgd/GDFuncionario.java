@@ -30,7 +30,7 @@ public class GDFuncionario {
         return listaFuncionarios;
     }
     
-    public void excluir(){
+    public void excluir(Funcionario funcionario){
        
     } 
 }
