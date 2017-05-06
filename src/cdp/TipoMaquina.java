@@ -1,10 +1,22 @@
 package cdp;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tipo_maquina")
 public class TipoMaquina {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     public String nome;
+    @Column(nullable = false)
     public String descricao;
+
+    public TipoMaquina() {
+    }
 
     public TipoMaquina(int id, String nome, String descricao) {
         this.id = id;
@@ -15,6 +27,14 @@ public class TipoMaquina {
     public TipoMaquina(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

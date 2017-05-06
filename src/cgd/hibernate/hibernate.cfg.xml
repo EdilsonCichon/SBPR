@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">cgd.SBPRMySqlInnoDBDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sbpr?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping class="cdp.Cargo"/>
+    <mapping class="cdp.Funcionario"/>
+    <mapping class="cdp.Habilitacao"/>
+    <mapping class="cdp.Maquina"/>
+    <mapping class="cdp.Pessoa"/>
+    <mapping class="cdp.Produtor"/>
+    <mapping class="cdp.Propriedade"/>
+    <mapping class="cdp.Servico"/>
+    <mapping class="cdp.ServicoAgendado"/>
+    <mapping class="cdp.ServicoCancelado"/>
+    <mapping class="cdp.ServicoConcluido"/>
+    <mapping class="cdp.TipoMaquina"/>
+    <mapping class="cdp.TipoServico"/>
+    <mapping class="cdp.Usuario"/>
+    <mapping class="cdp.endereco.Bairro"/>
+    <mapping class="cdp.endereco.Cep"/>
+    <mapping class="cdp.endereco.Cidade"/>
+    <mapping class="cdp.endereco.Endereco"/>
+    <mapping class="cdp.endereco.Estado"/>
+    <mapping class="cdp.endereco.Logradouro"/>
+  </session-factory>
+</hibernate-configuration>

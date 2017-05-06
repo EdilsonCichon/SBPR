@@ -1,17 +1,39 @@
 package cdp;
 
 import cdp.endereco.Endereco;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
+import javax.persistence.*;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Funcionario extends Pessoa {
     
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "habilitacao_id", nullable = true)
     private Habilitacao habilitacao;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id", nullable = true)
     private Usuario usuario;
+        
+    @Column(nullable = false)
     private String email;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cargo_id", nullable = false)
     private Cargo cargo;
-    private LinkedList<TipoServico> tipoServicos;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "funcionario_tipo_servico",
+            joinColumns = @JoinColumn(name = "funcionario_id"),
+            inverseJoinColumns = @JoinColumn(name = "tipo_servico_id"))
+    private Collection<TipoServico> tipoServicos;
 
     public Funcionario() {
     }
@@ -82,7 +104,7 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
     }
 
-    public LinkedList<TipoServico> getTipoServicos() {
+    public Collection<TipoServico> getTipoServicos() {
         return tipoServicos;
     }
 
@@ -92,5 +114,5 @@ public class Funcionario extends Pessoa {
     
     public Object[] toArray() {
         return new Object[] { this, getCpf(), getRg(), getDt_nasc("dd/MM/yyyy") };
-    }
+    } 
 }

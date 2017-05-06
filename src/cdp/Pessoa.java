@@ -2,15 +2,32 @@ package cdp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.*;
 
+@MappedSuperclass
 public abstract class Pessoa {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     private String nome;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date dt_nasc;
+    
+    @Column(nullable = false, unique = true, length = 11)
     private String cpf;
+    
+    @Column(nullable = false, unique = true, length = 7)
     private String rg;
+    
+    @Column(nullable = false, length = 1)
     private char sexo;
+    
+    @Column(nullable = false, length = 11)
     private String telefone;
 
     public Pessoa() {
@@ -91,7 +108,11 @@ public abstract class Pessoa {
     public int getId() {
         return id;
     }
-
+   
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     @Override
     public String toString() {
         return nome;

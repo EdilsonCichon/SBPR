@@ -28,8 +28,9 @@ public class CIGeral {
     }
 
     public void iniciarSistema() {
-         frmValidarAcesso = new FrmValidarAcesso(ciInterface);
-         frmValidarAcesso.setVisible(true);
+        gtGeral.inciarBancoDeDados();
+        frmValidarAcesso = new FrmValidarAcesso(ciInterface);
+        frmValidarAcesso.setVisible(true);
     }
     
     public void encerrarSessao() {

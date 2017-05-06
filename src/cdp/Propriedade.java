@@ -1,21 +1,40 @@
 package cdp;
 
+import javax.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+@Entity
 public class Propriedade {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome_propriedade;
+    
+    @Column(nullable = false)
+    private String nome;
+    
+    @Column(nullable = false)
     private String referencia;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "produtor_id", nullable = false)
+    //@JoinColumns (foreignKey = @ForeignKey(name = "produtor_id"), value = { @JoinColumn(referencedColumnName = "id") })
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Produtor responsavel;
+
+    public Propriedade() {
+    }
 
     public Propriedade(int id, String nome_propriedade, String referencia, Produtor responsavel) {
         this.id = id;
-        this.nome_propriedade = nome_propriedade;
+        this.nome = nome_propriedade;
         this.referencia = referencia;
         this.responsavel = responsavel;
     }
 
     public Propriedade(String nome_propriedade, String referencia, Produtor responsavel) {
-        this.nome_propriedade = nome_propriedade;
+        this.nome = nome_propriedade;
         this.referencia = referencia;
         this.responsavel = responsavel;
     }    
@@ -25,7 +44,7 @@ public class Propriedade {
     }
 
     public String getNome_propriedade() {
-        return nome_propriedade;
+        return nome;
     }
 
     public String getReferencia() {
@@ -38,7 +57,7 @@ public class Propriedade {
     
     @Override
     public String toString() {
-        return nome_propriedade;
+        return nome;
     }
 
     public void setId(int id) {
@@ -46,7 +65,7 @@ public class Propriedade {
     }
 
     public void setNome_propriedade(String nome_propriedade) {
-        this.nome_propriedade = nome_propriedade;
+        this.nome = nome_propriedade;
     }
 
     public void setReferencia(String referencia) {
@@ -59,5 +78,5 @@ public class Propriedade {
      
     public Object[] toArray() {
         return new Object[] { this, referencia, responsavel };
-    }
+    }  
 }

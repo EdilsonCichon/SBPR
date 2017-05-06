@@ -1,20 +1,34 @@
 package cdp.endereco;
 
-import java.util.LinkedList;
+import java.util.Collection;
+import javax.persistence.*;
 
+@Entity
 public class Cep {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     private String cep;
-    private LinkedList<Logradouro> logradouros;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "cep_logradouro", 
+        joinColumns =@JoinColumn(name = "cep_id"), 
+        inverseJoinColumns =@JoinColumn(name = "logradouro_id"))
+    private Collection<Logradouro> logradouros;
 
-    public Cep(int id, String cep, LinkedList<Logradouro> logradouros) {
+    public Cep() {
+    }
+    
+    public Cep(int id, String cep, Collection<Logradouro> logradouros) {
         this.id = id;
         this.cep = cep;
         this.logradouros = logradouros;
     }
     
-    public Cep(String cep, LinkedList<Logradouro> logradouros) {
+    public Cep(String cep, Collection<Logradouro> logradouros) {
         this.cep = cep;
         this.logradouros = logradouros;
     }  
@@ -27,11 +41,19 @@ public class Cep {
         this.cep = cep;
     }
 
-    public LinkedList<Logradouro> getLogradouros() {
+    public Collection<Logradouro> getLogradouros() {
         return logradouros;
     }
 
-    public void setLogradouros(LinkedList<Logradouro> logradouros) {
+    public void setLogradouros(Collection<Logradouro> logradouros) {
         this.logradouros = logradouros;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

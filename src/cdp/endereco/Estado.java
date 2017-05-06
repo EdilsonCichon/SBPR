@@ -1,9 +1,19 @@
 package cdp.endereco;
 
+import javax.persistence.*;
+
+@Entity
 public class Estado {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     private String nome;
+
+    public Estado() {
+    }
 
     public Estado(int id, String nome) {
         this.id = id;
@@ -20,5 +30,13 @@ public class Estado {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }    
+    }   
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

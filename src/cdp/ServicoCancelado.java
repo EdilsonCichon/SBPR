@@ -1,11 +1,22 @@
 package cdp;
 
 import java.util.Date;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "servico_cancelado")
+@PrimaryKeyJoinColumn(name = "servico_cancelado_id")
 public class ServicoCancelado extends Servico {
     
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date data_cancelamento;
+    
+    @Column(nullable = false, precision = 2)
     private double valor_multa;
+
+    public ServicoCancelado() {
+    }
 
     public ServicoCancelado(Date data_cancelamento, double valor_multa, int id, Date data_solicitacao, Date data_agendamento, 
             double qtd_hrs_prevista, Produtor produtor, Propriedade propriedade, TipoServico tipoServico) {

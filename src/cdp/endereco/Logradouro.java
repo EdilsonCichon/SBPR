@@ -1,22 +1,37 @@
 package cdp.endereco;
 
-import java.util.LinkedList;
+import java.util.Collection;
+import javax.persistence.*;
 
+@Entity
 public class Logradouro {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private String tipo;
-    private LinkedList<Bairro> bairros;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "logradouro_bairro", 
+        joinColumns =@JoinColumn(name = "logradouro_id"), 
+        inverseJoinColumns =@JoinColumn(name = "bairro_id"))
+    private Collection<Bairro> bairros;
 
-    public Logradouro(int id, String nome, String tipo, LinkedList<Bairro> bairros) {
+    public Logradouro() {
+    }
+
+    public Logradouro(int id, String nome, String tipo, Collection<Bairro> bairros) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.bairros = bairros;
     }
 
-    public Logradouro(String nome, String tipo, LinkedList<Bairro> bairros) {
+    public Logradouro(String nome, String tipo, Collection<Bairro> bairros) {
         this.nome = nome;
         this.tipo = tipo;
         this.bairros = bairros;
@@ -38,11 +53,19 @@ public class Logradouro {
         this.tipo = tipo;
     }
 
-    public LinkedList<Bairro> getBairros() {
+    public Collection<Bairro> getBairros() {
         return bairros;
     }
 
-    public void setBairros(LinkedList<Bairro> bairros) {
+    public void setBairros(Collection<Bairro> bairros) {
         this.bairros = bairros;
-    } 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

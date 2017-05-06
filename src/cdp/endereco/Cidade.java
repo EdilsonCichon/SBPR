@@ -1,10 +1,26 @@
 package cdp.endereco;
 
+import javax.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+@Entity
 public class Cidade {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column(nullable = false)
     private String nome;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "estado_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Estado estado;
+
+    public Cidade() {
+    }
 
     public Cidade(int id, String nome, Estado estado) {
         this.id = id;
@@ -31,5 +47,13 @@ public class Cidade {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -1,17 +1,26 @@
 package cdp;
 
+import java.util.Collection;
 import java.util.Date;
-import java.util.LinkedList;
+import javax.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-public class Produtor extends Pessoa{
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Produtor extends Pessoa {
     
+    @Column(nullable = false, length = 10)
     private String inscricao_estadual;
-    private LinkedList<Propriedade> propriedades;
+    
+    @OneToMany(mappedBy = "responsavel", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Collection<Propriedade> propriedades;
 
     public Produtor() {
     }
     
-    public Produtor(String inscricao_estadual, LinkedList<Propriedade> propriedades, int id, 
+    public Produtor(String inscricao_estadual, Collection<Propriedade> propriedades, int id, 
             String nome, Date dt_nasc, String cpf, String rg, char sexo, String telefone) {
         
         super(id, nome, dt_nasc, cpf, rg, sexo, telefone);
@@ -20,7 +29,7 @@ public class Produtor extends Pessoa{
     }
 
     public Produtor(String inscricao_estadual, String nome, Date dt_nasc, String cpf, 
-            String rg, char sexo, String telefone, LinkedList<Propriedade> propriedades) {
+            String rg, char sexo, String telefone, Collection<Propriedade> propriedades) {
         
         super(nome, dt_nasc, cpf, rg, sexo, telefone);
         this.inscricao_estadual = inscricao_estadual;
@@ -40,11 +49,11 @@ public class Produtor extends Pessoa{
         this.inscricao_estadual = inscricao_estadual;
     }
 
-    public LinkedList<Propriedade> getPropriedades() {
+    public Collection<Propriedade> getPropriedades() {
         return propriedades;
     }
 
-    public void setPropriedades(LinkedList<Propriedade> propriedades) {
+    public void setPropriedades(Collection<Propriedade> propriedades) {
         this.propriedades = propriedades;
     }
     
