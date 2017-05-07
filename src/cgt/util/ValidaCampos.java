@@ -1,6 +1,5 @@
-package cgt;
+package cgt.util;
 
-import cci.SBPRException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +7,7 @@ import java.util.InputMismatchException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class GTValidaCampos {
+public abstract class ValidaCampos {
     
     public static boolean validarCpf(String cpf) {
       
@@ -106,8 +105,7 @@ public abstract class GTValidaCampos {
         return true;
     }
 
-    public static boolean validarDataNasc(String data_nasc) throws ParseException{
-        
+    public static boolean validarDataNasc(String data_nasc) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = null;
         formato.setLenient(false);
@@ -120,7 +118,7 @@ public abstract class GTValidaCampos {
     }
     
     public static boolean validarRg(String rg){
-        if(rg.length() == 9)    
+        if ( rg.length() >= 7 )
             return true;
         return false;
     }

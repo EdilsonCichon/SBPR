@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class GDFuncionario {
     
-    public void cadastrar(){
+    public void cadastrar(Funcionario funcionario){
           
     }
     

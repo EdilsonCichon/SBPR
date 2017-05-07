@@ -1,8 +1,9 @@
 package cgt;
 
-import cci.SBPRException;
 import cdp.Produtor;
 import cgd.GDProdutor;
+import cci.SBPRException;
+import cgt.util.ValidaCampos;
 import java.util.Date;
 import java.util.LinkedList;
 import java.text.ParseException;
@@ -51,17 +52,17 @@ public class GTProdutor {
 
     private void validarCampos(String nome, String cpf, String data, String rg, String telefone, String inscricao) throws Exception {
         
-        if(!GTValidaCampos.validarNome(nome))
+        if(!ValidaCampos.validarNome(nome))
             throw new SBPRException(1);
-        if(!GTValidaCampos.validarCpf(cpf))
+        if(!ValidaCampos.validarCpf(cpf))
             throw new SBPRException(2);
-        if(!GTValidaCampos.validarDataNasc(data))
+        if(!ValidaCampos.validarDataNasc(data))
             throw new SBPRException(3);
-        if(!GTValidaCampos.validarRg(rg))
+        if(!ValidaCampos.validarRg(rg))
             throw new SBPRException(4);
-        if(!GTValidaCampos.validarTelefone(telefone))
+        if(!ValidaCampos.validarTelefone(telefone))
             throw new SBPRException(5);
-        if(!GTValidaCampos.validarInscricaoEstadual(inscricao))
+        if(!ValidaCampos.validarInscricaoEstadual(inscricao))
             throw new SBPRException(6);
     }
 }

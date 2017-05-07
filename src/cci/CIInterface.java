@@ -1,7 +1,7 @@
 package cci;
 
-import cih.JPCrud;
-import cih.JPServico;
+import cih.principal.JPCrud;
+import cih.principal.JPServico;
 import cci.util.Modulo;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;

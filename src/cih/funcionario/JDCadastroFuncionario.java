@@ -12,6 +12,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private Funcionario funcionario;
+    private Funcionario funcionarioAtual;
     
     public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Funcionario funcionario) {
         super(parent, modal);
@@ -102,6 +103,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jRadioButtonFeminino.setText("Feminino");
 
         jButtonGroupSexo.add(jRadioButtonMasculino);
+        jRadioButtonMasculino.setSelected(true);
         jRadioButtonMasculino.setText("Masculino");
 
         try {
@@ -429,24 +431,71 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     }//GEN-LAST:event_jCheckBoxAcessarSistemaActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        // TODO add your handling code here:
+        jTextFieldNome.setText("");
+        jTextFieldEmail.setText("");
+        jTextFieldBairro.setText("");
+        jTextFieldCidade.setText("");
+        jTextFieldEstado.setText("");
+        jTextFieldLogradouro.setText("");
+        jTextFieldNumero.setText("");
+        jFormattedTextFieldCep.setText("");
+        jFormattedTextFieldCpf.setText("");
+        jFormattedTextFieldRg.setText("");
+        jFormattedTextFieldDataNascimento.setText("");
+        jFormattedTextFieldTelefone.setText("");
+        jRadioButtonMasculino.setSelected(true);
+        jCheckBoxAcessarSistema.setSelected(false);
+        jTextFieldUsuario.setText("");
+        jPasswordFieldSenha.setText("");
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        
-        // DA PRA MELHORAR ESSA LOGICA USANDO SWITCH CASE AO INVEZ DE ELSE IF
-        
-        try { 
-            if(CENARIO == Cenario.CONSULTAR){
-                this.dispose();     
-            }else if(CENARIO == Cenario.EXCLUIR){
-                boolean resposta = ciInterface.getCiFuncionario().excluirFuncionario(funcionario);
-                if(resposta)
+        try {
+            validarCampos();
+            switch (CENARIO) {
+                case Cenario.CADASTRAR: {
+                    funcionarioAtual = ciInterface.getCiFuncionario().cadastrarFuncionario(
+                            jTextFieldNome.getText(), 
+                            jFormattedTextFieldCpf.getText().replace("-", "").replace(".", ""),
+                            jFormattedTextFieldRg.getText().replace("-", "").replace(".", ""),
+                            jFormattedTextFieldDataNascimento.getText(),
+                            jFormattedTextFieldTelefone.getText(), 
+                            (char) jButtonGroupSexo.getSelection().getMnemonic(), 
+                            jComboBoxCargo.getSelectedItem().toString(),
+                            jComboBoxHabilitacao.getSelectedItem().toString(),
+                            jTextFieldUsuario.getText(),
+                            jPasswordFieldSenha.getText(),
+                            jFormattedTextFieldCep.getText(),
+                            jTextFieldLogradouro.getText(),
+                            jTextFieldNumero.getText(),
+                            jTextFieldBairro.getText(),
+                            jTextFieldCidade.getText(),
+                            jTextFieldEstado.getText());
+                    if ( funcionarioAtual != null ) {
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
+                        modoSomenteLeitura(true);
+                    }
+                    break;
+                }
+                case Cenario.CONSULTAR:
                     this.dispose();
-            }    
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } 
+                    break;
+                case Cenario.ALTERAR:
+                    //CARTÃO DO ERICK
+                    break;
+                case Cenario.EXCLUIR:
+                    boolean resposta = ciInterface.getCiFuncionario().excluirFuncionario(funcionario);
+                    if(resposta) this.dispose();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, 
+                            "Não foi possível identificar a ação solicitada!");
+                    break;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -496,6 +545,38 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldTelefone.setText(funcionario.getTelefone());
         if ( funcionario.getSexo() == 'M' )
             jRadioButtonMasculino.setSelected(true);
+    }
+    
+    public void validarCampos() throws Exception {
+        String nome = jTextFieldNome.getText();
+        String cpf = jFormattedTextFieldCpf.getText();
+        cpf = cpf.replace(".", "").replace("-", "").replace(" ", "");
+        String data_nasc = jFormattedTextFieldDataNascimento.getText();
+        String rg = jFormattedTextFieldRg.getText();
+        rg = rg.replace(".", "").replace("-", "").replace(" ", "");
+        String telefone = jFormattedTextFieldTelefone.getText();
+        String email = jTextFieldEmail.getText();
+        String cep = jFormattedTextFieldCep.getText();
+        String numero = jTextFieldNumero.getText();
+        String logradouro = jTextFieldLogradouro.getText();
+        String bairro = jTextFieldBairro.getText();
+        String cidade = jTextFieldCidade.getText();
+        String estado = jTextFieldEstado.getText();
+        String usuario = jTextFieldUsuario.getText();
+        String senha = jPasswordFieldSenha.getText();
+        
+        if ( nome.equals("") || cpf.equals("") ||
+                data_nasc.equals("") || rg.equals("") || 
+                telefone.equals("") || email.equals("") ||
+                cep.equals("") || numero.equals("") ||
+                logradouro.equals("") || bairro.equals("") ||
+                cidade.equals("") || estado.equals("") )
+            throw new Exception("Verifique se todos os campos estão preenchidos!");
+        
+        if ( jCheckBoxAcessarSistema.isSelected() && (usuario.equals("") || senha.equals("")) ) {
+            jTextFieldUsuario.requestFocus();
+            throw new Exception("Favor informar usuário e senha!");
+        }
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

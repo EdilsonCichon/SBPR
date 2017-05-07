@@ -1,4 +1,4 @@
-package cih;
+package cih.principal;
 
 import cci.CIInterface;
 import javax.swing.ImageIcon;
@@ -12,6 +12,14 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
+        
+        /** 
+         * REMOVER ESSA LINHA QUANDO FINALIZAR O SISTEMA
+         */
+        jButtonEntrarActionPerformed(null);
+        /** 
+         * REMOVER ESSA LINHA QUANDO FINALIZAR O SISTEMA
+         */
     }
 
     @SuppressWarnings("unchecked")

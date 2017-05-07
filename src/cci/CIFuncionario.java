@@ -38,8 +38,24 @@ public class CIFuncionario {
         cadastroFuncionario.setVisible(true);
     }
     
-    public void cadastrarFuncionario(){
-        int i = gtFuncionario.cadastrarFuncionario();
+    public Funcionario cadastrarFuncionario(
+            String nome, String cpf, String rg, 
+            String data_nasc, String telefone, char sexo, String cargo,
+            String habilitacao, String usuario, String senha,
+            String cep, String logradouro, String numero,
+            String bairro, String cidade, String estado) {
+        try {
+          Funcionario funcionario = gtFuncionario.cadastrarFuncionario(
+                   nome, cpf, rg, data_nasc, telefone, sexo, cargo, 
+                   habilitacao, usuario, senha, cep, logradouro, numero,
+                   bairro, cidade, estado);
+            
+          JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+          return funcionario;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            return null;
+        }
     }
     
     public void alterarFuncionario(){
@@ -50,15 +66,14 @@ public class CIFuncionario {
         return gtFuncionario.consultarFuncionario(tipoFiltro, texto);
     }
     
-    public boolean excluirFuncionario(Funcionario funcionario){
-        
-         try{   
+    public boolean excluirFuncionario(Funcionario funcionario) {
+        try {
             gtFuncionario.excluirFuncionario(funcionario);
             JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
             return true;
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
             return false;
         }
-    }  
+    }
 }

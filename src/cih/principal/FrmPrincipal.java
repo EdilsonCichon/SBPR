@@ -1,4 +1,4 @@
-package cih;
+package cih.principal;
 
 import cci.CIInterface;
 import javax.swing.ImageIcon;

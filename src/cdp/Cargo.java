@@ -3,7 +3,7 @@ package cdp;
 import javax.persistence.*;
 
 @Entity
-class Cargo {
+public class Cargo {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

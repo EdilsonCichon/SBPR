@@ -2,12 +2,12 @@ package cci;
 
 import cgt.GTGeral;
 import javax.swing.JOptionPane;
-import cih.FrmPrincipal;
-import cih.FrmValidarAcesso;
-import cih.JDAjuda;
-import cih.JDRelatorio;
-import cih.JDSuporte;
-import cih.JPInicio;
+import cih.principal.FrmPrincipal;
+import cih.principal.FrmValidarAcesso;
+import cih.principal.JDAjuda;
+import cih.principal.JDRelatorio;
+import cih.principal.JDSuporte;
+import cih.principal.JPInicio;
 import javax.mail.MessagingException;
 import javax.swing.JFrame;
 

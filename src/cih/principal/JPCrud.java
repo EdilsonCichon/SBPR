@@ -1,4 +1,4 @@
-package cih;
+package cih.principal;
 
 import cci.util.Cenario;
 import cci.CIInterface;
