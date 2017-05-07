@@ -4,6 +4,7 @@ import cgd.Config;
 import cgt.util.EnvioEmail;
 import javax.mail.MessagingException;
 
+
 public class GTGeral {
     
     private Config config;
@@ -12,9 +13,11 @@ public class GTGeral {
         new EnvioEmail(emailDestinatario, mensagem, telefone);
     }
     
-    public void inciarBancoDeDados(){
-        
-         config = new Config();
-        
+    public void inciarBancoDeDados(){ 
+         config = new Config();       
+    }
+    
+    public boolean validarAcesso(String usuario, String senha){
+        return true;
     }
 }

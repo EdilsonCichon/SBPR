@@ -85,13 +85,13 @@ public abstract class GTValidaCampos {
 
         if (nome.equals("")) 
             return false;
-        if (!validarPadrao(nome, "[!-@]"))
+        if (!validarPadraoNome(nome, "[!-@]"))
             return false;
         
         return true;
     }
     
-    public static boolean validarPadrao(String nome, String pattern){
+    public static boolean validarPadraoNome(String nome, String pattern){
         
         Pattern padrao;
         Matcher cambinacao;
@@ -117,5 +117,23 @@ public abstract class GTValidaCampos {
             return false;
         }
         return true;
+    }
+    
+    public static boolean validarRg(String rg){
+        if(rg.length() == 9)    
+            return true;
+        return false;
+    }
+    
+    public static boolean validarTelefone(String telefone){
+        if(telefone.length() == 14)    
+            return true;
+        return false;
+    }
+    
+    public static boolean validarInscricaoEstadual(String inscricao){
+        if(inscricao.length() == 13)    
+            return true;
+        return false;
     }
 }

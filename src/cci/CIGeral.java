@@ -40,15 +40,15 @@ public class CIGeral {
         frmPrincipal.dispose();
     }
     
-    public void validarAcesso(String login, String senha) {
-        if ( login.equals("") && senha.equals("") ) {
-            if ( frmPrincipal == null )
-                frmPrincipal = new FrmPrincipal(ciInterface);
+    public void validarAcesso(String usuario, String senha) {
+ 
+        if(gtGeral.validarAcesso(usuario, senha)){
+            frmPrincipal = new FrmPrincipal(ciInterface);
             frmPrincipal.setVisible(true);
-            frmValidarAcesso.dispose();
-        } else {
+            frmValidarAcesso.dispose(); 
+        }else{
             JOptionPane.showMessageDialog(frmValidarAcesso, "Acesso Negado");
-        }
+        } 
     }
     
     public JPInicio abrirInicio(FrmPrincipal pai){

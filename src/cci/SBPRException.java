@@ -16,7 +16,10 @@ public class SBPRException extends Exception {
         // Erros de produtor: 1-19
         msgsErro[1] = "Campo NOME inválido";
         msgsErro[2] = "Campo CPF inválido";
-        msgsErro[3] = "Campo DATA inválido";  
+        msgsErro[3] = "Campo DATA inválido";
+        msgsErro[4] = "Campo RG inválido";  
+        msgsErro[5] = "Campo TELEFONE inválido";  
+        msgsErro[6] = "Campo INSCRIÇÃO ESTADUAL inválido";  
         
     }
     

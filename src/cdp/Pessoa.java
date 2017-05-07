@@ -27,7 +27,7 @@ public abstract class Pessoa {
     @Column(nullable = false, length = 1)
     private char sexo;
     
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 11, unique = true)
     private String telefone;
 
     public Pessoa() {

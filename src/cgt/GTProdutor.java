@@ -18,7 +18,7 @@ public class GTProdutor {
 
     public Produtor cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
             
-        validarCampos(nome, cpf, data_nasc);
+        validarCampos(nome, cpf, data_nasc, rg, telefone, inscricao);
         
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(data_nasc);
@@ -31,7 +31,8 @@ public class GTProdutor {
     }
 
     public void alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
-        validarCampos(nome, cpf, data_nasc);
+        
+        validarCampos(nome, cpf, data_nasc, rg, telefone, inscricao);
         
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(data_nasc);
@@ -48,13 +49,19 @@ public class GTProdutor {
         gdProdutor.excluir(produtor);
     }
 
-    private void validarCampos(String nome, String cpf, String data) throws Exception {
+    private void validarCampos(String nome, String cpf, String data, String rg, String telefone, String inscricao) throws Exception {
         
         if(!GTValidaCampos.validarNome(nome))
             throw new SBPRException(1);
         if(!GTValidaCampos.validarCpf(cpf))
             throw new SBPRException(2);
         if(!GTValidaCampos.validarDataNasc(data))
-            throw new SBPRException(3);            
+            throw new SBPRException(3);
+        if(!GTValidaCampos.validarRg(rg))
+            throw new SBPRException(4);
+        if(!GTValidaCampos.validarTelefone(telefone))
+            throw new SBPRException(5);
+        if(!GTValidaCampos.validarInscricaoEstadual(inscricao))
+            throw new SBPRException(6);
     }
 }

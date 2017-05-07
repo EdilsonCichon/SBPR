@@ -90,7 +90,11 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-        ciInterface.getCiGeral().validarAcesso(jTextFieldLogin.getText(), jPasswordFieldSenha.getText());
+        
+        String usuario = jTextFieldLogin.getText();
+        String senha = jPasswordFieldSenha.getText();
+        
+        ciInterface.getCiGeral().validarAcesso(usuario, senha);
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
 

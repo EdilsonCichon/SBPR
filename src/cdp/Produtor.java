@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Produtor extends Pessoa {
     
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 10, unique = true)
     private String inscricao_estadual;
     
     @OneToMany(mappedBy = "responsavel", fetch = FetchType.EAGER)

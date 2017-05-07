@@ -341,9 +341,12 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             
             if(CENARIO == Cenario.CADASTRAR){
                 produtorAtual = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-                if(produtorAtual != null)
-                    habilitarBotoes(true);
-                
+                if(produtorAtual != null){
+                    jButtonConfirmar.setEnabled(false);
+                    modoSomenteLeitura(true);
+                    habilitarBotoesPropriedade(true);
+                }
+                                   
             } else if (CENARIO == Cenario.ALTERAR){
                 boolean resposta = ciInterface.getCiProdutor().alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
                 if(resposta)
@@ -383,14 +386,16 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:
-                habilitarBotoes(false);
+                habilitarBotoesPropriedade(false);
                 break;
             case Cenario.ALTERAR:
                 modoSomenteLeitura(false);
+                habilitarBotoesPropriedade(true);
                 setarCamposComInstancia(produtor);
                 break;
             default:// CONSULTAR OU EXCLUIR
                 modoSomenteLeitura(true);
+                habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtor);
                 break;
         }
@@ -407,7 +412,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jRadioButtonFeminino.setEnabled(condicao);
         jRadioButtonMasculino.setEnabled(condicao);
         jButtonLimpar.setEnabled(condicao);
-        habilitarBotoes(condicao);
     }
     
     public void setarCamposComInstancia(Produtor produtor) {
@@ -425,7 +429,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         });
     }
     
-    public void habilitarBotoes(boolean resposta){
+    public void habilitarBotoesPropriedade(boolean resposta){
         jButtonAdicionar.setEnabled(resposta);
         jButtonAlterar.setEnabled(resposta);
         jButtonExcluir.setEnabled(resposta);
