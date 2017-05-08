@@ -203,6 +203,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             } else if (CENARIO == Cenario.CONSULTAR) {
                 this.dispose();
             } else if (CENARIO == Cenario.EXCLUIR) {
+                JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
                 boolean excluido = ciInterface.getCiPropriedade().excluirPropriedade(propriedade);
                 if (excluido) {
                     this.dispose();

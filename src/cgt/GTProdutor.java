@@ -31,7 +31,7 @@ public class GTProdutor {
 
     }
 
-    public void alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
+    public Produtor alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone, inscricao);
         
@@ -40,6 +40,7 @@ public class GTProdutor {
         
         Produtor produtor = new Produtor(nome, cpf, data, inscricao, rg, telefone, sexo);
         gdProdutor.alterar(produtor);
+        return produtor;
     }
 
     public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String valorFiltro) {

@@ -39,7 +39,8 @@ public class CIFuncionario {
     }
     
     public Funcionario cadastrarFuncionario(
-            String nome, String cpf, String rg, 
+            
+            String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String cargo,
             String habilitacao, String usuario, String senha,
             String cep, String logradouro, String numero,
@@ -47,7 +48,7 @@ public class CIFuncionario {
         
         try {
           Funcionario funcionario = gtFuncionario.cadastrarFuncionario(
-                   nome, cpf, rg, data_nasc, telefone, sexo, cargo, 
+                   nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, senha, cep, logradouro, numero,
                    bairro, cidade, estado);
             
@@ -59,20 +60,25 @@ public class CIFuncionario {
         }
     }
     
-    public boolean alterarFuncionario(String nome, String cpf, String rg, 
+    public Funcionario alterarFuncionario(
+            
+            String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String cargo,
             String habilitacao, String usuario, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado){
+        
         try {
-            gtFuncionario.alterarFuncionario(nome, cpf, rg, data_nasc, telefone, sexo, cargo, 
+            Funcionario funcionario = gtFuncionario.alterarFuncionario(
+                   nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, senha, cep, logradouro, numero,
                    bairro, cidade, estado);
+            
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return true;
+            return funcionario;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar " + e.getMessage());
-            return false;
+            return null;
         }
     }
     

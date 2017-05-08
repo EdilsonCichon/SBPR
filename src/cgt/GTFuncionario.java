@@ -23,13 +23,11 @@ public class GTFuncionario {
     }
     
     public Funcionario cadastrarFuncionario(
-            String nome, String cpf, String rg, 
+            String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String pCargo,
             String pHabilitacao, String pUsuario, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado) throws Exception {
-        
-        JOptionPane.showMessageDialog(null, rg);
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
         Date dtNascFormatada = new Date(data_nasc);
@@ -40,12 +38,13 @@ public class GTFuncionario {
         Cargo cargo = new Cargo(pCargo);
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
-        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, "email@mail.com", cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
+        
+        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
         gdFuncionario.cadastrar(funcionario);
         return funcionario;
     }
     
-    public int alterarFuncionario(String nome, String cpf, String rg, 
+    public Funcionario alterarFuncionario(String nome, String cpf, String rg, String email, 
             String data_nasc, String telefone, char sexo, String pCargo,
             String pHabilitacao, String pUsuario, String senha,
             String cep, String logradouro, String numero,
@@ -60,9 +59,10 @@ public class GTFuncionario {
         Cargo cargo = new Cargo(pCargo);
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
-        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, "email@mail.com", cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
-        gdFuncionario.cadastrar(funcionario);
-        return 0;
+        
+        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
+        gdFuncionario.alterar(funcionario);
+        return funcionario;
     }
     
     public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String texto){

@@ -11,8 +11,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private int CENARIO;
-    private Funcionario funcionario;
-    private Funcionario funcionarioAtual;
+    private Funcionario funcionario, funcionarioAtual;
     
     public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Funcionario funcionario) {
         super(parent, modal);
@@ -450,27 +449,35 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
+        String nome = jTextFieldNome.getText();
+        String cpf = jFormattedTextFieldCpf.getText().replace(".", "").replace("-", "").replace(" ", "");
+        String rg = jFormattedTextFieldRg.getText().replace(".", "").replace("-", "").replace(" ", "");
+        String data_nasc = jFormattedTextFieldDataNascimento.getText();
+        String telefone = jFormattedTextFieldTelefone.getText();
+        char sexo = (char) jButtonGroupSexo.getSelection().getMnemonic();
+        String email = jTextFieldEmail.getText();
+        String cargo = jComboBoxCargo.getSelectedItem().toString();
+        String habilitacao = jComboBoxHabilitacao.getSelectedItem().toString();
+        String cep = jFormattedTextFieldCep.getText();
+        String numero = jTextFieldNumero.getText();
+        String logradouro = jTextFieldLogradouro.getText();
+        String bairro = jTextFieldBairro.getText();
+        String cidade = jTextFieldCidade.getText();
+        String estado = jTextFieldEstado.getText();
+        String usuario = jTextFieldUsuario.getText();
+        String senha = jPasswordFieldSenha.getText();
+        
         try {
-            validarCampos();
+            
             switch (CENARIO) {
                 case Cenario.CADASTRAR: {
+                    validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, usuario, senha);
                     funcionarioAtual = ciInterface.getCiFuncionario().cadastrarFuncionario(
-                            jTextFieldNome.getText(), 
-                            jFormattedTextFieldCpf.getText().replace("-", "").replace(".", ""),
-                            jFormattedTextFieldRg.getText().replace("-", "").replace(".", ""),
-                            jFormattedTextFieldDataNascimento.getText(),
-                            jFormattedTextFieldTelefone.getText().replace("(", "").replace(")", "").replace("-", ""), 
-                            (char) jButtonGroupSexo.getSelection().getMnemonic(), 
-                            jComboBoxCargo.getSelectedItem().toString(),
-                            jComboBoxHabilitacao.getSelectedItem().toString(),
-                            jTextFieldUsuario.getText(),
-                            jPasswordFieldSenha.getText(),
-                            jFormattedTextFieldCep.getText().replace("-", ""),
-                            jTextFieldLogradouro.getText(),
-                            jTextFieldNumero.getText(),
-                            jTextFieldBairro.getText(),
-                            jTextFieldCidade.getText(),
-                            jTextFieldEstado.getText());
+                            nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
+                            habilitacao, usuario, senha, cep, logradouro, numero,
+                            bairro, cidade, estado);
+                    
                     if ( funcionarioAtual != null ) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
@@ -479,35 +486,27 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     break;
                 }
                 case Cenario.CONSULTAR:
-                    this.dispose();
-                    break;
+                    this.dispose(); break;
+                    
                 case Cenario.ALTERAR:
-                    boolean alterar = ciInterface.getCiFuncionario().alterarFuncionario(jTextFieldNome.getText(), 
-                            jFormattedTextFieldCpf.getText().replace("-", "").replace(".", ""),
-                            jFormattedTextFieldRg.getText().replace("-", "").replace(".", ""),
-                            jFormattedTextFieldDataNascimento.getText(),
-                            jFormattedTextFieldTelefone.getText().replace("(", "").replace(")", "").replace("-", ""), 
-                            (char) jButtonGroupSexo.getSelection().getMnemonic(), 
-                            jComboBoxCargo.getSelectedItem().toString(),
-                            jComboBoxHabilitacao.getSelectedItem().toString(),
-                            jTextFieldUsuario.getText(),
-                            jPasswordFieldSenha.getText(),
-                            jFormattedTextFieldCep.getText().replace("-", ""),
-                            jTextFieldLogradouro.getText(),
-                            jTextFieldNumero.getText(),
-                            jTextFieldBairro.getText(),
-                            jTextFieldCidade.getText(),
-                            jTextFieldEstado.getText());
-                    if(alterar) this.dispose();
-                    break;
+                    validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, usuario, senha);
+                    funcionarioAtual  = ciInterface.getCiFuncionario().alterarFuncionario(
+                            nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
+                            habilitacao, usuario, senha, cep, logradouro, numero,
+                            bairro, cidade, estado);
+                    
+                    if ( funcionarioAtual != null ) {
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
+                        modoSomenteLeitura(true);
+                    }
+                        
                 case Cenario.EXCLUIR:
+                    JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
                     boolean resposta = ciInterface.getCiFuncionario().excluirFuncionario(funcionario);
                     if(resposta) this.dispose();
                     break;
-                default:
-                    JOptionPane.showMessageDialog(this, 
-                            "Não foi possível identificar a ação solicitada!");
-                    break;
+                default: break;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
@@ -522,12 +521,19 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         
         switch (CENARIO) {
             
-            case Cenario.CADASTRAR:break;  
+            case Cenario.CADASTRAR:
+                break;  
             case Cenario.ALTERAR:
                 setarCamposComInstancia(funcionario);
                 modoSomenteLeitura(false);
                 break; 
-            default: // CONSULTAR OU EXCLUIR
+            case Cenario.CONSULTAR:
+                modoSomenteLeitura(true);
+                setarCamposComInstancia(funcionario);
+                jButtonConfirmar.setEnabled(false);
+                jButtonCancelar.setText("Sair");
+                break;
+            default: //EXCLUIR
                 modoSomenteLeitura(true);
                 setarCamposComInstancia(funcionario);
                 break;
@@ -543,6 +549,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jTextFieldEstado.setEditable(condicao);
         jTextFieldLogradouro.setEditable(condicao);
         jTextFieldNumero.setEditable(condicao);
+        jTextFieldEmail.setEditable(condicao);
         jFormattedTextFieldCep.setEditable(condicao);
         jFormattedTextFieldCpf.setEditable(condicao);
         jFormattedTextFieldRg.setEditable(condicao);
@@ -562,34 +569,19 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldRg.setText(funcionario.getRg());
         jFormattedTextFieldDataNascimento.setText(funcionario.getDt_nasc("dd/MM/yyyy"));
         jFormattedTextFieldTelefone.setText(funcionario.getTelefone());
+        jTextFieldEmail.setText(funcionario.getEmail());
         if ( funcionario.getSexo() == 'M' )
             jRadioButtonMasculino.setSelected(true);
     }
     
-    public void validarCampos() throws Exception {
-        String nome = jTextFieldNome.getText();
-        String cpf = jFormattedTextFieldCpf.getText();
-        cpf = cpf.replace(".", "").replace("-", "").replace(" ", "");
-        String data_nasc = jFormattedTextFieldDataNascimento.getText();
-        String rg = jFormattedTextFieldRg.getText();
-        rg = rg.replace(".", "").replace("-", "").replace(" ", "");
-        String telefone = jFormattedTextFieldTelefone.getText();
-        String email = jTextFieldEmail.getText();
-        String cep = jFormattedTextFieldCep.getText();
-        String numero = jTextFieldNumero.getText();
-        String logradouro = jTextFieldLogradouro.getText();
-        String bairro = jTextFieldBairro.getText();
-        String cidade = jTextFieldCidade.getText();
-        String estado = jTextFieldEstado.getText();
-        String usuario = jTextFieldUsuario.getText();
-        String senha = jPasswordFieldSenha.getText();
-        
+    public void validarCampos(
+            String nome, String cpf, String data_nasc, String rg, String telefone, String email, 
+            String cep, String numero, String usuario, String senha) throws Exception {
+             
         if ( nome.equals("") || cpf.equals("") ||
                 data_nasc.equals("") || rg.equals("") || 
                 telefone.equals("") || email.equals("") ||
-                cep.equals("") || numero.equals("") ||
-                logradouro.equals("") || bairro.equals("") ||
-                cidade.equals("") || estado.equals("") )
+                cep.equals("") || numero.equals(""))
             throw new Exception("Verifique se todos os campos estão preenchidos!");
         
         if ( jCheckBoxAcessarSistema.isSelected() && (usuario.equals("") || senha.equals("")) ) {

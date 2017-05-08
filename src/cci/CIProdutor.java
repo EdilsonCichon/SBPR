@@ -59,14 +59,14 @@ public class CIProdutor {
         }  
     }
     
-    public boolean alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) { //Erick
+    public Produtor alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) { //Erick
         try {
-            gtProdutor.alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            Produtor produtor = gtProdutor.alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return true;
+            return produtor;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
-            return false;
+            return null;
         }
     }
     

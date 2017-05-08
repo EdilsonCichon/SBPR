@@ -11,7 +11,7 @@ public class GDFuncionario {
           
     }
     
-    public void alterar(){
+    public void alterar(Funcionario funcionario){
        
     }
     

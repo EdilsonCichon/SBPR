@@ -14,8 +14,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private JFrame pai;
     private int CENARIO;
-    private Produtor produtor;
-    private Produtor produtorAtual;
+    private Produtor produtor, produtorAtual;
 
     public JDCadastroProdutor(java.awt.Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtor) {
         super(pai, modal);
@@ -324,9 +323,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
     
         String nome = jTextFieldNome.getText();
-
         String cpf = jFormattedTextFieldCpf.getText().replace(".", "").replace("-", "");
-        
         String data_nasc = jFormattedTextFieldDataNascimento.getText();
         String inscricao = jFormattedTextFieldInscricaoEstadual.getText().replace(".", "").replace("-", "");
         String rg = jFormattedTextFieldRg.getText().replace(".", "");
@@ -347,14 +344,20 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 }
                                    
             } else if (CENARIO == Cenario.ALTERAR){
-                boolean resposta = ciInterface.getCiProdutor().alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-                if(resposta)
-                    this.dispose();
+                produtorAtual = ciInterface.getCiProdutor().alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                
+                if(produtorAtual != null){
+                    jButtonConfirmar.setEnabled(false);
+                    jButtonCancelar.setText("Sair");
+                    modoSomenteLeitura(true);
+                    habilitarBotoesPropriedade(true);
+                }
                 
             } else if(CENARIO == Cenario.CONSULTAR){
                 this.dispose();
                 
             } else if(CENARIO == Cenario.EXCLUIR){
+               JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
                 boolean resposta = ciInterface.getCiProdutor().excluirProdutor(produtor);
                 if(resposta)
                     this.dispose();
@@ -392,7 +395,14 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 habilitarBotoesPropriedade(true);
                 setarCamposComInstancia(produtor);
                 break;
-            default:// CONSULTAR OU EXCLUIR
+            case Cenario.CONSULTAR:
+                modoSomenteLeitura(true);
+                habilitarBotoesPropriedade(false);
+                setarCamposComInstancia(produtor);
+                jButtonConfirmar.setEnabled(false);
+                jButtonCancelar.setText("Sair");
+                break;
+            default://EXCLUIR
                 modoSomenteLeitura(true);
                 habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtor);
