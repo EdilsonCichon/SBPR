@@ -482,7 +482,23 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     this.dispose();
                     break;
                 case Cenario.ALTERAR:
-                    //CARTÃO DO ERICK
+                    boolean alterar = ciInterface.getCiFuncionario().alterarFuncionario(jTextFieldNome.getText(), 
+                            jFormattedTextFieldCpf.getText().replace("-", "").replace(".", ""),
+                            jFormattedTextFieldRg.getText().replace("-", "").replace(".", ""),
+                            jFormattedTextFieldDataNascimento.getText(),
+                            jFormattedTextFieldTelefone.getText().replace("(", "").replace(")", "").replace("-", ""), 
+                            (char) jButtonGroupSexo.getSelection().getMnemonic(), 
+                            jComboBoxCargo.getSelectedItem().toString(),
+                            jComboBoxHabilitacao.getSelectedItem().toString(),
+                            jTextFieldUsuario.getText(),
+                            jPasswordFieldSenha.getText(),
+                            jFormattedTextFieldCep.getText().replace("-", ""),
+                            jTextFieldLogradouro.getText(),
+                            jTextFieldNumero.getText(),
+                            jTextFieldBairro.getText(),
+                            jTextFieldCidade.getText(),
+                            jTextFieldEstado.getText());
+                    if(alterar) this.dispose();
                     break;
                 case Cenario.EXCLUIR:
                     boolean resposta = ciInterface.getCiFuncionario().excluirFuncionario(funcionario);
@@ -507,7 +523,10 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:break;  
-            case Cenario.ALTERAR:break; 
+            case Cenario.ALTERAR:
+                setarCamposComInstancia(funcionario);
+                modoSomenteLeitura(false);
+                break; 
             default: // CONSULTAR OU EXCLUIR
                 modoSomenteLeitura(true);
                 setarCamposComInstancia(funcionario);

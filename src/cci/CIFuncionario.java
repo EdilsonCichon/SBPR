@@ -59,8 +59,21 @@ public class CIFuncionario {
         }
     }
     
-    public void alterarFuncionario(){
-        int i = gtFuncionario.alterarFuncionario();
+    public boolean alterarFuncionario(String nome, String cpf, String rg, 
+            String data_nasc, String telefone, char sexo, String cargo,
+            String habilitacao, String usuario, String senha,
+            String cep, String logradouro, String numero,
+            String bairro, String cidade, String estado){
+        try {
+            gtFuncionario.alterarFuncionario(nome, cpf, rg, data_nasc, telefone, sexo, cargo, 
+                   habilitacao, usuario, senha, cep, logradouro, numero,
+                   bairro, cidade, estado);
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar " + e.getMessage());
+            return false;
+        }
     }
     
     public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String texto){

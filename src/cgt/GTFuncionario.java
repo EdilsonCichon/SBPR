@@ -45,8 +45,23 @@ public class GTFuncionario {
         return funcionario;
     }
     
-    public int alterarFuncionario(){
-        gdFuncionario.alterar();
+    public int alterarFuncionario(String nome, String cpf, String rg, 
+            String data_nasc, String telefone, char sexo, String pCargo,
+            String pHabilitacao, String pUsuario, String senha,
+            String cep, String logradouro, String numero,
+            String bairro, String cidade, String estado) throws Exception {
+        
+        validarCampos(nome, cpf, data_nasc, rg, telefone);
+        Date dtNascFormatada = new Date(data_nasc);
+        
+        Endereco endereco = new Endereco(numero, "casa", numero, null);
+        Habilitacao habilitacao = new Habilitacao(pHabilitacao);
+        Usuario usuario = new Usuario(pUsuario, senha);
+        Cargo cargo = new Cargo(pCargo);
+        LinkedList<TipoServico> tipoServicos = new LinkedList<>();
+        tipoServicos.add(new TipoServico());
+        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, "email@mail.com", cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
+        gdFuncionario.cadastrar(funcionario);
         return 0;
     }
     
