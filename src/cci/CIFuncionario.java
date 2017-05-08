@@ -44,6 +44,7 @@ public class CIFuncionario {
             String habilitacao, String usuario, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado) {
+        
         try {
           Funcionario funcionario = gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, data_nasc, telefone, sexo, cargo, 

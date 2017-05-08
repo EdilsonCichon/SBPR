@@ -325,14 +325,12 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     
         String nome = jTextFieldNome.getText();
 
-        String cpf = jFormattedTextFieldCpf.getText();  
-        cpf = cpf.replace(".", "");
-        cpf = cpf.replace("-", "");
+        String cpf = jFormattedTextFieldCpf.getText().replace(".", "").replace("-", "");
         
         String data_nasc = jFormattedTextFieldDataNascimento.getText();
-        String inscricao = jFormattedTextFieldInscricaoEstadual.getText();
-        String rg = jFormattedTextFieldRg.getText();
-        String telefone = jFormattedTextFieldTelefone.getText();
+        String inscricao = jFormattedTextFieldInscricaoEstadual.getText().replace(".", "").replace("-", "");
+        String rg = jFormattedTextFieldRg.getText().replace(".", "");
+        String telefone = jFormattedTextFieldTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
         char sexo = (char) jButtonGroupSexo.getSelection().getMnemonic();
         
         try {
@@ -343,6 +341,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 produtorAtual = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
                 if(produtorAtual != null){
                     jButtonConfirmar.setEnabled(false);
+                    jButtonCancelar.setText("Sair");
                     modoSomenteLeitura(true);
                     habilitarBotoesPropriedade(true);
                 }

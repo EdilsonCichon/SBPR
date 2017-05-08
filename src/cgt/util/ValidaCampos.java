@@ -118,19 +118,19 @@ public abstract class ValidaCampos {
     }
     
     public static boolean validarRg(String rg){
-        if ( rg.length() >= 7 )
+        if ( rg.length() == 7 )
             return true;
         return false;
     }
     
     public static boolean validarTelefone(String telefone){
-        if(telefone.length() == 14)    
+        if(telefone.length() == 11)    
             return true;
         return false;
     }
     
     public static boolean validarInscricaoEstadual(String inscricao){
-        if(inscricao.length() == 13)    
+        if(inscricao.length() == 10)    
             return true;
         return false;
     }

@@ -1,10 +1,10 @@
 package cgd;
 
-public class GDValidarAcesso {
+public class GDValidaAcesso {
 
-    public GDValidarAcesso() {
+    public GDValidaAcesso() {
     }
-    
+
     public boolean validarAcesso(String usuario, String senha){
         return true;       
     } 
