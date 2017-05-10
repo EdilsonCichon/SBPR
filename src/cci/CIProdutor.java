@@ -38,14 +38,16 @@ public class CIProdutor {
         cadastroProdutor.setVisible(true);
     }
      
-    public Produtor instanciarTelaFiltroProdutor(Frame pai, int CENARIO){
-         
-        Produtor produtorSelecionado = null;
+    public Produtor instanciarTelaFiltroProdutor(Frame pai, int CENARIO, Produtor produtorSelecionado){
         
         pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, CENARIO, produtorSelecionado);
         pesquisaProdutor.setVisible(true);
         return produtorSelecionado;
      }
+    
+    public Produtor instanciarProdutorVazio() {
+        return gtProdutor.instanciarProdutorVazio();
+    }
 
     public Produtor cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
         

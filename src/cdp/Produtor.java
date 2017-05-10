@@ -54,7 +54,11 @@ public class Produtor extends Pessoa {
     }
 
     public void setPropriedades(Collection<Propriedade> propriedades) {
-        this.propriedades = propriedades;
+        this.propriedades = this.propriedades;
+    }
+    
+    public void setPropriedade(Propriedade propriedade){
+        this.propriedades.add(propriedade);
     }
     
     public Object[] toArray() {

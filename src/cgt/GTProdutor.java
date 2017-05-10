@@ -16,6 +16,11 @@ public class GTProdutor {
     public GTProdutor() {
         gdProdutor = new GDProdutor();
     }
+    
+    public Produtor instanciarProdutorVazio(){    
+        Produtor produtor = new Produtor();
+        return produtor;     
+    }
 
     public Produtor cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
             

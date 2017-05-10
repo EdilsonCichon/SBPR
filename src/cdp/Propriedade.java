@@ -77,6 +77,6 @@ public class Propriedade {
     }
      
     public Object[] toArray() {
-        return new Object[] { this, referencia, responsavel };
+        return new Object[] { this, getNome_propriedade(), getReferencia() };
     }  
 }

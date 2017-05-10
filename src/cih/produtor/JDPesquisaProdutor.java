@@ -176,14 +176,26 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
         try {
             
             Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
-            
+                 
             if(CENARIO == Cenario.CADASTRAR){ // PESQUISANDO PRODUTOR PARA CADASTRAR PROPRIEDADE
-               produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
-               if(produtorSelecionado != null)
-                   this.dispose();      
+                
+                produtorSelecionado.setId(produtor.getId());
+                produtorSelecionado.setCpf(produtor.getCpf());
+                produtorSelecionado.setDt_nasc(produtor.getDt_nasc());
+                produtorSelecionado.setRg(produtor.getRg());
+                produtorSelecionado.setInscricao_estadual(produtor.getInscricao_estadual());
+                produtorSelecionado.setNome(produtor.getNome());
+                produtorSelecionado.setTelefone(produtor.getTelefone());
+                produtorSelecionado.setSexo(produtor.getSexo());
+                produtorSelecionado.setPropriedades(produtor.getPropriedades());
+//               produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
+//               if(produtorSelecionado != null)
+//                   this.dispose();   
+               
             }else{ // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE PRODUTOR
                  ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtor, pai, CENARIO);
             }           
@@ -194,7 +206,10 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
        
-        LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().consultarProdutor((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
+        String colunaFiltro = (String)jComboBoxFiltro.getSelectedItem();
+        String filtro = jTextFieldFiltro.getText();
+        
+        LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().consultarProdutor(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableProdutor);
         
         listaProdutores.forEach((produtor) -> {

@@ -13,6 +13,8 @@ public class GDProdutor {
     }
     
     public void cadastrar(Produtor produtor){
+        
+        //produtor.setId(0);
           
     }
     
@@ -50,6 +52,7 @@ public class GDProdutor {
         listaProdutores.add( edilson );
         listaProdutores.add( erick );
         listaProdutores.add( cristian );
+        
         return listaProdutores;
     }
     

@@ -5,6 +5,7 @@ import cdp.Propriedade;
 import cci.CIInterface;
 import cci.util.Cenario;
 import cci.util.JTableUtil;
+import java.util.Collection;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -445,8 +446,22 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     }
     
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        
         Propriedade propriedadeVazia = ciInterface.getCiPropriedade().instanciarPropriedadeVazia(produtorAtual);
         ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedadeVazia, pai, Cenario.ADICIONAR);
+        
+        //TENTATIVA DE INSERIR A PROPRIEDADE CADASTRADA NA TABELA DE PRODUTOR
+        
+        
+//        produtorAtual.setPropriedade(propriedadeVazia);
+//        
+//        Collection<Propriedade> listaPropriedades = produtorAtual.getPropriedades();
+//        JTableUtil.limparTabela(jTablePropriedades);
+//        
+//        listaPropriedades.forEach((propriedadeAtual) -> {
+//            JTableUtil.addLinha(jTablePropriedades, propriedadeAtual.toArray() );
+//        });
+        
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
