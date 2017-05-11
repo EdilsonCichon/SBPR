@@ -1,12 +1,16 @@
 package cih.tipoMaquina;
 
-import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.util.Cenario;
+import cdp.TipoMaquina;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private int CENARIO;
+    private TipoMaquina tipoMaquinaAtual;
 
     public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface ciInterface) {
         super(parent, modal);
@@ -158,15 +162,29 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        
         String nome = jTextFieldNome.getText();
         String descricao = jTextAreaDescricao.getText();
-        
         try {
-            validarCampos(nome, descricao);
-            ciInterface.getCiTipoMaquina().cadastrarTipoMaquina(nome, descricao);
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            switch (CENARIO) {
+                case Cenario.CADASTRAR:
+                    validarCampos(nome, descricao);
+                    tipoMaquinaAtual = ciInterface.getCiTipoMaquina().cadastrarTipoMaquina(nome, descricao);
+                    if ( tipoMaquinaAtual != null ) {
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
+                        modoSomenteLeitura(true);
+                    }
+                    break;
+                case Cenario.CONSULTAR:
+                    this.dispose(); break;
+                case Cenario.ALTERAR:
+                    break;
+                case Cenario.EXCLUIR:
+                    break;
+                default: break;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -174,9 +192,16 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    public void modoSomenteLeitura(boolean condicao) {
+        condicao = !condicao;
+        jTextFieldNome.setEditable(condicao);
+        jTextAreaDescricao.setEditable(condicao);
+        jButtonLimpar.setEnabled(condicao);
+    }
+    
     private void validarCampos(String nome, String descricao) throws Exception {
         if (nome.equals("") || descricao.equals(""))
-            throw new Exception("Campos Vazios");
+            throw new Exception("Verifique se todos os campos estão preenchidos!");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

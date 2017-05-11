@@ -467,7 +467,6 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         String estado = jTextFieldEstado.getText();
         String usuario = jTextFieldUsuario.getText();
         String senha = jPasswordFieldSenha.getText();
-        
         try {
             
             switch (CENARIO) {

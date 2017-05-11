@@ -2,7 +2,6 @@ package cgt;
 
 import cdp.TipoMaquina;
 import cgd.GDTipoMaquina;
-import javax.swing.JOptionPane;
 
 public class GTTipoMaquina {
     
@@ -13,10 +12,11 @@ public class GTTipoMaquina {
         gdTipoMaquina = new GDTipoMaquina();
     }
     
-    public void cadastrarTipoMaquina(String nome, String descricao) throws Exception {
+    public TipoMaquina cadastrarTipoMaquina(String nome, String descricao) throws Exception {
         validarCampos(nome, descricao);
         tipoMaquina = new TipoMaquina(nome, descricao);
         gdTipoMaquina.cadastrar(tipoMaquina);
+        return tipoMaquina;
     }
     
     public int alterarTipoMaquina() {
@@ -35,8 +35,7 @@ public class GTTipoMaquina {
     } 
     
     private void validarCampos(String nome, String descricao) throws Exception {
-        // MELHORAR ESSA VALIDAÇÃO, FOI FEITA SOMENTE PARA COMEÇAR.
         if (nome.equals("") || descricao.equals(""))
-            throw new Exception("Favor preencher os campos!");
+            throw new Exception("Verifique se todos os campos estão preenchidos!");
     }
 }

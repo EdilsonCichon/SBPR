@@ -1,10 +1,11 @@
 package cci;
 
 import cci.util.Cenario;
-import javax.swing.JFrame;
+import cdp.TipoMaquina;
 import cgt.GTTipoMaquina;
 import cih.tipoMaquina.JDCadastroTipoMaquina;
 import cih.tipoMaquina.JDPesquisarTipoMaquina;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class CITipoMaquina {
@@ -35,12 +36,14 @@ public class CITipoMaquina {
         }
     }
         
-    public void cadastrarTipoMaquina(String nome, String descricao) {
+    public TipoMaquina cadastrarTipoMaquina(String nome, String descricao) {
         try {
-            gtTipoMaquina.cadastrarTipoMaquina(nome, descricao);
+            TipoMaquina tipoMaquina = gtTipoMaquina.cadastrarTipoMaquina(nome, descricao);
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            return tipoMaquina;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            return null;
         }
     }
     
