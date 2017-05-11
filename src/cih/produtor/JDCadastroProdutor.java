@@ -5,7 +5,6 @@ import cdp.Propriedade;
 import cci.CIInterface;
 import cci.util.Cenario;
 import cci.util.JTableUtil;
-import java.util.Collection;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -347,21 +346,23 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             } else if (CENARIO == Cenario.ALTERAR){
                 produtorAtual = ciInterface.getCiProdutor().alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
                 
-                if(produtorAtual != null){
+                if (produtorAtual != null) {
                     jButtonConfirmar.setEnabled(false);
                     jButtonCancelar.setText("Sair");
                     modoSomenteLeitura(true);
                     habilitarBotoesPropriedade(true);
                 }
                 
-            } else if(CENARIO == Cenario.CONSULTAR){
+            } else if (CENARIO == Cenario.CONSULTAR) {
                 this.dispose();
                 
-            } else if(CENARIO == Cenario.EXCLUIR){
-               JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
-                boolean resposta = ciInterface.getCiProdutor().excluirProdutor(produtor);
-                if(resposta)
-                    this.dispose();
+            } else if (CENARIO == Cenario.EXCLUIR) {
+                int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
+                if ( confirmacao == 0 ) {
+                    boolean resposta = ciInterface.getCiProdutor().excluirProdutor(produtor);
+                    if(resposta)
+                        this.dispose();
+                }
             }          
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());

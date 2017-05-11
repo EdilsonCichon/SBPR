@@ -5,6 +5,8 @@ import cdp.TipoMaquina;
 import cgt.GTTipoMaquina;
 import cih.tipoMaquina.JDCadastroTipoMaquina;
 import cih.tipoMaquina.JDPesquisarTipoMaquina;
+import java.awt.Frame;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,6 +14,8 @@ public class CITipoMaquina {
     
     private CIInterface ciInterface;
     private GTTipoMaquina gtTipoMaquina;
+    private JDCadastroTipoMaquina cadastroTipoMaquina;
+    private JDPesquisarTipoMaquina pesquisaTipoMaquina;
 
     public CITipoMaquina(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -19,19 +23,11 @@ public class CITipoMaquina {
     }
     
     public void gerenciarTipoMaquina(int CENARIO, JFrame pai) {
-        JDCadastroTipoMaquina cadastroTipoMaquina;
-        JDPesquisarTipoMaquina pesquisaTipoMaquina; 
-        if (CENARIO == Cenario.CADASTRAR) {
-            cadastroTipoMaquina = new JDCadastroTipoMaquina(pai, true, ciInterface);
+        if ( CENARIO == Cenario.CADASTRAR ) {
+            cadastroTipoMaquina = new JDCadastroTipoMaquina(pai, true, CENARIO, ciInterface, null);
             cadastroTipoMaquina.setVisible(true);
-        } else if (CENARIO > Cenario.ALTERAR) {
-            pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, ciInterface);
-            pesquisaTipoMaquina.setVisible(true);
-        }else if (CENARIO > Cenario.CONSULTAR) {
-            pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, ciInterface);
-            pesquisaTipoMaquina.setVisible(true);
-        }else if (CENARIO > Cenario.EXCLUIR) {
-            pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, ciInterface);
+        } else {
+            pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, CENARIO, ciInterface);
             pesquisaTipoMaquina.setVisible(true);
         }
     }
@@ -47,15 +43,34 @@ public class CITipoMaquina {
         }
     }
     
-    public void alterarTipoMaquina(){
-        int i = gtTipoMaquina.alterarTipoMaquina();
+    public TipoMaquina alterarTipoMaquina(String nome, String descricao) {
+        try {
+            TipoMaquina tipoMaquina = gtTipoMaquina.alterarTipoMaquina(nome, descricao);
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            return tipoMaquina;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
+            return null;
+        }
     }
     
-    public void consultarTipoMaquina(){
-        int i = gtTipoMaquina.consultarTipoMaquina();
+    public LinkedList<TipoMaquina> consultarTipoMaquina(String nomePesquisado){
+       return gtTipoMaquina.consultarTipoMaquina(nomePesquisado);
     }
     
-    public void excluirTipoMaquina(){
-        int i = gtTipoMaquina.excluirTipoMaquina();
+    public boolean excluirTipoMaquina(TipoMaquina tipoMaquina){
+        try {
+            gtTipoMaquina.excluirTipoMaquina(tipoMaquina);
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
+            return false;
+        }  
+    }
+    
+    public void instanciarTelaCadastroTipoMaquina(TipoMaquina tipoMaquina, Frame pai, int CENARIO) {
+        cadastroTipoMaquina = new JDCadastroTipoMaquina(pai, true, CENARIO, ciInterface, tipoMaquina);
+        cadastroTipoMaquina.setVisible(true);
     }
 }

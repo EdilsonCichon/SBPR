@@ -11,8 +11,6 @@ import cgd.GDFuncionario;
 import cgt.util.ValidaCampos;
 import java.util.Date;
 import java.util.LinkedList;
-import java.text.SimpleDateFormat;
-import javax.swing.JOptionPane;
 
 public class GTFuncionario {
     
@@ -65,8 +63,8 @@ public class GTFuncionario {
         return funcionario;
     }
     
-    public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String texto){
-        return gdFuncionario.consultar(tipoFiltro, texto);
+    public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String valorInformadoFiltro){
+        return gdFuncionario.consultar(tipoFiltro, valorInformadoFiltro);
     }
     
     public int excluirFuncionario(Funcionario funcionario){

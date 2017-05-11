@@ -4,6 +4,7 @@ import cdp.Produtor;
 import cci.util.Cenario;
 import cci.CIInterface;
 import cci.util.JTableUtil;
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import java.awt.Frame;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
@@ -26,9 +27,9 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         setIconImage(icone.getImage());
     }
     
-    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int cenario, Produtor produtorSelecionado) {
+    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtorSelecionado) {
         super(pai, modal);
-        this.CENARIO = cenario;
+        this.CENARIO = CENARIO;
         this.pai = pai;
         this.ciInterface = ciInterface;
         this.produtorSelecionado = produtorSelecionado;
@@ -178,11 +179,8 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
         try {
-            
-            Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
-                 
-            if(CENARIO == Cenario.CADASTRAR){ // PESQUISANDO PRODUTOR PARA CADASTRAR PROPRIEDADE
-                
+            Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);    
+            if (CENARIO == Cenario.CADASTRAR) { // PESQUISANDO PRODUTOR PARA CADASTRAR PROPRIEDADE
                 produtorSelecionado.setId(produtor.getId());
                 produtorSelecionado.setCpf(produtor.getCpf());
                 produtorSelecionado.setDt_nasc(produtor.getDt_nasc());
@@ -196,11 +194,11 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
 //               if(produtorSelecionado != null)
 //                   this.dispose();   
                
-            }else{ // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE PRODUTOR
-                 ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtor, pai, CENARIO);
-            }           
+            } else { // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE PRODUTOR
+                ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtor, pai, CENARIO);
+            }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro: "+ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 

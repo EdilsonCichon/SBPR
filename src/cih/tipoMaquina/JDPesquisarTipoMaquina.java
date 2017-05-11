@@ -1,16 +1,26 @@
 package cih.tipoMaquina;
 
-import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.util.Cenario;
+import cci.util.JTableUtil;
+import cdp.TipoMaquina;
+import java.awt.Frame;
+import java.util.LinkedList;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private int CENARIO;
+    private Frame pai;
     
-    public JDPesquisarTipoMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
-        super(parent, modal);
+    public JDPesquisarTipoMaquina(Frame pai, boolean modal, int CENARIO, CIInterface ciInterface) {
+        super(pai, modal);
         initComponents();
         this.ciInterface = ciInterface;
+        this.CENARIO = CENARIO;
+        this.pai = pai;
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
@@ -24,6 +34,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         jTableTipoDeMaquina = new javax.swing.JTable();
         jLabelNome = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
+        jButtonFiltrar = new javax.swing.JButton();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -45,6 +56,13 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
 
         jLabelNome.setText("Nome:");
 
+        jButtonFiltrar.setText("...");
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFiltrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTipoMaquinaLayout = new javax.swing.GroupLayout(jPanelTipoMaquina);
         jPanelTipoMaquina.setLayout(jPanelTipoMaquinaLayout);
         jPanelTipoMaquinaLayout.setHorizontalGroup(
@@ -52,11 +70,13 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
             .addGroup(jPanelTipoMaquinaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTipoMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                     .addGroup(jPanelTipoMaquinaLayout.createSequentialGroup()
                         .addComponent(jLabelNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldNome)))
+                        .addComponent(jTextFieldNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelTipoMaquinaLayout.setVerticalGroup(
@@ -65,9 +85,10 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelTipoMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFiltrar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -81,13 +102,18 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
         jPanelBotoes.setLayout(jPanelBotoesLayout);
         jPanelBotoesLayout.setHorizontalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
-                .addContainerGap(238, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar)
@@ -123,13 +149,40 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        // TODO add your handling code here:
+        try {
+            TipoMaquina tipoMaquina = (TipoMaquina) JTableUtil.getDadosLinhaSelecionada(jTableTipoDeMaquina);
+            switch ( CENARIO ) {
+                case Cenario.CADASTRAR: 
+                    break;
+                case Cenario.CONSULTAR:
+                    break;
+                case Cenario.ALTERAR:
+                    break;
+                case Cenario.EXCLUIR:
+                    ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO);
+                    break;
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Selecione um Tipo de Maquina", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
+        LinkedList<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().consultarTipoMaquina(jTextFieldNome.getText());
+        JTableUtil.limparTabela(jTableTipoDeMaquina);
+        listaTiposMaquinas.forEach((tipoMaquina) -> {
+            JTableUtil.addLinha(jTableTipoDeMaquina, tipoMaquina.toArray() );
+        });
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelTipoMaquina;

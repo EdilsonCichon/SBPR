@@ -14,8 +14,8 @@ public class CIProdutor {
     
     private CIInterface ciInterface;
     private GTProdutor gtProdutor;
-    JDCadastroProdutor cadastroProdutor;
-    JDPesquisaProdutor pesquisaProdutor;
+    private JDCadastroProdutor cadastroProdutor;
+    private JDPesquisaProdutor pesquisaProdutor;
     
     public CIProdutor(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -33,7 +33,7 @@ public class CIProdutor {
         }
     }
     
-    public void instanciarTelaCadastroProdutor(Produtor produtor, Frame pai, int CENARIO){
+    public void instanciarTelaCadastroProdutor(Produtor produtor, Frame pai, int CENARIO) {
         cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, CENARIO, produtor);
         cadastroProdutor.setVisible(true);
     }

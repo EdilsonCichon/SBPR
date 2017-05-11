@@ -3,21 +3,26 @@ package cih.tipoMaquina;
 import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.TipoMaquina;
+import java.awt.Frame;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
 public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     
-    private CIInterface ciInterface;
     private int CENARIO;
+    private CIInterface ciInterface;
+    private TipoMaquina tipoMaquina;
     private TipoMaquina tipoMaquinaAtual;
 
-    public JDCadastroTipoMaquina(java.awt.Frame parent, boolean modal,CIInterface ciInterface) {
+    public JDCadastroTipoMaquina(Frame parent, boolean modal, int CENARIO, CIInterface ciInterface, TipoMaquina tipoMaquina) {
         super(parent, modal);
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
         this.ciInterface = ciInterface;
+        this.tipoMaquina = tipoMaquina;
+        this.CENARIO = CENARIO;
+        identificarCenario();
     }
 
     @SuppressWarnings("unchecked")
@@ -158,7 +163,8 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        
+        jTextFieldNome.setText("");
+        jTextAreaDescricao.setText("");
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
@@ -180,7 +186,12 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
                 case Cenario.ALTERAR:
                     break;
                 case Cenario.EXCLUIR:
-                    break;
+                    int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
+                    if ( confirmacao == 0 ) {
+                        boolean resposta = ciInterface.getCiTipoMaquina().excluirTipoMaquina(tipoMaquina);
+                        if (resposta)
+                            this.dispose();
+                    }
                 default: break;
             }
         } catch (Exception e) {
@@ -192,6 +203,22 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    public void identificarCenario() {
+        switch ( CENARIO ) {
+            case Cenario.CADASTRAR:
+                break;
+            case Cenario.ALTERAR:
+                break;
+            case Cenario.CONSULTAR:
+                break;
+            default://EXCLUIR
+                modoSomenteLeitura(true);
+                jButtonConfirmar.setText("Excluir");
+                setarCamposComInstancia(tipoMaquina);
+                break;
+        }
+    }
+    
     public void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jTextFieldNome.setEditable(condicao);
@@ -202,6 +229,11 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     private void validarCampos(String nome, String descricao) throws Exception {
         if (nome.equals("") || descricao.equals(""))
             throw new Exception("Verifique se todos os campos estão preenchidos!");
+    }
+    
+    public void setarCamposComInstancia(TipoMaquina tipoMaquina) {
+        jTextFieldNome.setText(tipoMaquina.getNome());
+        jTextAreaDescricao.setText(tipoMaquina.getDescricao());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

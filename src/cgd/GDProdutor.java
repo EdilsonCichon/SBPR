@@ -3,6 +3,7 @@ package cgd;
 
 import cdp.Produtor;
 import cdp.Propriedade;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -29,17 +30,17 @@ public class GDProdutor {
         Produtor erick = new Produtor("54312", null, 0, "Erick", new Date("10/10/1990"), "13043103871", "54312", 'M', "91421041");
         Produtor cristian = new Produtor("54312", null, 0, "Crystian", new Date("10/10/1990"), "13043103871", "54312", 'M', "91421041");
         
-        LinkedList<Propriedade> propriedadesEdilson = new LinkedList();
+        Collection<Propriedade> propriedadesEdilson = new LinkedList();
         propriedadesEdilson.add( new Propriedade(10, "Fazenda 1", "Perto da estrada", edilson));
         propriedadesEdilson.add( new Propriedade(20, "Fazenda 2", "Longe da estrada", edilson));
         propriedadesEdilson.add( new Propriedade(30, "Fazenda 3", "Na da estrada", edilson));
         
-        LinkedList<Propriedade> propriedadesErick = new LinkedList();
+        Collection<Propriedade> propriedadesErick = new LinkedList();
         propriedadesErick.add( new Propriedade(10, "Fazenda 4", "Colatina", erick));
         propriedadesErick.add( new Propriedade(20, "Fazenda 5", "Marilandia", erick));
         propriedadesErick.add( new Propriedade(30, "Fazenda 6", "Sao Roque", erick));
         
-        LinkedList<Propriedade> propriedadesCristian = new LinkedList();
+        Collection<Propriedade> propriedadesCristian = new LinkedList();
         propriedadesCristian.add( new Propriedade(10, "Fazenda 7", "Vicosa", cristian));
         propriedadesCristian.add( new Propriedade(20, "Fazenda 8", "Boa esperança", cristian));
         propriedadesCristian.add( new Propriedade(30, "Fazenda 9", "Pinheiros", cristian));

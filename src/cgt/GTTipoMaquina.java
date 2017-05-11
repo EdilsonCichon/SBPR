@@ -2,6 +2,7 @@ package cgt;
 
 import cdp.TipoMaquina;
 import cgd.GDTipoMaquina;
+import java.util.LinkedList;
 
 public class GTTipoMaquina {
     
@@ -19,20 +20,20 @@ public class GTTipoMaquina {
         return tipoMaquina;
     }
     
-    public int alterarTipoMaquina() {
-        gdTipoMaquina.alterar();
-        return 0;
+    public TipoMaquina alterarTipoMaquina(String nome, String descricao) {
+        TipoMaquina tipoMaquina = new TipoMaquina(nome, descricao);
+        gdTipoMaquina.alterar(tipoMaquina);
+        return tipoMaquina;
     }
     
-    public int consultarTipoMaquina() {
-        gdTipoMaquina.consultar();
-        return 0;
+    public LinkedList<TipoMaquina> consultarTipoMaquina(String nomePesquisado) {
+        return gdTipoMaquina.consultar(nomePesquisado);
     }
     
-    public int excluirTipoMaquina() {
-        gdTipoMaquina.excluir();
+    public int excluirTipoMaquina(TipoMaquina tipoMaquina) {
+        gdTipoMaquina.excluir(tipoMaquina);
         return 0;
-    } 
+    }
     
     private void validarCampos(String nome, String descricao) throws Exception {
         if (nome.equals("") || descricao.equals(""))
