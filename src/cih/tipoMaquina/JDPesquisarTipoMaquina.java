@@ -151,16 +151,12 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         try {
             TipoMaquina tipoMaquina = (TipoMaquina) JTableUtil.getDadosLinhaSelecionada(jTableTipoDeMaquina);
+            
             switch ( CENARIO ) {
-                case Cenario.CADASTRAR: 
-                    break;
-                case Cenario.CONSULTAR:
-                    break;
-                case Cenario.ALTERAR:
-                    break;
-                case Cenario.EXCLUIR:
-                    ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO);
-                    break;
+                case Cenario.CADASTRAR: break;
+                
+                default:
+                    ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO); break;
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um Tipo de Maquina", "Aviso", JOptionPane.INFORMATION_MESSAGE);
