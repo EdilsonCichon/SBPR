@@ -1,4 +1,3 @@
-
 package cgd;
 
 import cdp.Produtor;
@@ -6,16 +5,8 @@ import cdp.Propriedade;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class GDPropriedade {
-    
-    public void cadastrar(Propriedade propriedade){
-          
-    }
-    
-    public void alterar(Propriedade propriedade) {
-       //FAZER OPERAÇÃO NO BANCO DE ALTERAR A PROPRIEDADE
-    }
-    
+public class GDPropriedade extends GDGenerico{
+     
     public LinkedList<Propriedade> consultar(String colunaFiltro, String valorFiltro) {
         //ESSES DADOS DEVEM SER RETORNADOS DO BANCO.
         Produtor Edilson = new Produtor("12345", null, 0, "Edilson", new Date("10/10/1992"), "23053109873", "12345", 'M', "98423044");
@@ -28,8 +19,4 @@ public class GDPropriedade {
         listaPropriedades.add( new Propriedade(30, "Fazenda 3", "Na da estrada", Crystian));
         return listaPropriedades;
     }
-    
-    public void excluir(Propriedade propriedade){
-       
-    }  
 }

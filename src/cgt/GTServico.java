@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cgt;
 
 import cgd.GDServico;
 
-/**
- *
- * @author Chrysthian
- */
 public class GTServico {
     
     private GDServico gdServico;
@@ -20,27 +11,27 @@ public class GTServico {
     }
     
     public int cadastrarServico(){
-        gdServico.cadastrar();
+        //gdServico.cadastrar();
         return 0;
     }
     
     public int alterarServico(){
-        gdServico.alterar();
+        //gdServico.alterar();
         return 0;
     }
     
     public int consultarServico(){
-        gdServico.consultar();
+        //gdServico.consultar();
         return 0;
     }
     
     public int cancelarServico(){
-        gdServico.cancelar();
+        //gdServico.cancelar();
         return 0;
     } 
     
     public int concluirServico(){
-        gdServico.concluir();
+        //gdServico.concluir();
         return 0;
     } 
 }

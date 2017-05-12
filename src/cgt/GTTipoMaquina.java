@@ -2,6 +2,7 @@ package cgt;
 
 import cdp.TipoMaquina;
 import cgd.GDTipoMaquina;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class GTTipoMaquina {
@@ -20,7 +21,7 @@ public class GTTipoMaquina {
         return tipoMaquina;
     }
     
-    public TipoMaquina alterarTipoMaquina(String nome, String descricao) {
+    public TipoMaquina alterarTipoMaquina(String nome, String descricao) throws SQLException, ClassNotFoundException {
         TipoMaquina tipoMaquina = new TipoMaquina(nome, descricao);
         gdTipoMaquina.alterar(tipoMaquina);
         return tipoMaquina;
@@ -30,7 +31,7 @@ public class GTTipoMaquina {
         return gdTipoMaquina.consultar(nomePesquisado);
     }
     
-    public int excluirTipoMaquina(TipoMaquina tipoMaquina) {
+    public int excluirTipoMaquina(TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException {
         gdTipoMaquina.excluir(tipoMaquina);
         return 0;
     }

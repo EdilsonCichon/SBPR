@@ -9,6 +9,7 @@ import cdp.TipoServico;
 import cdp.endereco.Endereco;
 import cgd.GDFuncionario;
 import cgt.util.ValidaCampos;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -67,7 +68,7 @@ public class GTFuncionario {
         return gdFuncionario.consultar(tipoFiltro, valorInformadoFiltro);
     }
     
-    public int excluirFuncionario(Funcionario funcionario){
+    public int excluirFuncionario(Funcionario funcionario) throws SQLException, ClassNotFoundException{
         gdFuncionario.excluir(funcionario);
         return 0;
     } 

@@ -1,22 +1,9 @@
 
 package cgd;
 
-public class GDTipoServico {
-    
-    public void cadastrar(){
-          
-    }
-    
-    public void alterar(){
-       
-    }
+public class GDTipoServico extends GDGenerico{
     
     public void consultar(){
         
-    }
-    
-    public void excluir(){
-       
-    } 
-    
+    }   
 }

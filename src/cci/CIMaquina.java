@@ -35,18 +35,18 @@ public class CIMaquina {
     }
 
     public void cadastrarMaquina(){
-        int i = gtMaquina.cadastrarMaquina();
+        //int i = gtMaquina.cadastrarMaquina();
     }
     
     public void alterarMaquina(){
-        int i = gtMaquina.alterarMaquina();
+        //int i = gtMaquina.alterarMaquina();
     }
     
     public void consultarMaquina(){
-        int i = gtMaquina.consultarMaquina();
+        //int i = gtMaquina.consultarMaquina();
     }
     
     public void excluirMaquina(){
-        int i = gtMaquina.excluirMaquina();
+        //int i = gtMaquina.excluirMaquina();
     }    
 }

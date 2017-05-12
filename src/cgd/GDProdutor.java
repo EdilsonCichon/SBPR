@@ -7,11 +7,7 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class GDProdutor extends GDGenerico{
-
-    public GDProdutor(){
-  
-    }
-         
+       
     public LinkedList<Produtor> consultar(String colunaFiltro, String valorFiltro) {
         
         //ESSES DADOS DEVEM SER RETORNADOS DO BANCO

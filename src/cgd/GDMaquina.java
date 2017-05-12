@@ -1,22 +1,10 @@
-
 package cgd;
 
-public class GDMaquina {
+import cdp.Maquina;
+
+public class GDMaquina extends GDGenerico{
     
-    public void cadastrar(){
-          
+    public void consultar(Maquina maquina){
+    
     }
-    
-    public void alterar(){
-       
-    }
-    
-    public void consultar(){
-        
-    }
-    
-    public void excluir(){
-       
-    } 
-    
 }

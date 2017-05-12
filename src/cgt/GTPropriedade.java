@@ -3,6 +3,7 @@ package cgt;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cgd.GDPropriedade;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class GTPropriedade {
@@ -13,7 +14,7 @@ public class GTPropriedade {
         gdPropriedade = new GDPropriedade();
     }
     
-    public void cadastrarPropriedade(Produtor responsavel, String nome, String referencia){
+    public void cadastrarPropriedade(Produtor responsavel, String nome, String referencia) throws SQLException, ClassNotFoundException{
         Propriedade propriedade = new Propriedade(nome, referencia, responsavel);
         gdPropriedade.cadastrar(propriedade);
     }
@@ -25,11 +26,11 @@ public class GTPropriedade {
         return propriedade;
     }
     
-    public void alterarPropriedade(Propriedade propriedade) {
+    public void alterarPropriedade(Propriedade propriedade) throws SQLException, ClassNotFoundException {
         gdPropriedade.alterar(propriedade);
     }
       
-    public void excluirPropriedade(Propriedade propriedade){
+    public void excluirPropriedade(Propriedade propriedade) throws SQLException, ClassNotFoundException{
         gdPropriedade.excluir(propriedade);
         
     } 

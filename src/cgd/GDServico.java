@@ -1,16 +1,8 @@
 
 package cgd;
 
-public class GDServico {
-    
-    public void cadastrar(){
-          
-    }
-    
-    public void alterar(){
-       
-    }
-    
+public class GDServico extends GDGenerico{
+      
     public void cancelar(){
         
     }

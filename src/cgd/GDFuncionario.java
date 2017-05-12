@@ -1,19 +1,10 @@
-
 package cgd;
 
 import cdp.Funcionario;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class GDFuncionario {
-    
-    public void cadastrar(Funcionario funcionario){
-          
-    }
-    
-    public void alterar(Funcionario funcionario){
-       
-    }
+public class GDFuncionario extends GDGenerico{
     
     public LinkedList<Funcionario> consultar(String tipoFiltro, String texto){
         
@@ -28,9 +19,5 @@ public class GDFuncionario {
         listaFuncionarios.add(edilson);
         
         return listaFuncionarios;
-    }
-    
-    public void excluir(Funcionario funcionario){
-       
-    } 
+    }   
 }

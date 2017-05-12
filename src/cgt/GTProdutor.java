@@ -4,6 +4,7 @@ import cdp.Produtor;
 import cgd.GDProdutor;
 import cci.SBPRException;
 import cgt.util.ValidaCampos;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.text.ParseException;
@@ -52,7 +53,7 @@ public class GTProdutor {
         return gdProdutor.consultar(colunaFiltro, valorFiltro);
     }
 
-    public void excluirProdutor(Produtor produtor) {
+    public void excluirProdutor(Produtor produtor) throws SQLException, ClassNotFoundException {
         gdProdutor.excluir(produtor);
     }
 

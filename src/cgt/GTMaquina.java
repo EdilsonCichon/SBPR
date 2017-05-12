@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cgt;
 
+import cdp.Maquina;
 import cgd.GDMaquina;
+import java.sql.SQLException;
 
 public class GTMaquina {
     
@@ -15,23 +12,23 @@ public class GTMaquina {
         gdMaquina = new GDMaquina();
     }
     
-    public int cadastrarMaquina(){
-        gdMaquina.cadastrar();
+    public int cadastrarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
+        gdMaquina.cadastrar(maquina);
         return 0;
     }
     
-    public int alterarMaquina(){
-        gdMaquina.alterar();
+    public int alterarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
+        gdMaquina.alterar(maquina);
         return 0;
     }
     
-    public int consultarMaquina(){
-        gdMaquina.consultar();
+    public int consultarMaquina(Maquina maquina){
+        gdMaquina.consultar(maquina);
         return 0;
     }
     
-    public int excluirMaquina(){
-        gdMaquina.excluir();
+    public int excluirMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
+        gdMaquina.excluir(maquina);
         return 0;
     } 
 }
