@@ -1,4 +1,3 @@
-
 package cgd;
 
 import cdp.Produtor;
@@ -7,22 +6,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class GDProdutor {
+public class GDProdutor extends GDGenerico{
 
     public GDProdutor(){
   
     }
-    
-    public void cadastrar(Produtor produtor){
-        
-        //produtor.setId(0);
-          
-    }
-    
-    public void alterar(Produtor produtor){
-       
-    }
-       
+         
     public LinkedList<Produtor> consultar(String colunaFiltro, String valorFiltro) {
         
         //ESSES DADOS DEVEM SER RETORNADOS DO BANCO
@@ -56,8 +45,4 @@ public class GDProdutor {
         
         return listaProdutores;
     }
-    
-    public void excluir(Produtor produtor){
-       
-    } 
 }
