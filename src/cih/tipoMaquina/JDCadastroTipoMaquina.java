@@ -184,8 +184,16 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
                 case Cenario.CONSULTAR:
                     this.dispose(); break;
                     
-                case Cenario.ALTERAR: break;
-                
+                case Cenario.ALTERAR: 
+                    validarCampos(nome, descricao);
+                    tipoMaquinaAtual = ciInterface.getCiTipoMaquina().alterarTipoMaquina(nome, descricao);
+                    if ( tipoMaquinaAtual != null ) {
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
+                        modoSomenteLeitura(true);
+                    }
+                    break;
+                    
                 case Cenario.EXCLUIR:
                     int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
                     if ( confirmacao == 0 ) {
@@ -209,6 +217,8 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
             case Cenario.CADASTRAR:
                 break;
             case Cenario.ALTERAR:
+                setarCamposComInstancia(tipoMaquina);
+                jButtonConfirmar.setText("Alterar");
                 break;
             case Cenario.CONSULTAR:
                 modoSomenteLeitura(true);
