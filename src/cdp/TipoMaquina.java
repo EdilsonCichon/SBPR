@@ -11,9 +11,9 @@ public class TipoMaquina {
     private int id;
     
     @Column(nullable = false)
-    public String nome;
+    private String nome;
     @Column(nullable = false)
-    public String descricao;
+    private String descricao;
 
     public TipoMaquina() {
     }

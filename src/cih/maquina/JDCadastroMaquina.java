@@ -2,17 +2,25 @@ package cih.maquina;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.util.Cenario;
+import cdp.Maquina;
+import cdp.TipoMaquina;
+import javax.swing.JOptionPane;
 
 public class JDCadastroMaquina extends javax.swing.JDialog {
 
     private CIInterface ciInterface; 
+    private int CENARIO;
+    private Maquina maquinaAtual;
     
-    public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+    public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Maquina maquina) {
         super(parent, modal);
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
         this.ciInterface = ciInterface;
+        this.CENARIO = CENARIO;
+        this.maquinaAtual = maquina;
     }
 
     @SuppressWarnings("unchecked")
@@ -21,9 +29,10 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
 
         jPanelTipo = new javax.swing.JPanel();
         jLabelNome = new javax.swing.JLabel();
-        jComboBoxTipo = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableTipo = new javax.swing.JTable();
+        jComboBoxTipoMaquina = new javax.swing.JComboBox<>();
+        jLabelDescricao = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaDescricao = new javax.swing.JTextArea();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -40,31 +49,29 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
 
         jLabelNome.setText("Nome:");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um tipo...", "Retro Escavadeira" }));
+        jComboBoxTipoMaquina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um tipo de máquina...", "Retro Escavadeira" }));
 
-        jTableTipo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jLabelDescricao.setText("Descrição:");
 
-            },
-            new String [] {
-                "Nome", "Descrição"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableTipo);
+        jTextAreaDescricao.setColumns(20);
+        jTextAreaDescricao.setRows(5);
+        jTextAreaDescricao.setEnabled(false);
+        jScrollPane2.setViewportView(jTextAreaDescricao);
 
         javax.swing.GroupLayout jPanelTipoLayout = new javax.swing.GroupLayout(jPanelTipo);
         jPanelTipo.setLayout(jPanelTipoLayout);
         jPanelTipoLayout.setHorizontalGroup(
             jPanelTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTipoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTipoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTipoLayout.createSequentialGroup()
+                .addGroup(jPanelTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelTipoLayout.createSequentialGroup()
                         .addComponent(jLabelNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelTipoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxTipoMaquina, 0, 334, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelTipoLayout.createSequentialGroup()
+                        .addComponent(jLabelDescricao)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -74,17 +81,28 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
-                    .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxTipoMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabelDescricao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
         );
 
         jPanelBotoes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
         jPanelBotoes.setLayout(jPanelBotoesLayout);
@@ -93,7 +111,7 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar)
                 .addContainerGap())
         );
@@ -111,12 +129,6 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
 
         jLabelModelo.setText("Modelo:");
 
-        jTextFieldModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldModeloActionPerformed(evt);
-            }
-        });
-
         jLabelPlaca.setText("Placa:");
 
         try {
@@ -124,11 +136,6 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextFieldPlaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldPlacaActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanelInformacaoLayout = new javax.swing.GroupLayout(jPanelInformacao);
         jPanelInformacao.setLayout(jPanelInformacaoLayout);
@@ -143,7 +150,7 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
                 .addComponent(jLabelPlaca)
                 .addGap(18, 18, 18)
                 .addComponent(jFormattedTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         jPanelInformacaoLayout.setVerticalGroup(
             jPanelInformacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,8 +180,8 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jPanelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,28 +192,83 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jFormattedTextFieldPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldPlacaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldPlacaActionPerformed
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
+        TipoMaquina tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem();
+        String modelo = jTextFieldModelo.getText();
+        String placa = jFormattedTextFieldPlaca.getText();
+        
+        try {
+            
+            // CRIAR METODO DE VALIDAR CAMPOS
+            
+            if (CENARIO == Cenario.CADASTRAR) {
+               
+            } else if (CENARIO == Cenario.ALTERAR) {
+                
+                maquinaAtual.setTipoMaquina(tipoMaquina);
+                maquinaAtual.setModelo(modelo);
+                maquinaAtual.setPlaca(placa);          
+                boolean resposta = ciInterface.getCiMaquina().alterarMaquina(maquinaAtual);
+                
+                if(resposta){
+                    //EXECUTAR METODO MODO SOMENTE LEITURA
+                    jButtonCancelar.setText("Sair");
+                }
+                
+            } else if (CENARIO == Cenario.CONSULTAR) {
+                this.dispose();
+                
+            } else{ //EXCLUIR
+               
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }      
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-    private void jTextFieldModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldModeloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldModeloActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    public void identificarCenario(){
+        
+        switch (CENARIO) {
+            
+            case Cenario.CADASTRAR:
+                break;  
+            case Cenario.ALTERAR:
+                setarCamposComInstancia(maquinaAtual);
+                break; 
+            case Cenario.CONSULTAR:  
+                break;
+            default: //EXCLUIR
+                break;
+        }
+    }
+    
+    public void setarCamposComInstancia(Maquina maquinaAtual){
+        jComboBoxTipoMaquina.setSelectedItem(maquinaAtual.getTipoMaquina());
+        jTextAreaDescricao.setText(maquinaAtual.getTipoMaquina().getDescricao());
+        jTextFieldModelo.setText(maquinaAtual.getModelo());
+        jFormattedTextFieldPlaca.setText(maquinaAtual.getPlaca()); 
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JComboBox<String> jComboBoxTipo;
+    private javax.swing.JComboBox<String> jComboBoxTipoMaquina;
     private javax.swing.JFormattedTextField jFormattedTextFieldPlaca;
+    private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelModelo;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelPlaca;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelInformacao;
     private javax.swing.JPanel jPanelTipo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableTipo;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextAreaDescricao;
     private javax.swing.JTextField jTextFieldModelo;
     // End of variables declaration//GEN-END:variables
 }

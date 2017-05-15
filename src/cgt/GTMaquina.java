@@ -17,9 +17,8 @@ public class GTMaquina {
         return 0;
     }
     
-    public int alterarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
+    public void alterarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
         gdMaquina.alterar(maquina);
-        return 0;
     }
     
     public int consultarMaquina(Maquina maquina){

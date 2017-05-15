@@ -1,15 +1,20 @@
 package cci;
 
 import cci.util.Cenario;
+import cdp.Maquina;
 import cgt.GTMaquina;
 import javax.swing.JFrame;
 import cih.maquina.JDCadastroMaquina;
 import cih.maquina.JDPesquisarMaquina;
+import java.awt.Frame;
+import javax.swing.JOptionPane;
 
 public class CIMaquina {
     
     private CIInterface ciInterface;
     private GTMaquina gtMaquina;
+    private JDCadastroMaquina cadastroMaquina;
+    private JDPesquisarMaquina pesquisaMaquina; 
 
     public CIMaquina(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -17,36 +22,41 @@ public class CIMaquina {
     }
     
     public void gerenciarMaquina(int CENARIO, JFrame pai) {
-        JDCadastroMaquina cadastroMaquina;
-        JDPesquisarMaquina pesquisaMaquina; 
+        
         if (CENARIO == Cenario.CADASTRAR) {
-            cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface);
+            cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface, Cenario.CADASTRAR, null);
             cadastroMaquina.setVisible(true);
-        } else if (CENARIO == Cenario.ALTERAR) {
-            pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface);
-            pesquisaMaquina.setVisible(true);
-        }else if (CENARIO == Cenario.CONSULTAR) {
-            pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface);
-            pesquisaMaquina.setVisible(true);
-        }else if (CENARIO == Cenario.EXCLUIR) {
+        } else {
             pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface);
             pesquisaMaquina.setVisible(true);
         }
     }
+    
+    public void instanciarTelaCadastroMaquina(Maquina maquina, Frame pai, int CENARIO){
+        cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface, CENARIO, maquina);
+        cadastroMaquina.setVisible(true);
+    }
 
     public void cadastrarMaquina(){
-        //int i = gtMaquina.cadastrarMaquina();
+        
     }
     
-    public void alterarMaquina(){
-        //int i = gtMaquina.alterarMaquina();
+    public boolean alterarMaquina(Maquina maquina){
+        try{  
+            gtMaquina.alterarMaquina(maquina);
+            JOptionPane.showMessageDialog(cadastroMaquina, "Alterada com sucesso!");
+            return true;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(cadastroMaquina, "Erro ao alterar: " + e.getMessage());
+            return false;
+        }
     }
     
     public void consultarMaquina(){
-        //int i = gtMaquina.consultarMaquina();
+       
     }
     
     public void excluirMaquina(){
-        //int i = gtMaquina.excluirMaquina();
+        
     }    
 }
