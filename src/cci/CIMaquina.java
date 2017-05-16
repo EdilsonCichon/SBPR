@@ -37,8 +37,15 @@ public class CIMaquina {
         cadastroMaquina.setVisible(true);
     }
 
-    public void cadastrarMaquina(){
-        
+    public Maquina cadastrarMaquina(Maquina maquina){
+        try{  
+            maquina = gtMaquina.cadastrarMaquina(maquina);
+            JOptionPane.showMessageDialog(null, "Cadastrada com sucesso!");
+            return maquina;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            return null;
+        }
     }
     
     public boolean alterarMaquina(Maquina maquina){

@@ -5,6 +5,8 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.Maquina;
 import cdp.TipoMaquina;
+import java.util.LinkedList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class JDCadastroMaquina extends javax.swing.JDialog {
@@ -12,6 +14,7 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
     private CIInterface ciInterface; 
     private int CENARIO;
     private Maquina maquinaAtual;
+    private TipoMaquina tipoMaquina;
     
     public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Maquina maquina) {
         super(parent, modal);
@@ -21,6 +24,7 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
         this.ciInterface = ciInterface;
         this.CENARIO = CENARIO;
         this.maquinaAtual = maquina;
+        identificarCenario();
     }
 
     @SuppressWarnings("unchecked")
@@ -50,6 +54,11 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
         jLabelNome.setText("Nome:");
 
         jComboBoxTipoMaquina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um tipo de máquina...", "Retro Escavadeira" }));
+        jComboBoxTipoMaquina.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoMaquinaItemStateChanged(evt);
+            }
+        });
 
         jLabelDescricao.setText("Descrição:");
 
@@ -200,10 +209,17 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
         
         try {
             
-            // CRIAR METODO DE VALIDAR CAMPOS
-            
+            validarCampos(tipoMaquina, modelo, placa);
             if (CENARIO == Cenario.CADASTRAR) {
-               
+                maquinaAtual.setTipoMaquina(tipoMaquina);
+                maquinaAtual.setModelo(modelo);
+                maquinaAtual.setPlaca(placa);
+                maquinaAtual = ciInterface.getCiMaquina().cadastrarMaquina(maquinaAtual);
+                    if ( maquinaAtual != null ) {
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
+                        modoSomenteLeitura(true);
+                    }
             } else if (CENARIO == Cenario.ALTERAR) {
                 
                 maquinaAtual.setTipoMaquina(tipoMaquina);
@@ -223,7 +239,7 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
                
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }      
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -231,11 +247,18 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    private void jComboBoxTipoMaquinaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoMaquinaItemStateChanged
+            tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem();
+            jTextAreaDescricao.setText(tipoMaquina.getDescricao());
+    }//GEN-LAST:event_jComboBoxTipoMaquinaItemStateChanged
+
     public void identificarCenario(){
         
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:
+                LinkedList<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina("");
+                jComboBoxTipoMaquina.setModel( new DefaultComboBoxModel( listaTipoMaquina.toArray() )  );
                 break;  
             case Cenario.ALTERAR:
                 setarCamposComInstancia(maquinaAtual);
@@ -250,10 +273,23 @@ public class JDCadastroMaquina extends javax.swing.JDialog {
     public void setarCamposComInstancia(Maquina maquinaAtual){
         jComboBoxTipoMaquina.setSelectedItem(maquinaAtual.getTipoMaquina());
         jTextAreaDescricao.setText(maquinaAtual.getTipoMaquina().getDescricao());
+        jTextAreaDescricao.setEditable(false);//Erick----Como disse no comentario modoSomenteLeitura, então adicionei essa linha.
         jTextFieldModelo.setText(maquinaAtual.getModelo());
         jFormattedTextFieldPlaca.setText(maquinaAtual.getPlaca()); 
     }
     
+    public void modoSomenteLeitura(boolean condicao) {
+        condicao = !condicao;
+        jComboBoxTipoMaquina.setEnabled(condicao);
+        jTextAreaDescricao.setEditable(false);// Erick----Acho que esse campo não pode ser editavel já que é uma descriçao do tipo da maquina. Posso estar errado
+        jTextFieldModelo.setEditable(condicao);
+        jFormattedTextFieldPlaca.setEnabled(condicao);
+    }
+    
+    private void validarCampos( TipoMaquina tpMaquina, String modelo, String placa) throws Exception {
+        if (tpMaquina == null || modelo.equals("") || placa.equals(""))
+            throw new Exception("Verifique se todos os campos estão preenchidos!");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
