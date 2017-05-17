@@ -1,11 +1,12 @@
 package cdp;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

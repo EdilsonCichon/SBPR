@@ -1,13 +1,12 @@
 package cdp.endereco;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Bairro {
+public class Bairro implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +17,6 @@ public class Bairro {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cidade_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Cidade cidade;
 
     //NAO CRIAMOS UMA LISTA DE LOGRADOUROS POIS NAO QUEREMOS UMA NAVEGABILIDADE DUPLA

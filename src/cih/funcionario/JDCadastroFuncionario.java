@@ -9,15 +9,16 @@ import javax.swing.JOptionPane;
 
 public class JDCadastroFuncionario extends javax.swing.JDialog {
     
-    private CIInterface ciInterface;
-    private int CENARIO;
-    private Funcionario funcionario, funcionarioAtual;
+    private final CIInterface ciInterface;
+    private final int CENARIO;
+    private boolean resposta;
+    private final Funcionario funcionarioAtual;
     
     public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Funcionario funcionario) {
         super(parent, modal);
         this.ciInterface = ciInterface;
         this.CENARIO = CENARIO;
-        this.funcionario = funcionario;
+        this.funcionarioAtual = funcionario;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
@@ -467,17 +468,20 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         String estado = jTextFieldEstado.getText();
         String usuario = jTextFieldUsuario.getText();
         String senha = jPasswordFieldSenha.getText();
+        
         try {
+            
+            validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, usuario, senha);
             
             switch (CENARIO) {
                 case Cenario.CADASTRAR: {
-                    validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, usuario, senha);
-                    funcionarioAtual = ciInterface.getCiFuncionario().cadastrarFuncionario(
+                    
+                    resposta = ciInterface.getCiFuncionario().cadastrarFuncionario(
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                             habilitacao, usuario, senha, cep, logradouro, numero,
                             bairro, cidade, estado);
                     
-                    if ( funcionarioAtual != null ) {
+                    if (resposta) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(true);
@@ -488,13 +492,12 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     this.dispose(); break;
                     
                 case Cenario.ALTERAR:
-                    validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, usuario, senha);
-                    funcionarioAtual  = ciInterface.getCiFuncionario().alterarFuncionario(
+                    resposta  = ciInterface.getCiFuncionario().alterarFuncionario(funcionarioAtual,
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                             habilitacao, usuario, senha, cep, logradouro, numero,
                             bairro, cidade, estado);
                     
-                    if ( funcionarioAtual != null ) {
+                    if (resposta) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(true);
@@ -502,10 +505,13 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                         
                 case Cenario.EXCLUIR:
                     JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
-                    boolean resposta = ciInterface.getCiFuncionario().excluirFuncionario(funcionario);
-                    if(resposta) this.dispose();
+                    resposta = ciInterface.getCiFuncionario().excluirFuncionario(funcionarioAtual);
+                    if(resposta) 
+                        this.dispose();
                     break;
-                default: break;
+                    
+                default: 
+                    break;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
@@ -523,18 +529,18 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             case Cenario.CADASTRAR:
                 break;  
             case Cenario.ALTERAR:
-                setarCamposComInstancia(funcionario);
+                setarCamposComInstancia(funcionarioAtual);
                 modoSomenteLeitura(false);
                 break; 
             case Cenario.CONSULTAR:
                 modoSomenteLeitura(true);
-                setarCamposComInstancia(funcionario);
+                setarCamposComInstancia(funcionarioAtual);
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
                 break;
             default: //EXCLUIR
                 modoSomenteLeitura(true);
-                setarCamposComInstancia(funcionario);
+                setarCamposComInstancia(funcionarioAtual);
                 break;
         }
     }

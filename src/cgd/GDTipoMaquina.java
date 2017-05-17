@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class GDTipoMaquina extends GDGenerico{
     
-    public LinkedList<TipoMaquina> consultar(String nomePesquisado){
+    public LinkedList<TipoMaquina> consultar(){
         //EXECUTA A CONSULTA COM O PARAMETRO INFORMADO.
         //E POPULA O ARRAY COMO ABAIXO.
         LinkedList<TipoMaquina> tipoMaquinas = new LinkedList<>();

@@ -15,13 +15,13 @@ import java.util.LinkedList;
 
 public class GTFuncionario {
     
-    private GDFuncionario gdFuncionario;
+    private final GDFuncionario gdFuncionario;
 
     public GTFuncionario() {
         gdFuncionario = new GDFuncionario();
     }
     
-    public Funcionario cadastrarFuncionario(
+    public void cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String pCargo,
             String pHabilitacao, String pUsuario, String senha,
@@ -40,10 +40,9 @@ public class GTFuncionario {
         
         Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
         gdFuncionario.cadastrar(funcionario);
-        return funcionario;
     }
     
-    public Funcionario alterarFuncionario(String nome, String cpf, String rg, String email, 
+    public void alterarFuncionario(Funcionario funcionario, String nome, String cpf, String rg, String email, 
             String data_nasc, String telefone, char sexo, String pCargo,
             String pHabilitacao, String pUsuario, String senha,
             String cep, String logradouro, String numero,
@@ -59,18 +58,28 @@ public class GTFuncionario {
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
         
-        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
+        funcionario.setCargo(cargo);
+        funcionario.setCpf(cpf);
+        funcionario.setDt_nasc(dtNascFormatada);
+        funcionario.setEmail(email);
+        funcionario.setEndereco(endereco);
+        funcionario.setHabilitacao(habilitacao);
+        funcionario.setNome(nome);
+        funcionario.setRg(rg);
+        funcionario.setSexo(sexo);
+        funcionario.setTelefone(telefone);
+        funcionario.setTipoServicos(tipoServicos);
+        funcionario.setUsuario(usuario);
+
         gdFuncionario.alterar(funcionario);
-        return funcionario;
     }
     
     public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String valorInformadoFiltro){
         return gdFuncionario.consultar(tipoFiltro, valorInformadoFiltro);
     }
     
-    public int excluirFuncionario(Funcionario funcionario) throws SQLException, ClassNotFoundException{
+    public void excluirFuncionario(Funcionario funcionario) throws SQLException, ClassNotFoundException{
         gdFuncionario.excluir(funcionario);
-        return 0;
     } 
     
     private void validarCampos(String nome, String cpf, String data, String rg, String telefone) throws Exception {

@@ -1,8 +1,6 @@
-
 package cih.propriedade;
 
 import cci.CIInterface;
-import cci.util.Cenario;
 import cdp.Propriedade;
 import cci.util.JTableUtil;
 import java.awt.Frame;
@@ -13,9 +11,9 @@ import javax.swing.JFrame;
 
 public class JDPesquisaPropriedade extends javax.swing.JDialog {
     
-    private CIInterface ciInterface;
-    private JFrame pai;
-    private int CENARIO;
+    private final CIInterface ciInterface;
+    private final Frame pai;
+    private final int CENARIO;
     
     public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
@@ -166,7 +164,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
-        //TODO Validações seriam colocadas aqui.
+        
         LinkedList<Propriedade> listaPropriedades = ciInterface.getCiPropriedade().consultarProdutor((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
         JTableUtil.limparTabela(jTablePropriedades);
         
@@ -181,20 +179,10 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
-        try {
-            
+        try { 
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            
-            if ( CENARIO == Cenario.ALTERAR ) {
-                ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
-            }
-            if ( CENARIO == Cenario.CONSULTAR ) {
-                
-                ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
-            }
-            if ( CENARIO == Cenario.EXCLUIR ) {
-                ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
-            }
+            ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
+           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione uma propriedade", "ERRO", JOptionPane.ERROR_MESSAGE);
         }

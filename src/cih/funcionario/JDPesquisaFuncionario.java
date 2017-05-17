@@ -12,9 +12,10 @@ import javax.swing.JOptionPane;
 
 public class JDPesquisaFuncionario extends javax.swing.JDialog {
 
-    private CIInterface ciInterface;
-    private int CENARIO;
-    private Frame pai;
+    private final CIInterface ciInterface;
+    private final int CENARIO;
+    private final Frame pai;
+    private Funcionario funcionario;
 
     public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
@@ -181,16 +182,12 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
         try {
-            
-            Funcionario funcionario = (Funcionario) JTableUtil.getDadosLinhaSelecionada(jTableFuncionario);
-            
-            if(CENARIO == Cenario.CADASTRAR){
-               
-            }else{ // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE FUNCIONARIO
+            funcionario = (Funcionario) JTableUtil.getDadosLinhaSelecionada(jTableFuncionario);
+                // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE FUNCIONARIO
                  ciInterface.getCiFuncionario().instanciarTelaCadastroFuncionario(funcionario, pai, CENARIO);
-            }           
+                      
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um funcionário", "ERRO", JOptionPane.ERROR_MESSAGE);
         }    
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 

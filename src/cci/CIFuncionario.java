@@ -38,7 +38,7 @@ public class CIFuncionario {
         cadastroFuncionario.setVisible(true);
     }
     
-    public Funcionario cadastrarFuncionario(
+    public boolean cadastrarFuncionario(
             
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String cargo,
@@ -47,20 +47,20 @@ public class CIFuncionario {
             String bairro, String cidade, String estado) {
         
         try {
-          Funcionario funcionario = gtFuncionario.cadastrarFuncionario(
+          gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, senha, cep, logradouro, numero,
                    bairro, cidade, estado);
             
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-          return funcionario;
+          return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return null;
+            return false;
         }
     }
     
-    public Funcionario alterarFuncionario(
+    public boolean alterarFuncionario(Funcionario funcionario,
             
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String cargo,
@@ -69,16 +69,16 @@ public class CIFuncionario {
             String bairro, String cidade, String estado){
         
         try {
-            Funcionario funcionario = gtFuncionario.alterarFuncionario(
+            gtFuncionario.alterarFuncionario(funcionario,
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, senha, cep, logradouro, numero,
                    bairro, cidade, estado);
             
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return funcionario;
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar " + e.getMessage());
-            return null;
+            return false;
         }
     }
     

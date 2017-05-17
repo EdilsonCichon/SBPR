@@ -2,8 +2,6 @@ package cdp;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Maquina implements Serializable {
@@ -20,7 +18,6 @@ public class Maquina implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tipo_maquina_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private TipoMaquina tipoMaquina;
 
     public Maquina() {

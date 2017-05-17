@@ -9,10 +9,11 @@ import javax.swing.ImageIcon;
 
 public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     
-    private int CENARIO;
-    private CIInterface ciInterface;
-    private TipoMaquina tipoMaquina;
-    private TipoMaquina tipoMaquinaAtual;
+    private final int CENARIO;
+    private final CIInterface ciInterface;
+    private final TipoMaquina tipoMaquinaAtual;
+    private boolean resposta;
+  
 
     public JDCadastroTipoMaquina(Frame parent, boolean modal, int CENARIO, CIInterface ciInterface, TipoMaquina tipoMaquina) {
         super(parent, modal);
@@ -20,7 +21,7 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
         this.ciInterface = ciInterface;
-        this.tipoMaquina = tipoMaquina;
+        this.tipoMaquinaAtual = tipoMaquina;
         this.CENARIO = CENARIO;
         identificarCenario();
     }
@@ -174,8 +175,8 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
             switch (CENARIO) {
                 case Cenario.CADASTRAR:
                     validarCampos(nome, descricao);
-                    tipoMaquinaAtual = ciInterface.getCiTipoMaquina().cadastrarTipoMaquina(nome, descricao);
-                    if ( tipoMaquinaAtual != null ) {
+                    resposta = ciInterface.getCiTipoMaquina().cadastrarTipoMaquina(nome, descricao);
+                    if (resposta) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(true);
@@ -186,8 +187,8 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
                     
                 case Cenario.ALTERAR: 
                     validarCampos(nome, descricao);
-                    tipoMaquinaAtual = ciInterface.getCiTipoMaquina().alterarTipoMaquina(nome, descricao);
-                    if ( tipoMaquinaAtual != null ) {
+                    resposta = ciInterface.getCiTipoMaquina().alterarTipoMaquina(tipoMaquinaAtual, nome, descricao);
+                    if (resposta) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(true);
@@ -197,7 +198,7 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
                 case Cenario.EXCLUIR:
                     int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
                     if ( confirmacao == 0 ) {
-                        boolean resposta = ciInterface.getCiTipoMaquina().excluirTipoMaquina(tipoMaquina);
+                        resposta = ciInterface.getCiTipoMaquina().excluirTipoMaquina(tipoMaquinaAtual);
                         if (resposta)
                             this.dispose();
                     }
@@ -217,19 +218,19 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
             case Cenario.CADASTRAR:
                 break;
             case Cenario.ALTERAR:
-                setarCamposComInstancia(tipoMaquina);
+                setarCamposComInstancia(tipoMaquinaAtual);
                 jButtonConfirmar.setText("Alterar");
                 break;
             case Cenario.CONSULTAR:
                 modoSomenteLeitura(true);
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
-                setarCamposComInstancia(tipoMaquina);
+                setarCamposComInstancia(tipoMaquinaAtual);
                 break;
             default://EXCLUIR
                 modoSomenteLeitura(true);
                 jButtonConfirmar.setText("Excluir");
-                setarCamposComInstancia(tipoMaquina);
+                setarCamposComInstancia(tipoMaquinaAtual);
                 break;
         }
     }

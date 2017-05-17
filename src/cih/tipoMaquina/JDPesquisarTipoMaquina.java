@@ -1,7 +1,6 @@
 package cih.tipoMaquina;
 
 import cci.CIInterface;
-import cci.util.Cenario;
 import cci.util.JTableUtil;
 import cdp.TipoMaquina;
 import java.awt.Frame;
@@ -11,9 +10,9 @@ import javax.swing.JOptionPane;
 
 public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     
-    private CIInterface ciInterface;
-    private int CENARIO;
-    private Frame pai;
+    private final CIInterface ciInterface;
+    private final int CENARIO;
+    private final Frame pai;
     
     public JDPesquisarTipoMaquina(Frame pai, boolean modal, int CENARIO, CIInterface ciInterface) {
         super(pai, modal);
@@ -150,29 +149,27 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         try {
-            TipoMaquina tipoMaquina = (TipoMaquina) JTableUtil.getDadosLinhaSelecionada(jTableTipoDeMaquina);
             
-            switch ( CENARIO ) {
-                case Cenario.CADASTRAR: break;
-                
-                default:
-                    ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO); break;
-            }
+            TipoMaquina tipoMaquina = (TipoMaquina) JTableUtil.getDadosLinhaSelecionada(jTableTipoDeMaquina);
+            ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO);
+ 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um Tipo de Maquina", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
-        LinkedList<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().consultarTipoMaquina(jTextFieldNome.getText());
+        
+        LinkedList<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
         JTableUtil.limparTabela(jTableTipoDeMaquina);
+        
         listaTiposMaquinas.forEach((tipoMaquina) -> {
             JTableUtil.addLinha(jTableTipoDeMaquina, tipoMaquina.toArray() );
         });
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,8 +13,9 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
 
     private final CIInterface ciInterface; 
     private final int CENARIO;
-    private Maquina maquinaAtual, maquina;
+    private final Maquina maquinaAtual;
     private TipoMaquina tipoMaquina;
+    private boolean resposta;
     
     public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Maquina maquina) {
         super(parent, modal);
@@ -204,35 +205,31 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
-        TipoMaquina tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem();
+        tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem();
         String modelo = jTextFieldModelo.getText();
-        String placa = jFormattedTextFieldPlaca.getText();
+        String placa = jFormattedTextFieldPlaca.getText().replace("-", "");
         
         try {
             
             validarCampos(tipoMaquina, modelo, placa);
             switch (CENARIO) {
                 case Cenario.CADASTRAR:
-                    maquina.setTipoMaquina(tipoMaquina);
-                    maquina.setModelo(modelo);
-                    maquina.setPlaca(placa);
-                    maquina = ciInterface.getCiMaquina().cadastrarMaquina(maquina);
-                    if ( maquina != null ) {
+                    resposta = ciInterface.getCiMaquina().cadastrarMaquina(modelo, placa, tipoMaquina);
+                    if (resposta) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(true);
                     }
                     break;
+                    
                 case Cenario.ALTERAR:
-                    maquinaAtual.setTipoMaquina(tipoMaquina);
-                    maquinaAtual.setModelo(modelo);
-                    maquinaAtual.setPlaca(placa);
-                    boolean resposta = ciInterface.getCiMaquina().alterarMaquina(maquinaAtual);
+                    resposta = ciInterface.getCiMaquina().alterarMaquina(maquinaAtual, modelo, placa, tipoMaquina);
                     if(resposta){
                         modoSomenteLeitura(true);
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                     }   break;
+                    
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
@@ -259,7 +256,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:
-                LinkedList<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina("");
+                LinkedList<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
                 jComboBoxTipoMaquina.setModel( new DefaultComboBoxModel( listaTipoMaquina.toArray()));
                 break;  
             case Cenario.ALTERAR:
@@ -273,7 +270,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
     }
     
     public void setarCamposComInstancia(Maquina maquinaAtual){
-        jComboBoxTipoMaquina.setSelectedItem(maquinaAtual.getTipoMaquina());
+        jComboBoxTipoMaquina.setSelectedItem(maquinaAtual.getTipoMaquina().toArray());
         jTextAreaDescricao.setText(maquinaAtual.getTipoMaquina().getDescricao());
         jTextFieldModelo.setText(maquinaAtual.getModelo());
         jFormattedTextFieldPlaca.setText(maquinaAtual.getPlaca()); 

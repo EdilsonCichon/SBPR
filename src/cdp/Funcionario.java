@@ -1,6 +1,7 @@
 package cdp;
 
 import cdp.endereco.Endereco;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements Serializable {
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id", nullable = false)

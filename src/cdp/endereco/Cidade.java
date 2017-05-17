@@ -1,11 +1,12 @@
 package cdp.endereco;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Cidade {
+public class Cidade implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +17,6 @@ public class Cidade {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "estado_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Estado estado;
 
     public Cidade() {

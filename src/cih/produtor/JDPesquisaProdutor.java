@@ -4,7 +4,6 @@ import cdp.Produtor;
 import cci.util.Cenario;
 import cci.CIInterface;
 import cci.util.JTableUtil;
-import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import java.awt.Frame;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
@@ -12,27 +11,17 @@ import javax.swing.JOptionPane;
 
 public class JDPesquisaProdutor extends javax.swing.JDialog {
     
-    private CIInterface ciInterface;
-    private int CENARIO;
-    private Frame pai;
-    private Produtor produtorSelecionado;
-
-    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO) {
-        super(pai, modal);
-        this.CENARIO = CENARIO;
-        this.pai = pai;
-        this.ciInterface = ciInterface;
-        initComponents();
-        ImageIcon icone = ciInterface.setarIconesJanela();
-        setIconImage(icone.getImage());
-    }
-    
+    private final CIInterface ciInterface;
+    private final int CENARIO;
+    private final Frame pai;
+    private final Produtor produtorAtual;
+  
     public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtorSelecionado) {
         super(pai, modal);
         this.CENARIO = CENARIO;
         this.pai = pai;
         this.ciInterface = ciInterface;
-        this.produtorSelecionado = produtorSelecionado;
+        this.produtorAtual = produtorSelecionado;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
@@ -179,26 +168,16 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
         try {
-            Produtor produtor = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);    
-            if (CENARIO == Cenario.CADASTRAR) { // PESQUISANDO PRODUTOR PARA CADASTRAR PROPRIEDADE
-                produtorSelecionado.setId(produtor.getId());
-                produtorSelecionado.setCpf(produtor.getCpf());
-                produtorSelecionado.setDt_nasc(produtor.getDt_nasc());
-                produtorSelecionado.setRg(produtor.getRg());
-                produtorSelecionado.setInscricao_estadual(produtor.getInscricao_estadual());
-                produtorSelecionado.setNome(produtor.getNome());
-                produtorSelecionado.setTelefone(produtor.getTelefone());
-                produtorSelecionado.setSexo(produtor.getSexo());
-                produtorSelecionado.setPropriedades(produtor.getPropriedades());
-//               produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
-//               if(produtorSelecionado != null)
-//                   this.dispose();   
-               
-            } else { // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE PRODUTOR
-                ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtor, pai, CENARIO);
+            Produtor produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
+            
+            if (CENARIO == Cenario.CADASTRAR) {
+                ciInterface.getCiProdutor().setarCamposProdutorSelecionado(produtorAtual, produtorSelecionado);
+
+            } else {
+                ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtorSelecionado, pai, CENARIO);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro: "+ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
