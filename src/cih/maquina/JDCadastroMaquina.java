@@ -214,6 +214,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
             validarCampos(tipoMaquina, modelo, placa);
             switch (CENARIO) {
                 case Cenario.CADASTRAR:
+
                     resposta = ciInterface.getCiMaquina().cadastrarMaquina(modelo, placa, tipoMaquina);
                     if (resposta) {
                         jButtonConfirmar.setEnabled(false);

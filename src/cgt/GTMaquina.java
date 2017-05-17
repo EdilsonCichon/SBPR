@@ -12,11 +12,10 @@ public class GTMaquina {
     public GTMaquina() {
         gdMaquina = new GDMaquina();
     }
-    
+
     public void cadastrarMaquina(String modelo, String placa, TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException{
         Maquina maquina = new Maquina(modelo, placa, tipoMaquina);
         gdMaquina.cadastrar(maquina);
-        
     }
     
     public void alterarMaquina(Maquina maquina, String modelo, String placa, TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException{  
