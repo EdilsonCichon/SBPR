@@ -13,7 +13,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
 
     private final CIInterface ciInterface; 
     private final int CENARIO;
-    private Maquina maquinaAtual;
+    private Maquina maquinaAtual, maquina;
     private TipoMaquina tipoMaquina;
     
     public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Maquina maquina) {
@@ -211,14 +211,13 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         try {
             
             validarCampos(tipoMaquina, modelo, placa);
-            //CADASTRAR ESTÁ INCORRETO - maquinaAtual foi criada para o cenário de alterar, não deve ser usado no cadastro
             switch (CENARIO) {
                 case Cenario.CADASTRAR:
-                    maquinaAtual.setTipoMaquina(tipoMaquina);
-                    maquinaAtual.setModelo(modelo);
-                    maquinaAtual.setPlaca(placa);
-                    maquinaAtual = ciInterface.getCiMaquina().cadastrarMaquina(maquinaAtual);
-                    if ( maquinaAtual != null ) {
+                    maquina.setTipoMaquina(tipoMaquina);
+                    maquina.setModelo(modelo);
+                    maquina.setPlaca(placa);
+                    maquina = ciInterface.getCiMaquina().cadastrarMaquina(maquina);
+                    if ( maquina != null ) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(true);
@@ -242,7 +241,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
                     break;               
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }      
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
