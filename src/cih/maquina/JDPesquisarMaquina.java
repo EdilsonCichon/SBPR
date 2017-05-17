@@ -1,17 +1,25 @@
-
 package cih.maquina;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.util.JTableUtil;
+import cdp.Maquina;
+import java.awt.Frame;
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 public class JDPesquisarMaquina extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private int CENARIO;
+    private Frame pai;
     
-    public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+    public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
         initComponents();
         this.ciInterface = ciInterface;
+        this.pai = parent;
+        this.CENARIO = CENARIO;
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
     }
@@ -41,7 +49,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "Modelo", "Placa"
+                "Modelo", "Placa"
             }
         ));
         jScrollPane1.setViewportView(jTableMaquina);
@@ -149,10 +157,22 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
+        try {
+            Maquina maquina = (Maquina) JTableUtil.getDadosLinhaSelecionada(jTableMaquina);
+            ciInterface.getCiMaquina().instanciarTelaCadastroMaquina(maquina, pai, CENARIO);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Selecione uma máquina", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }         
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonPesquisarMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarMaquinaActionPerformed
         
+        LinkedList<Maquina> listaMaquinas = ciInterface.getCiMaquina().consultarMaquina();
+        JTableUtil.limparTabela(jTableMaquina);
+        
+        listaMaquinas.forEach ((maquina) -> {
+            JTableUtil.addLinha(jTableMaquina, maquina.toArray());
+        });       
     }//GEN-LAST:event_jButtonPesquisarMaquinaActionPerformed
 
 

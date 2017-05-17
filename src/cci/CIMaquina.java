@@ -7,12 +7,13 @@ import javax.swing.JFrame;
 import cih.maquina.JDCadastroMaquina;
 import cih.maquina.JDPesquisarMaquina;
 import java.awt.Frame;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 public class CIMaquina {
     
-    private CIInterface ciInterface;
-    private GTMaquina gtMaquina;
+    private final CIInterface ciInterface;
+    private final GTMaquina gtMaquina;
     private JDCadastroMaquina cadastroMaquina;
     private JDPesquisarMaquina pesquisaMaquina; 
 
@@ -24,10 +25,10 @@ public class CIMaquina {
     public void gerenciarMaquina(int CENARIO, JFrame pai) {
         
         if (CENARIO == Cenario.CADASTRAR) {
-            cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface, Cenario.CADASTRAR, null);
+            cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface, CENARIO, null);
             cadastroMaquina.setVisible(true);
         } else {
-            pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface);
+            pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface, CENARIO);
             pesquisaMaquina.setVisible(true);
         }
     }
@@ -59,8 +60,8 @@ public class CIMaquina {
         }
     }
     
-    public void consultarMaquina(){
-       
+    public LinkedList<Maquina> consultarMaquina(){
+       return null;
     }
     
     public void excluirMaquina(){

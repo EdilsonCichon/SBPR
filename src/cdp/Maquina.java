@@ -1,11 +1,12 @@
 package cdp;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Maquina {
+public class Maquina implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,5 +69,14 @@ public class Maquina {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return getModelo();
+    }
+  
+     public Object[] toArray() {
+        return new Object[] { this, getPlaca()};
     }
 }
