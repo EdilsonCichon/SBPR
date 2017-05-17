@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import cih.produtor.JDCadastroProdutor;
 import cih.produtor.JDPesquisaProdutor;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CIProdutor {
@@ -75,7 +75,7 @@ public class CIProdutor {
         }
     }
     
-    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String filtro){
+    public List<Produtor> consultarProdutor(String colunaFiltro, String filtro){
        return gtProdutor.consultarProdutor(colunaFiltro, filtro);
     }
     

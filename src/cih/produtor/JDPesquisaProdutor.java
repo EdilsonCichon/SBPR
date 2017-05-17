@@ -5,7 +5,7 @@ import cci.util.Cenario;
 import cci.CIInterface;
 import cci.util.JTableUtil;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -186,7 +186,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         String colunaFiltro = (String)jComboBoxFiltro.getSelectedItem();
         String filtro = jTextFieldFiltro.getText();
         
-        LinkedList<Produtor> listaProdutores = ciInterface.getCiProdutor().consultarProdutor(colunaFiltro, filtro);
+        List<Produtor> listaProdutores = ciInterface.getCiProdutor().consultarProdutor(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableProdutor);
         
         listaProdutores.forEach((produtor) -> {

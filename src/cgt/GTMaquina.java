@@ -4,6 +4,7 @@ import cdp.Maquina;
 import cdp.TipoMaquina;
 import cgd.GDMaquina;
 import java.sql.SQLException;
+import java.util.List;
 
 public class GTMaquina {
     
@@ -25,9 +26,8 @@ public class GTMaquina {
         gdMaquina.alterar(maquina);
     }
     
-    public int consultarMaquina(Maquina maquina){
-        gdMaquina.consultar(maquina);
-        return 0;
+    public List<Maquina> consultarMaquina(){
+        return gdMaquina.consultar();
     }
     
     public int excluirMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{

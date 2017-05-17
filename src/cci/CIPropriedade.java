@@ -8,13 +8,13 @@ import cih.propriedade.JDCadastroPropriedade;
 import cih.propriedade.JDPesquisaPropriedade;
 import java.awt.Frame;
 import javax.swing.JFrame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CIPropriedade {
 
-    private CIInterface ciInterface;
-    private GTPropriedade gtPropriedade;
+    private final CIInterface ciInterface;
+    private final GTPropriedade gtPropriedade;
     private JDCadastroPropriedade cadastroPropriedade;
     private JDPesquisaPropriedade pesquisaPropriedade;
 
@@ -82,7 +82,7 @@ public class CIPropriedade {
         }
     }
 
-    public LinkedList<Propriedade> consultarProdutor(String colunaFiltro, String filtro) {
+    public List<Propriedade> consultarProdutor(String colunaFiltro, String filtro) {
         return gtPropriedade.consultarProdutor(colunaFiltro, filtro);
     }
 }

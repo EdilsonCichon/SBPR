@@ -8,12 +8,13 @@ import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
 import java.awt.Frame;
 import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CIFuncionario {
     
-    private CIInterface ciInterface;
-    private GTFuncionario gtFuncionario;
+    private final CIInterface ciInterface;
+    private final GTFuncionario gtFuncionario;
     JDCadastroFuncionario cadastroFuncionario;
     JDPesquisaFuncionario pesquisaFuncionario;
 
@@ -82,7 +83,7 @@ public class CIFuncionario {
         }
     }
     
-    public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String texto){
+    public List<Funcionario> consultarFuncionario(String tipoFiltro, String texto){
         return gtFuncionario.consultarFuncionario(tipoFiltro, texto);
     }
     

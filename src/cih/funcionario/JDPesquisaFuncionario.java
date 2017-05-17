@@ -3,11 +3,10 @@ package cih.funcionario;
 import javax.swing.ImageIcon;
 
 import cci.CIInterface;
-import cci.util.Cenario;
 import cci.util.JTableUtil;
 import cdp.Funcionario;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class JDPesquisaFuncionario extends javax.swing.JDialog {
@@ -15,7 +14,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     private final CIInterface ciInterface;
     private final int CENARIO;
     private final Frame pai;
-    private Funcionario funcionario;
+    private Funcionario funcionarioAtual;
 
     public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
@@ -171,7 +170,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         String tipoFiltro = (String)jComboBoxFiltro.getSelectedItem();
         String texto = jTextFieldFiltro.getText();
         
-        LinkedList<Funcionario> listaFuncionarios = ciInterface.getCiFuncionario().consultarFuncionario(tipoFiltro, texto);
+        List<Funcionario> listaFuncionarios = ciInterface.getCiFuncionario().consultarFuncionario(tipoFiltro, texto);
         JTableUtil.limparTabela(jTableFuncionario);
         
         listaFuncionarios.forEach((funcionario) -> {
@@ -182,9 +181,9 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
         try {
-            funcionario = (Funcionario) JTableUtil.getDadosLinhaSelecionada(jTableFuncionario);
+            funcionarioAtual = (Funcionario) JTableUtil.getDadosLinhaSelecionada(jTableFuncionario);
                 // ALTERAÇÃO, CONSULTA OU EXCLUSAO DE FUNCIONARIO
-                 ciInterface.getCiFuncionario().instanciarTelaCadastroFuncionario(funcionario, pai, CENARIO);
+                 ciInterface.getCiFuncionario().instanciarTelaCadastroFuncionario(funcionarioAtual, pai, CENARIO);
                       
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um funcionário", "ERRO", JOptionPane.ERROR_MESSAGE);

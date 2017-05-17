@@ -5,7 +5,7 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.Maquina;
 import cdp.TipoMaquina;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -257,7 +257,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:
-                LinkedList<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
+                List<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
                 jComboBoxTipoMaquina.setModel( new DefaultComboBoxModel( listaTipoMaquina.toArray()));
                 break;  
             case Cenario.ALTERAR:

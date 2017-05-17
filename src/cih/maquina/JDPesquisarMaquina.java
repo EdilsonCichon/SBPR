@@ -5,7 +5,7 @@ import cci.CIInterface;
 import cci.util.JTableUtil;
 import cdp.Maquina;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class JDPesquisarMaquina extends javax.swing.JDialog {
@@ -167,7 +167,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
 
     private void jButtonPesquisarMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarMaquinaActionPerformed
         
-        LinkedList<Maquina> listaMaquinas = ciInterface.getCiMaquina().consultarMaquina();
+        List<Maquina> listaMaquinas = ciInterface.getCiMaquina().consultarMaquina();
         JTableUtil.limparTabela(jTableMaquina);
         
         listaMaquinas.forEach ((maquina) -> {

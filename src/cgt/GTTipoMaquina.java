@@ -3,11 +3,11 @@ package cgt;
 import cdp.TipoMaquina;
 import cgd.GDTipoMaquina;
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.List;
 
 public class GTTipoMaquina {
     
-    private GDTipoMaquina gdTipoMaquina;
+    private final GDTipoMaquina gdTipoMaquina;
     private TipoMaquina tipoMaquina;
 
     public GTTipoMaquina() {
@@ -28,7 +28,7 @@ public class GTTipoMaquina {
  
     }
     
-    public LinkedList<TipoMaquina> consultarTipoMaquina() {
+    public List<TipoMaquina> consultarTipoMaquina() {
         return gdTipoMaquina.consultar();
     }
     

@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import cih.maquina.JDCadastroMaquina;
 import cih.maquina.JDPesquisarMaquina;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CIMaquina {
@@ -61,8 +61,8 @@ public class CIMaquina {
         }
     }
     
-    public LinkedList<Maquina> consultarMaquina(){
-       return null;
+    public List<Maquina> consultarMaquina(){
+       return gtMaquina.consultarMaquina();
     }
     
     public boolean excluirMaquina(){

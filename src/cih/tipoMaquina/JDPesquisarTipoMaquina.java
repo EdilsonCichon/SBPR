@@ -4,7 +4,7 @@ import cci.CIInterface;
 import cci.util.JTableUtil;
 import cdp.TipoMaquina;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -160,7 +160,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         
-        LinkedList<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
+        List<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
         JTableUtil.limparTabela(jTableTipoDeMaquina);
         
         listaTiposMaquinas.forEach((tipoMaquina) -> {

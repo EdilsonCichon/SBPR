@@ -6,7 +6,7 @@ import cgt.GTTipoMaquina;
 import cih.tipoMaquina.JDCadastroTipoMaquina;
 import cih.tipoMaquina.JDPesquisarTipoMaquina;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -54,7 +54,7 @@ public class CITipoMaquina {
         }
     }
     
-    public LinkedList<TipoMaquina> consultarTipoMaquina(){
+    public List<TipoMaquina> consultarTipoMaquina(){
        return gtTipoMaquina.consultarTipoMaquina();
     }
     

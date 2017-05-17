@@ -12,6 +12,7 @@ import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 public class GTFuncionario {
     
@@ -74,7 +75,7 @@ public class GTFuncionario {
         gdFuncionario.alterar(funcionario);
     }
     
-    public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String valorInformadoFiltro){
+    public List consultarFuncionario(String tipoFiltro, String valorInformadoFiltro){
         return gdFuncionario.consultar(tipoFiltro, valorInformadoFiltro);
     }
     

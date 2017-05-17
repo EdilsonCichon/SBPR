@@ -6,9 +6,9 @@ import cci.SBPRException;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.LinkedList;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class GTProdutor {
 
@@ -68,7 +68,7 @@ public class GTProdutor {
         gdProdutor.alterar(produtor);
     }
 
-    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String valorFiltro) {
+    public List<Produtor> consultarProdutor(String colunaFiltro, String valorFiltro) {
         return gdProdutor.consultar(colunaFiltro, valorFiltro);
     }
 

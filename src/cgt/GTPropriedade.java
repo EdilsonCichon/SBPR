@@ -4,11 +4,11 @@ import cdp.Produtor;
 import cdp.Propriedade;
 import cgd.GDPropriedade;
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.List;
 
 public class GTPropriedade {
     
-    private GDPropriedade gdPropriedade;
+    private final GDPropriedade gdPropriedade;
 
     public GTPropriedade() {
         gdPropriedade = new GDPropriedade();
@@ -35,7 +35,7 @@ public class GTPropriedade {
         
     } 
     
-    public LinkedList<Propriedade> consultarProdutor(String colunaFiltro, String valorFiltro) {
+    public List<Propriedade> consultarProdutor(String colunaFiltro, String valorFiltro) {
         return gdPropriedade.consultar(colunaFiltro, valorFiltro);
     }
 }

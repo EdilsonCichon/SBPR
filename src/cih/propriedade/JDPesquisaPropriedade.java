@@ -4,7 +4,7 @@ import cci.CIInterface;
 import cdp.Propriedade;
 import cci.util.JTableUtil;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
@@ -165,7 +165,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         
-        LinkedList<Propriedade> listaPropriedades = ciInterface.getCiPropriedade().consultarProdutor((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
+        List<Propriedade> listaPropriedades = ciInterface.getCiPropriedade().consultarProdutor((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
         JTableUtil.limparTabela(jTablePropriedades);
         
         listaPropriedades.forEach((propriedade) -> {
