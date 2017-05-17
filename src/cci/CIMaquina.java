@@ -2,6 +2,7 @@ package cci;
 
 import cci.util.Cenario;
 import cdp.Maquina;
+import cdp.TipoMaquina;
 import cgt.GTMaquina;
 import javax.swing.JFrame;
 import cih.maquina.JDCadastroMaquina;
@@ -38,14 +39,15 @@ public class CIMaquina {
         cadastroMaquina.setVisible(true);
     }
 
-    public Maquina cadastrarMaquina(Maquina maquina){
+    public boolean cadastrarMaquina(TipoMaquina tpMaquina, String modelo, String placa){
         try{  
-            maquina = gtMaquina.cadastrarMaquina(maquina);
+            Maquina maquina = new Maquina(modelo, placa, tpMaquina);
+            gtMaquina.cadastrarMaquina(maquina);
             JOptionPane.showMessageDialog(null, "Cadastrada com sucesso!");
-            return maquina;
+            return true;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return null;
+            return false;
         }
     }
     

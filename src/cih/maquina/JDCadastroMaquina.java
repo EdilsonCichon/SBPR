@@ -206,18 +206,15 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         
         TipoMaquina tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem();
         String modelo = jTextFieldModelo.getText();
-        String placa = jFormattedTextFieldPlaca.getText();
+        String placa = jFormattedTextFieldPlaca.getText().replace("-", "");
         
         try {
             
             validarCampos(tipoMaquina, modelo, placa);
             switch (CENARIO) {
                 case Cenario.CADASTRAR:
-                    maquina.setTipoMaquina(tipoMaquina);
-                    maquina.setModelo(modelo);
-                    maquina.setPlaca(placa);
-                    maquina = ciInterface.getCiMaquina().cadastrarMaquina(maquina);
-                    if ( maquina != null ) {
+                    boolean cadastrado = ciInterface.getCiMaquina().cadastrarMaquina(tipoMaquina,modelo,placa);
+                    if ( cadastrado ) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(true);

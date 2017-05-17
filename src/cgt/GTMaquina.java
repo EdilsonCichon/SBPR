@@ -12,9 +12,8 @@ public class GTMaquina {
         gdMaquina = new GDMaquina();
     }
     
-    public Maquina cadastrarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
-        maquina = gdMaquina.cadastrar(maquina);
-        return maquina;
+    public void cadastrarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
+        gdMaquina.cadastrar(maquina);
     }
     
     public void alterarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
