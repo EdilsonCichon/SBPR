@@ -39,7 +39,6 @@ public class CIFuncionario {
     }
     
     public Funcionario cadastrarFuncionario(
-            
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String cargo,
             String habilitacao, String usuario, String senha,
@@ -61,7 +60,6 @@ public class CIFuncionario {
     }
     
     public Funcionario alterarFuncionario(
-            
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String cargo,
             String habilitacao, String usuario, String senha,
