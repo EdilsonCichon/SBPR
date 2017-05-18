@@ -244,6 +244,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         produtorAtual = ciInterface.getCiProdutor().instanciarProdutorVazio();
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, CENARIO, produtorAtual);
         jTextFieldResponsavel.setText(produtorAtual.getNome());
+        propriedadeVazia.setResponsavel(produtorAtual);
         desabilitarCampos(false);
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
@@ -267,6 +268,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                         
                     case Cenario.ALTERAR:
                         setarCamposComInstancia();
+                        jButtonPesquisarProdutor.setEnabled(true);
                         break;
                         
                     case Cenario.CADASTRAR:

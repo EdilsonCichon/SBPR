@@ -439,9 +439,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         if ( produtor.getSexo() == 'M' )
             jRadioButtonMasculino.setSelected(true);
         
-        produtor.getPropriedades().forEach((propriedade) -> {
+        if(produtor.getPropriedades() != null){
+            produtor.getPropriedades().forEach((propriedade) -> {
             JTableUtil.addLinha(jTablePropriedades, propriedade.toArray());
-        });
+            });
+        }
     }
     
     public void habilitarBotoesPropriedade(boolean resposta){

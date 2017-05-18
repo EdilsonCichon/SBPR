@@ -271,10 +271,14 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
     }
     
     public void setarCamposComInstancia(Maquina maquinaAtual){
-        jComboBoxTipoMaquina.setSelectedItem(maquinaAtual.getTipoMaquina().toArray());
-        jTextAreaDescricao.setText(maquinaAtual.getTipoMaquina().getDescricao());
+        
         jTextFieldModelo.setText(maquinaAtual.getModelo());
         jFormattedTextFieldPlaca.setText(maquinaAtual.getPlaca()); 
+        
+        if(maquinaAtual.getTipoMaquina() != null){
+            jComboBoxTipoMaquina.setSelectedItem(maquinaAtual.getTipoMaquina().toArray());
+            jTextAreaDescricao.setText(maquinaAtual.getTipoMaquina().getDescricao());
+        } 
     }
     
     public void modoSomenteLeitura(boolean condicao) {
