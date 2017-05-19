@@ -172,7 +172,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
             
             if (CENARIO == Cenario.CADASTRAR) {
                 ciInterface.getCiProdutor().setarCamposProdutorSelecionado(produtorAtual, produtorSelecionado);
-
+                this.dispose();
             } else {
                 ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtorSelecionado, pai, CENARIO);
             }
