@@ -205,7 +205,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
-        tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem();
+       // tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem(); Essa linha não existe pois o metodo jComboBoxTipoMaquinaItemStateChanged faz. 
         String modelo = jTextFieldModelo.getText();
         String placa = jFormattedTextFieldPlaca.getText().replace("-", "");
         
@@ -234,7 +234,13 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
-            //EXCLUIR
+                case Cenario.EXCLUIR:
+                    JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
+                    boolean excluido = ciInterface.getCiMaquina().excluirMaquina(maquinaAtual);
+                    if (excluido) {
+                        this.dispose();
+                    }
+                    break;
                 default:
                     break;               
             }
@@ -257,17 +263,29 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:
-                List<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
-                jComboBoxTipoMaquina.setModel( new DefaultComboBoxModel( listaTipoMaquina.toArray()));
+                setarCombo();
                 break;  
             case Cenario.ALTERAR:
                 setarCamposComInstancia(maquinaAtual);
                 break; 
             case Cenario.CONSULTAR:  
+                setarCamposComInstancia(maquinaAtual);
+                modoSomenteLeitura(true);
+                jButtonConfirmar.setEnabled(false);
+                jButtonCancelar.setText("Sair");
                 break;
-            default: //EXCLUIR
+            case Cenario.EXCLUIR:
+                setarCamposComInstancia(maquinaAtual);
+                modoSomenteLeitura(true);
+                break;
+            default: 
                 break;
         }
+    }
+    
+    public void setarCombo(){
+        List<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
+        jComboBoxTipoMaquina.setModel( new DefaultComboBoxModel( listaTipoMaquina.toArray()));
     }
     
     public void setarCamposComInstancia(Maquina maquinaAtual){
@@ -276,8 +294,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         jFormattedTextFieldPlaca.setText(maquinaAtual.getPlaca()); 
         
         if(maquinaAtual.getTipoMaquina() != null){
-            jComboBoxTipoMaquina.setSelectedItem(maquinaAtual.getTipoMaquina().toArray());
-            jTextAreaDescricao.setText(maquinaAtual.getTipoMaquina().getDescricao());
+            setarCombo();
         } 
     }
     

@@ -65,7 +65,14 @@ public class CIMaquina {
        return gtMaquina.consultarMaquina();
     }
     
-    public boolean excluirMaquina(){
-        return true;
+    public boolean excluirMaquina( Maquina maquina){
+        try {
+            gtMaquina.excluirMaquina(maquina);
+            JOptionPane.showMessageDialog(null, "Maquina excluída com sucesso");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir maquina: " + e.getMessage());
+            return false;
+        }
     }    
 }
