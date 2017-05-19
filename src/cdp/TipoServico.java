@@ -22,7 +22,7 @@ public class TipoServico implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tipo_maquina_id", nullable = false)
-    public TipoMaquina tipoMaquina;
+    private TipoMaquina tipoMaquina;
 
     public TipoServico() {
     }
