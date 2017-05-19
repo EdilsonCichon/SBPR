@@ -6,13 +6,13 @@ import cci.SBPRException;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.LinkedList;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class GTProdutor {
 
-    private GDProdutor gdProdutor;
+    private final GDProdutor gdProdutor;
 
     public GTProdutor() {
         gdProdutor = new GDProdutor();
@@ -21,6 +21,19 @@ public class GTProdutor {
     public Produtor instanciarProdutorVazio(){    
         Produtor produtor = new Produtor();
         return produtor;     
+    }
+    
+     public void setarCamposProdutorSelecionado(Produtor produtorAtual, Produtor produtorSelecionado){
+         
+        produtorAtual.setId(produtorSelecionado.getId());
+        produtorAtual.setCpf(produtorSelecionado.getCpf());
+        produtorAtual.setDt_nasc(produtorSelecionado.getDt_nasc());
+        produtorAtual.setRg(produtorSelecionado.getRg());
+        produtorAtual.setInscricao_estadual(produtorSelecionado.getInscricao_estadual());
+        produtorAtual.setNome(produtorSelecionado.getNome());
+        produtorAtual.setTelefone(produtorSelecionado.getTelefone());
+        produtorAtual.setSexo(produtorSelecionado.getSexo());
+        produtorAtual.setPropriedades(produtorSelecionado.getPropriedades());
     }
 
     public Produtor cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
@@ -37,19 +50,25 @@ public class GTProdutor {
 
     }
 
-    public Produtor alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
+    public void alterarProdutor(Produtor produtor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone, inscricao);
         
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(data_nasc);
         
-        Produtor produtor = new Produtor(nome, cpf, data, inscricao, rg, telefone, sexo);
+        produtor.setCpf(cpf);
+        produtor.setDt_nasc(data);
+        produtor.setInscricao_estadual(inscricao);
+        produtor.setNome(nome);
+        produtor.setRg(rg);
+        produtor.setSexo(sexo);
+        produtor.setTelefone(telefone);
+        
         gdProdutor.alterar(produtor);
-        return produtor;
     }
 
-    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String valorFiltro) {
+    public List<Produtor> consultarProdutor(String colunaFiltro, String valorFiltro) {
         return gdProdutor.consultar(colunaFiltro, valorFiltro);
     }
 

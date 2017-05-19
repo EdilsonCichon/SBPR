@@ -1,11 +1,10 @@
 package cdp.endereco;
 
+import java.io.Serializable;
 import javax.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Endereco {
+public class Endereco implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +21,6 @@ public class Endereco {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cep_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Cep cep;
 
     public Endereco() {

@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CIFuncionario {
     
-    private CIInterface ciInterface;
-    private GTFuncionario gtFuncionario;
+    private final CIInterface ciInterface;
+    private final GTFuncionario gtFuncionario;
     JDCadastroFuncionario cadastroFuncionario;
     JDPesquisaFuncionario pesquisaFuncionario;
 
@@ -38,7 +38,7 @@ public class CIFuncionario {
         cadastroFuncionario.setVisible(true);
     }
     
-    public Funcionario cadastrarFuncionario(
+    public boolean cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String cargo,
             String habilitacao, String usuario, String senha,
@@ -46,20 +46,20 @@ public class CIFuncionario {
             String bairro, String cidade, String estado) {
         
         try {
-          Funcionario funcionario = gtFuncionario.cadastrarFuncionario(
+          gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, senha, cep, logradouro, numero,
                    bairro, cidade, estado);
             
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-          return funcionario;
+          return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return null;
+            return false;
         }
     }
     
-    public Funcionario alterarFuncionario(
+    public boolean alterarFuncionario(Funcionario funcionario,
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, String cargo,
             String habilitacao, String usuario, String senha,
@@ -67,20 +67,20 @@ public class CIFuncionario {
             String bairro, String cidade, String estado){
         
         try {
-            Funcionario funcionario = gtFuncionario.alterarFuncionario(
+            gtFuncionario.alterarFuncionario(funcionario,
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, senha, cep, logradouro, numero,
                    bairro, cidade, estado);
             
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return funcionario;
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar " + e.getMessage());
-            return null;
+            return false;
         }
     }
     
-    public LinkedList<Funcionario> consultarFuncionario(String tipoFiltro, String texto){
+    public List<Funcionario> consultarFuncionario(String tipoFiltro, String texto){
         return gtFuncionario.consultarFuncionario(tipoFiltro, texto);
     }
     

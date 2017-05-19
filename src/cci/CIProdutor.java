@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 import cih.produtor.JDCadastroProdutor;
 import cih.produtor.JDPesquisaProdutor;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CIProdutor {
     
-    private CIInterface ciInterface;
-    private GTProdutor gtProdutor;
+    private final CIInterface ciInterface;
+    private final GTProdutor gtProdutor;
     private JDCadastroProdutor cadastroProdutor;
     private JDPesquisaProdutor pesquisaProdutor;
     
@@ -28,7 +28,7 @@ public class CIProdutor {
             cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, CENARIO, null);
             cadastroProdutor.setVisible(true);
         } else{
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, CENARIO);
+            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, CENARIO, null);
             pesquisaProdutor.setVisible(true);
         }
     }
@@ -38,12 +38,15 @@ public class CIProdutor {
         cadastroProdutor.setVisible(true);
     }
      
-    public Produtor instanciarTelaFiltroProdutor(Frame pai, int CENARIO, Produtor produtorSelecionado){
+    public void instanciarTelaFiltroProdutor(Frame pai, int CENARIO, Produtor produtorSelecionado){
         
         pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, CENARIO, produtorSelecionado);
         pesquisaProdutor.setVisible(true);
-        return produtorSelecionado;
      }
+    
+    public void setarCamposProdutorSelecionado(Produtor produtorAtual, Produtor produtorSelecionado){
+        
+    }
     
     public Produtor instanciarProdutorVazio() {
         return gtProdutor.instanciarProdutorVazio();
@@ -61,18 +64,18 @@ public class CIProdutor {
         }  
     }
     
-    public Produtor alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) { //Erick
+    public boolean alterarProdutor(Produtor produtor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) {
         try {
-            Produtor produtor = gtProdutor.alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            gtProdutor.alterarProdutor(produtor, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return produtor;
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
-            return null;
+            return false;
         }
     }
     
-    public LinkedList<Produtor> consultarProdutor(String colunaFiltro, String filtro){
+    public List<Produtor> consultarProdutor(String colunaFiltro, String filtro){
        return gtProdutor.consultarProdutor(colunaFiltro, filtro);
     }
     

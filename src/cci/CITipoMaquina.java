@@ -6,14 +6,14 @@ import cgt.GTTipoMaquina;
 import cih.tipoMaquina.JDCadastroTipoMaquina;
 import cih.tipoMaquina.JDPesquisarTipoMaquina;
 import java.awt.Frame;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class CITipoMaquina {
     
-    private CIInterface ciInterface;
-    private GTTipoMaquina gtTipoMaquina;
+    private final CIInterface ciInterface;
+    private final GTTipoMaquina gtTipoMaquina;
     private JDCadastroTipoMaquina cadastroTipoMaquina;
     private JDPesquisarTipoMaquina pesquisaTipoMaquina;
 
@@ -32,30 +32,30 @@ public class CITipoMaquina {
         }
     }
         
-    public TipoMaquina cadastrarTipoMaquina(String nome, String descricao) {
+    public boolean cadastrarTipoMaquina(String nome, String descricao) {
         try {
-            TipoMaquina tipoMaquina = gtTipoMaquina.cadastrarTipoMaquina(nome, descricao);
+            gtTipoMaquina.cadastrarTipoMaquina(nome, descricao);
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-            return tipoMaquina;
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return null;
+            return false;
         }
     }
     
-    public TipoMaquina alterarTipoMaquina(String nome, String descricao) {
+    public boolean alterarTipoMaquina(TipoMaquina tipoMaquina, String nome, String descricao) {
         try {
-            TipoMaquina tipoMaquina = gtTipoMaquina.alterarTipoMaquina(nome, descricao);
+            gtTipoMaquina.alterarTipoMaquina(tipoMaquina, nome, descricao);
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return tipoMaquina;
+            return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
-            return null;
+            return false;
         }
     }
     
-    public LinkedList<TipoMaquina> consultarTipoMaquina(String nomePesquisado){
-       return gtTipoMaquina.consultarTipoMaquina(nomePesquisado);
+    public List<TipoMaquina> consultarTipoMaquina(){
+       return gtTipoMaquina.consultarTipoMaquina();
     }
     
     public boolean excluirTipoMaquina(TipoMaquina tipoMaquina){

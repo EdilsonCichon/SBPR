@@ -5,10 +5,11 @@ import cdp.Propriedade;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 public class GDProdutor extends GDGenerico{
        
-    public LinkedList<Produtor> consultar(String colunaFiltro, String valorFiltro) {
+    public List<Produtor> consultar(String colunaFiltro, String valorFiltro) {
         
         //ESSES DADOS DEVEM SER RETORNADOS DO BANCO
         Produtor edilson = new Produtor("12345", null, 0, "Edilson", new Date("10/10/1992"), "23053109873", "12345", 'M', "98423044");
@@ -34,7 +35,7 @@ public class GDProdutor extends GDGenerico{
         erick.setPropriedades(propriedadesErick);
         cristian.setPropriedades(propriedadesCristian);
         
-        LinkedList<Produtor> listaProdutores = new LinkedList();
+        List<Produtor> listaProdutores = new LinkedList();
         listaProdutores.add( edilson );
         listaProdutores.add( erick );
         listaProdutores.add( cristian );

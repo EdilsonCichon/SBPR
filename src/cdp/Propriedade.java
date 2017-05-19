@@ -1,11 +1,12 @@
 package cdp;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Propriedade {
+public class Propriedade implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +20,6 @@ public class Propriedade {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "produtor_id", nullable = false)
-    //@JoinColumns (foreignKey = @ForeignKey(name = "produtor_id"), value = { @JoinColumn(referencedColumnName = "id") })
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Produtor responsavel;
 
     public Propriedade() {

@@ -30,10 +30,11 @@ public class JTableUtil {
      * @throws Exception 
      */
     public static Object getDadosLinhaSelecionada(JTable jTable) throws Exception {
-        int rowSelected = jTable.getSelectedRow();
-        if ( rowSelected < 0 )
+        int linhaSelecionada = jTable.getSelectedRow();
+        int coluna = 0;
+        if ( linhaSelecionada < 0 )
             throw new Exception("Nenhuma linha selecionada.");
-        return getModel(jTable).getValueAt(rowSelected, 0);
+        return getModel(jTable).getValueAt(linhaSelecionada, coluna);
     }
     
     /**

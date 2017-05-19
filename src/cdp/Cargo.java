@@ -1,9 +1,10 @@
 package cdp;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-public class Cargo {
+public class Cargo implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,29 +1,33 @@
 package cgt;
 
 import cdp.Maquina;
+import cdp.TipoMaquina;
 import cgd.GDMaquina;
 import java.sql.SQLException;
+import java.util.List;
 
 public class GTMaquina {
     
-    private GDMaquina gdMaquina;
+    private final GDMaquina gdMaquina;
 
     public GTMaquina() {
         gdMaquina = new GDMaquina();
     }
-    
-    public Maquina cadastrarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
-        maquina = gdMaquina.cadastrar(maquina);
-        return maquina;
+
+    public void cadastrarMaquina(String modelo, String placa, TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException{
+        Maquina maquina = new Maquina(modelo, placa, tipoMaquina);
+        gdMaquina.cadastrar(maquina);
     }
     
-    public void alterarMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
+    public void alterarMaquina(Maquina maquina, String modelo, String placa, TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException{  
+        maquina.setModelo(modelo);
+        maquina.setPlaca(placa);
+        maquina.setTipoMaquina(tipoMaquina);
         gdMaquina.alterar(maquina);
     }
     
-    public int consultarMaquina(Maquina maquina){
-        gdMaquina.consultar(maquina);
-        return 0;
+    public List<Maquina> consultarMaquina(){
+        return gdMaquina.consultar();
     }
     
     public int excluirMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{

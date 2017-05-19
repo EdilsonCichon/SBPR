@@ -1,10 +1,11 @@
 package cdp;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tipo_maquina")
-public class TipoMaquina {
+public class TipoMaquina implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

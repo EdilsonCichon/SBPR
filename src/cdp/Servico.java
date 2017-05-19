@@ -1,5 +1,6 @@
 package cdp;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
@@ -7,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Servico {
+public abstract class Servico implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

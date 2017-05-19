@@ -3,37 +3,37 @@ package cgt;
 import cdp.TipoMaquina;
 import cgd.GDTipoMaquina;
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.List;
 
 public class GTTipoMaquina {
     
-    private GDTipoMaquina gdTipoMaquina;
+    private final GDTipoMaquina gdTipoMaquina;
     private TipoMaquina tipoMaquina;
 
     public GTTipoMaquina() {
         gdTipoMaquina = new GDTipoMaquina();
     }
     
-    public TipoMaquina cadastrarTipoMaquina(String nome, String descricao) throws Exception {
+    public void cadastrarTipoMaquina(String nome, String descricao) throws Exception {
         validarCampos(nome, descricao);
         tipoMaquina = new TipoMaquina(nome, descricao);
         gdTipoMaquina.cadastrar(tipoMaquina);
-        return tipoMaquina;
     }
     
-    public TipoMaquina alterarTipoMaquina(String nome, String descricao) throws SQLException, ClassNotFoundException {
-        TipoMaquina tipoMaquina = new TipoMaquina(nome, descricao);
+    public void alterarTipoMaquina(TipoMaquina tipoMaquina, String nome, String descricao) throws SQLException, ClassNotFoundException {
+       
+        tipoMaquina.setDescricao(descricao);
+        tipoMaquina.setNome(nome);
         gdTipoMaquina.alterar(tipoMaquina);
-        return tipoMaquina;
+ 
     }
     
-    public LinkedList<TipoMaquina> consultarTipoMaquina(String nomePesquisado) {
-        return gdTipoMaquina.consultar(nomePesquisado);
+    public List<TipoMaquina> consultarTipoMaquina() {
+        return gdTipoMaquina.consultar();
     }
     
-    public int excluirTipoMaquina(TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException {
+    public void excluirTipoMaquina(TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException {
         gdTipoMaquina.excluir(tipoMaquina);
-        return 0;
     }
     
     private void validarCampos(String nome, String descricao) throws Exception {

@@ -1,10 +1,11 @@
 package cdp.endereco;
 
+import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.*;
 
 @Entity
-public class Cep {
+public class Cep implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
