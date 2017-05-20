@@ -3,6 +3,8 @@ package cdp.endereco;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Logradouro implements Serializable {
@@ -20,6 +22,7 @@ public class Logradouro implements Serializable {
     @JoinTable(name = "logradouro_bairro", 
         joinColumns =@JoinColumn(name = "logradouro_id"), 
         inverseJoinColumns =@JoinColumn(name = "bairro_id"))
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Bairro> bairros;
 
     public Logradouro() {

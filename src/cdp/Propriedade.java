@@ -2,6 +2,8 @@ package cdp;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -20,6 +22,7 @@ public class Propriedade implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "produtor_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Produtor responsavel;
 
     public Propriedade() {

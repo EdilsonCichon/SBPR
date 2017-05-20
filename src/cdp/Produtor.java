@@ -3,6 +3,8 @@ package cdp;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -15,6 +17,7 @@ public class Produtor extends Pessoa {
     
     @OneToMany(mappedBy = "responsavel", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<Propriedade> propriedades;
 
     public Produtor() {
