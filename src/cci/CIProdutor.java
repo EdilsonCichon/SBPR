@@ -16,6 +16,7 @@ public class CIProdutor {
     private final GTProdutor gtProdutor;
     private JDCadastroProdutor cadastroProdutor;
     private JDPesquisaProdutor pesquisaProdutor;
+    private Produtor produtorSelecionado;
     
     public CIProdutor(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -42,10 +43,6 @@ public class CIProdutor {
         
         pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, CENARIO, produtorSelecionado);
         pesquisaProdutor.setVisible(true);
-     }
-    
-    public void setarCamposProdutorSelecionado(Produtor produtorAtual, Produtor produtorSelecionado){
-        
     }
     
     public Produtor instanciarProdutorVazio() {
@@ -89,5 +86,13 @@ public class CIProdutor {
             JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
             return false;
         }    
+    }
+
+    public Produtor getProdutorSelecionado() {
+        return produtorSelecionado;
+    }
+    
+    public void setProdutorSelecionado(Produtor produtor) {
+        produtorSelecionado = produtor;
     }
 }

@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
 
-    private final int CENARIO;
+    private int CENARIO;
     private JFrame pai;
-    private final CIInterface ciInterface;
-    private final Propriedade propriedadeVazia;
+    private CIInterface ciInterface;
+    private Propriedade propriedadeVazia;
     private Produtor produtorAtual;
 
     public JDCadastroPropriedade(Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Propriedade propriedadeVazia) {
@@ -192,13 +192,13 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             switch (CENARIO) {
                 case Cenario.CADASTRAR:
                     {
-                        Produtor produtorVazio = ciInterface.getCiProdutor().instanciarProdutorVazio();
-                        boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(produtorVazio, nome, referencia);
+                        boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(produtorAtual, nome, referencia);
                         if (resposta) {
                             modoSomenteLeitura(resposta);
                             jButtonConfirmar.setEnabled(false);
                             jButtonCancelar.setText("Sair");
-                        }break;
+                        }
+                        break;
                     }
                 case Cenario.ALTERAR:
                     boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia);
@@ -241,11 +241,12 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonPesquisarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutorActionPerformed
-        produtorAtual = ciInterface.getCiProdutor().instanciarProdutorVazio();
-        ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, CENARIO, produtorAtual);
+        
+        desabilitarCampos(false);
+        ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, Cenario.SELECIONAR, produtorAtual);
+        produtorAtual = ciInterface.getCiProdutor().getProdutorSelecionado();
         jTextFieldResponsavel.setText(produtorAtual.getNome());
         propriedadeVazia.setResponsavel(produtorAtual);
-        desabilitarCampos(false);
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
     private void identificarCenario() {

@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
 
 public class JDPesquisaProdutor extends javax.swing.JDialog {
     
-    private final CIInterface ciInterface;
-    private final int CENARIO;
-    private final Frame pai;
-    private final Produtor produtorAtual;
+    private CIInterface ciInterface;
+    private int CENARIO;
+    private Frame pai;
+    private Produtor produtorAtual;
   
     public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtorSelecionado) {
         super(pai, modal);
@@ -170,9 +170,9 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         try {
             Produtor produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
             
-            if (CENARIO == Cenario.CADASTRAR) {
-                ciInterface.getCiProdutor().setarCamposProdutorSelecionado(produtorAtual, produtorSelecionado);
-                this.dispose();
+            if (CENARIO == Cenario.SELECIONAR) {
+                ciInterface.getCiProdutor().setProdutorSelecionado(produtorSelecionado);
+                dispose();
             } else {
                 ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtorSelecionado, pai, CENARIO);
             }

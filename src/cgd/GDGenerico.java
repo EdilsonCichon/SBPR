@@ -18,7 +18,7 @@ public abstract class GDGenerico {
     
     private void persistir(Object obj, int cenario) throws SQLException, ClassNotFoundException{
         
-        sessao = cgd.hibernate.HibernateConfig.getSessionFactory().openSession();
+        sessao = criarSessao();
         sessao.beginTransaction();
         
         switch (cenario) {
@@ -47,10 +47,10 @@ public abstract class GDGenerico {
         persistir(obj, EXCLUIR);
     }
      
-    public List consultar(Class classe) throws SQLException {
+    public List consultar(Class classe) {
         
         List lista;
-        sessao = cgd.hibernate.HibernateConfig.getSessionFactory().openSession();
+        sessao = criarSessao();
         sessao.beginTransaction();
         
         Criteria cons = sessao.createCriteria(classe);
@@ -60,5 +60,10 @@ public abstract class GDGenerico {
         sessao.close();
         
         return lista;
-    } 
+    }
+
+    public Session criarSessao() {
+        sessao = cgd.hibernate.HibernateConfig.getSessionFactory().openSession();
+        return sessao;
+    }
 }
