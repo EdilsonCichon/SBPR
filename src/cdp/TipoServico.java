@@ -84,4 +84,13 @@ public class TipoServico implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+    public Object[] toArray() {
+        return new Object[] { this, valor_hr, descricao};
+    }
 }

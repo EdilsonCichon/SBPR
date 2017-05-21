@@ -15,7 +15,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     private final JFrame pai;
     private final int CENARIO;
     private Produtor produtorAtual;
-    private boolean resposta;
 
     public JDCadastroProdutor(java.awt.Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtor) {
         super(pai, modal);
@@ -334,7 +333,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         try {
             
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
-            
+            boolean respostaOperacao;
             switch (CENARIO) {
                 case Cenario.CADASTRAR:
                     produtorAtual = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
@@ -346,8 +345,8 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                     }   break;
                     
                 case Cenario.ALTERAR:
-                    resposta = ciInterface.getCiProdutor().alterarProdutor(produtorAtual, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-                    if (resposta) {
+                    respostaOperacao = ciInterface.getCiProdutor().alterarProdutor(produtorAtual, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                    if (respostaOperacao) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(true);
@@ -360,10 +359,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 case Cenario.EXCLUIR:
                     int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
                     if ( confirmacao == 0 ) {
-                        resposta = ciInterface.getCiProdutor().excluirProdutor(produtorAtual);
-                        if(resposta)
+                        respostaOperacao = ciInterface.getCiProdutor().excluirProdutor(produtorAtual);
+                        if (respostaOperacao)
                             this.dispose();
-                    }   break;
+                    }
+                    break;
                     
                 default:
                     break;

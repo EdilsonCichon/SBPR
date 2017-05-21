@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import cih.tipoServico.JDCadastroTipoServico;
 import cih.tipoServico.JDPesquisaTipoServico;
 import java.awt.Frame;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CITipoServico {
@@ -33,8 +34,8 @@ public class CITipoServico {
         cadastroTipoServico.setVisible(true);
     }
      
-    public void instanciarTelaFiltroProdutor(Frame pai, int CENARIO){
-        pesquisaTipoServico = new JDPesquisaTipoServico(pai, true, ciInterface);
+    public void instanciarTelaFiltroProdutor(Frame pai, int CENARIO) {
+        pesquisaTipoServico = new JDPesquisaTipoServico(pai, true, ciInterface, CENARIO);
         pesquisaTipoServico.setVisible(true);
     }
     
@@ -57,8 +58,18 @@ public class CITipoServico {
         int i = gtTipoServico.consultarTipoServico();
     }
     
-    public void excluirTipoServico(){
-        int i = gtTipoServico.excluirTipoServico();
+    public boolean excluirTipoServico(TipoServico tipoServico) {
+        try {
+            gtTipoServico.excluirTipoServico(tipoServico);
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+            return true;
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
+            return false;
+        } 
     } 
     
+    public List<TipoServico> filtrarTipoServico(String colunaFiltro, String filtro) {
+       return gtTipoServico.filtrarTipoServico(colunaFiltro, filtro);
+    }
 }

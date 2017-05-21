@@ -5,6 +5,7 @@ import cdp.TipoServico;
 import cgd.GDTipoServico;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
+import java.util.List;
 
 public class GTTipoServico {
     
@@ -31,13 +32,16 @@ public class GTTipoServico {
         return 0;
     }
     
-    public int excluirTipoServico(){
-        //gdTipoServico.excluir();
-        return 0;
-    } 
+    public void excluirTipoServico(TipoServico tipoServico) throws SQLException, ClassNotFoundException {
+        gdTipoServico.excluir(tipoServico);
+    }
     
     private void validarCampos(String valor) throws SBPRException{
         if(!ValidaCampos.validarValor(valor))
             throw new SBPRException(1);   
+    }
+    
+    public List<TipoServico> filtrarTipoServico(String colunaFiltro, String valorFiltro) {
+        return gdTipoServico.filtrar(colunaFiltro, valorFiltro);
     }
 }

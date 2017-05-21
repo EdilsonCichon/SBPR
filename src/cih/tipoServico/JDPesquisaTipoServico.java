@@ -2,18 +2,27 @@ package cih.tipoServico;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.util.Cenario;
+import cci.util.JTableUtil;
+import cdp.TipoServico;
+import java.awt.Frame;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class JDPesquisaTipoServico extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private int CENARIO;
+    private Frame framePai;
     
-    public JDPesquisaTipoServico(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
-        super(parent, modal);
+    public JDPesquisaTipoServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO) {
+        super(framePai, modal);
+        this.framePai = framePai;
         this.ciInterface = ciInterface;
+        this.CENARIO = CENARIO;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -25,8 +34,8 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         jComboBoxFiltro = new javax.swing.JComboBox<>();
         jTextFieldFiltro = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableResultadoTipoServico = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jTableTipoServico = new javax.swing.JTable();
+        jButtonFiltrarTipoServico = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -46,7 +55,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
             }
         });
 
-        jTableResultadoTipoServico.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTipoServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -62,9 +71,14 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTableResultadoTipoServico);
+        jScrollPane1.setViewportView(jTableTipoServico);
 
-        jButton1.setText("...");
+        jButtonFiltrarTipoServico.setText("...");
+        jButtonFiltrarTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFiltrarTipoServicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPesquisarTipoServicoLayout = new javax.swing.GroupLayout(jPanelPesquisarTipoServico);
         jPanelPesquisarTipoServico.setLayout(jPanelPesquisarTipoServicoLayout);
@@ -80,7 +94,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonFiltrarTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -91,7 +105,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                     .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelFiltrar)
                     .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonFiltrarTipoServico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
@@ -150,23 +164,43 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
 
     private void jComboBoxFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFiltroActionPerformed
         //System.out.println(jComboBoxFiltro.getSelectedItem().toString());
-//        jLabelTipoFiltro.setText(jComboBoxFiltro.getSelectedItem().toString());
+        //jLabelTipoFiltro.setText(jComboBoxFiltro.getSelectedItem().toString());
     }//GEN-LAST:event_jComboBoxFiltroActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        // TODO add your handling code here:
+        try {
+            TipoServico tipoServico = (TipoServico) JTableUtil.getDadosLinhaSelecionada(jTableTipoServico);
+            if (CENARIO == Cenario.SELECIONAR) {}
+                //vai ser necessário quando for relacionar o Serviço com o Tipo de Serviço
+            else
+                ciInterface.getCiTipoServico().instanciarTelaCadastroTipoServico(tipoServico, framePai, CENARIO);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Selecione um tipo de serviço", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
+    private void jButtonFiltrarTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoActionPerformed
+        String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
+        String filtro = jTextFieldFiltro.getText();
+        
+        List<TipoServico> listaTipoServicos = ciInterface.getCiTipoServico().filtrarTipoServico(colunaFiltro, filtro);
+        JTableUtil.limparTabela(jTableTipoServico);
+        
+        listaTipoServicos.forEach((tipoServico) -> {
+            JTableUtil.addLinha(jTableTipoServico, tipoServico.toArray() );
+        });
+    }//GEN-LAST:event_jButtonFiltrarTipoServicoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonFiltrarTipoServico;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JPanel jPanelPesquisarTipoServico;
     private javax.swing.JPanel jPanelRodape;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableResultadoTipoServico;
+    private javax.swing.JTable jTableTipoServico;
     private javax.swing.JTextField jTextFieldFiltro;
     // End of variables declaration//GEN-END:variables
 }
