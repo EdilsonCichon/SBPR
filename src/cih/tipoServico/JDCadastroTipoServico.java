@@ -32,13 +32,13 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
             case Cenario.ALTERAR:
                 break;
             case Cenario.CONSULTAR:
-                setTitle("Consulta de Tipo de Serviço");
+                setTitle("Consultar Tipo de Serviço");
                 modoSomenteLeitura(true);
                 setarCamposComInstancia(tipoServicoAtual);
                 jButtonConfirmar.setEnabled(false);
                 break;
             case Cenario.EXCLUIR:
-                setTitle("Exclusão de Tipo de Serviço");
+                setTitle("Excluir Tipo de Serviço");
                 modoSomenteLeitura(true);
                 setarCamposComInstancia(tipoServicoAtual);
                 break;

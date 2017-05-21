@@ -397,11 +397,13 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 habilitarBotoesPropriedade(false);
                 break;
             case Cenario.ALTERAR:
+                setTitle("Alterar Produtor");
                 modoSomenteLeitura(false);
                 habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtorAtual);
                 break;
             case Cenario.CONSULTAR:
+                setTitle("Consultar Produtor");
                 modoSomenteLeitura(true);
                 habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtorAtual);
@@ -409,6 +411,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 jButtonCancelar.setText("Sair");
                 break;
             default://EXCLUIR
+                setTitle("Excluir Produtor");
                 modoSomenteLeitura(true);
                 habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtorAtual);

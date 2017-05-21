@@ -529,16 +529,19 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             case Cenario.CADASTRAR:
                 break;  
             case Cenario.ALTERAR:
+                setTitle("Alterar Funcionário");
                 setarCamposComInstancia(funcionarioAtual);
                 modoSomenteLeitura(false);
                 break; 
             case Cenario.CONSULTAR:
+                setTitle("Consultar Funcionário");
                 modoSomenteLeitura(true);
                 setarCamposComInstancia(funcionarioAtual);
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
                 break;
             default: //EXCLUIR
+                setTitle("Excluir Funcionário");
                 modoSomenteLeitura(true);
                 setarCamposComInstancia(funcionarioAtual);
                 break;

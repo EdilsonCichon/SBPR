@@ -218,16 +218,19 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
             case Cenario.CADASTRAR:
                 break;
             case Cenario.ALTERAR:
+                setTitle("Alterar Tipo de Máquina");
                 setarCamposComInstancia(tipoMaquinaAtual);
                 jButtonConfirmar.setText("Alterar");
                 break;
             case Cenario.CONSULTAR:
+                setTitle("Consultar Tipo de Máquina");
                 modoSomenteLeitura(true);
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
                 setarCamposComInstancia(tipoMaquinaAtual);
                 break;
             default://EXCLUIR
+                setTitle("Excluir Tipo de Máquina");
                 modoSomenteLeitura(true);
                 jButtonConfirmar.setText("Excluir");
                 setarCamposComInstancia(tipoMaquinaAtual);

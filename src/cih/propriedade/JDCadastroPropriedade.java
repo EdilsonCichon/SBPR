@@ -262,11 +262,13 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                 
                 switch (CENARIO) {
                     case Cenario.CONSULTAR:
+                        setTitle("Consultar Propriedade");
                         setarCamposComInstancia();
                         modoSomenteLeitura(true);
                         break;
                         
                     case Cenario.ALTERAR:
+                        setTitle("Alterar Propriedade");
                         setarCamposComInstancia();
                         jButtonPesquisarProdutor.setEnabled(true);
                         break;
@@ -276,6 +278,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                         break;
                         
                     case Cenario.EXCLUIR:
+                        setTitle("Excluir Propriedade");
                         setarCamposComInstancia();
                         modoSomenteLeitura(true);
                         break;

@@ -264,17 +264,20 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
             
             case Cenario.CADASTRAR:
                 setarCombo();
-                break;  
+                break;
             case Cenario.ALTERAR:
+                setTitle("Alterar Máquina");
                 setarCamposComInstancia(maquinaAtual);
                 break; 
             case Cenario.CONSULTAR:  
+                setTitle("Consultar Máquina");
                 setarCamposComInstancia(maquinaAtual);
                 modoSomenteLeitura(true);
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
                 break;
             case Cenario.EXCLUIR:
+                setTitle("Excluir Máquina");
                 setarCamposComInstancia(maquinaAtual);
                 modoSomenteLeitura(true);
                 break;

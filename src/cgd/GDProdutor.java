@@ -11,7 +11,8 @@ public class GDProdutor extends GDGenerico {
         Criteria crit = criarSessao().createCriteria(Produtor.class);
         //crit.setMaxResults(50);
         crit.add( Restrictions.like(colunaFiltro, "%"+valorFiltro+"%") );
+        List lista = crit.list();
         sessao.close();
-        return crit.list();
+        return lista;
     }
 }
