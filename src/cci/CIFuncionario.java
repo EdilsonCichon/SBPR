@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 
 public class CIFuncionario {
     
-    private final CIInterface ciInterface;
-    private final GTFuncionario gtFuncionario;
+    private CIInterface ciInterface;
+    private GTFuncionario gtFuncionario;
     JDCadastroFuncionario cadastroFuncionario;
     JDPesquisaFuncionario pesquisaFuncionario;
 
@@ -24,18 +24,20 @@ public class CIFuncionario {
     
     public void gerenciarFuncionario(int CENARIO, JFrame pai) {
        
-        if (CENARIO == Cenario.CADASTRAR) {
-            cadastroFuncionario = new JDCadastroFuncionario(pai, true, ciInterface, CENARIO, null);
-            cadastroFuncionario.setVisible(true);
-        } else {
-           pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface, CENARIO);
-            pesquisaFuncionario.setVisible(true);
-        }
+        if (CENARIO == Cenario.CADASTRAR)
+            instanciarTelaCadastroFuncionario(null, pai, CENARIO);
+        else
+            instanciarTelaFiltroFuncionario(pai, CENARIO);
     }
     
-    public void instanciarTelaCadastroFuncionario(Funcionario funcionario, Frame pai, int CENARIO){
+    public void instanciarTelaCadastroFuncionario(Funcionario funcionario, Frame pai, int CENARIO) {
         cadastroFuncionario = new JDCadastroFuncionario(pai, true, ciInterface, CENARIO, funcionario);
         cadastroFuncionario.setVisible(true);
+    }
+    
+    public void instanciarTelaFiltroFuncionario(Frame pai, int CENARIO) {
+        pesquisaFuncionario = new JDPesquisaFuncionario(pai, true, ciInterface, CENARIO);
+        pesquisaFuncionario.setVisible(true);
     }
     
     public boolean cadastrarFuncionario(

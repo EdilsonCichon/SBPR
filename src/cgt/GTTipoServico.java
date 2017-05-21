@@ -1,18 +1,24 @@
 package cgt;
 
+import cci.SBPRException;
+import cdp.TipoServico;
 import cgd.GDTipoServico;
+import cgt.util.ValidaCampos;
+import java.sql.SQLException;
 
 public class GTTipoServico {
     
-    private GDTipoServico gdTipoServico;
+    private final GDTipoServico gdTipoServico;
+    private TipoServico tipoServico;
 
     public GTTipoServico() {
         gdTipoServico = new GDTipoServico();
     }
     
-    public int cadastrarTipoServico(){
-        //gdTipoServico.cadastrar();
-        return 0;
+    public void cadastrarTipoServico(String nome, String valor, String descricao) throws SQLException, ClassNotFoundException, SBPRException{
+        validarCampos(valor);
+        tipoServico = new TipoServico(nome, descricao, Double.parseDouble(valor), null);
+        gdTipoServico.cadastrar(tipoServico);  
     }
     
     public int alterarTipoServico(){
@@ -29,4 +35,9 @@ public class GTTipoServico {
         //gdTipoServico.excluir();
         return 0;
     } 
+    
+    private void validarCampos(String valor) throws SBPRException{
+        if(!ValidaCampos.validarValor(valor))
+            throw new SBPRException(1);   
+    }
 }

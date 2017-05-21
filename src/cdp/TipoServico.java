@@ -2,6 +2,8 @@ package cdp;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "tipo_servico")
@@ -22,7 +24,8 @@ public class TipoServico implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tipo_maquina_id", nullable = false)
-    public TipoMaquina tipoMaquina;
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private TipoMaquina tipoMaquina;
 
     public TipoServico() {
     }

@@ -23,13 +23,10 @@ public class CITipoMaquina {
     }
     
     public void gerenciarTipoMaquina(int CENARIO, JFrame pai) {
-        if ( CENARIO == Cenario.CADASTRAR ) {
-            cadastroTipoMaquina = new JDCadastroTipoMaquina(pai, true, CENARIO, ciInterface, null);
-            cadastroTipoMaquina.setVisible(true);
-        } else {
-            pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, CENARIO, ciInterface);
-            pesquisaTipoMaquina.setVisible(true);
-        }
+        if ( CENARIO == Cenario.CADASTRAR )
+            instanciarTelaCadastroTipoMaquina(null, pai, CENARIO);
+        else
+            instanciarTelaFiltroTipoMaquina(pai, CENARIO);
     }
         
     public boolean cadastrarTipoMaquina(String nome, String descricao) {
@@ -72,5 +69,10 @@ public class CITipoMaquina {
     public void instanciarTelaCadastroTipoMaquina(TipoMaquina tipoMaquina, Frame pai, int CENARIO) {
         cadastroTipoMaquina = new JDCadastroTipoMaquina(pai, true, CENARIO, ciInterface, tipoMaquina);
         cadastroTipoMaquina.setVisible(true);
+    }
+    
+    public void instanciarTelaFiltroTipoMaquina(Frame pai, int CENARIO) {
+        pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, CENARIO, ciInterface);
+        pesquisaTipoMaquina.setVisible(true);
     }
 }

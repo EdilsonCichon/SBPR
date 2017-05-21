@@ -2,6 +2,8 @@ package cdp;
 
 import java.util.Date;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "servico_concluido")
@@ -20,10 +22,12 @@ public class ServicoConcluido extends Servico {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "maquina_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Maquina maquina;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "funcionario_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Funcionario funcionario;
     
     public ServicoConcluido() {

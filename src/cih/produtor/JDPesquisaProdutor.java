@@ -16,12 +16,11 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     private Frame pai;
     private Produtor produtorAtual;
   
-    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtorSelecionado) {
+    public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(pai, modal);
         this.CENARIO = CENARIO;
         this.pai = pai;
         this.ciInterface = ciInterface;
-        this.produtorAtual = produtorSelecionado;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());

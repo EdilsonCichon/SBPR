@@ -15,7 +15,6 @@ public class GTTipoMaquina {
     }
     
     public void cadastrarTipoMaquina(String nome, String descricao) throws Exception {
-        validarCampos(nome, descricao);
         tipoMaquina = new TipoMaquina(nome, descricao);
         gdTipoMaquina.cadastrar(tipoMaquina);
     }
@@ -34,10 +33,5 @@ public class GTTipoMaquina {
     
     public void excluirTipoMaquina(TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException {
         gdTipoMaquina.excluir(tipoMaquina);
-    }
-    
-    private void validarCampos(String nome, String descricao) throws Exception {
-        if (nome.equals("") || descricao.equals(""))
-            throw new Exception("Verifique se todos os campos estão preenchidos!");
     }
 }

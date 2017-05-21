@@ -25,13 +25,10 @@ public class CIPropriedade {
 
     public void gerenciarPropriedade(int CENARIO, JFrame pai) {
 
-        if (CENARIO == Cenario.CADASTRAR) {
-            cadastroPropriedade = new JDCadastroPropriedade(pai, true, ciInterface, Cenario.CADASTRAR, null);
-            cadastroPropriedade.setVisible(true);
-        } else {
-            pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface, CENARIO);
-            pesquisaPropriedade.setVisible(true);
-        }
+        if (CENARIO == Cenario.CADASTRAR)
+            instanciarTelaCadastroPropriedade(null, pai, CENARIO);
+        else
+            instanciarTelaFiltroPropriedade(pai, CENARIO);
     }
 
     public void instanciarTelaCadastroPropriedade(Propriedade propriedade, Frame pai, int CENARIO) {
@@ -39,7 +36,7 @@ public class CIPropriedade {
         cadastroPropriedade.setVisible(true);
     }
 
-    public void instanciarTelaFiltroPropriedade(Frame pai, int CENARIO, Propriedade propriedade) {
+    public void instanciarTelaFiltroPropriedade(Frame pai, int CENARIO) {
         pesquisaPropriedade = new JDPesquisaPropriedade(pai, true, ciInterface, CENARIO);
         pesquisaPropriedade.setVisible(true);
     }

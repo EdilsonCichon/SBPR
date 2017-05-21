@@ -190,44 +190,44 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             validarCampos(nome, referencia);
             
             switch (CENARIO) {
-                case Cenario.CADASTRAR:
-                    {
-                        boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(produtorAtual, nome, referencia);
-                        if (resposta) {
-                            modoSomenteLeitura(resposta);
-                            jButtonConfirmar.setEnabled(false);
-                            jButtonCancelar.setText("Sair");
-                        }
-                        break;
+                case Cenario.CADASTRAR: {
+                    boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(produtorAtual, nome, referencia);
+                    if (resposta) {
+                        modoSomenteLeitura(resposta);
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
                     }
+                    break;
+                }
                 case Cenario.ALTERAR:
                     boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia);
-                    if (alterado) {
+                    if (alterado)
                         this.dispose();
-                    }   break;
+                    break;
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
                 case Cenario.EXCLUIR:
-                    JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
-                    boolean excluido = ciInterface.getCiPropriedade().excluirPropriedade(propriedadeVazia);
-                    if (excluido) {
-                        this.dispose();
-                    }   break;
-                case Cenario.ADICIONAR:
-                    {
-                        propriedadeVazia.setNome_propriedade(nome);
-                        propriedadeVazia.setReferencia(referencia);
-                        boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia);
-                        if (resposta) {
+                    int confirmado = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.INFORMATION_MESSAGE);
+                    if ( confirmado == 0 ) {
+                        boolean excluido = ciInterface.getCiPropriedade().excluirPropriedade(propriedadeVazia);
+                        if ( excluido )
                             this.dispose();
-                        }       break;
                     }
+                    break;
+                case Cenario.ADICIONAR: {
+                    propriedadeVazia.setNome_propriedade(nome);
+                    propriedadeVazia.setReferencia(referencia);
+                    boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia);
+                    if ( resposta )
+                        this.dispose();
+                    break;
+                }
                 default:
                     break;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao confirmar a operação: " +e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -241,9 +241,8 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonPesquisarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutorActionPerformed
-        
         desabilitarCampos(false);
-        ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, Cenario.SELECIONAR, produtorAtual);
+        ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, Cenario.SELECIONAR);
         produtorAtual = ciInterface.getCiProdutor().getProdutorSelecionado();
         jTextFieldResponsavel.setText(produtorAtual.getNome());
         propriedadeVazia.setResponsavel(produtorAtual);

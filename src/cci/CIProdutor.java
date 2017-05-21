@@ -1,19 +1,19 @@
 package cci;
 
-import cci.util.Cenario;
 import cdp.Produtor;
 import cgt.GTProdutor;
-import javax.swing.JFrame;
+import cci.util.Cenario;
 import cih.produtor.JDCadastroProdutor;
 import cih.produtor.JDPesquisaProdutor;
-import java.awt.Frame;
 import java.util.List;
+import java.awt.Frame;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class CIProdutor {
     
-    private final CIInterface ciInterface;
-    private final GTProdutor gtProdutor;
+    private CIInterface ciInterface;
+    private GTProdutor gtProdutor;
     private JDCadastroProdutor cadastroProdutor;
     private JDPesquisaProdutor pesquisaProdutor;
     private Produtor produtorSelecionado;
@@ -24,14 +24,10 @@ public class CIProdutor {
     }
     
     public void gerenciarProdutor(int CENARIO, JFrame pai) {
-       
-        if (CENARIO == Cenario.CADASTRAR) {
-            cadastroProdutor = new JDCadastroProdutor(pai, true, ciInterface, CENARIO, null);
-            cadastroProdutor.setVisible(true);
-        } else{
-            pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, CENARIO, null);
-            pesquisaProdutor.setVisible(true);
-        }
+        if (CENARIO == Cenario.CADASTRAR)
+            instanciarTelaCadastroProdutor(null, pai, CENARIO);
+        else
+            instanciarTelaFiltroProdutor(pai, CENARIO);
     }
     
     public void instanciarTelaCadastroProdutor(Produtor produtor, Frame pai, int CENARIO) {
@@ -39,9 +35,9 @@ public class CIProdutor {
         cadastroProdutor.setVisible(true);
     }
      
-    public void instanciarTelaFiltroProdutor(Frame pai, int CENARIO, Produtor produtorSelecionado){
+    public void instanciarTelaFiltroProdutor(Frame pai, int CENARIO){
         
-        pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, CENARIO, produtorSelecionado);
+        pesquisaProdutor = new JDPesquisaProdutor(pai, true, ciInterface, CENARIO);
         pesquisaProdutor.setVisible(true);
     }
     

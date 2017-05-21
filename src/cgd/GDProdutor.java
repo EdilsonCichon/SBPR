@@ -4,7 +4,7 @@ import cdp.Produtor;
 import java.util.List;
 import org.hibernate.Criteria;
 
-public class GDProdutor extends GDGenerico{
+public class GDProdutor extends GDGenerico {
        
     public List consultar(String colunaFiltro, String valorFiltro) {
         

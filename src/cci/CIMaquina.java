@@ -24,19 +24,20 @@ public class CIMaquina {
     }
     
     public void gerenciarMaquina(int CENARIO, JFrame pai) {
-        
-        if (CENARIO == Cenario.CADASTRAR) {
-            cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface, CENARIO, null);
-            cadastroMaquina.setVisible(true);
-        } else {
-            pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface, CENARIO);
-            pesquisaMaquina.setVisible(true);
-        }
+        if (CENARIO == Cenario.CADASTRAR)
+            instanciarTelaCadastroMaquina(null, pai, CENARIO);
+        else
+            instanciarTelaFiltroMaquina(pai, CENARIO);
     }
     
     public void instanciarTelaCadastroMaquina(Maquina maquina, Frame pai, int CENARIO){
         cadastroMaquina = new JDCadastroMaquina(pai, true, ciInterface, CENARIO, maquina);
         cadastroMaquina.setVisible(true);
+    }
+    
+    public void instanciarTelaFiltroMaquina(Frame pai, int CENARIO) {
+        pesquisaMaquina = new JDPesquisarMaquina(pai, true, ciInterface, CENARIO);
+        pesquisaMaquina.setVisible(true);
     }
 
     public boolean cadastrarMaquina(String modelo, String placa, TipoMaquina tipoMaquina){
@@ -65,7 +66,14 @@ public class CIMaquina {
        return gtMaquina.consultarMaquina();
     }
     
-    public boolean excluirMaquina(){
-        return true;
+    public boolean excluirMaquina( Maquina maquina){
+        try {
+            gtMaquina.excluirMaquina(maquina);
+            JOptionPane.showMessageDialog(null, "Maquina excluída com sucesso");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir maquina: " + e.getMessage());
+            return false;
+        }
     }    
 }
