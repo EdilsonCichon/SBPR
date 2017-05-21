@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class GTTipoServico {
     
-    private final GDTipoServico gdTipoServico;
+    private GDTipoServico gdTipoServico;
     private TipoServico tipoServico;
 
     public GTTipoServico() {

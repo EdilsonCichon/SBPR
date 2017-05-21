@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GTPropriedade {
     
-    private final GDPropriedade gdPropriedade;
+    private GDPropriedade gdPropriedade;
 
     public GTPropriedade() {
         gdPropriedade = new GDPropriedade();

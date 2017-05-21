@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GTTipoMaquina {
     
-    private final GDTipoMaquina gdTipoMaquina;
+    private GDTipoMaquina gdTipoMaquina;
     private TipoMaquina tipoMaquina;
 
     public GTTipoMaquina() {

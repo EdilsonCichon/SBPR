@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GTProdutor {
 
-    private final GDProdutor gdProdutor;
+    private GDProdutor gdProdutor;
 
     public GTProdutor() {
         gdProdutor = new GDProdutor();
@@ -68,8 +68,8 @@ public class GTProdutor {
         gdProdutor.alterar(produtor);
     }
 
-    public List<Produtor> consultarProdutor(String colunaFiltro, String valorFiltro) {
-        return gdProdutor.consultar(colunaFiltro, valorFiltro);
+    public List<Produtor> filtrarProdutor(String colunaFiltro, String valorFiltro) {
+        return gdProdutor.filtrar(colunaFiltro, valorFiltro);
     }
 
     public void excluirProdutor(Produtor produtor) throws SQLException, ClassNotFoundException {

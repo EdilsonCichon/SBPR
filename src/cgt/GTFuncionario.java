@@ -16,7 +16,7 @@ import java.util.List;
 
 public class GTFuncionario {
     
-    private final GDFuncionario gdFuncionario;
+    private GDFuncionario gdFuncionario;
 
     public GTFuncionario() {
         gdFuncionario = new GDFuncionario();

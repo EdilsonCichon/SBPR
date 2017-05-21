@@ -68,8 +68,8 @@ public class CIProdutor {
         }
     }
     
-    public List<Produtor> consultarProdutor(String colunaFiltro, String filtro){
-       return gtProdutor.consultarProdutor(colunaFiltro, filtro);
+    public List<Produtor> filtrarProdutor(String colunaFiltro, String filtro) {
+       return gtProdutor.filtrarProdutor(colunaFiltro, filtro);
     }
     
     public boolean excluirProdutor(Produtor produtor){

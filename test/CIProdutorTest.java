@@ -27,7 +27,7 @@ public class CIProdutorTest {
     
     @Test
     public void testConsultar() {
-        List<Produtor> listaConsultada = ciProdutor.consultarProdutor("CPF", "");
+        List<Produtor> listaConsultada = ciProdutor.filtrarProdutor("CPF", "");
         assertNotNull(listaConsultada);
     }
     

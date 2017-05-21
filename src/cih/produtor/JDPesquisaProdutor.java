@@ -182,10 +182,10 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
        
-        String colunaFiltro = (String)jComboBoxFiltro.getSelectedItem();
+        String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
         
-        List<Produtor> listaProdutores = ciInterface.getCiProdutor().consultarProdutor(colunaFiltro, filtro);
+        List<Produtor> listaProdutores = ciInterface.getCiProdutor().filtrarProdutor(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableProdutor);
         
         listaProdutores.forEach((produtor) -> {

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GTMaquina {
     
-    private final GDMaquina gdMaquina;
+    private GDMaquina gdMaquina;
 
     public GTMaquina() {
         gdMaquina = new GDMaquina();
