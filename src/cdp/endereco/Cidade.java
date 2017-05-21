@@ -2,8 +2,8 @@ package cdp.endereco;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Cidade implements Serializable {
@@ -17,6 +17,7 @@ public class Cidade implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "estado_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Estado estado;
 
     public Cidade() {

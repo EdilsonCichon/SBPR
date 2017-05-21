@@ -84,13 +84,23 @@ public abstract class ValidaCampos {
 
         if (nome.equals("")) 
             return false;
-        if (!validarPadraoNome(nome, "[!-@]"))
+        if (!validarPadrao(nome, "[!-@]"))
             return false;
         
         return true;
     }
     
-    public static boolean validarPadraoNome(String nome, String pattern){
+    public static boolean validarValor(String valor){
+
+        if (valor.equals("")) 
+            return false;
+        if (!validarPadrao(valor, "[A-z]"))
+            return false;
+        
+        return true;
+    }
+    
+    public static boolean validarPadrao(String nome, String pattern){
         
         Pattern padrao;
         Matcher cambinacao;

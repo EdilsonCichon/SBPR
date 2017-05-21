@@ -30,8 +30,7 @@ public class GTMaquina {
         return gdMaquina.consultar();
     }
     
-    public int excluirMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
+    public void excluirMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{
         gdMaquina.excluir(maquina);
-        return 0;
     } 
 }

@@ -3,6 +3,8 @@ package cdp;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -28,16 +30,19 @@ public abstract class Servico implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "produtor_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Produtor produtor;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "propriedade_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Propriedade propriedade;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tipo_servico_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private TipoServico tipoServico;
 
     public Servico() {

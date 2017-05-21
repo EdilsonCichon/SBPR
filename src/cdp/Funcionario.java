@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -34,6 +36,7 @@ public class Funcionario extends Pessoa implements Serializable {
     @JoinTable(name = "funcionario_tipo_servico",
             joinColumns = @JoinColumn(name = "funcionario_id"),
             inverseJoinColumns = @JoinColumn(name = "tipo_servico_id"))
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<TipoServico> tipoServicos;
 
     public Funcionario() {
