@@ -22,10 +22,15 @@ public class GTFuncionario {
         gdFuncionario = new GDFuncionario();
     }
     
+    public Usuario instanciarUsuario(String login, String senha){
+        Usuario usuario = new Usuario(login, senha);
+        return usuario;
+    }
+    
     public void cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
-            String pHabilitacao, String pUsuario, String senha,
+            String pHabilitacao, Usuario usuario,
             String pCep, String logradouro, String numero,
             String pBairro, String cidade, String estado) throws Exception {
         
@@ -45,13 +50,6 @@ public class GTFuncionario {
         
         Cep cep = new Cep(pCep, logradouros);
         Endereco endereco = new Endereco(numero, "casa", "", cep);
-        
-        Usuario usuario;
-        if((pUsuario.equals("")) || (senha.equals(""))){
-            usuario = null;
-        }else{
-            usuario = new Usuario(pUsuario, senha);
-        }
 
         Habilitacao habilitacao;
         if(pHabilitacao.equals("N/H")){

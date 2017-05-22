@@ -3,6 +3,7 @@ package cci;
 import cci.util.Cenario;
 import cdp.Cargo;
 import cdp.Funcionario;
+import cdp.Usuario;
 import cgt.GTFuncionario;
 import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
@@ -31,6 +32,10 @@ public class CIFuncionario {
             instanciarTelaFiltroFuncionario(pai, CENARIO);
     }
     
+    public Usuario instanciarUsuario(String login, String senha){
+        return gtFuncionario.instanciarUsuario(login, senha);
+    }
+    
     public void instanciarTelaCadastroFuncionario(Funcionario funcionario, Frame pai, int CENARIO) {
         cadastroFuncionario = new JDCadastroFuncionario(pai, true, ciInterface, CENARIO, funcionario);
         cadastroFuncionario.setVisible(true);
@@ -44,14 +49,14 @@ public class CIFuncionario {
     public boolean cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
-            String habilitacao, String usuario, String senha,
+            String habilitacao, Usuario usuario,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado) {
         
         try {
           gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
-                   habilitacao, usuario, senha, cep, logradouro, numero,
+                   habilitacao, usuario, cep, logradouro, numero,
                    bairro, cidade, estado);
             
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");

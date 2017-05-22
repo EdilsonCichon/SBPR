@@ -6,6 +6,7 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.Cargo;
 import cdp.Funcionario;
+import cdp.Usuario;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -474,23 +475,28 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         String bairro = jTextFieldBairro.getText();
         String cidade = jTextFieldCidade.getText();
         String estado = jTextFieldEstado.getText();
-        String usuario = jTextFieldUsuario.getText();
+        String login = jTextFieldUsuario.getText();
         String senha = jPasswordFieldSenha.getText();
         
         try {
-            
-            validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, usuario, senha);
+              
+            validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, login, senha);
             
             switch (CENARIO) {
+                
                 case Cenario.CADASTRAR: {
+                    
+                    Usuario usuario = null;
+                    if(jCheckBoxAcessarSistema.isSelected())
+                        usuario = ciInterface.getCiFuncionario().instanciarUsuario(login, senha);
                     
                     resposta = ciInterface.getCiFuncionario().cadastrarFuncionario(
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
-                            habilitacao, usuario, senha, cep, logradouro, numero,
+                            habilitacao, usuario, cep, logradouro, numero,
                             bairro, cidade, estado);
                     
                     if (resposta) {
-                        jButtonConfirmar.setEnabled(false);
+                        jButtonConfirmar.setEnabled(!resposta);
                         jButtonCancelar.setText("Sair");
                         modoSomenteLeitura(resposta);
                     }
@@ -502,13 +508,13 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                 case Cenario.ALTERAR:
                     resposta  = ciInterface.getCiFuncionario().alterarFuncionario(funcionarioAtual,
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
-                            habilitacao, usuario, senha, cep, logradouro, numero,
+                            habilitacao, login, senha, cep, logradouro, numero,
                             bairro, cidade, estado);
                     
                     if (resposta) {
-                        jButtonConfirmar.setEnabled(false);
+                        jButtonConfirmar.setEnabled(!resposta);
                         jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(true);
+                        modoSomenteLeitura(resposta);
                     }
                         
                 case Cenario.EXCLUIR:
@@ -588,6 +594,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     }
     
     public void setarCamposComInstancia(Funcionario funcionario) {
+        
         jTextFieldNome.setText(funcionario.getNome());
         jFormattedTextFieldCpf.setText(funcionario.getCpf());
         jFormattedTextFieldRg.setText(funcionario.getRg());
@@ -595,6 +602,13 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldTelefone.setText(funcionario.getTelefone());
         jTextFieldEmail.setText(funcionario.getEmail());
         jComboBoxCargo.setSelectedItem(funcionario.getCargo());
+        
+        if(funcionario.getUsuario() != null){
+            jCheckBoxAcessarSistemaActionPerformed(null);
+            jTextFieldUsuario.setText(funcionario.getUsuario().getLogin());
+            jPasswordFieldSenha.setText(funcionario.getUsuario().getSenha());
+        }
+        
         if ( funcionario.getSexo() == 'M' )
             jRadioButtonMasculino.setSelected(true);
     }
