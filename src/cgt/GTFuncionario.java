@@ -24,7 +24,7 @@ public class GTFuncionario {
     
     public void cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
-            String data_nasc, String telefone, char sexo, String pCargo,
+            String data_nasc, String telefone, char sexo, Cargo cargo,
             String pHabilitacao, String pUsuario, String senha,
             String pCep, String logradouro, String numero,
             String pBairro, String cidade, String estado) throws Exception {
@@ -60,8 +60,6 @@ public class GTFuncionario {
             habilitacao = new Habilitacao(pHabilitacao);
         }
         
-        Cargo cargo = new Cargo(pCargo);
-        
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
         
@@ -70,7 +68,7 @@ public class GTFuncionario {
     }
     
     public void alterarFuncionario(Funcionario funcionario, String nome, String cpf, String rg, String email, 
-            String data_nasc, String telefone, char sexo, String pCargo,
+            String data_nasc, String telefone, char sexo, Cargo cargo,
             String pHabilitacao, String pUsuario, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado) throws Exception {
@@ -81,7 +79,6 @@ public class GTFuncionario {
         Endereco endereco = new Endereco(numero, "casa", numero, null);
         Habilitacao habilitacao = new Habilitacao(pHabilitacao);
         Usuario usuario = new Usuario(pUsuario, senha);
-        Cargo cargo = new Cargo(pCargo);
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
         

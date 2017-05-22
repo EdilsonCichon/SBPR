@@ -262,7 +262,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:
-                setarCombo();
+                preencherCombo();
                 jComboBoxTipoMaquinaItemStateChanged(null);
                 break;
             case Cenario.ALTERAR:
@@ -286,7 +286,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         }
     }
     
-    public void setarCombo(){
+    public void preencherCombo(){
         List<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
         jComboBoxTipoMaquina.setModel( new DefaultComboBoxModel( listaTipoMaquina.toArray()));
     }
@@ -297,7 +297,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         jFormattedTextFieldPlaca.setText(maquinaAtual.getPlaca()); 
         
         if(maquinaAtual.getTipoMaquina() != null){
-            setarCombo();
+            preencherCombo();
         } 
     }
     

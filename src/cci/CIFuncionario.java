@@ -1,6 +1,7 @@
 package cci;
 
 import cci.util.Cenario;
+import cdp.Cargo;
 import cdp.Funcionario;
 import cgt.GTFuncionario;
 import javax.swing.JFrame;
@@ -42,7 +43,7 @@ public class CIFuncionario {
     
     public boolean cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
-            String data_nasc, String telefone, char sexo, String cargo,
+            String data_nasc, String telefone, char sexo, Cargo cargo,
             String habilitacao, String usuario, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado) {
@@ -63,7 +64,7 @@ public class CIFuncionario {
     
     public boolean alterarFuncionario(Funcionario funcionario,
             String nome, String cpf, String rg, String email,
-            String data_nasc, String telefone, char sexo, String cargo,
+            String data_nasc, String telefone, char sexo, Cargo cargo,
             String habilitacao, String usuario, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado){
