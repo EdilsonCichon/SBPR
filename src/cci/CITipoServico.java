@@ -50,8 +50,15 @@ public class CITipoServico {
         }
     }
     
-    public void alterarTipoServico(){
-        int i = gtTipoServico.alterarTipoServico();
+    public boolean alterarTipoServico(TipoServico tipoServico){
+        try {
+            gtTipoServico.alterarTipoServico(tipoServico);
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterado: " + e.getMessage());
+            return false;
+        }
     }
     
     public void consultarTipoServico(){

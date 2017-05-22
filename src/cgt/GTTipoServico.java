@@ -22,9 +22,9 @@ public class GTTipoServico {
         gdTipoServico.cadastrar(tipoServico);  
     }
     
-    public int alterarTipoServico(){
-        //gdTipoServico.alterar();
-        return 0;
+    public void alterarTipoServico(TipoServico tipoServico) throws SBPRException, SQLException, ClassNotFoundException{
+        validarCampos(String.valueOf(tipoServico.getValor_hr()));
+        gdTipoServico.alterar(tipoServico);
     }
     
     public int consultarTipoServico(){
