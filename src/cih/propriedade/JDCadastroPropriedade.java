@@ -277,7 +277,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                         break;
                         
                     case Cenario.CADASTRAR:
-                        setTitle("Consultar Propriedade");
+                        setTitle("Consultar Propriedade"); // ANALISAR ISSO FUTURAMENTE
                         jButtonPesquisarProdutor.setEnabled(true);
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");

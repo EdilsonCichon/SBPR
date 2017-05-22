@@ -39,7 +39,7 @@ public class GTTipoServico {
     
     private void validarCampos(String valor) throws SBPRException{
         if(!ValidaCampos.validarValor(valor))
-            throw new SBPRException(1);   
+            throw new SBPRException(7);   
     }
     
     public List<TipoServico> filtrarTipoServico(String colunaFiltro, String valorFiltro) {

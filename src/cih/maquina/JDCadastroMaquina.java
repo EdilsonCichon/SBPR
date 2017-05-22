@@ -263,6 +263,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
             
             case Cenario.CADASTRAR:
                 setarCombo();
+                jComboBoxTipoMaquinaItemStateChanged(null);
                 break;
             case Cenario.ALTERAR:
                 setTitle("Alterar Máquina");

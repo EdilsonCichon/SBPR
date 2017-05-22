@@ -1,6 +1,7 @@
 package cih.tipoMaquina;
 
 import cci.CIInterface;
+import cci.util.Cenario;
 import cci.util.JTableUtil;
 import cdp.TipoMaquina;
 import java.awt.Frame;
@@ -151,9 +152,12 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         try {
             
             TipoMaquina tipoMaquina = (TipoMaquina) JTableUtil.getDadosLinhaSelecionada(jTableTipoDeMaquina);
-            ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO);
-            ciInterface.getCiTipoMaquina().setTipoMaquinaSelecionada(tipoMaquina);
-            dispose();
+            
+            if(CENARIO == Cenario.SELECIONAR){
+                ciInterface.getCiTipoMaquina().setTipoMaquinaSelecionada(tipoMaquina);
+                dispose();
+            }else
+               ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO);     
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um Tipo de Maquina", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }

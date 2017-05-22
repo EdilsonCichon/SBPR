@@ -241,6 +241,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                     validarCampos(nome, valor, descricao);
                     respostaOperacao = ciInterface.getCiTipoServico().cadastrarTipoServico(nome, valor, descricao, tipoMaquina);
                     if (respostaOperacao) {
+                        modoSomenteLeitura(respostaOperacao);
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
                     }
@@ -281,7 +282,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSelecionarTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoMaquinaActionPerformed
-        ciInterface.getCiTipoMaquina().instanciarTelaFiltroTipoMaquina(pai, CENARIO);
+        ciInterface.getCiTipoMaquina().instanciarTelaFiltroTipoMaquina(pai, Cenario.SELECIONAR);
         String tipoMaquina = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada().getNome();
         jTextFieldTipoMaquina.setText(tipoMaquina);
     }//GEN-LAST:event_jButtonSelecionarTipoMaquinaActionPerformed

@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 
 public class JDCadastroFuncionario extends javax.swing.JDialog {
     
-    private final CIInterface ciInterface;
-    private final int CENARIO;
+    private CIInterface ciInterface;
+    private int CENARIO;
     private boolean resposta;
-    private final Funcionario funcionarioAtual;
+    private Funcionario funcionarioAtual;
     
     public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Funcionario funcionario) {
         super(parent, modal);
@@ -133,7 +133,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Atendente", "Motorista", "Mecânico", " " }));
         jComboBoxCargo.setSelectedIndex(1);
 
-        jComboBoxHabilitacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "AB", "AC", "AD", "AE" }));
+        jComboBoxHabilitacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/H", "A", "B", "C", "D", "E", "AB", "AC", "AD", "AE" }));
 
         jCheckBoxAcessarSistema.setText("Permitir Acesso ao Sistema");
         jCheckBoxAcessarSistema.addActionListener(new java.awt.event.ActionListener() {
@@ -455,7 +455,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         String cpf = jFormattedTextFieldCpf.getText().replace(".", "").replace("-", "").replace(" ", "");
         String rg = jFormattedTextFieldRg.getText().replace(".", "").replace("-", "").replace(" ", "");
         String data_nasc = jFormattedTextFieldDataNascimento.getText();
-        String telefone = jFormattedTextFieldTelefone.getText();
+        String telefone = jFormattedTextFieldTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
         char sexo = (char) jButtonGroupSexo.getSelection().getMnemonic();
         String email = jTextFieldEmail.getText();
         String cargo = jComboBoxCargo.getSelectedItem().toString();
@@ -484,7 +484,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     if (resposta) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(true);
+                        modoSomenteLeitura(resposta);
                     }
                     break;
                 }
