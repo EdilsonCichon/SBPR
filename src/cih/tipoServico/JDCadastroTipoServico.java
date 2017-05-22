@@ -33,6 +33,9 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
             case Cenario.CADASTRAR:
                 break;
             case Cenario.ALTERAR:
+                setTitle("Alterar Tipo de Serviço");
+                setarCamposComInstancia(tipoServicoAtual);
+                jButtonConfirmar.setText("Alterar");
                 break;
             case Cenario.CONSULTAR:
                 setTitle("Consultar Tipo de Serviço");
@@ -240,6 +243,19 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                     if (respostaOperacao) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
+                    }
+                    break;
+                case Cenario.ALTERAR:
+                    validarCampos(nome, valor, descricao);
+                    //tipoServicoAtual.setTipoMaquina(tipoMaquina);
+                    tipoServicoAtual.setNome(nome);
+                    tipoServicoAtual.setValor_hr(Double.parseDouble(valor));
+                    tipoServicoAtual.setDescricao(descricao);
+                    respostaOperacao = ciInterface.getCiTipoServico().alterarTipoServico(tipoServicoAtual);
+                    if (respostaOperacao) {
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
+                        modoSomenteLeitura(true);
                     }
                     break;
                 case Cenario.EXCLUIR:
