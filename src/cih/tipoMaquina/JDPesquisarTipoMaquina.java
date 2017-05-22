@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 
 public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     
-    private final CIInterface ciInterface;
-    private final int CENARIO;
-    private final Frame pai;
+    private CIInterface ciInterface;
+    private int CENARIO;
+    private Frame pai;
     
     public JDPesquisarTipoMaquina(Frame pai, boolean modal, int CENARIO, CIInterface ciInterface) {
         super(pai, modal);
@@ -32,7 +32,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTipoDeMaquina = new javax.swing.JTable();
         jLabelNome = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
+        jTextFieldFiltro = new javax.swing.JTextField();
         jButtonFiltrar = new javax.swing.JButton();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
@@ -73,7 +73,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
                     .addGroup(jPanelTipoMaquinaLayout.createSequentialGroup()
                         .addComponent(jLabelNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldNome)
+                        .addComponent(jTextFieldFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -84,7 +84,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelTipoMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFiltrar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
@@ -152,7 +152,8 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
             
             TipoMaquina tipoMaquina = (TipoMaquina) JTableUtil.getDadosLinhaSelecionada(jTableTipoDeMaquina);
             ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO);
- 
+            ciInterface.getCiTipoMaquina().setTipoMaquinaSelecionada(tipoMaquina);
+            dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um Tipo de Maquina", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -160,7 +161,10 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         
-        List<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
+        String colunaFiltro = "nome";
+        String filtro = jTextFieldFiltro.getText();
+        
+        List<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().filtrarTipoMaquina(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableTipoDeMaquina);
         
         listaTiposMaquinas.forEach((tipoMaquina) -> {
@@ -181,6 +185,6 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelTipoMaquina;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTipoDeMaquina;
-    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldFiltro;
     // End of variables declaration//GEN-END:variables
 }

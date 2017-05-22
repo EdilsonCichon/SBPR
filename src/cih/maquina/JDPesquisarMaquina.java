@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 
 public class JDPesquisarMaquina extends javax.swing.JDialog {
     
-    private final CIInterface ciInterface;
-    private final int CENARIO;
-    private final Frame pai;
+    private CIInterface ciInterface;
+    private int CENARIO;
+    private Frame pai;
     
     public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
@@ -56,7 +56,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
 
         jLabelFiltro.setText("Filtrar por:");
 
-        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Placa" }));
+        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modelo", "Placa" }));
 
         jButtonPesquisarMaquina.setText("...");
         jButtonPesquisarMaquina.addActionListener(new java.awt.event.ActionListener() {
@@ -74,16 +74,16 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
                 .addGroup(jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelPesquisaLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelPesquisaLayout.createSequentialGroup()
                         .addComponent(jLabelFiltro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonPesquisarMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jButtonPesquisarMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanelPesquisaLayout.setVerticalGroup(
             jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +172,10 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
 
     private void jButtonPesquisarMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarMaquinaActionPerformed
         
-        List<Maquina> listaMaquinas = ciInterface.getCiMaquina().consultarMaquina();
+        String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
+        String filtro = jTextFieldFiltro.getText();
+        
+        List<Maquina> listaMaquinas = ciInterface.getCiMaquina().filtrarMaquina(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableMaquina);
         
         listaMaquinas.forEach ((maquina) -> {

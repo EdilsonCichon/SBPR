@@ -27,8 +27,12 @@ public class GTTipoMaquina {
  
     }
     
-    public List<TipoMaquina> consultarTipoMaquina() {
-        return gdTipoMaquina.consultar();
+    public List<TipoMaquina> filtrarTipoMaquina(String colunaFiltro, String filtro) {
+        return gdTipoMaquina.filtrar(colunaFiltro, filtro);
+    }
+    
+     public List<TipoMaquina> consultarTipoMaquina() {
+        return gdTipoMaquina.consultar(TipoMaquina.class);
     }
     
     public void excluirTipoMaquina(TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException {

@@ -5,6 +5,7 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.TipoMaquina;
 import cdp.TipoServico;
+import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 public class JDCadastroTipoServico extends javax.swing.JDialog {
@@ -12,12 +13,14 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private TipoServico tipoServicoAtual;
+    private Frame pai;
     
     public JDCadastroTipoServico(java.awt.Frame FramePai, boolean modal, CIInterface ciInterface, int CENARIO, TipoServico tipoServicoInformado) {
         super(FramePai, modal);
         this.ciInterface = ciInterface;
         this.CENARIO = CENARIO;
         this.tipoServicoAtual = tipoServicoInformado;
+        this.pai = FramePai;
         initComponents();
         this.setLocationRelativeTo(FramePai);
         ImageIcon icone = ciInterface.setarIconesJanela();
@@ -119,22 +122,20 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                 .addGroup(jPanelTipoServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanelTipoServicoLayout.createSequentialGroup()
+                        .addComponent(jLabelTipoMaquina)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldTipoMaquina)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonSelecionarTipoMaquina))
+                    .addGroup(jPanelTipoServicoLayout.createSequentialGroup()
                         .addGroup(jPanelTipoServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTipoServicoLayout.createSequentialGroup()
-                                .addComponent(jLabelTipoMaquina)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldTipoMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonSelecionarTipoMaquina))
-                            .addGroup(jPanelTipoServicoLayout.createSequentialGroup()
-                                .addGroup(jPanelTipoServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelResponsavel)
-                                    .addComponent(jLabelValorHora)
-                                    .addComponent(jLabelNomePropriedade))
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanelTipoServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabelResponsavel)
+                            .addComponent(jLabelValorHora)
+                            .addComponent(jLabelNomePropriedade))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanelTipoServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -154,7 +155,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                     .addComponent(jLabelTipoMaquina)
                     .addComponent(jTextFieldTipoMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSelecionarTipoMaquina))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelNomePropriedade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,12 +229,14 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         String nome = jTextFieldNome.getText();
         String valor = jTextFieldValorHora.getText();
         String descricao = jTextAreaDescricao.getText();
+        TipoMaquina tipoMaquina = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada();
         boolean respostaOperacao;
+        
         try {
             switch (CENARIO) {
                 case Cenario.CADASTRAR:
                     validarCampos(nome, valor, descricao);
-                    respostaOperacao = ciInterface.getCiTipoServico().cadastrarTipoServico(nome, valor, descricao);
+                    respostaOperacao = ciInterface.getCiTipoServico().cadastrarTipoServico(nome, valor, descricao, tipoMaquina);
                     if (respostaOperacao) {
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
@@ -262,7 +265,9 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSelecionarTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoMaquinaActionPerformed
-        JOptionPane.showMessageDialog(this, "Crystian vai implementar essa lógica no CADASTRAR.");
+        ciInterface.getCiTipoMaquina().instanciarTelaFiltroTipoMaquina(pai, CENARIO);
+        String tipoMaquina = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada().getNome();
+        jTextFieldTipoMaquina.setText(tipoMaquina);
     }//GEN-LAST:event_jButtonSelecionarTipoMaquinaActionPerformed
 
     public void validarCampos(String nome, String valor, String descricao) throws Exception {

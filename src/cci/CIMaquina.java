@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 
 public class CIMaquina {
     
-    private final CIInterface ciInterface;
-    private final GTMaquina gtMaquina;
+    private CIInterface ciInterface;
+    private GTMaquina gtMaquina;
     private JDCadastroMaquina cadastroMaquina;
     private JDPesquisarMaquina pesquisaMaquina; 
 
@@ -62,8 +62,8 @@ public class CIMaquina {
         }
     }
     
-    public List<Maquina> consultarMaquina(){
-       return gtMaquina.consultarMaquina();
+    public List<Maquina> filtrarMaquina(String colunaFiltro, String filtro){
+       return gtMaquina.filtrarMaquina(colunaFiltro, filtro);
     }
     
     public boolean excluirMaquina( Maquina maquina){

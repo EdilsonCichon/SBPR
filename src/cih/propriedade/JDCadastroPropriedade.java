@@ -220,6 +220,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                     propriedadeVazia.setReferencia(referencia);
                     boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia);
                     if ( resposta )
+                        ciInterface.getCiProdutor().getProdutorSelecionado().setPropriedade(propriedadeVazia);
                         this.dispose();
                     break;
                 }
@@ -263,6 +264,8 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                 switch (CENARIO) {
                     case Cenario.CONSULTAR:
                         setTitle("Consultar Propriedade");
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
                         setarCamposComInstancia();
                         modoSomenteLeitura(true);
                         break;
@@ -274,7 +277,10 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                         break;
                         
                     case Cenario.CADASTRAR:
+                        setTitle("Consultar Propriedade");
                         jButtonPesquisarProdutor.setEnabled(true);
+                        jButtonConfirmar.setEnabled(false);
+                        jButtonCancelar.setText("Sair");
                         break;
                         
                     case Cenario.EXCLUIR:

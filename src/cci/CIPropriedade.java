@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 
 public class CIPropriedade {
 
-    private final CIInterface ciInterface;
-    private final GTPropriedade gtPropriedade;
+    private CIInterface ciInterface;
+    private GTPropriedade gtPropriedade;
     private JDCadastroPropriedade cadastroPropriedade;
     private JDPesquisaPropriedade pesquisaPropriedade;
 
@@ -79,7 +79,8 @@ public class CIPropriedade {
         }
     }
 
-    public List<Propriedade> consultarProdutor(String colunaFiltro, String filtro) {
-        return gtPropriedade.consultarProdutor(colunaFiltro, filtro);
+    public List<Propriedade> filtrarPropriedade(String colunaFiltro, String filtro) {
+        return gtPropriedade.filtrarPropriedade(colunaFiltro, filtro);
     }
+  
 }

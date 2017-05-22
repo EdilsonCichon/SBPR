@@ -59,6 +59,10 @@ public class Produtor extends Pessoa {
     public void setPropriedades(Collection<Propriedade> propriedades) {
         this.propriedades = this.propriedades;
     }
+    
+    public void setPropriedade(Propriedade propriedade){
+        this.propriedades.add(propriedade);
+    }
    
     public Object[] toArray() {
         return new Object[] { this, getCpf(), getRg(), getDt_nasc("dd/MM/yyyy") };

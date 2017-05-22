@@ -9,9 +9,9 @@ import javax.swing.ImageIcon;
 
 public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     
-    private final int CENARIO;
-    private final CIInterface ciInterface;
-    private final TipoMaquina tipoMaquinaAtual;
+    private int CENARIO;
+    private CIInterface ciInterface;
+    private TipoMaquina tipoMaquinaAtual;
     private boolean resposta;
   
 
@@ -169,8 +169,10 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
         String nome = jTextFieldNome.getText();
         String descricao = jTextAreaDescricao.getText();
+        
         try {
             switch (CENARIO) {
                 case Cenario.CADASTRAR:

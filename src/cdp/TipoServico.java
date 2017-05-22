@@ -91,6 +91,6 @@ public class TipoServico implements Serializable {
     }
     
     public Object[] toArray() {
-        return new Object[] { this, valor_hr, descricao};
+        return new Object[] { this, getValor_hr(), getDescricao()};
     }
 }

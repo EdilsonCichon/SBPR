@@ -11,9 +11,9 @@ import javax.swing.JOptionPane;
 
 public final class JDCadastroMaquina extends javax.swing.JDialog {
 
-    private final CIInterface ciInterface; 
-    private final int CENARIO;
-    private final Maquina maquinaAtual;
+    private CIInterface ciInterface; 
+    private int CENARIO;
+    private Maquina maquinaAtual;
     private TipoMaquina tipoMaquina;
     private boolean resposta;
     
@@ -205,7 +205,6 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
-       // tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem(); Essa linha não existe pois o metodo jComboBoxTipoMaquinaItemStateChanged faz. 
         String modelo = jTextFieldModelo.getText();
         String placa = jFormattedTextFieldPlaca.getText().replace("-", "");
         

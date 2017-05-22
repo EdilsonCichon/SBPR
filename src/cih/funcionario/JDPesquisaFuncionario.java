@@ -170,7 +170,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         String tipoFiltro = (String)jComboBoxFiltro.getSelectedItem();
         String texto = jTextFieldFiltro.getText();
         
-        List<Funcionario> listaFuncionarios = ciInterface.getCiFuncionario().consultarFuncionario(tipoFiltro, texto);
+        List<Funcionario> listaFuncionarios = ciInterface.getCiFuncionario().filtrarFuncionario(tipoFiltro, texto);
         JTableUtil.limparTabela(jTableFuncionario);
         
         listaFuncionarios.forEach((funcionario) -> {

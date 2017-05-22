@@ -303,7 +303,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFuncionarioActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        ciInterface.getCiGeral().encerrarSessao();
+        ciInterface.getCiGeral().encerrarSessao(this);
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjudaActionPerformed

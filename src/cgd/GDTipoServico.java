@@ -3,7 +3,6 @@ package cgd;
 
 import cdp.TipoServico;
 import java.util.List;
-import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 

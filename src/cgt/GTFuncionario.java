@@ -75,8 +75,8 @@ public class GTFuncionario {
         gdFuncionario.alterar(funcionario);
     }
     
-    public List consultarFuncionario(String tipoFiltro, String valorInformadoFiltro){
-        return gdFuncionario.consultar(tipoFiltro, valorInformadoFiltro);
+    public List filtrarFuncionario(String tipoFiltro, String valorInformadoFiltro){
+        return gdFuncionario.filtrar(tipoFiltro, valorInformadoFiltro);
     }
     
     public void excluirFuncionario(Funcionario funcionario) throws SQLException, ClassNotFoundException{

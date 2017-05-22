@@ -14,7 +14,6 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private Frame pai;
-    private Produtor produtorAtual;
   
     public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(pai, modal);

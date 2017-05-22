@@ -1,6 +1,7 @@
 package cgt;
 
 import cci.SBPRException;
+import cdp.TipoMaquina;
 import cdp.TipoServico;
 import cgd.GDTipoServico;
 import cgt.util.ValidaCampos;
@@ -16,9 +17,9 @@ public class GTTipoServico {
         gdTipoServico = new GDTipoServico();
     }
     
-    public void cadastrarTipoServico(String nome, String valor, String descricao) throws SQLException, ClassNotFoundException, SBPRException{
+    public void cadastrarTipoServico(String nome, String valor, String descricao, TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException, SBPRException{
         validarCampos(valor);
-        tipoServico = new TipoServico(nome, descricao, Double.parseDouble(valor), null);
+        tipoServico = new TipoServico(nome, descricao, Double.parseDouble(valor), tipoMaquina);
         gdTipoServico.cadastrar(tipoServico);  
     }
     

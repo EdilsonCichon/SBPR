@@ -14,8 +14,8 @@ public class CIFuncionario {
     
     private CIInterface ciInterface;
     private GTFuncionario gtFuncionario;
-    JDCadastroFuncionario cadastroFuncionario;
-    JDPesquisaFuncionario pesquisaFuncionario;
+    private JDCadastroFuncionario cadastroFuncionario;
+    private JDPesquisaFuncionario pesquisaFuncionario;
 
     public CIFuncionario(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -82,8 +82,8 @@ public class CIFuncionario {
         }
     }
     
-    public List<Funcionario> consultarFuncionario(String tipoFiltro, String texto){
-        return gtFuncionario.consultarFuncionario(tipoFiltro, texto);
+    public List<Funcionario> filtrarFuncionario(String tipoFiltro, String texto){
+        return gtFuncionario.filtrarFuncionario(tipoFiltro, texto);
     }
     
     public boolean excluirFuncionario(Funcionario funcionario) {

@@ -11,9 +11,9 @@ import javax.swing.JFrame;
 
 public class JDPesquisaPropriedade extends javax.swing.JDialog {
     
-    private final CIInterface ciInterface;
-    private final Frame pai;
-    private final int CENARIO;
+    private CIInterface ciInterface;
+    private Frame pai;
+    private int CENARIO;
     
     public JDPesquisaPropriedade(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
@@ -48,7 +48,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
         jLabelFiltrar.setText("Filtrar por:");
 
-        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Propriedade", "Produtor" }));
+        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Produtor" }));
 
         jTablePropriedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,7 +83,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
             .addGroup(jPanelPesquisarPropriedadeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPesquisarPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPanePropriedades)
+                    .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                     .addGroup(jPanelPesquisarPropriedadeLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addGap(10, 10, 10)
@@ -165,10 +165,13 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         
-        List<Propriedade> listaPropriedades = ciInterface.getCiPropriedade().consultarProdutor((String)jComboBoxFiltro.getSelectedItem(), jTextFieldFiltro.getText());
+        String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
+        String filtro = jTextFieldFiltro.getText();
+        
+        List<Propriedade> listaProdutores = ciInterface.getCiPropriedade().filtrarPropriedade(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTablePropriedades);
         
-        listaPropriedades.forEach((propriedade) -> {
+        listaProdutores.forEach((propriedade) -> {
             JTableUtil.addLinha(jTablePropriedades, propriedade.toArray() );
         });
     }//GEN-LAST:event_jButtonFiltrarActionPerformed

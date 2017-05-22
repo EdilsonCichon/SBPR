@@ -23,19 +23,6 @@ public class GTProdutor {
         return produtor;     
     }
     
-     public void setarCamposProdutorSelecionado(Produtor produtorAtual, Produtor produtorSelecionado){
-         
-        produtorAtual.setId(produtorSelecionado.getId());
-        produtorAtual.setCpf(produtorSelecionado.getCpf());
-        produtorAtual.setDt_nasc(produtorSelecionado.getDt_nasc());
-        produtorAtual.setRg(produtorSelecionado.getRg());
-        produtorAtual.setInscricao_estadual(produtorSelecionado.getInscricao_estadual());
-        produtorAtual.setNome(produtorSelecionado.getNome());
-        produtorAtual.setTelefone(produtorSelecionado.getTelefone());
-        produtorAtual.setSexo(produtorSelecionado.getSexo());
-        produtorAtual.setPropriedades(produtorSelecionado.getPropriedades());
-    }
-
     public Produtor cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws ParseException, Exception {
             
         validarCampos(nome, cpf, data_nasc, rg, telefone, inscricao);

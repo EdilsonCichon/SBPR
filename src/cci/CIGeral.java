@@ -8,6 +8,8 @@ import cih.principal.JDAjuda;
 import cih.principal.JDRelatorio;
 import cih.principal.JDSuporte;
 import cih.principal.JPInicio;
+import java.awt.Frame;
+import static java.awt.image.ImageObserver.WIDTH;
 import javax.mail.MessagingException;
 import javax.swing.JFrame;
 
@@ -33,8 +35,12 @@ public class CIGeral {
         frmValidarAcesso.setVisible(true);
     }
     
-    public void encerrarSessao() {
-        //JOptionPane.showConfirmDialog(null, "Deseja sair ?");
+    public void encerrarSessao(Frame principal) {
+        
+        int confirmacao = JOptionPane.showConfirmDialog(principal, "Deseja Sair ?", "Sair", JOptionPane.YES_NO_OPTION);
+            if ( confirmacao == 0 ) 
+                principal.dispose();
+            
         frmValidarAcesso = new FrmValidarAcesso(ciInterface);
         frmValidarAcesso.setVisible(true);
         frmPrincipal.dispose();

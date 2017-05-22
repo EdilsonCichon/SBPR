@@ -9,7 +9,6 @@ public class GDProdutor extends GDGenerico {
        
     public List filtrar(String colunaFiltro, String valorFiltro) {
         Criteria crit = criarSessao().createCriteria(Produtor.class);
-        //crit.setMaxResults(50);
         crit.add( Restrictions.like(colunaFiltro, "%"+valorFiltro+"%") );
         List lista = crit.list();
         sessao.close();

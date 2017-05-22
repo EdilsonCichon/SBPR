@@ -5,6 +5,7 @@ import cdp.Propriedade;
 import cci.CIInterface;
 import cci.util.Cenario;
 import cci.util.JTableUtil;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -399,7 +400,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             case Cenario.ALTERAR:
                 setTitle("Alterar Produtor");
                 modoSomenteLeitura(false);
-                habilitarBotoesPropriedade(false);
+                habilitarBotoesPropriedade(true);
                 setarCamposComInstancia(produtorAtual);
                 break;
             case Cenario.CONSULTAR:
@@ -459,18 +460,13 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         
         Propriedade propriedadeVazia = ciInterface.getCiPropriedade().instanciarPropriedadeVazia(produtorAtual);
         ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedadeVazia, pai, Cenario.ADICIONAR);
+         
+        List<Propriedade> listaPropriedades = (List<Propriedade>) produtorAtual.getPropriedades();
+        JTableUtil.limparTabela(jTablePropriedades);
         
-        //TENTATIVA DE INSERIR A PROPRIEDADE CADASTRADA NA TABELA DE PRODUTOR
-        
-        
-//        produtorAtual.setPropriedade(propriedadeVazia);
-//        
-//        Collection<Propriedade> listaPropriedades = produtorAtual.getPropriedades();
-//        JTableUtil.limparTabela(jTablePropriedades);
-//        
-//        listaPropriedades.forEach((propriedadeAtual) -> {
-//            JTableUtil.addLinha(jTablePropriedades, propriedadeAtual.toArray() );
-//        });
+        listaPropriedades.forEach((propriedadeAtual) -> {
+            JTableUtil.addLinha(jTablePropriedades, propriedadeAtual.toArrayProdutor());
+        });
         
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 

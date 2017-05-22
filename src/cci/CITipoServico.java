@@ -1,6 +1,7 @@
 package cci;
 
 import cci.util.Cenario;
+import cdp.TipoMaquina;
 import cdp.TipoServico;
 import cgt.GTTipoServico;
 import javax.swing.JFrame;
@@ -39,9 +40,9 @@ public class CITipoServico {
         pesquisaTipoServico.setVisible(true);
     }
     
-    public boolean cadastrarTipoServico(String nome, String valor, String descricao){ 
+    public boolean cadastrarTipoServico(String nome, String valor, String descricao, TipoMaquina tipoMaquina){ 
         try {
-            gtTipoServico.cadastrarTipoServico(nome, valor, descricao);
+            gtTipoServico.cadastrarTipoServico(nome, valor, descricao, tipoMaquina);
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             return true;
         } catch (Exception e) {

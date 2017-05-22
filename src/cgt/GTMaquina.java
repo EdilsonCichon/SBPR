@@ -26,8 +26,8 @@ public class GTMaquina {
         gdMaquina.alterar(maquina);
     }
     
-    public List<Maquina> consultarMaquina(){
-        return gdMaquina.consultar();
+    public List<Maquina> filtrarMaquina(String colunaFiltro, String filtro){
+        return gdMaquina.filtrar(colunaFiltro, filtro);
     }
     
     public void excluirMaquina(Maquina maquina) throws SQLException, ClassNotFoundException{

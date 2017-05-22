@@ -3,21 +3,16 @@ package cgd;
 import cdp.Maquina;
 import java.util.LinkedList;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 public class GDMaquina extends GDGenerico{
     
-    public List<Maquina> consultar() {
-        
-        Maquina maq1 = new Maquina("SD434", "GHB1254", null);
-        Maquina maq2 = new Maquina("V355", "GBN2386", null);
-        Maquina maq3 = new Maquina("BD233", "BNK7412", null);
-        
-        List<Maquina> listaMaquinas = new LinkedList();
-        
-        listaMaquinas.add(maq1);
-        listaMaquinas.add(maq2);
-        listaMaquinas.add(maq3);
-        
-        return listaMaquinas;
+    public List filtrar(String colunaFiltro, String valorFiltro) {
+        Criteria crit = criarSessao().createCriteria(Maquina.class);
+        crit.add( Restrictions.like(colunaFiltro, "%"+valorFiltro+"%") );
+        List lista = crit.list();
+        sessao.close();
+        return lista;
     }
 }

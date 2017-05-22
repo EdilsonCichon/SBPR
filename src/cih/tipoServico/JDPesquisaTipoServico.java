@@ -49,11 +49,6 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         jLabelFiltrar.setText("Filtrar por:");
 
         jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Valor Hora" }));
-        jComboBoxFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFiltroActionPerformed(evt);
-            }
-        });
 
         jTableTipoServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,11 +156,6 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBoxFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFiltroActionPerformed
-        //System.out.println(jComboBoxFiltro.getSelectedItem().toString());
-        //jLabelTipoFiltro.setText(jComboBoxFiltro.getSelectedItem().toString());
-    }//GEN-LAST:event_jComboBoxFiltroActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         try {

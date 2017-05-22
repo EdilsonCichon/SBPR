@@ -12,10 +12,11 @@ import javax.swing.JOptionPane;
 
 public class CITipoMaquina {
     
-    private final CIInterface ciInterface;
-    private final GTTipoMaquina gtTipoMaquina;
+    private CIInterface ciInterface;
+    private GTTipoMaquina gtTipoMaquina;
     private JDCadastroTipoMaquina cadastroTipoMaquina;
     private JDPesquisarTipoMaquina pesquisaTipoMaquina;
+    private TipoMaquina tipoMaquinaSelecionada;
 
     public CITipoMaquina(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -51,6 +52,10 @@ public class CITipoMaquina {
         }
     }
     
+    public List<TipoMaquina> filtrarTipoMaquina(String colunaFiltro, String filtro){
+       return gtTipoMaquina.filtrarTipoMaquina(colunaFiltro, filtro);
+    }
+    
     public List<TipoMaquina> consultarTipoMaquina(){
        return gtTipoMaquina.consultarTipoMaquina();
     }
@@ -74,5 +79,13 @@ public class CITipoMaquina {
     public void instanciarTelaFiltroTipoMaquina(Frame pai, int CENARIO) {
         pesquisaTipoMaquina = new JDPesquisarTipoMaquina(pai, true, CENARIO, ciInterface);
         pesquisaTipoMaquina.setVisible(true);
+    }
+
+    public TipoMaquina getTipoMaquinaSelecionada() {
+        return tipoMaquinaSelecionada;
+    }
+
+    public void setTipoMaquinaSelecionada(TipoMaquina tipoMaquinaSelecionada) {
+        this.tipoMaquinaSelecionada = tipoMaquinaSelecionada;
     }
 }

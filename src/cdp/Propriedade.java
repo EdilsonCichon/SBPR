@@ -4,8 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Propriedade implements Serializable {
@@ -79,6 +77,10 @@ public class Propriedade implements Serializable {
     }
      
     public Object[] toArray() {
-        return new Object[] { this, getNome_propriedade(), getReferencia() };
-    }  
+        return new Object[] { this, getReferencia(), getResponsavel().getNome() };
+    }
+    
+    public Object[] toArrayProdutor() {
+        return new Object[] { this, getReferencia() };
+    }
 }
