@@ -10,7 +10,7 @@ public class Cargo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
 
     public Cargo() {
@@ -40,5 +40,13 @@ public class Cargo implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
     
+     public Object[] toArray() {
+        return new Object[] {getId(), this};
+    } 
 }

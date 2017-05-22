@@ -25,6 +25,7 @@ public class JPInicio extends javax.swing.JPanel {
         jButtonPropriedade = new javax.swing.JButton();
         jButtonTipoServico = new javax.swing.JButton();
         jButtonFuncionario = new javax.swing.JButton();
+        jButtonConfiguracoes = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(2, 4, 5, 5));
 
@@ -111,6 +112,14 @@ public class JPInicio extends javax.swing.JPanel {
             }
         });
         add(jButtonFuncionario);
+
+        jButtonConfiguracoes.setText("Configurações");
+        jButtonConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfiguracoesActionPerformed(evt);
+            }
+        });
+        add(jButtonConfiguracoes);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPropriedadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPropriedadeActionPerformed
@@ -141,6 +150,10 @@ public class JPInicio extends javax.swing.JPanel {
         frmPrincipal.trocarPanel(new JPCrud(frmPrincipal, Modulo.PRODUTOR, ciInterface));
     }//GEN-LAST:event_jButtonProdutorActionPerformed
 
+    private void jButtonConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfiguracoesActionPerformed
+        frmPrincipal.trocarPanel(new JPConfiguracoes(frmPrincipal, ciInterface));
+    }//GEN-LAST:event_jButtonConfiguracoesActionPerformed
+
     public void setjButtonProdutor(java.awt.event.ActionEvent evt) {
         jButtonProdutorActionPerformed(evt);
     }
@@ -170,6 +183,7 @@ public class JPInicio extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonConfiguracoes;
     private javax.swing.JButton jButtonFuncionario;
     private javax.swing.JButton jButtonMaquina;
     private javax.swing.JButton jButtonProdutor;

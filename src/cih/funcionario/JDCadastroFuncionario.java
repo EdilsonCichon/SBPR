@@ -539,9 +539,11 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                 setarCamposComInstancia(funcionarioAtual);
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
+                jButtonLimpar.setEnabled(false);
                 break;
             default: //EXCLUIR
                 setTitle("Excluir Funcionário");
+                jButtonLimpar.setEnabled(false);
                 modoSomenteLeitura(true);
                 setarCamposComInstancia(funcionarioAtual);
                 break;

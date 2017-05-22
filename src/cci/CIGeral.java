@@ -1,15 +1,18 @@
 package cci;
 
+import cdp.Cargo;
 import cgt.GTGeral;
 import javax.swing.JOptionPane;
 import cih.principal.FrmPrincipal;
 import cih.principal.FrmValidarAcesso;
 import cih.principal.JDAjuda;
+import cih.principal.JDCargo;
+import cih.principal.JDEndereco;
+import cih.principal.JDHabilitacao;
 import cih.principal.JDRelatorio;
 import cih.principal.JDSuporte;
 import cih.principal.JPInicio;
-import java.awt.Frame;
-import static java.awt.image.ImageObserver.WIDTH;
+import java.util.List;
 import javax.mail.MessagingException;
 import javax.swing.JFrame;
 
@@ -23,6 +26,9 @@ public class CIGeral {
     private JDRelatorio relatorio;
     private JPInicio inicio; 
     private JDSuporte suporte;
+    private JDCargo cargo;
+    private JDHabilitacao habilitacao;
+    private JDEndereco endereco;
 
     public CIGeral(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -31,54 +37,88 @@ public class CIGeral {
 
     public void iniciarSistema() {
         gtGeral.inciarBancoDeDados();
-        frmValidarAcesso = new FrmValidarAcesso(ciInterface);
-        frmValidarAcesso.setVisible(true);
+        instanciarFrameValidarAcesso();
     }
     
-    public void encerrarSessao(Frame principal) {
+    public boolean cadastrarCargo(String nomeCargo){
+        try{
+            gtGeral.cadastrarCargo(nomeCargo);
+            JOptionPane.showMessageDialog(null, "Cargo Cadastrado!");
+            return true;
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public List<Cargo> consultarCargos(){
+       return gtGeral.consultarCargos();
+    }
+    
+    public void encerrarSessao() {
         
-        int confirmacao = JOptionPane.showConfirmDialog(principal, "Deseja Sair ?", "Sair", JOptionPane.YES_NO_OPTION);
-            if ( confirmacao == 0 ) 
-                principal.dispose();
-            
-        frmValidarAcesso = new FrmValidarAcesso(ciInterface);
-        frmValidarAcesso.setVisible(true);
-        frmPrincipal.dispose();
+        int confirmacao = JOptionPane.showConfirmDialog(frmPrincipal, "Deseja Sair ?", "Sair", JOptionPane.YES_NO_OPTION);
+            if ( confirmacao == 0 ){
+                instanciarFrameValidarAcesso();
+                frmPrincipal.dispose();   
+            }        
     }
     
     public void validarAcesso(String usuario, String senha) {
  
         if(gtGeral.validarAcesso(usuario, senha)){
-            frmPrincipal = new FrmPrincipal(ciInterface);
-            frmPrincipal.setVisible(true);
+            instanciarFramePrincipal();
             frmValidarAcesso.dispose(); 
         }else{
             JOptionPane.showMessageDialog(frmValidarAcesso, "Acesso Negado");
         } 
     }
     
-    public JPInicio abrirInicio(FrmPrincipal pai){
+    public void instanciarFrameValidarAcesso(){
+        frmValidarAcesso = new FrmValidarAcesso(ciInterface);
+        frmValidarAcesso.setVisible(true);
+    }
+    
+    public void instanciarFramePrincipal(){
+        frmPrincipal = new FrmPrincipal(ciInterface);
+        frmPrincipal.setVisible(true);
+    }
+    
+    public JPInicio instanciarPainelInicio(FrmPrincipal pai){
         
         inicio = new JPInicio(pai, ciInterface); 
-        //JPanel principal = pai.getjPanelPrincipal();
-        //trocarPanel(principal, inicio);
         return inicio;
     }
     
-    public void abrirAjuda(JFrame pai){
+    public void instanciarTelaAjuda(JFrame pai){
         ajuda = new JDAjuda(pai, true, ciInterface);
         ajuda.setVisible(true);      
     }
     
-    public void abrirRelatorio(JFrame pai){
+    public void instanciarTelaRelatorio(JFrame pai){
         relatorio = new JDRelatorio(pai, true, ciInterface);
         relatorio.setVisible(true);
     }
     
-    public void abrirSuporte(JFrame pai){
+    public void instanciarTelaSuporte(JFrame pai){
         suporte = new JDSuporte(pai, true, ciInterface);
         suporte.setVisible(true);  
     }
+    
+    public void instanciarTelaCadastroCargo(JFrame pai){
+        cargo = new JDCargo(pai, true, ciInterface);
+        cargo.setVisible(true);
+    }
+    
+    public void instanciarTelaCadastroHabilitacao(JFrame pai){
+        habilitacao = new JDHabilitacao(pai, true, ciInterface);
+        habilitacao.setVisible(true);
+    }
+     
+    public void instanciarTelaCadastroEndereco(JFrame pai){
+        endereco = new JDEndereco(pai, true, ciInterface);
+        endereco.setVisible(true);
+    } 
     
     public void enviarEmail(String emailDestinatario, String mensagem, String telefone) throws MessagingException {
         gtGeral.enviarEmail(emailDestinatario, mensagem, telefone);

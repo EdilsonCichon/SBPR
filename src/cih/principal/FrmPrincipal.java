@@ -5,8 +5,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class FrmPrincipal extends javax.swing.JFrame {    
-    private JPInicio inicio; 
-
+    
+    private JPInicio inicio;
     private CIInterface ciInterface;
 
     public FrmPrincipal(CIInterface ciInterface) {
@@ -52,6 +52,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(705, 495));
+        setResizable(false);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
         jPanelMenuPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -270,7 +271,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
-        inicio = ciInterface.getCiGeral().abrirInicio(this);
+        inicio = ciInterface.getCiGeral().instanciarPainelInicio(this);
         trocarPanel(inicio);
     }//GEN-LAST:event_jButtonInicioActionPerformed
 
@@ -303,25 +304,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFuncionarioActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        ciInterface.getCiGeral().encerrarSessao(this);
+        ciInterface.getCiGeral().encerrarSessao();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjudaActionPerformed
-        ciInterface.getCiGeral().abrirAjuda(this);    
+        ciInterface.getCiGeral().instanciarTelaAjuda(this);    
     }//GEN-LAST:event_jButtonAjudaActionPerformed
 
     private void jButtonRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelatorioActionPerformed
-        ciInterface.getCiGeral().abrirRelatorio(this);    
+        ciInterface.getCiGeral().instanciarTelaRelatorio(this);    
     }//GEN-LAST:event_jButtonRelatorioActionPerformed
 
     private void jButtonAssistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssistenciaActionPerformed
-        ciInterface.getCiGeral().abrirSuporte(this);    
+        ciInterface.getCiGeral().instanciarTelaSuporte(this);    
     }//GEN-LAST:event_jButtonAssistenciaActionPerformed
-
-    public JPanel getjPanelPrincipal() {
-        return jPanelPrincipal;
-    } 
-    
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAjuda;
     private javax.swing.JButton jButtonAssistencia;
