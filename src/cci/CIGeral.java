@@ -11,7 +11,11 @@ import cih.principal.JDEndereco;
 import cih.principal.JDHabilitacao;
 import cih.principal.JDRelatorio;
 import cih.principal.JDSuporte;
+import cih.principal.JPConfiguracoes;
+import cih.principal.JPCrud;
 import cih.principal.JPInicio;
+import cih.principal.JPServico;
+import java.awt.Frame;
 import java.util.List;
 import javax.mail.MessagingException;
 import javax.swing.JFrame;
@@ -24,7 +28,10 @@ public class CIGeral {
     private FrmValidarAcesso frmValidarAcesso;
     private JDAjuda ajuda;
     private JDRelatorio relatorio;
-    private JPInicio inicio; 
+    private JPInicio inicio;
+    private JPCrud crud;
+    private JPServico servico;
+    private JPConfiguracoes config;
     private JDSuporte suporte;
     private JDCargo cargo;
     private JDHabilitacao habilitacao;
@@ -82,6 +89,21 @@ public class CIGeral {
     public void instanciarFramePrincipal(){
         frmPrincipal = new FrmPrincipal(ciInterface);
         frmPrincipal.setVisible(true);
+    }
+    
+    public JPCrud instanciarJPCrud(JFrame pai , int MODULO){
+        crud = new JPCrud(pai, MODULO, ciInterface);
+        return crud;
+    }
+    
+    public JPServico instanciarJPServico(JFrame pai , int MODULO){
+        servico = new JPServico(pai, MODULO, ciInterface);
+        return servico;
+    }
+    
+    public JPConfiguracoes instanciarJPConfiguracoes(JFrame pai){
+        config = new JPConfiguracoes(pai, ciInterface);
+        return config;
     }
     
     public JPInicio instanciarPainelInicio(FrmPrincipal pai){

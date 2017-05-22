@@ -599,7 +599,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             jRadioButtonMasculino.setSelected(true);
     }
     
-     public void preencherComboCargo(){
+    public void preencherComboCargo(){
         List<Cargo> listaCargos = ciInterface.getCiGeral().consultarCargos();
         jComboBoxCargo.setModel( new DefaultComboBoxModel( listaCargos.toArray()));
     }

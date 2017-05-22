@@ -17,6 +17,16 @@ public class JDCargo extends javax.swing.JDialog {
         this.ciInterface = ciInterface;
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
+        preencherTabela();
+    }
+
+    public void preencherTabela() {
+        JTableUtil.limparTabela(jTableCargo);
+        List<Cargo> listaCargos = ciInterface.getCiGeral().consultarCargos();
+
+        listaCargos.forEach((cargo) -> {
+            JTableUtil.addLinha(jTableCargo, cargo.toArray());
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -120,24 +130,26 @@ public class JDCargo extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
+        
         String nomeCargo = jTextFieldNome.getText();
         try {
+            validarCampos(nomeCargo);
             boolean resposta = ciInterface.getCiGeral().cadastrarCargo(nomeCargo);
             if (resposta) {
                 jTextFieldNome.setText("");
-                JTableUtil.limparTabela(jTableCargo);
-                List<Cargo> listaCargos = ciInterface.getCiGeral().consultarCargos();
-
-                listaCargos.forEach((cargo) -> {
-                    JTableUtil.addLinha(jTableCargo, cargo.toArray());
-                });
+                preencherTabela();
             }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
-
+    
+    public void validarCampos(String nomeCargo) throws Exception{ 
+        if(nomeCargo.equals("")){
+            throw new Exception("Cargo Inválido");
+        }       
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonSair;

@@ -22,8 +22,9 @@ public class SBPRException extends Exception {
         msgsErro[6] = "Campo INSCRIÇÃO ESTADUAL inválido";    
         
         // Erros de Tipo de Serviço
-        msgsErro[7] = "Campo VALOR inválido";  
+        msgsErro[7] = "Campo VALOR inválido"; 
         
+        msgsErro[20] = "Campo NOME DO CARGO inválido";    
     }
     
     @Override

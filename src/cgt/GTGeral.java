@@ -1,10 +1,12 @@
 package cgt;
 
+import cci.SBPRException;
 import cdp.Cargo;
 import cgd.Config;
 import cgd.GDGeral;
 import cgd.GDValidaAcesso;
 import cgt.util.EnvioEmail;
+import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.List;
 import javax.mail.MessagingException;
@@ -20,7 +22,10 @@ public class GTGeral {
         gdGeral = new GDGeral();
     }
 
-    public void cadastrarCargo(String nomeCargo) throws SQLException, ClassNotFoundException{
+    public void cadastrarCargo(String nomeCargo) throws SQLException, ClassNotFoundException, SBPRException{
+        
+        if(!ValidaCampos.validarNome(nomeCargo))
+            throw new SBPRException(20);
         
         Cargo cargo = new Cargo(nomeCargo);
         gdGeral.cadastrar(cargo);
