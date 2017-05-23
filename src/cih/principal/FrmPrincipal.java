@@ -74,7 +74,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jButtonInicio);
 
         jButtonProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-produtor-reduzido.png"))); // NOI18N
-        jButtonProdutor.setToolTipText("Produtor");
+        jButtonProdutor.setToolTipText("Produtores");
         jButtonProdutor.setFocusable(false);
         jButtonProdutor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonProdutor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

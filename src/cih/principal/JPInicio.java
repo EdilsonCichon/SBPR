@@ -30,7 +30,7 @@ public class JPInicio extends javax.swing.JPanel {
         setLayout(new java.awt.GridLayout(2, 4, 5, 5));
 
         jButtonProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-produtor-reduzido.png"))); // NOI18N
-        jButtonProdutor.setText("Produtor");
+        jButtonProdutor.setText("Produtores");
         jButtonProdutor.setToolTipText("");
         jButtonProdutor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonProdutor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

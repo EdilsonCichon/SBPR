@@ -17,8 +17,8 @@
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
     <Property name="columns" type="int" value="4"/>
     <Property name="horizontalGap" type="int" value="5"/>
-    <Property name="verticalGap" type="int" value="5"/>
     <Property name="rows" type="int" value="2"/>
+    <Property name="verticalGap" type="int" value="5"/>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButtonProdutor">
@@ -26,7 +26,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/cih/icones/icone-produtor-reduzido.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Produtor"/>
+        <Property name="text" type="java.lang.String" value="Produtores"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="verticalTextPosition" type="int" value="3"/>

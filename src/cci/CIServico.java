@@ -19,7 +19,7 @@ public class CIServico {
      public void gerenciarServico(int CENARIO, JFrame pai) {
 
         if (CENARIO == Cenario.AGENDAR) {
-            JDCadastroServico agendarServico = new JDCadastroServico(pai, true, ciInterface);
+            JDCadastroServico agendarServico = new JDCadastroServico(pai, true, ciInterface, Cenario.AGENDAR);
             agendarServico.setVisible(true);
         } else if (CENARIO == Cenario.ALTERAR) {
             JDPesquisaServico consultarServico = new JDPesquisaServico(pai, true, ciInterface);
