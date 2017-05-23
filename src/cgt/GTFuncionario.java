@@ -30,7 +30,7 @@ public class GTFuncionario {
     public void cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
-            String pHabilitacao, Usuario usuario,
+            Habilitacao habilitacao, Usuario usuario,
             String pCep, String logradouro, String numero,
             String pBairro, String cidade, String estado) throws Exception {
         
@@ -50,14 +50,7 @@ public class GTFuncionario {
         
         Cep cep = new Cep(pCep, logradouros);
         Endereco endereco = new Endereco(numero, "casa", "", cep);
-
-        Habilitacao habilitacao;
-        if(pHabilitacao.equals("N/H")){
-            habilitacao = null;
-        }else{
-            habilitacao = new Habilitacao(pHabilitacao);
-        }
-        
+       
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
         
@@ -67,7 +60,7 @@ public class GTFuncionario {
     
     public void alterarFuncionario(Funcionario funcionario, String nome, String cpf, String rg, String email, 
             String data_nasc, String telefone, char sexo, Cargo cargo,
-            String pHabilitacao, String pUsuario, String senha,
+            Habilitacao habilitacao, String login, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado) throws Exception {
         
@@ -75,8 +68,6 @@ public class GTFuncionario {
         Date dtNascFormatada = new Date(data_nasc);
         
         Endereco endereco = new Endereco(numero, "casa", numero, null);
-        Habilitacao habilitacao = new Habilitacao(pHabilitacao);
-        Usuario usuario = new Usuario(pUsuario, senha);
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
         
@@ -91,7 +82,8 @@ public class GTFuncionario {
         funcionario.setSexo(sexo);
         funcionario.setTelefone(telefone);
         funcionario.setTipoServicos(tipoServicos);
-        funcionario.setUsuario(usuario);
+        funcionario.getUsuario().setLogin(login);
+        funcionario.getUsuario().setSenha(senha);
 
         gdFuncionario.alterar(funcionario);
     }

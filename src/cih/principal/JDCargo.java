@@ -33,7 +33,7 @@ public class JDCargo extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanelCargo = new javax.swing.JPanel();
         jLabelNome = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -45,7 +45,7 @@ public class JDCargo extends javax.swing.JDialog {
         setTitle("Cadastro de Cargo");
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cargo"));
+        jPanelCargo.setBorder(javax.swing.BorderFactory.createTitledBorder("Cargo"));
 
         jLabelNome.setText("Cargo:");
 
@@ -81,33 +81,33 @@ public class JDCargo extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelCargoLayout = new javax.swing.GroupLayout(jPanelCargo);
+        jPanelCargo.setLayout(jPanelCargoLayout);
+        jPanelCargoLayout.setHorizontalGroup(
+            jPanelCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCargoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanelCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCargoLayout.createSequentialGroup()
                         .addComponent(jLabelNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonCadastrar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelCargoLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCargoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelCargoLayout.setVerticalGroup(
+            jPanelCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCargoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelNome)
                         .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButtonCadastrar))
@@ -118,8 +118,8 @@ public class JDCargo extends javax.swing.JDialog {
                 .addGap(3, 3, 3))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
-        jPanel1.getAccessibleContext().setAccessibleParent(jPanel1);
+        getContentPane().add(jPanelCargo, java.awt.BorderLayout.CENTER);
+        jPanelCargo.getAccessibleContext().setAccessibleParent(jPanelCargo);
 
         pack();
         setLocationRelativeTo(null);
@@ -154,7 +154,7 @@ public class JDCargo extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabelNome;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelCargo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCargo;
     private javax.swing.JTextField jTextFieldNome;

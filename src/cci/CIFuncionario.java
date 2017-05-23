@@ -3,6 +3,7 @@ package cci;
 import cci.util.Cenario;
 import cdp.Cargo;
 import cdp.Funcionario;
+import cdp.Habilitacao;
 import cdp.Usuario;
 import cgt.GTFuncionario;
 import javax.swing.JFrame;
@@ -49,7 +50,7 @@ public class CIFuncionario {
     public boolean cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
-            String habilitacao, Usuario usuario,
+            Habilitacao habilitacao, Usuario usuario,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado) {
         
@@ -70,14 +71,14 @@ public class CIFuncionario {
     public boolean alterarFuncionario(Funcionario funcionario,
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
-            String habilitacao, String usuario, String senha,
+            Habilitacao habilitacao, String login, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado){
         
         try {
             gtFuncionario.alterarFuncionario(funcionario,
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
-                   habilitacao, usuario, senha, cep, logradouro, numero,
+                   habilitacao, login, senha, cep, logradouro, numero,
                    bairro, cidade, estado);
             
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");

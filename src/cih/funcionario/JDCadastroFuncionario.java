@@ -6,6 +6,7 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.Cargo;
 import cdp.Funcionario;
+import cdp.Habilitacao;
 import cdp.Usuario;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -18,6 +19,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private boolean resposta;
     private Funcionario funcionarioAtual;
     private Cargo cargo;
+    private Habilitacao habilitacao;
     
     public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Funcionario funcionario) {
         super(parent, modal);
@@ -137,8 +139,12 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
 
         jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Atendente", "Motorista", "Mecânico", " " }));
         jComboBoxCargo.setSelectedIndex(1);
+        jComboBoxCargo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxCargoItemStateChanged(evt);
+            }
+        });
 
-        jComboBoxHabilitacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/H", "A", "B", "C", "D", "E", "AB", "AC", "AD", "AE" }));
         jComboBoxHabilitacao.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxHabilitacaoItemStateChanged(evt);
@@ -468,7 +474,6 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         String telefone = jFormattedTextFieldTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
         char sexo = (char) jButtonGroupSexo.getSelection().getMnemonic();
         String email = jTextFieldEmail.getText();
-        String habilitacao = jComboBoxHabilitacao.getSelectedItem().toString();
         String cep = jFormattedTextFieldCep.getText();
         String numero = jTextFieldNumero.getText();
         String logradouro = jTextFieldLogradouro.getText();
@@ -495,11 +500,9 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                             habilitacao, usuario, cep, logradouro, numero,
                             bairro, cidade, estado);
                     
-                    if (resposta) {
-                        jButtonConfirmar.setEnabled(!resposta);
-                        jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(resposta);
-                    }
+                    if (resposta)
+                        modoConcluido(resposta);
+                    
                     break;
                 }
                 case Cenario.CONSULTAR:
@@ -511,11 +514,8 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                             habilitacao, login, senha, cep, logradouro, numero,
                             bairro, cidade, estado);
                     
-                    if (resposta) {
-                        jButtonConfirmar.setEnabled(!resposta);
-                        jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(resposta);
-                    }
+                    if (resposta)
+                        modoConcluido(resposta);
                         
                 case Cenario.EXCLUIR:
                     JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
@@ -537,8 +537,12 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jComboBoxHabilitacaoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxHabilitacaoItemStateChanged
-        cargo = (Cargo) jComboBoxCargo.getSelectedItem();
+        habilitacao = (Habilitacao) jComboBoxHabilitacao.getSelectedItem();
     }//GEN-LAST:event_jComboBoxHabilitacaoItemStateChanged
+
+    private void jComboBoxCargoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxCargoItemStateChanged
+        cargo = (Cargo) jComboBoxCargo.getSelectedItem();
+    }//GEN-LAST:event_jComboBoxCargoItemStateChanged
 
     public void identificarCenario() {
         
@@ -546,10 +550,13 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             
             case Cenario.CADASTRAR:
                 preencherComboCargo();
+                preencherComboHabilitacao();
                 jComboBoxHabilitacaoItemStateChanged(null);
                 break;  
             case Cenario.ALTERAR:
                 setTitle("Alterar Funcionário");
+                preencherComboCargo();
+                preencherComboHabilitacao();
                 setarCamposComInstancia(funcionarioAtual);
                 modoSomenteLeitura(false);
                 break; 
@@ -593,6 +600,12 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jButtonLimpar.setEnabled(condicao);
     }
     
+    public void modoConcluido(boolean resposta){
+        jButtonConfirmar.setEnabled(!resposta);
+        jButtonCancelar.setText("Sair");
+        modoSomenteLeitura(resposta);
+    }
+    
     public void setarCamposComInstancia(Funcionario funcionario) {
         
         jTextFieldNome.setText(funcionario.getNome());
@@ -602,6 +615,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldTelefone.setText(funcionario.getTelefone());
         jTextFieldEmail.setText(funcionario.getEmail());
         jComboBoxCargo.setSelectedItem(funcionario.getCargo());
+        jComboBoxHabilitacao.setSelectedItem(funcionario.getHabilitacao());
         
         if(funcionario.getUsuario() != null){
             jCheckBoxAcessarSistemaActionPerformed(null);
@@ -616,6 +630,11 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     public void preencherComboCargo(){
         List<Cargo> listaCargos = ciInterface.getCiGeral().consultarCargos();
         jComboBoxCargo.setModel( new DefaultComboBoxModel( listaCargos.toArray()));
+    }
+    
+    public void preencherComboHabilitacao(){
+        List<Habilitacao> listaHabilitacoes = ciInterface.getCiGeral().consultarHabilitacoes();
+        jComboBoxHabilitacao.setModel( new DefaultComboBoxModel( listaHabilitacoes.toArray()));
     }
     
     public void validarCampos(

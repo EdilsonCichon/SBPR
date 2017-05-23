@@ -1,6 +1,7 @@
 package cci;
 
 import cdp.Cargo;
+import cdp.Habilitacao;
 import cgt.GTGeral;
 import javax.swing.JOptionPane;
 import cih.principal.FrmPrincipal;
@@ -58,8 +59,23 @@ public class CIGeral {
         }
     }
     
+    public boolean cadastrarHabilitacao(String categoria){
+        try{
+            gtGeral.cadastrarHabilitacao(categoria);
+            JOptionPane.showMessageDialog(null, "Habilitação Cadastrada!");
+            return true;
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            return false;
+        }
+    }
+    
     public List<Cargo> consultarCargos(){
        return gtGeral.consultarCargos();
+    }
+    
+    public List<Habilitacao> consultarHabilitacoes(){
+        return gtGeral.consultarHabilitacoes();
     }
     
     public void encerrarSessao() {

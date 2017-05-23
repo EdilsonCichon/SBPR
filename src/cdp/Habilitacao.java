@@ -40,4 +40,13 @@ public class Habilitacao implements Serializable {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+    
+    @Override
+    public String toString() {
+        return categoria;
+    }
+    
+    public Object[] toArray() {
+        return new Object[] {getId(), this};
+    } 
 }

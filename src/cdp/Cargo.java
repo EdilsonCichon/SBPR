@@ -46,7 +46,7 @@ public class Cargo implements Serializable {
         return nome;
     }
     
-     public Object[] toArray() {
+    public Object[] toArray() {
         return new Object[] {getId(), this};
     } 
 }

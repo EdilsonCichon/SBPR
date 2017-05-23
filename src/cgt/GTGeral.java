@@ -2,6 +2,7 @@ package cgt;
 
 import cci.SBPRException;
 import cdp.Cargo;
+import cdp.Habilitacao;
 import cgd.Config;
 import cgd.GDGeral;
 import cgd.GDValidaAcesso;
@@ -31,8 +32,18 @@ public class GTGeral {
         gdGeral.cadastrar(cargo);
     }
     
+    public void cadastrarHabilitacao(String categoria) throws SQLException, ClassNotFoundException, SBPRException{
+        
+        Habilitacao habilitacao = new Habilitacao(categoria);
+        gdGeral.cadastrar(habilitacao);
+    }
+    
     public List<Cargo> consultarCargos(){
        return gdGeral.consultar(Cargo.class);
+    }
+    
+    public List<Habilitacao> consultarHabilitacoes(){
+       return gdGeral.consultar(Habilitacao.class);
     }
     
     public void enviarEmail(String emailDestinatario, String mensagem, String telefone) throws MessagingException {
