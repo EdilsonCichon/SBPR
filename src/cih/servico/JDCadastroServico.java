@@ -402,6 +402,12 @@ public class JDCadastroServico extends javax.swing.JDialog {
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor((Frame) getOwner(), Cenario.SELECIONAR);
         produtorSelecionado = ciInterface.getCiProdutor().getProdutorSelecionado();
         jTextFieldNomeProdutor.setText(produtorSelecionado.getNome());
+        
+        if (produtorSelecionado.getPropriedades() != null)
+            produtorSelecionado.getPropriedades()
+                    .forEach((propriedade) -> {
+                        jComboBoxPropriedades.addItem(propriedade.toString());
+                    });
     }//GEN-LAST:event_jButtonSelecionarProdutorActionPerformed
 
     private void jButtonSelecionarTipoSevicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoSevicoActionPerformed
