@@ -29,20 +29,21 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jPanelPesquisarProdutor = new javax.swing.JPanel();
         jTextFieldNomeProdutor = new javax.swing.JTextField();
-        jLabelFiltrarPor = new javax.swing.JLabel();
-        jComboBoxChavePesquisa = new javax.swing.JComboBox<>();
+        jLabelNomeProdutor = new javax.swing.JLabel();
+        jButtonSelecionarProdutor = new javax.swing.JButton();
         jPanelSelecaoPropriedade = new javax.swing.JPanel();
         jLabelPropriedade = new javax.swing.JLabel();
-        jComboBoxSelecaoPropriedade = new javax.swing.JComboBox<>();
+        jComboBoxPropriedades = new javax.swing.JComboBox<>();
         jPanelAgendar = new javax.swing.JPanel();
         jLabelTipoServico = new javax.swing.JLabel();
-        jComboBoxSelecaoServico = new javax.swing.JComboBox<>();
         jLabelDataPrevista = new javax.swing.JLabel();
         jFormattedTextFieldDataPrevista = new javax.swing.JFormattedTextField();
         jLabelDuracao = new javax.swing.JLabel();
         jFormattedTextFieldQtHrsPrevista = new javax.swing.JFormattedTextField();
         jLabelValorHora = new javax.swing.JLabel();
         jTextFieldValorHora = new javax.swing.JTextField();
+        jTextFieldTipoServico = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
@@ -65,9 +66,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jPanelPesquisarProdutor.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtor"));
 
-        jLabelFiltrarPor.setText("Filtrar por:");
+        jTextFieldNomeProdutor.setEditable(false);
 
-        jComboBoxChavePesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "RG" }));
+        jLabelNomeProdutor.setText("Produtor:");
+
+        jButtonSelecionarProdutor.setText("...");
 
         javax.swing.GroupLayout jPanelPesquisarProdutorLayout = new javax.swing.GroupLayout(jPanelPesquisarProdutor);
         jPanelPesquisarProdutor.setLayout(jPanelPesquisarProdutorLayout);
@@ -75,12 +78,12 @@ public class JDCadastroServico extends javax.swing.JDialog {
             jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelFiltrarPor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBoxChavePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldNomeProdutor, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabelNomeProdutor)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldNomeProdutor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSelecionarProdutor)
+                .addContainerGap())
         );
         jPanelPesquisarProdutorLayout.setVerticalGroup(
             jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,8 +91,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNomeProdutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelFiltrarPor)
-                    .addComponent(jComboBoxChavePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNomeProdutor)
+                    .addComponent(jButtonSelecionarProdutor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -97,8 +100,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jLabelPropriedade.setText("Propriedade:");
 
-        jComboBoxSelecaoPropriedade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a propriedade...", "Propriedade 1" }));
-        jComboBoxSelecaoPropriedade.setToolTipText("");
+        jComboBoxPropriedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a propriedade...", "Propriedade 1" }));
+        jComboBoxPropriedades.setToolTipText("");
 
         javax.swing.GroupLayout jPanelSelecaoPropriedadeLayout = new javax.swing.GroupLayout(jPanelSelecaoPropriedade);
         jPanelSelecaoPropriedade.setLayout(jPanelSelecaoPropriedadeLayout);
@@ -108,7 +111,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabelPropriedade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxSelecaoPropriedade, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxPropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelSelecaoPropriedadeLayout.setVerticalGroup(
@@ -117,15 +120,13 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelSelecaoPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPropriedade)
-                    .addComponent(jComboBoxSelecaoPropriedade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxPropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelAgendar.setBorder(javax.swing.BorderFactory.createTitledBorder("Agendar"));
 
         jLabelTipoServico.setText("Tipo de Serviço:");
-
-        jComboBoxSelecaoServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um Serviço...", "Patrolagem", "Escavação", "Arado" }));
 
         jLabelDataPrevista.setText("Data prevista para conclusão:");
 
@@ -147,41 +148,51 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jTextFieldValorHora.setText(" ");
 
+        jTextFieldTipoServico.setEditable(false);
+
+        jButton1.setText("...");
+
         javax.swing.GroupLayout jPanelAgendarLayout = new javax.swing.GroupLayout(jPanelAgendar);
         jPanelAgendar.setLayout(jPanelAgendarLayout);
         jPanelAgendarLayout.setHorizontalGroup(
             jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAgendarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelTipoServico)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxSelecaoServico, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelValorHora)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTipoServico))
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelDataPrevista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelDuracao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelDuracao)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jFormattedTextFieldQtHrsPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelAgendarLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelValorHora)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelAgendarLayout.setVerticalGroup(
             jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAgendarLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
+                .addGap(1, 1, 1)
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipoServico)
-                    .addComponent(jComboBoxSelecaoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelValorHora)
-                    .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDataPrevista)
@@ -379,8 +390,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private void redimensionarJanelaCenario(int CENARIO) {
         JPanel[] paineisCenario = new JPanel[] { jPanelAgendar, jPanelCancelar, jPanelConcluir };
         int alturaPaineis = 0;
-        for (JPanel paineil : paineisCenario)
-            alturaPaineis += paineil.getHeight();
+        for (JPanel painel : paineisCenario)
+            alturaPaineis += painel.getHeight();
         int alturaSemPaineis = getHeight() - alturaPaineis;
         setBounds(getX(), getY(), getWidth(), alturaSemPaineis);
         for (JPanel paineil : paineisCenario)
@@ -389,12 +400,12 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonLimpar;
-    private javax.swing.JComboBox<String> jComboBoxChavePesquisa;
-    private javax.swing.JComboBox<String> jComboBoxSelecaoPropriedade;
-    private javax.swing.JComboBox<String> jComboBoxSelecaoServico;
+    private javax.swing.JButton jButtonSelecionarProdutor;
+    private javax.swing.JComboBox<String> jComboBoxPropriedades;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCancelamento;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataConclusao;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataPrevista;
@@ -405,7 +416,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelDataConclusao;
     private javax.swing.JLabel jLabelDataPrevista;
     private javax.swing.JLabel jLabelDuracao;
-    private javax.swing.JLabel jLabelFiltrarPor;
+    private javax.swing.JLabel jLabelNomeProdutor;
     private javax.swing.JLabel jLabelPropriedade;
     private javax.swing.JLabel jLabelTipoServico;
     private javax.swing.JLabel jLabelValorHora;
@@ -419,6 +430,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelSelecaoPropriedade;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldNomeProdutor;
+    private javax.swing.JTextField jTextFieldTipoServico;
     private javax.swing.JTextField jTextFieldValorHora;
     private javax.swing.JTextField jTextFieldValorTotal;
     // End of variables declaration//GEN-END:variables
