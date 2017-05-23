@@ -1,7 +1,6 @@
 package cdp.endereco;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -13,44 +12,42 @@ public class Cep implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(nullable = false)
-    private String cep;
+    @Column(nullable = false, unique = true)
+    private String nome;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "cep_logradouro", 
-        joinColumns =@JoinColumn(name = "cep_id"), 
-        inverseJoinColumns =@JoinColumn(name = "logradouro_id"))
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "logradouro_id", nullable = false)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Logradouro> logradouros;
+    private Logradouro logradouro;
 
     public Cep() {
     }
     
-    public Cep(int id, String cep, Collection<Logradouro> logradouros) {
+    public Cep(int id, String cep, Logradouro logradouro) {
         this.id = id;
-        this.cep = cep;
-        this.logradouros = logradouros;
+        this.nome = cep;
+        this.logradouro = logradouro;
     }
     
-    public Cep(String cep, Collection<Logradouro> logradouros) {
-        this.cep = cep;
-        this.logradouros = logradouros;
+    public Cep(String cep, Logradouro logradouro) {
+        this.nome = cep;
+        this.logradouro = logradouro;
     }  
 
-    public String getCep() {
-        return cep;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setNome(String cep) {
+        this.nome = cep;
     }
 
-    public Collection<Logradouro> getLogradouros() {
-        return logradouros;
+    public Logradouro getLogradouro() {
+        return logradouro;
     }
 
-    public void setLogradouros(Collection<Logradouro> logradouros) {
-        this.logradouros = logradouros;
+    public void setLogradouro(Logradouro logradouro) {
+        this.logradouro = logradouro;
     }
 
     public int getId() {

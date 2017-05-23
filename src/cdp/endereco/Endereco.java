@@ -14,10 +14,7 @@ public class Endereco implements Serializable {
     
     @Column(nullable = false)
     private String numero;
-    
-    @Column(nullable = false)
-    private String tipo;
-    
+
     @Column(nullable = false)
     private String complemento;
     
@@ -29,17 +26,15 @@ public class Endereco implements Serializable {
     public Endereco() {
     }
 
-    public Endereco(int id, String numero, String tipo, String complemento, Cep cep) {
+    public Endereco(int id, String numero, String complemento, Cep cep) {
         this.id = id;
         this.numero = numero;
-        this.tipo = tipo;
         this.complemento = complemento;
         this.cep = cep;
     }
 
-    public Endereco(String numero, String tipo, String complemento, Cep cep) {
+    public Endereco(String numero, String complemento, Cep cep) {
         this.numero = numero;
-        this.tipo = tipo;
         this.complemento = complemento;
         this.cep = cep;
     }
@@ -50,14 +45,6 @@ public class Endereco implements Serializable {
 
     public void setNumero(String numero) {
         this.numero = numero;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public String getComplemento() {

@@ -6,7 +6,7 @@ import cdp.Habilitacao;
 import cgd.Config;
 import cgd.GDGeral;
 import cgd.GDValidaAcesso;
-import cgt.util.EnvioEmail;
+import csw.WebServiceEmail;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.List;
@@ -47,7 +47,7 @@ public class GTGeral {
     }
     
     public void enviarEmail(String emailDestinatario, String mensagem, String telefone) throws MessagingException {
-        new EnvioEmail(emailDestinatario, mensagem, telefone);
+        new WebServiceEmail(emailDestinatario, mensagem, telefone);
     }
     
     public void inciarBancoDeDados(){ 

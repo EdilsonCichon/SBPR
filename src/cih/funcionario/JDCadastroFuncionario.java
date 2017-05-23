@@ -8,6 +8,8 @@ import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
 import cdp.Usuario;
+import csw.WebServiceCep;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -20,6 +22,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private Funcionario funcionarioAtual;
     private Cargo cargo;
     private Habilitacao habilitacao;
+    private WebServiceCep webServiceCep;
     
     public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Funcionario funcionario) {
         super(parent, modal);
@@ -76,6 +79,8 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jTextFieldEstado = new javax.swing.JTextField();
         jTextFieldCidade = new javax.swing.JTextField();
         jFormattedTextFieldCep = new javax.swing.JFormattedTextField();
+        jLabelComplemento = new javax.swing.JLabel();
+        jTextFieldComplemento = new javax.swing.JTextField();
         jPanelRodape = new javax.swing.JPanel();
         jButtonCancelar = new javax.swing.JButton();
         jButtonConfirmar = new javax.swing.JButton();
@@ -317,11 +322,26 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
 
         jLabelEstado.setText("UF:");
 
+        jTextFieldLogradouro.setEnabled(false);
+
+        jTextFieldBairro.setEnabled(false);
+
+        jTextFieldEstado.setEnabled(false);
+
+        jTextFieldCidade.setEnabled(false);
+
         try {
             jFormattedTextFieldCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextFieldCep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFormattedTextFieldCepKeyPressed(evt);
+            }
+        });
+
+        jLabelComplemento.setText("Complemento:");
 
         javax.swing.GroupLayout jPanelEnderecoLayout = new javax.swing.GroupLayout(jPanelEndereco);
         jPanelEndereco.setLayout(jPanelEnderecoLayout);
@@ -330,11 +350,14 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             .addGroup(jPanelEnderecoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelEnderecoLayout.createSequentialGroup()
-                        .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelBairro)
-                            .addComponent(jLabelCidade))
-                        .addGap(32, 32, 32)
+                    .addComponent(jLabelBairro)
+                    .addComponent(jLabelCidade)
+                    .addComponent(jLabelComplemento)
+                    .addComponent(jLabelLogradouro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldLogradouro)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelEnderecoLayout.createSequentialGroup()
                         .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                             .addComponent(jTextFieldCidade))
@@ -352,11 +375,8 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelCep)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldCep, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
-                    .addGroup(jPanelEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabelLogradouro)
-                        .addGap(10, 10, 10)
-                        .addComponent(jTextFieldLogradouro)))
+                        .addComponent(jFormattedTextFieldCep, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                    .addComponent(jTextFieldComplemento, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
         jPanelEnderecoLayout.setVerticalGroup(
@@ -380,6 +400,10 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelEstado)
                     .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelComplemento)
+                    .addComponent(jTextFieldComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -474,14 +498,18 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         String telefone = jFormattedTextFieldTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
         char sexo = (char) jButtonGroupSexo.getSelection().getMnemonic();
         String email = jTextFieldEmail.getText();
-        String cep = jFormattedTextFieldCep.getText();
-        String numero = jTextFieldNumero.getText();
-        String logradouro = jTextFieldLogradouro.getText();
-        String bairro = jTextFieldBairro.getText();
-        String cidade = jTextFieldCidade.getText();
-        String estado = jTextFieldEstado.getText();
         String login = jTextFieldUsuario.getText();
         String senha = jPasswordFieldSenha.getText();
+        
+        String cep = webServiceCep.getCep();
+        String numero = jTextFieldNumero.getText();
+        String tipoLogradouro = webServiceCep.getLogradouroType();
+        String logradouro = webServiceCep.getLogradouro();
+        String bairro = webServiceCep.getBairro();
+        String cidade = webServiceCep.getCidade();
+        String estado = webServiceCep.getUf();
+        String complemento = jTextFieldComplemento.getText();
+        
         
         try {
               
@@ -498,7 +526,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     resposta = ciInterface.getCiFuncionario().cadastrarFuncionario(
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                             habilitacao, usuario, cep, logradouro, numero,
-                            bairro, cidade, estado);
+                            bairro, cidade, estado, tipoLogradouro, complemento);
                     
                     if (resposta)
                         modoConcluido(resposta);
@@ -512,7 +540,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     resposta  = ciInterface.getCiFuncionario().alterarFuncionario(funcionarioAtual,
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                             habilitacao, login, senha, cep, logradouro, numero,
-                            bairro, cidade, estado);
+                            bairro, cidade, estado, tipoLogradouro, complemento);
                     
                     if (resposta)
                         modoConcluido(resposta);
@@ -544,6 +572,18 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         cargo = (Cargo) jComboBoxCargo.getSelectedItem();
     }//GEN-LAST:event_jComboBoxCargoItemStateChanged
 
+    private void jFormattedTextFieldCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCepKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String cep = jFormattedTextFieldCep.getText();
+            webServiceCep = WebServiceCep.searchCep(cep);
+            if(webServiceCep.wasSuccessful()){
+                preencherEndereco(webServiceCep);
+            }else{
+                JOptionPane.showMessageDialog(this, "CEP INVÁLIDO");
+            } 
+        }
+    }//GEN-LAST:event_jFormattedTextFieldCepKeyPressed
+  
     public void identificarCenario() {
         
         switch (CENARIO) {
@@ -552,6 +592,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                 preencherComboCargo();
                 preencherComboHabilitacao();
                 jComboBoxHabilitacaoItemStateChanged(null);
+                jComboBoxCargoItemStateChanged(null);
                 break;  
             case Cenario.ALTERAR:
                 setTitle("Alterar Funcionário");
@@ -585,6 +626,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jTextFieldCidade.setEditable(condicao);
         jTextFieldEstado.setEditable(condicao);
         jTextFieldLogradouro.setEditable(condicao);
+        jTextFieldComplemento.setEditable(condicao);
         jTextFieldNumero.setEditable(condicao);
         jTextFieldEmail.setEditable(condicao);
         jFormattedTextFieldCep.setEditable(condicao);
@@ -623,8 +665,24 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             jPasswordFieldSenha.setText(funcionario.getUsuario().getSenha());
         }
         
-        if ( funcionario.getSexo() == 'M' )
+        if ( funcionario.getSexo() == 'M' ){
             jRadioButtonMasculino.setSelected(true);
+        }
+        
+        jTextFieldBairro.setText(funcionario.getEndereco().getCep().getLogradouro().getBairro().getNome());
+        jTextFieldCidade.setText(funcionario.getEndereco().getCep().getLogradouro().getBairro().getCidade().getNome());
+        jTextFieldComplemento.setText(funcionario.getEndereco().getComplemento());
+        jTextFieldEstado.setText(funcionario.getEndereco().getCep().getLogradouro().getBairro().getCidade().getEstado().getNome());
+        jTextFieldLogradouro.setText(funcionario.getEndereco().getCep().getLogradouro().toString());
+        jTextFieldNumero.setText(funcionario.getEndereco().getNumero());
+        jFormattedTextFieldCep.setText(funcionario.getEndereco().getCep().getNome());
+    }
+    
+     public void preencherEndereco(WebServiceCep webServiceCep){
+        jTextFieldBairro.setText(webServiceCep.getBairro());
+        jTextFieldCidade.setText(webServiceCep.getCidade());
+        jTextFieldLogradouro.setText(webServiceCep.getLogradouroFull());
+        jTextFieldEstado.setText(webServiceCep.getUf());
     }
     
     public void preencherComboCargo(){
@@ -670,6 +728,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelCargo;
     private javax.swing.JLabel jLabelCep;
     private javax.swing.JLabel jLabelCidade;
+    private javax.swing.JLabel jLabelComplemento;
     private javax.swing.JLabel jLabelCpf;
     private javax.swing.JLabel jLabelDataNascimento;
     private javax.swing.JLabel jLabelEmail;
@@ -692,6 +751,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButtonMasculino;
     private javax.swing.JTextField jTextFieldBairro;
     private javax.swing.JTextField jTextFieldCidade;
+    private javax.swing.JTextField jTextFieldComplemento;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldEstado;
     private javax.swing.JTextField jTextFieldLogradouro;

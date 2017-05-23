@@ -153,9 +153,8 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxPropriedades">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="1">
                 <StringItem index="0" value="Selecione a propriedade..."/>
-                <StringItem index="1" value="Propriedade 1"/>
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>

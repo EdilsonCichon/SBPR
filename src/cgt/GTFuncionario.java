@@ -32,24 +32,18 @@ public class GTFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, Usuario usuario,
             String pCep, String logradouro, String numero,
-            String pBairro, String cidade, String estado) throws Exception {
+            String pBairro, String cidade, String estado, String tipoLogradouro, String complemento) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
+        
         Date dtNascFormatada = new Date(data_nasc);
         
         Estado estate = new Estado(estado);
         Cidade city = new Cidade(cidade, estate);
-        
         Bairro bairro = new Bairro(pBairro, city);
-        LinkedList<Bairro> bairros = new LinkedList<>();
-        bairros.add(bairro);
-        
-        Logradouro rua = new Logradouro(logradouro, "rua", bairros);
-        LinkedList<Logradouro> logradouros = new LinkedList<>();
-        logradouros.add(rua);
-        
-        Cep cep = new Cep(pCep, logradouros);
-        Endereco endereco = new Endereco(numero, "casa", "", cep);
+        Logradouro rua = new Logradouro(logradouro, tipoLogradouro, bairro);
+        Cep cep = new Cep(pCep, rua);
+        Endereco endereco = new Endereco(numero, complemento, cep);
        
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
@@ -62,28 +56,31 @@ public class GTFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, String login, String senha,
             String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado) throws Exception {
+            String bairro, String cidade, String estado, String tipoLogradouro, String complemento) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
         Date dtNascFormatada = new Date(data_nasc);
-        
-        Endereco endereco = new Endereco(numero, "casa", numero, null);
-        LinkedList<TipoServico> tipoServicos = new LinkedList<>();
-        tipoServicos.add(new TipoServico());
         
         funcionario.setCargo(cargo);
         funcionario.setCpf(cpf);
         funcionario.setDt_nasc(dtNascFormatada);
         funcionario.setEmail(email);
-        funcionario.setEndereco(endereco);
         funcionario.setHabilitacao(habilitacao);
         funcionario.setNome(nome);
         funcionario.setRg(rg);
         funcionario.setSexo(sexo);
         funcionario.setTelefone(telefone);
-        funcionario.setTipoServicos(tipoServicos);
         funcionario.getUsuario().setLogin(login);
         funcionario.getUsuario().setSenha(senha);
+        
+        funcionario.getEndereco().setNumero(numero);
+        funcionario.getEndereco().getCep().setNome(cep);
+        funcionario.getEndereco().setComplemento(complemento);
+        funcionario.getEndereco().getCep().getLogradouro().setNome(logradouro);
+        funcionario.getEndereco().getCep().getLogradouro().setTipo(tipoLogradouro);
+        funcionario.getEndereco().getCep().getLogradouro().getBairro().setNome(bairro);
+        funcionario.getEndereco().getCep().getLogradouro().getBairro().getCidade().setNome(cidade);
+        funcionario.getEndereco().getCep().getLogradouro().getBairro().getCidade().getEstado().setNome(estado);
 
         gdFuncionario.alterar(funcionario);
     }

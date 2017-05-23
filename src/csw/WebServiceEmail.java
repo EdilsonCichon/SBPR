@@ -1,16 +1,16 @@
-package cgt.util;
+package csw;
 
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-public class EnvioEmail {
+public class WebServiceEmail {
 
     private static String USER_NAME = "tresmosqueteiros.ifes";  // GMail user name (just the part before "@gmail.com")
     private static String PASSWORD = "tresmosqueteiros.ifes#2016"; // GMail password
     //private static String RECIPIENT = "edilsoncichon@gmail.com";
 
-    public EnvioEmail(String toForm, String bodyForm, String telefone) throws AddressException, MessagingException {
+    public WebServiceEmail(String toForm, String bodyForm, String telefone) throws AddressException, MessagingException {
         String from = USER_NAME;
         String pass = PASSWORD;
         String[] to = { toForm }; // list of recipient email addresses

@@ -18,27 +18,25 @@ public class Logradouro implements Serializable {
     @Column(nullable = false)
     private String tipo;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "logradouro_bairro", 
-        joinColumns =@JoinColumn(name = "logradouro_id"), 
-        inverseJoinColumns =@JoinColumn(name = "bairro_id"))
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "bairro_id", nullable = false)
     @Cascade(CascadeType.SAVE_UPDATE)
-    private Collection<Bairro> bairros;
+    private Bairro bairro;
 
     public Logradouro() {
     }
 
-    public Logradouro(int id, String nome, String tipo, Collection<Bairro> bairros) {
+    public Logradouro(int id, String nome, String tipo, Bairro bairro) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
-        this.bairros = bairros;
+        this.bairro = bairro;
     }
 
-    public Logradouro(String nome, String tipo, Collection<Bairro> bairros) {
+    public Logradouro(String nome, String tipo, Bairro bairro) {
         this.nome = nome;
         this.tipo = tipo;
-        this.bairros = bairros;
+        this.bairro = bairro;
     }
 
     public String getNome() {
@@ -57,12 +55,12 @@ public class Logradouro implements Serializable {
         this.tipo = tipo;
     }
 
-    public Collection<Bairro> getBairros() {
-        return bairros;
+    public Bairro getBairro() {
+        return bairro;
     }
 
-    public void setBairros(Collection<Bairro> bairros) {
-        this.bairros = bairros;
+    public void setBairro(Bairro bairro) {
+        this.bairro = bairro;
     }
 
     public int getId() {
@@ -72,4 +70,9 @@ public class Logradouro implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return getTipo() + getNome();
+    } 
 }

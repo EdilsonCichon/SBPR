@@ -110,7 +110,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jLabelPropriedade.setText("Propriedade:");
 
-        jComboBoxPropriedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a propriedade...", "Propriedade 1" }));
+        jComboBoxPropriedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a propriedade..." }));
         jComboBoxPropriedades.setToolTipText("");
 
         javax.swing.GroupLayout jPanelSelecaoPropriedadeLayout = new javax.swing.GroupLayout(jPanelSelecaoPropriedade);

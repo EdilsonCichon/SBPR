@@ -2,6 +2,7 @@ package cih.principal;
 
 import cci.CIInterface;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class JPConfiguracoes extends javax.swing.JPanel {
 
@@ -20,7 +21,7 @@ public class JPConfiguracoes extends javax.swing.JPanel {
 
         jButtonCargo = new javax.swing.JButton();
         jButtonHabilitacao = new javax.swing.JButton();
-        jButtonEndereco = new javax.swing.JButton();
+        jButtonClick = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Configurações"));
         setLayout(new java.awt.GridLayout(2, 3, 5, 5));
@@ -41,13 +42,13 @@ public class JPConfiguracoes extends javax.swing.JPanel {
         });
         add(jButtonHabilitacao);
 
-        jButtonEndereco.setText("Endereço");
-        jButtonEndereco.addActionListener(new java.awt.event.ActionListener() {
+        jButtonClick.setText("Click");
+        jButtonClick.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEnderecoActionPerformed(evt);
+                jButtonClickActionPerformed(evt);
             }
         });
-        add(jButtonEndereco);
+        add(jButtonClick);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargoActionPerformed
@@ -58,13 +59,13 @@ public class JPConfiguracoes extends javax.swing.JPanel {
         ciInterface.getCiGeral().instanciarTelaCadastroHabilitacao(pai);
     }//GEN-LAST:event_jButtonHabilitacaoActionPerformed
 
-    private void jButtonEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnderecoActionPerformed
-        ciInterface.getCiGeral().instanciarTelaCadastroEndereco(pai);
-    }//GEN-LAST:event_jButtonEnderecoActionPerformed
+    private void jButtonClickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClickActionPerformed
+        JOptionPane.showMessageDialog(pai, "Volte Sempre!");
+    }//GEN-LAST:event_jButtonClickActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCargo;
-    private javax.swing.JButton jButtonEndereco;
+    private javax.swing.JButton jButtonClick;
     private javax.swing.JButton jButtonHabilitacao;
     // End of variables declaration//GEN-END:variables
 }

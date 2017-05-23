@@ -52,13 +52,13 @@ public class CIFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, Usuario usuario,
             String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado) {
+            String bairro, String cidade, String estado, String tipoLogradouro, String complemento) {
         
         try {
           gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, cep, logradouro, numero,
-                   bairro, cidade, estado);
+                   bairro, cidade, estado, tipoLogradouro, complemento);
             
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
           return true;
@@ -73,13 +73,13 @@ public class CIFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, String login, String senha,
             String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado){
+            String bairro, String cidade, String estado, String tipoLogradouro, String complemento){
         
         try {
             gtFuncionario.alterarFuncionario(funcionario,
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, login, senha, cep, logradouro, numero,
-                   bairro, cidade, estado);
+                   bairro, cidade, estado, tipoLogradouro, complemento);
             
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
             return true;
