@@ -17,6 +17,7 @@ public class CITipoServico {
     private GTTipoServico gtTipoServico;
     private JDCadastroTipoServico cadastroTipoServico;
     private JDPesquisaTipoServico pesquisaTipoServico;
+    private TipoServico tipoServicoSelecionado;
 
     public CITipoServico(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -27,7 +28,7 @@ public class CITipoServico {
         if (CENARIO == Cenario.CADASTRAR)
             instanciarTelaCadastroTipoServico(null, pai, CENARIO);
         else
-            instanciarTelaFiltroProdutor(pai, CENARIO);
+            instanciarTelaFiltroTipoServico(pai, CENARIO);
     }
     
     public void instanciarTelaCadastroTipoServico(TipoServico tipoServico, Frame pai, int CENARIO) {
@@ -35,7 +36,7 @@ public class CITipoServico {
         cadastroTipoServico.setVisible(true);
     }
      
-    public void instanciarTelaFiltroProdutor(Frame pai, int CENARIO) {
+    public void instanciarTelaFiltroTipoServico(Frame pai, int CENARIO) {
         pesquisaTipoServico = new JDPesquisaTipoServico(pai, true, ciInterface, CENARIO);
         pesquisaTipoServico.setVisible(true);
     }
@@ -79,5 +80,13 @@ public class CITipoServico {
     
     public List<TipoServico> filtrarTipoServico(String colunaFiltro, String filtro) {
        return gtTipoServico.filtrarTipoServico(colunaFiltro, filtro);
+    }
+
+    public TipoServico getTipoServicoSelecionado() {
+        return tipoServicoSelecionado;
+    }
+
+    public void setTipoServicoSelecionado(TipoServico tipoServicoSelecionado) {
+        this.tipoServicoSelecionado = tipoServicoSelecionado;
     }
 }

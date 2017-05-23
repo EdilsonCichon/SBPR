@@ -2,6 +2,9 @@ package cih.servico;
 
 import cci.CIInterface;
 import cci.util.Cenario;
+import cdp.Produtor;
+import cdp.TipoServico;
+import java.awt.Frame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
@@ -9,9 +12,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
     private int CENARIO;
+    private Produtor produtorSelecionado;
+    private TipoServico tipoServicoSelecionado;
    
-    public JDCadastroServico(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
-        super(parent, modal);
+    public JDCadastroServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO) {
+        super(framePai, modal);
         this.ciInterface = ciInterface;
         this.CENARIO = CENARIO;
         initComponents();
@@ -43,7 +48,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jLabelValorHora = new javax.swing.JLabel();
         jTextFieldValorHora = new javax.swing.JTextField();
         jTextFieldTipoServico = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonSelecionarTipoSevico = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
@@ -59,7 +64,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jLabelDataCancelamento = new javax.swing.JLabel();
         jFormattedTextFieldDataCancelamento = new javax.swing.JFormattedTextField();
         jLabelValorMulta = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldValorMulta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agendar Serviço");
@@ -71,6 +76,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jLabelNomeProdutor.setText("Produtor:");
 
         jButtonSelecionarProdutor.setText("...");
+        jButtonSelecionarProdutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarProdutorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPesquisarProdutorLayout = new javax.swing.GroupLayout(jPanelPesquisarProdutor);
         jPanelPesquisarProdutor.setLayout(jPanelPesquisarProdutorLayout);
@@ -150,7 +160,12 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jTextFieldTipoServico.setEditable(false);
 
-        jButton1.setText("...");
+        jButtonSelecionarTipoSevico.setText("...");
+        jButtonSelecionarTipoSevico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarTipoSevicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelAgendarLayout = new javax.swing.GroupLayout(jPanelAgendar);
         jPanelAgendar.setLayout(jPanelAgendarLayout);
@@ -170,7 +185,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelDuracao)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonSelecionarTipoSevico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
@@ -192,7 +207,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                     .addComponent(jLabelValorHora)
                     .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonSelecionarTipoSevico))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDataPrevista)
@@ -208,13 +223,28 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jButtonConfirmar.setMaximumSize(new java.awt.Dimension(75, 23));
         jButtonConfirmar.setMinimumSize(new java.awt.Dimension(75, 23));
         jButtonConfirmar.setPreferredSize(new java.awt.Dimension(75, 23));
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.setMaximumSize(new java.awt.Dimension(75, 23));
         jButtonLimpar.setMinimumSize(new java.awt.Dimension(75, 23));
         jButtonLimpar.setPreferredSize(new java.awt.Dimension(75, 23));
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -321,7 +351,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabelValorMulta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldValorMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCancelarLayout.setVerticalGroup(
@@ -332,7 +362,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                     .addComponent(jLabelDataCancelamento)
                     .addComponent(jFormattedTextFieldDataCancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelValorMulta)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldValorMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -368,6 +398,51 @@ public class JDCadastroServico extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonSelecionarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarProdutorActionPerformed
+        ciInterface.getCiProdutor().instanciarTelaFiltroProdutor((Frame) getOwner(), Cenario.SELECIONAR);
+        produtorSelecionado = ciInterface.getCiProdutor().getProdutorSelecionado();
+        jTextFieldNomeProdutor.setText(produtorSelecionado.getNome());
+    }//GEN-LAST:event_jButtonSelecionarProdutorActionPerformed
+
+    private void jButtonSelecionarTipoSevicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoSevicoActionPerformed
+        ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico((Frame) getOwner(), Cenario.SELECIONAR);
+        tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
+        jTextFieldTipoServico.setText(tipoServicoSelecionado.getNome());
+    }//GEN-LAST:event_jButtonSelecionarTipoSevicoActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        jTextFieldNomeProdutor.setText("");
+        jTextFieldTipoServico.setText("");
+        jTextFieldValorHora.setText("");
+        jTextFieldValorMulta.setText("");
+        jTextFieldValorTotal.setText("");
+        jFormattedTextFieldDataPrevista.setText("");
+        jFormattedTextFieldQtHrsPrevista.setText("");
+        jFormattedTextFieldDataCancelamento.setText("");
+        jFormattedTextFieldDataConclusao.setText("");
+        jFormattedTextFieldQtHrsReais.setText("");
+        jComboBoxPropriedades.setSelectedIndex(0);
+    }//GEN-LAST:event_jButtonLimparActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        switch (CENARIO) {
+            case Cenario.AGENDAR:
+                //Vou terminar essa implementar.
+                ciInterface.getCiServico().cadastrarServico();
+                break;
+            case Cenario.CANCELAR:
+                
+                break;
+            case Cenario.CONCLUIR:
+                
+                break;
+        }
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
     private void identificarCenario() {
         switch (CENARIO) {
             case Cenario.AGENDAR:
@@ -400,11 +475,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonSelecionarProdutor;
+    private javax.swing.JButton jButtonSelecionarTipoSevico;
     private javax.swing.JComboBox<String> jComboBoxPropriedades;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCancelamento;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataConclusao;
@@ -428,10 +503,10 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelPesquisarProdutor;
     private javax.swing.JPanel jPanelRodape;
     private javax.swing.JPanel jPanelSelecaoPropriedade;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldNomeProdutor;
     private javax.swing.JTextField jTextFieldTipoServico;
     private javax.swing.JTextField jTextFieldValorHora;
+    private javax.swing.JTextField jTextFieldValorMulta;
     private javax.swing.JTextField jTextFieldValorTotal;
     // End of variables declaration//GEN-END:variables
 }

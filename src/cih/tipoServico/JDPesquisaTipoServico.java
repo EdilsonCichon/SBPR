@@ -159,11 +159,13 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         try {
-            TipoServico tipoServico = (TipoServico) JTableUtil.getDadosLinhaSelecionada(jTableTipoServico);
-            if (CENARIO == Cenario.SELECIONAR) {}
-                //vai ser necessário quando for relacionar o Serviço com o Tipo de Serviço
+            TipoServico tipoServicoSelecionado = (TipoServico) JTableUtil.getDadosLinhaSelecionada(jTableTipoServico);
+            if (CENARIO == Cenario.SELECIONAR) {
+                ciInterface.getCiTipoServico().setTipoServicoSelecionado(tipoServicoSelecionado);
+                dispose();
+            }
             else
-                ciInterface.getCiTipoServico().instanciarTelaCadastroTipoServico(tipoServico, framePai, CENARIO);
+                ciInterface.getCiTipoServico().instanciarTelaCadastroTipoServico(tipoServicoSelecionado, framePai, CENARIO);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um tipo de serviço", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
