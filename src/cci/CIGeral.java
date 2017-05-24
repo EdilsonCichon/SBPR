@@ -2,6 +2,7 @@ package cci;
 
 import cdp.Cargo;
 import cdp.Habilitacao;
+import cdp.endereco.Cep;
 import cgt.GTGeral;
 import javax.swing.JOptionPane;
 import cih.principal.FrmPrincipal;
@@ -15,7 +16,6 @@ import cih.principal.JPConfiguracoes;
 import cih.principal.JPCrud;
 import cih.principal.JPInicio;
 import cih.principal.JPServico;
-import java.awt.Frame;
 import java.util.List;
 import javax.mail.MessagingException;
 import javax.swing.JFrame;
@@ -153,5 +153,8 @@ public class CIGeral {
     
     public void enviarEmail(String emailDestinatario, String mensagem, String telefone) throws MessagingException {
         gtGeral.enviarEmail(emailDestinatario, mensagem, telefone);
+    }   
+    public Cep consultarCep(String cep){
+        return gtGeral.consultarCep(cep);
     }
 }

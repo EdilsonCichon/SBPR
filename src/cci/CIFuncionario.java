@@ -5,6 +5,7 @@ import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
 import cdp.Usuario;
+import cdp.endereco.Cep;
 import cgt.GTFuncionario;
 import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
@@ -52,13 +53,13 @@ public class CIFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, Usuario usuario,
             String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado, String tipoLogradouro, String complemento) {
+            String bairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual) {
         
         try {
           gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, cep, logradouro, numero,
-                   bairro, cidade, estado, tipoLogradouro, complemento);
+                   bairro, cidade, estado, tipoLogradouro, complemento, cepAtual);
             
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
           return true;

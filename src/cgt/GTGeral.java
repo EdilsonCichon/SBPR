@@ -3,6 +3,7 @@ package cgt;
 import cci.SBPRException;
 import cdp.Cargo;
 import cdp.Habilitacao;
+import cdp.endereco.Cep;
 import cgd.Config;
 import cgd.GDGeral;
 import cgd.GDValidaAcesso;
@@ -60,5 +61,9 @@ public class GTGeral {
         
        return gdValidarAcesso.validarAcesso(usuario, senha);
         
+    }
+    
+     public Cep consultarCep(String cep){
+        return gdGeral.consultarCep(cep);
     }
 }

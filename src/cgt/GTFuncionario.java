@@ -32,18 +32,24 @@ public class GTFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, Usuario usuario,
             String pCep, String logradouro, String numero,
-            String pBairro, String cidade, String estado, String tipoLogradouro, String complemento) throws Exception {
+            String pBairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
         
         Date dtNascFormatada = new Date(data_nasc);
         
-        Estado estate = new Estado(estado);
-        Cidade city = new Cidade(cidade, estate);
-        Bairro bairro = new Bairro(pBairro, city);
-        Logradouro rua = new Logradouro(logradouro, tipoLogradouro, bairro);
-        Cep cep = new Cep(pCep, rua);
-        Endereco endereco = new Endereco(numero, complemento, cep);
+        Endereco endereco;
+        
+        if(cepAtual != null){
+            endereco = new Endereco(numero, complemento, cepAtual);
+        }else{
+            Estado estate = new Estado(estado);
+            Cidade city = new Cidade(cidade, estate);
+            Bairro bairro = new Bairro(pBairro, city);
+            Logradouro rua = new Logradouro(logradouro, tipoLogradouro, bairro);
+            Cep cep = new Cep(pCep, rua);
+            endereco = new Endereco(numero, complemento, cep);
+        }
        
         LinkedList<TipoServico> tipoServicos = new LinkedList<>();
         tipoServicos.add(new TipoServico());
@@ -92,7 +98,7 @@ public class GTFuncionario {
     public void excluirFuncionario(Funcionario funcionario) throws SQLException, ClassNotFoundException{
         gdFuncionario.excluir(funcionario);
     } 
-    
+        
     private void validarCampos(String nome, String cpf, String data, String rg, String telefone) throws Exception {
         if(!ValidaCampos.validarNome(nome))
             throw new SBPRException(1);
