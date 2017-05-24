@@ -588,11 +588,15 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             if (cepAtual == null) {
                 webServiceCep = WebServiceCep.searchCep(cepp);
                 
-                if (webServiceCep.wasSuccessful()) 
-                    preencherEnderecoWeb(webServiceCep);
-                else
+                if (webServiceCep.wasSuccessful()){
+                    jTextFieldBairro.setText(webServiceCep.getBairro());
+                    jTextFieldCidade.setText(webServiceCep.getCidade());
+                    jTextFieldLogradouro.setText(webServiceCep.getLogradouroFull());
+                    jTextFieldEstado.setText(webServiceCep.getUf());
+                }else{
                     JOptionPane.showMessageDialog(this, "CEP INVÁLIDO");
                     limparEndereco();
+                }
             }else{
                 preencherEnderecoCep(cepAtual);
             }
@@ -697,13 +701,6 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldCep.setText(cep.getNome());
     }
 
-    public void preencherEnderecoWeb(WebServiceCep webServiceCep) {
-        jTextFieldBairro.setText(webServiceCep.getBairro());
-        jTextFieldCidade.setText(webServiceCep.getCidade());
-        jTextFieldLogradouro.setText(webServiceCep.getLogradouroFull());
-        jTextFieldEstado.setText(webServiceCep.getUf());
-    }
-    
     public void limparEndereco(){
         jTextFieldBairro.setText("");
         jTextFieldCidade.setText("");
