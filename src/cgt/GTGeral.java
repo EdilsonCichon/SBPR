@@ -5,8 +5,8 @@ import cdp.Cargo;
 import cdp.Habilitacao;
 import cdp.endereco.Cep;
 import cgd.Config;
+import cgd.GDEndereco;
 import cgd.GDGeral;
-import cgd.GDValidaAcesso;
 import csw.WebServiceEmail;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
@@ -17,11 +17,12 @@ import javax.mail.MessagingException;
 public class GTGeral {
     
     private Config config;
-    private GDGeral gdGeral;       
-    private GDValidaAcesso gdValidarAcesso;
+    private GDGeral gdGeral;
+    private GDEndereco gdEndereco;
 
     public GTGeral() {
         gdGeral = new GDGeral();
+        gdEndereco = new GDEndereco();
     }
 
     public void cadastrarCargo(String nomeCargo) throws SQLException, ClassNotFoundException, SBPRException{
@@ -55,15 +56,11 @@ public class GTGeral {
          config = new Config();       
     }
     
-    public boolean validarAcesso(String usuario, String senha){
-        
-        gdValidarAcesso = new GDValidaAcesso();
-        
-       return gdValidarAcesso.validarAcesso(usuario, senha);
-        
+    public boolean validarAcesso(String usuario, String senha){ 
+       return gdGeral.validarAcesso(usuario, senha);    
     }
     
      public Cep consultarCep(String cep){
-        return gdGeral.consultarCep(cep);
+        return gdEndereco.consultarCep(cep);
     }
 }

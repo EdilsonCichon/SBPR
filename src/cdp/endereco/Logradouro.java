@@ -15,6 +15,7 @@ public class Logradouro implements Serializable {
     
     @Column(nullable = false)
     private String nome;
+    
     @Column(nullable = false)
     private String tipo;
     

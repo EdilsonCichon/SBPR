@@ -15,6 +15,7 @@ public class Funcionario extends Pessoa implements Serializable {
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id", nullable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Endereco endereco;
     
     @OneToOne(fetch = FetchType.EAGER)
@@ -23,6 +24,7 @@ public class Funcionario extends Pessoa implements Serializable {
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id", nullable = true)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Usuario usuario;
         
     @Column(nullable = false)
@@ -34,7 +36,7 @@ public class Funcionario extends Pessoa implements Serializable {
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "funcionario_tipo_servico",
-            joinColumns = @JoinColumn(name = "funcionario_id"),
+            joinColumns = @JoinColumn(name = "funcionario_id", nullable = true),
             inverseJoinColumns = @JoinColumn(name = "tipo_servico_id"))
     @Cascade(CascadeType.SAVE_UPDATE)
     private Collection<TipoServico> tipoServicos;

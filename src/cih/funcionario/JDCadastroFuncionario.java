@@ -502,15 +502,26 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         String email = jTextFieldEmail.getText();
         String login = jTextFieldUsuario.getText();
         String senha = jPasswordFieldSenha.getText();
-
-        String cep = webServiceCep.getCep();
         String numero = jTextFieldNumero.getText();
-        String tipoLogradouro = webServiceCep.getLogradouroType();
-        String logradouro = webServiceCep.getLogradouro();
-        String bairro = webServiceCep.getBairro();
-        String cidade = webServiceCep.getCidade();
-        String estado = webServiceCep.getUf();
         String complemento = jTextFieldComplemento.getText();
+
+        String cep = "";
+        String tipoLogradouro = "";
+        String logradouro = "";
+        String bairro = "";
+        String cidade = "";
+        String estado = "";
+
+        if (webServiceCep == null) {
+            consultarCep();
+        } else {
+            cep = webServiceCep.getCep();
+            tipoLogradouro = webServiceCep.getLogradouroType();
+            logradouro = webServiceCep.getLogradouro();
+            bairro = webServiceCep.getBairro();
+            cidade = webServiceCep.getCidade();
+            estado = webServiceCep.getUf();
+        }
 
         try {
 
@@ -580,26 +591,8 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
 
     private void jFormattedTextFieldCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCepKeyPressed
 
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
-            String cepp = jFormattedTextFieldCep.getText();
-            cepAtual = ciInterface.getCiGeral().consultarCep(cepp);
-            
-            if (cepAtual == null) {
-                webServiceCep = WebServiceCep.searchCep(cepp);
-                
-                if (webServiceCep.wasSuccessful()){
-                    jTextFieldBairro.setText(webServiceCep.getBairro());
-                    jTextFieldCidade.setText(webServiceCep.getCidade());
-                    jTextFieldLogradouro.setText(webServiceCep.getLogradouroFull());
-                    jTextFieldEstado.setText(webServiceCep.getUf());
-                }else{
-                    JOptionPane.showMessageDialog(this, "CEP INVÁLIDO");
-                    limparEndereco();
-                }
-            }else{
-                preencherEnderecoCep(cepAtual);
-            }
+        if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_TAB)) {
+            consultarCep();
         }
     }//GEN-LAST:event_jFormattedTextFieldCepKeyPressed
 
@@ -692,8 +685,8 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jTextFieldComplemento.setText(funcionario.getEndereco().getComplemento());
         preencherEnderecoCep(funcionario.getEndereco().getCep());
     }
-    
-    public void preencherEnderecoCep(Cep cep){
+
+    public void preencherEnderecoCep(Cep cep) {
         jTextFieldBairro.setText(cep.getLogradouro().getBairro().getNome());
         jTextFieldCidade.setText(cep.getLogradouro().getBairro().getCidade().getNome());
         jTextFieldEstado.setText(cep.getLogradouro().getBairro().getCidade().getEstado().getNome());
@@ -701,11 +694,38 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldCep.setText(cep.getNome());
     }
 
-    public void limparEndereco(){
+    public void preencherEnderecoWeb(WebServiceCep webServiceCep) {
+        jTextFieldBairro.setText(webServiceCep.getBairro());
+        jTextFieldCidade.setText(webServiceCep.getCidade());
+        jTextFieldLogradouro.setText(webServiceCep.getLogradouroFull());
+        jTextFieldEstado.setText(webServiceCep.getUf());
+    }
+
+    public void limparEndereco() {
         jTextFieldBairro.setText("");
         jTextFieldCidade.setText("");
         jTextFieldEstado.setText("");
         jTextFieldLogradouro.setText("");
+    }
+
+    public void consultarCep() {
+        
+        String numeroCep = jFormattedTextFieldCep.getText();
+        cepAtual = ciInterface.getCiGeral().consultarCep(numeroCep);
+
+        if (cepAtual == null) {
+            webServiceCep = WebServiceCep.searchCep(numeroCep);
+
+            if (webServiceCep.wasSuccessful()) {
+                preencherEnderecoWeb(webServiceCep);
+            } else {
+                JOptionPane.showMessageDialog(this, "CEP INVÁLIDO");
+                limparEndereco();
+            }
+        } else {
+            webServiceCep = WebServiceCep.searchCep(numeroCep);
+            preencherEnderecoCep(cepAtual);
+        }
     }
 
     public void preencherComboCargo() {

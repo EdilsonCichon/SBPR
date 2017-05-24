@@ -9,7 +9,7 @@ public class GDFuncionario extends GDGenerico {
 
     public List filtrar(String colunaFiltro, String valorFiltro) {
         Criteria crit = criarSessao().createCriteria(Funcionario.class);
-        crit.add(Restrictions.like(colunaFiltro, "%" + valorFiltro + "%"));
+        crit.add(Restrictions.like(colunaFiltro.toLowerCase(), "%" + valorFiltro + "%"));
         List lista = crit.list();
         sessao.close();
         return lista;
