@@ -544,7 +544,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     resposta = ciInterface.getCiFuncionario().alterarFuncionario(funcionarioAtual,
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                             habilitacao, login, senha, cep, logradouro, numero,
-                            bairro, cidade, estado, tipoLogradouro, complemento);
+                            bairro, cidade, estado, tipoLogradouro, complemento, cepAtual);
 
                     if (resposta) {
                         modoConcluido(resposta);
@@ -592,6 +592,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     preencherEnderecoWeb(webServiceCep);
                 else
                     JOptionPane.showMessageDialog(this, "CEP INVÁLIDO");
+                    limparEndereco();
             }else{
                 preencherEnderecoCep(cepAtual);
             }
@@ -701,6 +702,13 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jTextFieldCidade.setText(webServiceCep.getCidade());
         jTextFieldLogradouro.setText(webServiceCep.getLogradouroFull());
         jTextFieldEstado.setText(webServiceCep.getUf());
+    }
+    
+    public void limparEndereco(){
+        jTextFieldBairro.setText("");
+        jTextFieldCidade.setText("");
+        jTextFieldEstado.setText("");
+        jTextFieldLogradouro.setText("");
     }
 
     public void preencherComboCargo() {

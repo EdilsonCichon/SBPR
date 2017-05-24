@@ -10,7 +10,7 @@ public class Estado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
 
     public Estado() {

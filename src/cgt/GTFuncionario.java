@@ -61,8 +61,8 @@ public class GTFuncionario {
     public void alterarFuncionario(Funcionario funcionario, String nome, String cpf, String rg, String email, 
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, String login, String senha,
-            String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado, String tipoLogradouro, String complemento) throws Exception {
+            String pCep, String logradouro, String numero,
+            String pBairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
         Date dtNascFormatada = new Date(data_nasc);
@@ -78,16 +78,19 @@ public class GTFuncionario {
         funcionario.setTelefone(telefone);
         funcionario.getUsuario().setLogin(login);
         funcionario.getUsuario().setSenha(senha);
-        
         funcionario.getEndereco().setNumero(numero);
-        funcionario.getEndereco().getCep().setNome(cep);
         funcionario.getEndereco().setComplemento(complemento);
-        funcionario.getEndereco().getCep().getLogradouro().setNome(logradouro);
-        funcionario.getEndereco().getCep().getLogradouro().setTipo(tipoLogradouro);
-        funcionario.getEndereco().getCep().getLogradouro().getBairro().setNome(bairro);
-        funcionario.getEndereco().getCep().getLogradouro().getBairro().getCidade().setNome(cidade);
-        funcionario.getEndereco().getCep().getLogradouro().getBairro().getCidade().getEstado().setNome(estado);
-
+        
+        if(cepAtual != null){
+            funcionario.getEndereco().setCep(cepAtual);
+        }else{
+            Estado estate = new Estado(estado);
+            Cidade city = new Cidade(cidade, estate);
+            Bairro bairro = new Bairro(pBairro, city);
+            Logradouro rua = new Logradouro(logradouro, tipoLogradouro, bairro);
+            Cep cep = new Cep(pCep, rua);
+            funcionario.getEndereco().setCep(cep);
+        }
         gdFuncionario.alterar(funcionario);
     }
     
