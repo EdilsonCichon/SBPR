@@ -34,12 +34,13 @@ public class GTFuncionario {
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, Usuario usuario,
-            String numeroCep, String nomeLogradouro, String numero,
+            String nCep, String nomeLogradouro, String numero,
             String nomeBairro, String nomeCidade, String nomeEstado, String tipoLogradouro, String complemento, Cep cepAtual) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
         Date dtNascFormatada = new Date(data_nasc);
         
+        String numeroCep = nCep.replace("-", "");
         Endereco endereco;
         Estado estado;
         Cidade cidade;

@@ -358,7 +358,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                     break;
                     
                 case Cenario.EXCLUIR:
-                    int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
+                    int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
                     if ( confirmacao == 0 ) {
                         respostaOperacao = ciInterface.getCiProdutor().excluirProdutor(produtorAtual);
                         if (respostaOperacao)
