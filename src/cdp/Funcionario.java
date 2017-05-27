@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -60,7 +61,7 @@ public class Funcionario extends Pessoa implements Serializable {
    
     public Funcionario(Endereco endereco, Habilitacao habilitacao, Usuario usuario, 
             String email, Cargo cargo, String nome, Date dt_nasc, String cpf, String rg, 
-            char sexo, String telefone, LinkedList<TipoServico> tipoServicos) {
+            char sexo, String telefone, List<TipoServico> tipoServicos) {
         
         super(nome, dt_nasc, cpf, rg, sexo, telefone);
         this.endereco = endereco;
@@ -115,7 +116,7 @@ public class Funcionario extends Pessoa implements Serializable {
         return tipoServicos;
     }
 
-    public void setTipoServicos(LinkedList<TipoServico> tipoServicos) {
+    public void setTipoServicos(List tipoServicos) {
         this.tipoServicos = tipoServicos;
     }
     

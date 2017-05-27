@@ -1,6 +1,7 @@
 package cdp;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -92,5 +93,26 @@ public class TipoServico implements Serializable {
     
     public Object[] toArray() {
         return new Object[] { this, getValor_hr(), getDescricao()};
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoServico other = (TipoServico) obj;
+        if (Double.doubleToLongBits(this.valor_hr) != Double.doubleToLongBits(other.valor_hr)) {
+            return false;
+        }
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        return true;
     }
 }

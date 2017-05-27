@@ -116,6 +116,11 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -182,6 +187,10 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
             JTableUtil.addLinha(jTableTipoServico, tipoServico.toArray() );
         });
     }//GEN-LAST:event_jButtonFiltrarTipoServicoActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

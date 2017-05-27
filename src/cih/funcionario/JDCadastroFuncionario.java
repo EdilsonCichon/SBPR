@@ -4,12 +4,15 @@ import javax.swing.ImageIcon;
 
 import cci.CIInterface;
 import cci.util.Cenario;
+import cci.util.JTableUtil;
 import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
+import cdp.TipoServico;
 import cdp.Usuario;
 import cdp.endereco.Cep;
 import csw.WebServiceCep;
+import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -19,7 +22,6 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
 
     private CIInterface ciInterface;
     private int CENARIO;
-    private boolean resposta;
     private Funcionario funcionarioAtual;
     private Cargo cargo;
     private Habilitacao habilitacao;
@@ -62,19 +64,24 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldCpf = new javax.swing.JFormattedTextField();
         jComboBoxCargo = new javax.swing.JComboBox<>();
         jComboBoxHabilitacao = new javax.swing.JComboBox<>();
-        jCheckBoxAcessarSistema = new javax.swing.JCheckBox();
+        jPanelLoginTipoServico = new javax.swing.JPanel();
         jPanelAcessarSistema = new javax.swing.JPanel();
         jLabelUsuario = new javax.swing.JLabel();
         jTextFieldUsuario = new javax.swing.JTextField();
         jLabelSenha = new javax.swing.JLabel();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
+        jCheckBoxAcessarSistema = new javax.swing.JCheckBox();
+        jPanelTiposServicos = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableTiposServicos = new javax.swing.JTable();
+        jButtonRemoverTipoServico = new javax.swing.JButton();
+        jButtonAddTipoServico = new javax.swing.JButton();
         jPanelEndereco = new javax.swing.JPanel();
         jLabelNumero = new javax.swing.JLabel();
         jLabelLogradouro = new javax.swing.JLabel();
         jLabelBairro = new javax.swing.JLabel();
         jLabelCep = new javax.swing.JLabel();
         jLabelCidade = new javax.swing.JLabel();
-        jLabelEstado = new javax.swing.JLabel();
         jTextFieldNumero = new javax.swing.JTextField();
         jTextFieldLogradouro = new javax.swing.JTextField();
         jTextFieldBairro = new javax.swing.JTextField();
@@ -161,103 +168,51 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             }
         });
 
-        jCheckBoxAcessarSistema.setText("Permitir Acesso ao Sistema");
-        jCheckBoxAcessarSistema.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxAcessarSistemaActionPerformed(evt);
-            }
-        });
-
-        jPanelAcessarSistema.setBorder(javax.swing.BorderFactory.createTitledBorder("Acesso ao Sistema"));
-
-        jLabelUsuario.setText("Usuário:");
-
-        jTextFieldUsuario.setEnabled(false);
-
-        jLabelSenha.setText("Senha:");
-
-        jPasswordFieldSenha.setEnabled(false);
-
-        javax.swing.GroupLayout jPanelAcessarSistemaLayout = new javax.swing.GroupLayout(jPanelAcessarSistema);
-        jPanelAcessarSistema.setLayout(jPanelAcessarSistemaLayout);
-        jPanelAcessarSistemaLayout.setHorizontalGroup(
-            jPanelAcessarSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAcessarSistemaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelAcessarSistemaLayout.setVerticalGroup(
-            jPanelAcessarSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAcessarSistemaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelAcessarSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUsuario)
-                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSenha)
-                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1))
-        );
-
         javax.swing.GroupLayout jPanelDadosPessoaisLayout = new javax.swing.GroupLayout(jPanelDadosPessoais);
         jPanelDadosPessoais.setLayout(jPanelDadosPessoaisLayout);
         jPanelDadosPessoaisLayout.setHorizontalGroup(
             jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelNome)
+                    .addComponent(jLabelCpf)
+                    .addComponent(jLabelTelefone)
+                    .addComponent(jLabelSexo)
+                    .addComponent(jLabelCargo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldNome)
                     .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jFormattedTextFieldCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                            .addComponent(jFormattedTextFieldTelefone))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                                .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelNome)
-                                    .addComponent(jLabelCpf)
-                                    .addComponent(jLabelTelefone)
-                                    .addComponent(jLabelSexo)
-                                    .addComponent(jLabelCargo))
+                                .addComponent(jLabelRg)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldNome)
-                                    .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                                        .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jFormattedTextFieldCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                            .addComponent(jFormattedTextFieldTelefone))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                                                .addComponent(jLabelRg)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jFormattedTextFieldRg))
-                                            .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                                                .addComponent(jLabelDataNascimento)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jFormattedTextFieldDataNascimento))))
-                                    .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                                        .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jComboBoxCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosPessoaisLayout.createSequentialGroup()
-                                                .addComponent(jRadioButtonFeminino)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jRadioButtonMasculino)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabelEmail)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                            .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                                                .addComponent(jLabelHabilitacao)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jComboBoxHabilitacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(jFormattedTextFieldRg))
                             .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                                .addComponent(jCheckBoxAcessarSistema)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addComponent(jPanelAcessarSistema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabelDataNascimento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextFieldDataNascimento))))
+                    .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
+                        .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jComboBoxCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosPessoaisLayout.createSequentialGroup()
+                                .addComponent(jRadioButtonFeminino)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonMasculino)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelEmail)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
+                                .addComponent(jLabelHabilitacao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxHabilitacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanelDadosPessoaisLayout.setVerticalGroup(
@@ -304,14 +259,143 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelCargo)
                         .addComponent(jComboBoxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxAcessarSistema)
-                .addGap(5, 5, 5)
-                .addComponent(jPanelAcessarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2))
+                .addContainerGap())
         );
 
         getContentPane().add(jPanelDadosPessoais);
+
+        jPanelAcessarSistema.setBorder(javax.swing.BorderFactory.createTitledBorder("Acesso ao Sistema"));
+
+        jLabelUsuario.setText("Usuário:");
+
+        jTextFieldUsuario.setEnabled(false);
+
+        jLabelSenha.setText("Senha:");
+
+        jPasswordFieldSenha.setEnabled(false);
+
+        jCheckBoxAcessarSistema.setText("Permitir Acesso ao Sistema");
+        jCheckBoxAcessarSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxAcessarSistemaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelAcessarSistemaLayout = new javax.swing.GroupLayout(jPanelAcessarSistema);
+        jPanelAcessarSistema.setLayout(jPanelAcessarSistemaLayout);
+        jPanelAcessarSistemaLayout.setHorizontalGroup(
+            jPanelAcessarSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAcessarSistemaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelAcessarSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAcessarSistemaLayout.createSequentialGroup()
+                        .addComponent(jLabelUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelAcessarSistemaLayout.createSequentialGroup()
+                        .addComponent(jLabelSenha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBoxAcessarSistema))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jPanelAcessarSistemaLayout.setVerticalGroup(
+            jPanelAcessarSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAcessarSistemaLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jCheckBoxAcessarSistema)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelAcessarSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUsuario)
+                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAcessarSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSenha)
+                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanelTiposServicos.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipos Serviços"));
+
+        jTableTiposServicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo Serviço"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableTiposServicos);
+
+        jButtonRemoverTipoServico.setText("Remover");
+        jButtonRemoverTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverTipoServicoActionPerformed(evt);
+            }
+        });
+
+        jButtonAddTipoServico.setText("Adicionar");
+        jButtonAddTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddTipoServicoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTiposServicosLayout = new javax.swing.GroupLayout(jPanelTiposServicos);
+        jPanelTiposServicos.setLayout(jPanelTiposServicosLayout);
+        jPanelTiposServicosLayout.setHorizontalGroup(
+            jPanelTiposServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTiposServicosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTiposServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAddTipoServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRemoverTipoServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanelTiposServicosLayout.setVerticalGroup(
+            jPanelTiposServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTiposServicosLayout.createSequentialGroup()
+                .addGroup(jPanelTiposServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTiposServicosLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jButtonAddTipoServico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRemoverTipoServico))
+                    .addGroup(jPanelTiposServicosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelLoginTipoServicoLayout = new javax.swing.GroupLayout(jPanelLoginTipoServico);
+        jPanelLoginTipoServico.setLayout(jPanelLoginTipoServicoLayout);
+        jPanelLoginTipoServicoLayout.setHorizontalGroup(
+            jPanelLoginTipoServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLoginTipoServicoLayout.createSequentialGroup()
+                .addComponent(jPanelAcessarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelTiposServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelLoginTipoServicoLayout.setVerticalGroup(
+            jPanelLoginTipoServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLoginTipoServicoLayout.createSequentialGroup()
+                .addGroup(jPanelLoginTipoServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanelAcessarSistema, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelTiposServicos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanelLoginTipoServico);
 
         jPanelEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
 
@@ -324,8 +408,6 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jLabelCep.setText("CEP:");
 
         jLabelCidade.setText("Cidade:");
-
-        jLabelEstado.setText("UF:");
 
         jTextFieldLogradouro.setEnabled(false);
 
@@ -360,56 +442,53 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     .addComponent(jLabelBairro)
                     .addComponent(jLabelCidade)
                     .addComponent(jLabelComplemento)
-                    .addComponent(jLabelLogradouro))
+                    .addComponent(jLabelLogradouro)
+                    .addComponent(jLabelCep))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelEnderecoLayout.createSequentialGroup()
-                        .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                            .addComponent(jTextFieldCidade))
-                        .addGap(18, 18, 18)
+                .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldComplemento)
+                    .addGroup(jPanelEnderecoLayout.createSequentialGroup()
                         .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabelNumero)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addComponent(jFormattedTextFieldCep, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabelEstado)
-                                .addGap(9, 9, 9)))
-                        .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                            .addComponent(jTextFieldNumero))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelCep)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldCep))
-                    .addComponent(jTextFieldComplemento, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelEnderecoLayout.createSequentialGroup()
-                        .addComponent(jTextFieldTipoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldCidade))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelEnderecoLayout.createSequentialGroup()
+                                .addComponent(jTextFieldTipoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabelNumero)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 63, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelEnderecoLayout.setVerticalGroup(
             jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEnderecoLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
+                .addContainerGap()
+                .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCep)
+                    .addComponent(jFormattedTextFieldCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelLogradouro)
                     .addComponent(jTextFieldLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTipoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTipoLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNumero)
+                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelBairro)
-                    .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNumero)
-                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCep)
-                    .addComponent(jFormattedTextFieldCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCidade)
                     .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEstado)
                     .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -476,7 +555,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jPanelRodapeLayout.setVerticalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar)
@@ -537,12 +616,14 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         
         cargo = (Cargo) jComboBoxCargo.getSelectedItem();
         habilitacao = (Habilitacao) jComboBoxHabilitacao.getSelectedItem();
+        List tiposServicos = JTableUtil.toList(jTableTiposServicos);
         String cep = "";
         String tipoLogradouro = "";
         String logradouro = "";
         String bairro = "";
         String cidade = "";
         String estado = "";
+        boolean cenarioExecutado = false;
 
         try {
 
@@ -564,13 +645,13 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     
                     validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, login, senha);
                     consultarCep();
-                    resposta = ciInterface.getCiFuncionario().cadastrarFuncionario(
+                    cenarioExecutado = ciInterface.getCiFuncionario().cadastrarFuncionario(
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                             habilitacao, usuario, cep, logradouro, numero,
-                            bairro, cidade, estado, tipoLogradouro, complemento, cepAtual);
+                            bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
 
-                    if (resposta) {
-                        modoConcluido(resposta);
+                    if (cenarioExecutado) {
+                        modoConcluido(cenarioExecutado);
                     }
 
                     break;
@@ -590,23 +671,23 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
 
                     validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, login, senha);
                     consultarCep();
-                    resposta = ciInterface.getCiFuncionario().alterarFuncionario(funcionarioAtual,
+                    cenarioExecutado = ciInterface.getCiFuncionario().alterarFuncionario(funcionarioAtual,
                             nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                             habilitacao, login, senha, cep, logradouro, numero,
-                            bairro, cidade, estado, tipoLogradouro, complemento, cepAtual);
+                            bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
 
-                    if (resposta) {
-                        modoConcluido(resposta);
+                    if (cenarioExecutado) {
+                        modoConcluido(cenarioExecutado);
                     }
                     break;
 
                 case Cenario.EXCLUIR:
                     int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
                     if (confirmacao == 0) {
-                        resposta = ciInterface.getCiFuncionario().excluirFuncionario(funcionarioAtual);
+                        cenarioExecutado = ciInterface.getCiFuncionario().excluirFuncionario(funcionarioAtual);
                     }
 
-                    if (resposta) {
+                    if (cenarioExecutado) {
                         this.dispose();
                     }
                     break;
@@ -659,6 +740,24 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             jButtonCancelarActionPerformed(null);
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
+
+    private void jButtonAddTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTipoServicoActionPerformed
+        ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico((Frame)getOwner(), Cenario.SELECIONAR);
+        TipoServico tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
+        boolean jaVinculado = false;
+        
+        for (Object tipoServicoFuncionario : JTableUtil.toList(jTableTiposServicos))
+            if ( tipoServicoFuncionario.equals(tipoServicoSelecionado) )
+                jaVinculado = true;
+        if ( !jaVinculado )
+            JTableUtil.addLinha(jTableTiposServicos, tipoServicoSelecionado.toArray());
+        else
+            JOptionPane.showMessageDialog(this, "Tipo de Serviço já selecionado!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButtonAddTipoServicoActionPerformed
+
+    private void jButtonRemoverTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverTipoServicoActionPerformed
+        JTableUtil.removeLinhaSelecionada(jTableTiposServicos);
+    }//GEN-LAST:event_jButtonRemoverTipoServicoActionPerformed
 
     public void identificarCenario() {
 
@@ -720,6 +819,9 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jPasswordFieldSenha.setEditable(condicao);
         jTextFieldUsuario.setEnabled(condicao);
         jPasswordFieldSenha.setEnabled(condicao);
+        jTableTiposServicos.setEnabled(condicao);
+        jButtonAddTipoServico.setEnabled(condicao);
+        jButtonRemoverTipoServico.setEnabled(condicao);
     }
 
     public void modoConcluido(boolean resposta) {
@@ -746,13 +848,16 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             jPasswordFieldSenha.setText(funcionario.getUsuario().getSenha());
         }
 
-        if (funcionario.getSexo() == 'M') {
+        if (funcionario.getSexo() == 'M')
             jRadioButtonMasculino.setSelected(true);
-        }
 
         jTextFieldNumero.setText(funcionario.getEndereco().getNumero());
         jTextFieldComplemento.setText(funcionario.getEndereco().getComplemento());
         preencherEnderecoCep(funcionario.getEndereco().getCep());
+        
+        funcionario.getTipoServicos().forEach( (tipoServico) -> {
+            JTableUtil.addLinha(jTableTiposServicos, tipoServico.toArray());
+        });
     }
 
     public void preencherEnderecoCep(Cep cep) {
@@ -827,10 +932,12 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddTipoServico;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.ButtonGroup jButtonGroupSexo;
     private javax.swing.JButton jButtonLimpar;
+    private javax.swing.JButton jButtonRemoverTipoServico;
     private javax.swing.JCheckBox jCheckBoxAcessarSistema;
     private javax.swing.JComboBox<String> jComboBoxCargo;
     private javax.swing.JComboBox<String> jComboBoxHabilitacao;
@@ -847,7 +954,6 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelCpf;
     private javax.swing.JLabel jLabelDataNascimento;
     private javax.swing.JLabel jLabelEmail;
-    private javax.swing.JLabel jLabelEstado;
     private javax.swing.JLabel jLabelHabilitacao;
     private javax.swing.JLabel jLabelLogradouro;
     private javax.swing.JLabel jLabelNome;
@@ -860,10 +966,14 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelAcessarSistema;
     private javax.swing.JPanel jPanelDadosPessoais;
     private javax.swing.JPanel jPanelEndereco;
+    private javax.swing.JPanel jPanelLoginTipoServico;
     private javax.swing.JPanel jPanelRodape;
+    private javax.swing.JPanel jPanelTiposServicos;
     private javax.swing.JPasswordField jPasswordFieldSenha;
     private javax.swing.JRadioButton jRadioButtonFeminino;
     private javax.swing.JRadioButton jRadioButtonMasculino;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableTiposServicos;
     private javax.swing.JTextField jTextFieldBairro;
     private javax.swing.JTextField jTextFieldCidade;
     private javax.swing.JTextField jTextFieldComplemento;

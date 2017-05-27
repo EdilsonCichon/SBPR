@@ -4,6 +4,7 @@ import cci.util.Cenario;
 import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
+import cdp.TipoServico;
 import cdp.Usuario;
 import cdp.endereco.Cep;
 import cgt.GTFuncionario;
@@ -11,6 +12,7 @@ import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
 import java.awt.Frame;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -53,13 +55,13 @@ public class CIFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, Usuario usuario,
             String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual) {
+            String bairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual, List tiposServicos) {
         
         try {
           gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, cep, logradouro, numero,
-                   bairro, cidade, estado, tipoLogradouro, complemento, cepAtual);
+                   bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
             
           JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
           return true;
@@ -74,13 +76,13 @@ public class CIFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, String login, String senha,
             String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual){
+            String bairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual, List tipoServicos){
         
         try {
             gtFuncionario.alterarFuncionario(funcionario,
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, login, senha, cep, logradouro, numero,
-                   bairro, cidade, estado, tipoLogradouro, complemento, cepAtual);
+                   bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tipoServicos);
             
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
             return true;

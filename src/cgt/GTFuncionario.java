@@ -35,7 +35,9 @@ public class GTFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, Usuario usuario,
             String nCep, String nomeLogradouro, String numero,
-            String nomeBairro, String nomeCidade, String nomeEstado, String tipoLogradouro, String complemento, Cep cepAtual) throws Exception {
+            String nomeBairro, String nomeCidade, String nomeEstado, 
+            String tipoLogradouro, String complemento, Cep cepAtual, 
+            List pTiposServicos) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
         Date dtNascFormatada = new Date(data_nasc);
@@ -98,7 +100,7 @@ public class GTFuncionario {
             endereco = new Endereco(numero, complemento, cepAtual);
         }
        
-        LinkedList<TipoServico> tipoServicos = null;
+        List<TipoServico> tipoServicos = pTiposServicos;
         
         Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
         gdFuncionario.cadastrar(funcionario);
@@ -108,7 +110,7 @@ public class GTFuncionario {
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, String login, String senha,
             String numeroCep, String nomeLogradouro, String numero,
-            String nomeBairro, String nomeCidade, String nomeEstado, String tipoLogradouro, String complemento, Cep cepAtual) throws Exception {
+            String nomeBairro, String nomeCidade, String nomeEstado, String tipoLogradouro, String complemento, Cep cepAtual, List tipoServicos ) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
         Date dtNascFormatada = new Date(data_nasc);
@@ -126,6 +128,7 @@ public class GTFuncionario {
         funcionario.getUsuario().setSenha(senha);
         funcionario.getEndereco().setNumero(numero);
         funcionario.getEndereco().setComplemento(complemento);
+        funcionario.setTipoServicos(tipoServicos);
         
         Estado estado;
         Cidade cidade;
