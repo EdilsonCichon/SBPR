@@ -3,25 +3,34 @@ package cih.servico;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.CIServico;
 import cci.util.JTableUtil;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cdp.Servico;
 import cdp.ServicoAgendado;
 import cdp.TipoServico;
+import java.awt.Frame;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class JDPesquisaServico extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private CIServico ciServico;
+    private int CENARIO;
+    private Frame pai;
     private Produtor produtorSelecionado;
     private Propriedade propriedadeSelecionada;
+    private TipoServico tipoServicoSelecionado;
+    private List<TipoServico> listaTipoServico;
     
-    public JDPesquisaServico(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
+    public JDPesquisaServico(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
         this.ciInterface = ciInterface;
+        this.ciServico = ciInterface.getCiServico();
+        this.CENARIO = CENARIO;
+        this.pai = parent;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
@@ -297,12 +306,19 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         
         int produtor_id = produtorSelecionado.getId();
         int propriedade_id = propriedadeSelecionada.getId();
-        TipoServico tipoServico = (TipoServico) jComboBoxTipoServico.getSelectedItem();
+        listaTipoServico.forEach((tipoServico) -> {
+            if (jComboBoxPropriedades.getSelectedItem().toString().equals(tipoServico.getNome()))
+                tipoServicoSelecionado = tipoServico;
+            });
         
-        List<ServicoAgendado> listaServicos = ciInterface.getCiServico().filtrarServico(produtor_id, propriedade_id, tipoServico.getId());      
-        listaServicos.forEach((servico) -> {
+        List<ServicoAgendado> listaServicos = ciInterface.getCiServico().filtrarServico(produtor_id, propriedade_id, tipoServicoSelecionado.getId());      
+        if(listaServicos != null){
+            listaServicos.forEach((servico) -> {
             JTableUtil.addLinha(jTableServico, servico.toArray() );
-        });
+            });
+        }else{
+            JOptionPane.showMessageDialog(this, "Não existem serviços deste tipo para esta propriedade.");
+        }
     }//GEN-LAST:event_jComboBoxTipoServicoItemStateChanged
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -311,11 +327,23 @@ public class JDPesquisaServico extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
+        try {
+            
+            Servico servico = (Servico) JTableUtil.getDadosLinhaSelecionada(jTableServico);
+            ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Selecione um serviço", "ERRO", JOptionPane.ERROR_MESSAGE);
+        } 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     public void preencherComboTipoServico() {
-        List<TipoServico> listaTipoServico = ciInterface.getCiTipoServico().consultarTipoServico();
-        jComboBoxTipoServico.setModel(new DefaultComboBoxModel(listaTipoServico.toArray()));
+        listaTipoServico = ciInterface.getCiTipoServico().consultarTipoServico();
+        if(listaTipoServico != null){
+            listaTipoServico.forEach((tipoServico) -> {
+            jComboBoxTipoServico.addItem(tipoServico.toString());
+            });
+        }     
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

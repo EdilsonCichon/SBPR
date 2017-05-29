@@ -3,11 +3,13 @@ package cci;
 import cci.util.Cenario;
 import cdp.Produtor;
 import cdp.Propriedade;
+import cdp.Servico;
 import cdp.ServicoAgendado;
 import cdp.TipoServico;
 import cgt.GTServico;
 import cih.servico.JDCadastroServico;
 import cih.servico.JDPesquisaServico;
+import java.awt.Frame;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,18 +28,22 @@ public class CIServico {
     
      public void gerenciarServico(int CENARIO, JFrame pai) {
 
-        switch (CENARIO) {
-            case Cenario.AGENDAR:
-                agendarServico = new JDCadastroServico(pai, true, ciInterface, Cenario.AGENDAR);
-                agendarServico.setVisible(true);
-                break;
-            default:
-                pesquisaServico = new JDPesquisaServico(pai, true, ciInterface);
-                pesquisaServico.setVisible(true);
-                break;
-        }
+        if(CENARIO == Cenario.AGENDAR)
+            instanciarTelaCadastroServico(null, pai, CENARIO);
+        else
+            instanciarTelaFiltroServico(pai, CENARIO);    
     }
      
+    public void instanciarTelaCadastroServico(Servico servico, Frame pai, int CENARIO){
+        agendarServico = new JDCadastroServico(pai, true, ciInterface, CENARIO);
+        agendarServico.setVisible(true);
+    }
+     
+    public void instanciarTelaFiltroServico(Frame pai, int CENARIO){
+        pesquisaServico = new JDPesquisaServico(pai, true, ciInterface, CENARIO);
+        pesquisaServico.setVisible(true);
+    }
+    
      public ServicoAgendado cadastrarServico(Produtor produtor, Propriedade propriedade, 
              TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) {
          try {
@@ -66,6 +72,5 @@ public class CIServico {
      
      public List<ServicoAgendado> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
         return gtServico.filtrarServico(produtor_id, propriedade_id, tipoServico_id);
-    }
-    
+    }   
 }
