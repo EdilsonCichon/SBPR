@@ -8,6 +8,7 @@ import cdp.TipoServico;
 import cgt.GTServico;
 import cih.servico.JDCadastroServico;
 import cih.servico.JDPesquisaServico;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ public class CIServico {
     private CIInterface ciInterface;
     private GTServico gtServico;
     private JDCadastroServico agendarServico;
-    private JDPesquisaServico consultarServico;
+    private JDPesquisaServico pesquisaServico;
 
     public CIServico(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -31,8 +32,8 @@ public class CIServico {
                 agendarServico.setVisible(true);
                 break;
             default:
-                consultarServico = new JDPesquisaServico(pai, true, ciInterface);
-                consultarServico.setVisible(true);
+                pesquisaServico = new JDPesquisaServico(pai, true, ciInterface);
+                pesquisaServico.setVisible(true);
                 break;
         }
     }
@@ -62,5 +63,9 @@ public class CIServico {
      public void concluirServico(){
          int i = gtServico.concluirServico();
      }
+     
+     public List<ServicoAgendado> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
+        return gtServico.filtrarServico(produtor_id, propriedade_id, tipoServico_id);
+    }
     
 }

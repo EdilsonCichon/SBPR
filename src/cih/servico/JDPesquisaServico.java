@@ -3,10 +3,21 @@ package cih.servico;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.util.JTableUtil;
+import cdp.Produtor;
+import cdp.Propriedade;
+import cdp.Servico;
+import cdp.ServicoAgendado;
+import cdp.TipoServico;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 public class JDPesquisaServico extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private Produtor produtorSelecionado;
+    private Propriedade propriedadeSelecionada;
     
     public JDPesquisaServico(java.awt.Frame parent, boolean modal, CIInterface ciInterface) {
         super(parent, modal);
@@ -14,6 +25,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
+        preencherComboTipoServico();
     }
 
     @SuppressWarnings("unchecked")
@@ -21,19 +33,20 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanelPesquisarProdutor = new javax.swing.JPanel();
-        jTextFieldNomeProdutor = new javax.swing.JTextField();
+        jTextFieldFiltro = new javax.swing.JTextField();
         jLabelFiltrarPor = new javax.swing.JLabel();
-        jComboBoxChavePesquisa = new javax.swing.JComboBox<>();
+        jComboBoxFiltro = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableResultadoProdutor = new javax.swing.JTable();
+        jTableProdutor = new javax.swing.JTable();
+        jButtonFiltrar = new javax.swing.JButton();
         jPanelSelecaoPropriedade = new javax.swing.JPanel();
         jLabelPropriedade = new javax.swing.JLabel();
-        jComboBoxSelecaoPropriedade = new javax.swing.JComboBox<>();
+        jComboBoxPropriedades = new javax.swing.JComboBox<>();
         jPanelPesquisarServico = new javax.swing.JPanel();
         jLabelTipoServico = new javax.swing.JLabel();
-        jComboBoxSelecaoServico = new javax.swing.JComboBox<>();
+        jComboBoxTipoServico = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTableResultadoServico = new javax.swing.JTable();
+        jTableServico = new javax.swing.JTable();
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -45,14 +58,9 @@ public class JDPesquisaServico extends javax.swing.JDialog {
 
         jLabelFiltrarPor.setText("Filtrar por:");
 
-        jComboBoxChavePesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "RG" }));
-        jComboBoxChavePesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxChavePesquisaActionPerformed(evt);
-            }
-        });
+        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "RG" }));
 
-        jTableResultadoProdutor.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProdutor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -60,7 +68,19 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 "Nome", "CPF", "RG", "Data Nasc."
             }
         ));
-        jScrollPane2.setViewportView(jTableResultadoProdutor);
+        jTableProdutor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProdutorMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableProdutor);
+
+        jButtonFiltrar.setText("...");
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFiltrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPesquisarProdutorLayout = new javax.swing.GroupLayout(jPanelPesquisarProdutor);
         jPanelPesquisarProdutor.setLayout(jPanelPesquisarProdutorLayout);
@@ -73,9 +93,11 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                     .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrarPor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxChavePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNomeProdutor)))
+                        .addComponent(jButtonFiltrar)))
                 .addContainerGap())
         );
         jPanelPesquisarProdutorLayout.setVerticalGroup(
@@ -83,19 +105,24 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             .addGroup(jPanelPesquisarProdutorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNomeProdutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelFiltrarPor)
-                    .addComponent(jComboBoxChavePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFiltrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
         );
 
         jPanelSelecaoPropriedade.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedade"));
 
         jLabelPropriedade.setText("Propriedade:");
 
-        jComboBoxSelecaoPropriedade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a propriedade...", "Propriedade 1" }));
+        jComboBoxPropriedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jComboBoxPropriedades.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxPropriedadesItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelSelecaoPropriedadeLayout = new javax.swing.GroupLayout(jPanelSelecaoPropriedade);
         jPanelSelecaoPropriedade.setLayout(jPanelSelecaoPropriedadeLayout);
@@ -105,7 +132,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabelPropriedade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxSelecaoPropriedade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxPropriedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelSelecaoPropriedadeLayout.setVerticalGroup(
@@ -114,7 +141,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelSelecaoPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPropriedade)
-                    .addComponent(jComboBoxSelecaoPropriedade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxPropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -122,9 +149,14 @@ public class JDPesquisaServico extends javax.swing.JDialog {
 
         jLabelTipoServico.setText("Tipo de Serviço:");
 
-        jComboBoxSelecaoServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um Serviço...", "Patrolagem", "Escavação", "Arado" }));
+        jComboBoxTipoServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jComboBoxTipoServico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoServicoItemStateChanged(evt);
+            }
+        });
 
-        jTableResultadoServico.setModel(new javax.swing.table.DefaultTableModel(
+        jTableServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -132,7 +164,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 "Tipo do Serviço", "Data Conclusão", "Tempo previsto", "Situação"
             }
         ));
-        jScrollPane3.setViewportView(jTableResultadoServico);
+        jScrollPane3.setViewportView(jTableServico);
 
         javax.swing.GroupLayout jPanelPesquisarServicoLayout = new javax.swing.GroupLayout(jPanelPesquisarServico);
         jPanelPesquisarServico.setLayout(jPanelPesquisarServicoLayout);
@@ -141,11 +173,12 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             .addGroup(jPanelPesquisarServicoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPesquisarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                     .addGroup(jPanelPesquisarServicoLayout.createSequentialGroup()
                         .addComponent(jLabelTipoServico)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxSelecaoServico, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jComboBoxTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelPesquisarServicoLayout.setVerticalGroup(
@@ -154,7 +187,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 .addGap(2, 2, 2)
                 .addGroup(jPanelPesquisarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipoServico)
-                    .addComponent(jComboBoxSelecaoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -166,8 +199,18 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         jButtonConfirmar.setMaximumSize(new java.awt.Dimension(105, 23));
         jButtonConfirmar.setMinimumSize(new java.awt.Dimension(105, 23));
         jButtonConfirmar.setPreferredSize(new java.awt.Dimension(105, 23));
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -215,16 +258,73 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxChavePesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxChavePesquisaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxChavePesquisaActionPerformed
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
+        
+        String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
+        String filtro = jTextFieldFiltro.getText();
+        
+        List<Produtor> listaProdutores = ciInterface.getCiProdutor().filtrarProdutor(colunaFiltro, filtro);
+        JTableUtil.limparTabela(jTableProdutor);
+        
+        listaProdutores.forEach((produtor) -> {
+            JTableUtil.addLinha(jTableProdutor, produtor.toArray() );
+        });
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
+    private void jTableProdutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutorMouseClicked
+        if(evt.getClickCount() == 2){
+            try {
+                produtorSelecionado = (Produtor) JTableUtil.getDadosLinhaSelecionada(jTableProdutor);
+                if (produtorSelecionado.getPropriedades() != null){
+                    produtorSelecionado.getPropriedades().forEach((propriedade) -> {
+                        jComboBoxPropriedades.addItem(propriedade.toString());
+                    });
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "ERRO de Seleção de Dados");
+            }
+        }
+    }//GEN-LAST:event_jTableProdutorMouseClicked
+
+    private void jComboBoxPropriedadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesItemStateChanged
+        produtorSelecionado.getPropriedades().forEach((propriedade) -> {
+            if (jComboBoxPropriedades.getSelectedItem().toString().equals(propriedade.getNome_propriedade()))
+                propriedadeSelecionada = propriedade;
+            });
+    }//GEN-LAST:event_jComboBoxPropriedadesItemStateChanged
+
+    private void jComboBoxTipoServicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicoItemStateChanged
+        
+        int produtor_id = produtorSelecionado.getId();
+        int propriedade_id = propriedadeSelecionada.getId();
+        TipoServico tipoServico = (TipoServico) jComboBoxTipoServico.getSelectedItem();
+        
+        List<ServicoAgendado> listaServicos = ciInterface.getCiServico().filtrarServico(produtor_id, propriedade_id, tipoServico.getId());      
+        listaServicos.forEach((servico) -> {
+            JTableUtil.addLinha(jTableServico, servico.toArray() );
+        });
+    }//GEN-LAST:event_jComboBoxTipoServicoItemStateChanged
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    public void preencherComboTipoServico() {
+        List<TipoServico> listaTipoServico = ciInterface.getCiTipoServico().consultarTipoServico();
+        jComboBoxTipoServico.setModel(new DefaultComboBoxModel(listaTipoServico.toArray()));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JComboBox<String> jComboBoxChavePesquisa;
-    private javax.swing.JComboBox<String> jComboBoxSelecaoPropriedade;
-    private javax.swing.JComboBox<String> jComboBoxSelecaoServico;
+    private javax.swing.JButton jButtonFiltrar;
+    private javax.swing.JComboBox<String> jComboBoxFiltro;
+    private javax.swing.JComboBox<String> jComboBoxPropriedades;
+    private javax.swing.JComboBox<String> jComboBoxTipoServico;
     private javax.swing.JLabel jLabelFiltrarPor;
     private javax.swing.JLabel jLabelPropriedade;
     private javax.swing.JLabel jLabelTipoServico;
@@ -234,8 +334,8 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelSelecaoPropriedade;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTableResultadoProdutor;
-    private javax.swing.JTable jTableResultadoServico;
-    private javax.swing.JTextField jTextFieldNomeProdutor;
+    private javax.swing.JTable jTableProdutor;
+    private javax.swing.JTable jTableServico;
+    private javax.swing.JTextField jTextFieldFiltro;
     // End of variables declaration//GEN-END:variables
 }

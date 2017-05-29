@@ -113,5 +113,10 @@ public abstract class Servico implements Serializable {
 
     public void setTipoServico(TipoServico tipoServico) {
         this.tipoServico = tipoServico;
-    }    
+    }   
+
+    @Override
+    public String toString() {
+        return tipoServico.getNome();
+    }
 }

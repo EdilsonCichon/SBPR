@@ -8,6 +8,7 @@ import cgd.GDServico;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class GTServico {
     
@@ -56,4 +57,8 @@ public class GTServico {
         //gdServico.concluir();
         return 0;
     } 
+    
+    public List<ServicoAgendado> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
+        return gdServico.filtrar(produtor_id, propriedade_id, tipoServico_id);
+    }
 }
