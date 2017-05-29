@@ -1,7 +1,6 @@
 package cgd;
 
 import cdp.Maquina;
-import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;

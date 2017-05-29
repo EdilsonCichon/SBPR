@@ -53,7 +53,7 @@ public class GTGeral {
     }
     
     public void inciarBancoDeDados(){ 
-         config = new Config();       
+         config = new Config();
     }
     
     public boolean validarAcesso(String usuario, String senha){ 
