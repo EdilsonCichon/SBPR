@@ -1,23 +1,31 @@
 package cih.servico;
 
 import cci.CIInterface;
+import cci.CIServico;
 import cci.util.Cenario;
 import cdp.Produtor;
+import cdp.Propriedade;
+import cdp.ServicoAgendado;
 import cdp.TipoServico;
 import java.awt.Frame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class JDCadastroServico extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
+    private CIServico ciServico;
     private int CENARIO;
     private Produtor produtorSelecionado;
+    private Propriedade propriedadeSelecionada;
     private TipoServico tipoServicoSelecionado;
+    private ServicoAgendado servicoAgendado;
    
     public JDCadastroServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(framePai, modal);
         this.ciInterface = ciInterface;
+        this.ciServico = ciInterface.getCiServico();
         this.CENARIO = CENARIO;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
@@ -112,6 +120,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jComboBoxPropriedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a propriedade..." }));
         jComboBoxPropriedades.setToolTipText("");
+        jComboBoxPropriedades.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxPropriedadesItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelSelecaoPropriedadeLayout = new javax.swing.GroupLayout(jPanelSelecaoPropriedade);
         jPanelSelecaoPropriedade.setLayout(jPanelSelecaoPropriedadeLayout);
@@ -156,6 +169,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jLabelValorHora.setText("Valor por hora:");
 
+        jTextFieldValorHora.setEditable(false);
         jTextFieldValorHora.setText(" ");
 
         jTextFieldTipoServico.setEditable(false);
@@ -173,15 +187,15 @@ public class JDCadastroServico extends javax.swing.JDialog {
             jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAgendarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelTipoServico)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldTipoServico))
+                        .addComponent(jTextFieldTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelDataPrevista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelDuracao)
@@ -414,6 +428,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico((Frame) getOwner(), Cenario.SELECIONAR);
         tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
         jTextFieldTipoServico.setText(tipoServicoSelecionado.getNome());
+        jTextFieldValorHora.setText( String.valueOf(tipoServicoSelecionado.getValor_hr()) );
     }//GEN-LAST:event_jButtonSelecionarTipoSevicoActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
@@ -435,10 +450,18 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        String dtPrevistaConclusao = jFormattedTextFieldDataPrevista.getText();
+        String qtdHrsPrevista = jFormattedTextFieldQtHrsPrevista.getText().replace(':', '.');
+        
         switch (CENARIO) {
             case Cenario.AGENDAR:
-                //Vou terminar essa implementar.
-                ciInterface.getCiServico().cadastrarServico();
+                servicoAgendado = ciServico.cadastrarServico(produtorSelecionado, propriedadeSelecionada, 
+                        tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
+                if (servicoAgendado != null) {
+                    JOptionPane.showMessageDialog(this, "Serviço agendado com sucesso!");
+                    modoSomenteLeitura(true);
+                    jButtonCancelar.setText("Sair");
+                }
                 break;
             case Cenario.CANCELAR:
                 
@@ -448,6 +471,13 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 break;
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jComboBoxPropriedadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesItemStateChanged
+        produtorSelecionado.getPropriedades().forEach((propriedade) -> {
+            if (jComboBoxPropriedades.getSelectedItem().toString() == propriedade.getNome_propriedade())
+                propriedadeSelecionada = propriedade;
+        });
+    }//GEN-LAST:event_jComboBoxPropriedadesItemStateChanged
 
     private void identificarCenario() {
         switch (CENARIO) {
@@ -478,6 +508,17 @@ public class JDCadastroServico extends javax.swing.JDialog {
         for (JPanel paineil : paineisCenario)
             if ( paineil.isEnabled() )
                 setBounds(getX(), getY(), getWidth(), alturaSemPaineis + paineil.getHeight());
+    }
+    
+    public void modoSomenteLeitura(boolean condicao) {
+        condicao = !condicao;
+        jFormattedTextFieldDataPrevista.setEnabled(condicao);
+        jFormattedTextFieldQtHrsPrevista.setEnabled(condicao);
+        jComboBoxPropriedades.setEnabled(condicao);
+        jButtonSelecionarProdutor.setEnabled(condicao);
+        jButtonSelecionarTipoSevico.setEnabled(condicao);
+        jButtonConfirmar.setEnabled(condicao);
+        jButtonLimpar.setEnabled(condicao);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
