@@ -1,7 +1,7 @@
 
 package cgd;
 
-public class GDServico extends GDGenerico{
+public class GDServico extends GDGenerico {
       
     public void cancelar(){
         
