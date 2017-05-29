@@ -5,6 +5,7 @@ import cci.CIServico;
 import cci.util.Cenario;
 import cdp.Produtor;
 import cdp.Propriedade;
+import cdp.Servico;
 import cdp.ServicoAgendado;
 import cdp.TipoServico;
 import java.awt.Frame;
@@ -20,13 +21,14 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private Produtor produtorSelecionado;
     private Propriedade propriedadeSelecionada;
     private TipoServico tipoServicoSelecionado;
-    private ServicoAgendado servicoAgendado;
+    private Servico servico;
    
-    public JDCadastroServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO) {
+    public JDCadastroServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO, Servico servico) {
         super(framePai, modal);
         this.ciInterface = ciInterface;
         this.ciServico = ciInterface.getCiServico();
         this.CENARIO = CENARIO;
+        this.servico = servico;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
@@ -450,12 +452,14 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+       
         String dtPrevistaConclusao = jFormattedTextFieldDataPrevista.getText();
         String qtdHrsPrevista = jFormattedTextFieldQtHrsPrevista.getText().replace(':', '.');
         
         switch (CENARIO) {
+            
             case Cenario.AGENDAR:
-                servicoAgendado = ciServico.cadastrarServico(produtorSelecionado, propriedadeSelecionada, 
+                ServicoAgendado servicoAgendado = ciServico.cadastrarServico(produtorSelecionado, propriedadeSelecionada, 
                         tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
                 if (servicoAgendado != null) {
                     JOptionPane.showMessageDialog(this, "Serviço agendado com sucesso!");
@@ -463,11 +467,24 @@ public class JDCadastroServico extends javax.swing.JDialog {
                     jButtonCancelar.setText("Sair");
                 }
                 break;
-            case Cenario.CANCELAR:
                 
+            case Cenario.ALTERAR:
+                
+                boolean alterado = ciServico.alterarServico(servico, produtorSelecionado, propriedadeSelecionada, 
+                        tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
+                
+                if(alterado){
+                    modoSomenteLeitura(true); 
+                    jButtonCancelar.setText("Sair");
+                }break;
+                
+            case Cenario.CONSULTAR:
                 break;
-            case Cenario.CONCLUIR:
                 
+            case Cenario.CANCELAR: 
+                break;
+                
+            case Cenario.CONCLUIR:
                 break;
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
@@ -483,22 +500,26 @@ public class JDCadastroServico extends javax.swing.JDialog {
         switch (CENARIO) {
             case Cenario.AGENDAR:
                 jPanelAgendar.setVisible(true);
-                redimensionarJanelaCenario(Cenario.AGENDAR);
+                redimensionarJanelaCenario();
+                break;
+            case Cenario.ALTERAR:
+                jPanelAgendar.setVisible(true);
+                setarCamposComInstancia(servico);
                 break;
             case Cenario.CANCELAR:
                 setTitle("Cancelar Serviço");
                 jPanelCancelar.setVisible(true);
-                redimensionarJanelaCenario(Cenario.CANCELAR);
+                redimensionarJanelaCenario();
                 break;
             case Cenario.CONCLUIR:
                 setTitle("Concluir Serviço");
                 jPanelConcluir.setVisible(true);
-                redimensionarJanelaCenario(Cenario.CONCLUIR);
+                redimensionarJanelaCenario();
                 break;
         }
     }
     
-    private void redimensionarJanelaCenario(int CENARIO) {
+    private void redimensionarJanelaCenario() {
         JPanel[] paineisCenario = new JPanel[] { jPanelAgendar, jPanelCancelar, jPanelConcluir };
         int alturaPaineis = 0;
         for (JPanel painel : paineisCenario)
@@ -508,6 +529,15 @@ public class JDCadastroServico extends javax.swing.JDialog {
         for (JPanel paineil : paineisCenario)
             if ( paineil.isEnabled() )
                 setBounds(getX(), getY(), getWidth(), alturaSemPaineis + paineil.getHeight());
+    }
+    
+    public void setarCamposComInstancia(Servico servico){
+        jTextFieldNomeProdutor.setText(servico.getProdutor().getNome());
+        jComboBoxPropriedades.setSelectedItem(servico.getPropriedade());
+        jTextFieldTipoServico.setText(servico.getTipoServico().getNome());
+        jTextFieldValorHora.setText(String.valueOf(servico.getTipoServico().getValor_hr()));
+        jFormattedTextFieldDataPrevista.setText(String.valueOf(servico.getData_prevista_conclusao()));
+        jFormattedTextFieldQtHrsPrevista.setText(String.valueOf(servico.getQtd_hrs_prevista()));
     }
     
     public void modoSomenteLeitura(boolean condicao) {

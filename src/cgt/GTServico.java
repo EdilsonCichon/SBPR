@@ -2,9 +2,11 @@ package cgt;
 
 import cdp.Produtor;
 import cdp.Propriedade;
+import cdp.Servico;
 import cdp.ServicoAgendado;
 import cdp.TipoServico;
 import cgd.GDServico;
+import java.sql.SQLException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,8 +21,8 @@ public class GTServico {
     }
     
     public ServicoAgendado cadastrarServico(Produtor produtor, Propriedade propriedade, 
-             TipoServico tipoServico, String dtPrevistaConclusao,
-             String qtdHrsPrevista) throws Exception {
+            TipoServico tipoServico, String dtPrevistaConclusao,
+            String qtdHrsPrevista) throws Exception {
         
         ServicoAgendado servicoAgendado = new ServicoAgendado();
         servicoAgendado.setProdutor(produtor);
@@ -38,9 +40,17 @@ public class GTServico {
         }
     }
     
-    public int alterarServico(){
-        //gdServico.alterar();
-        return 0;
+    public void alterarServico(Servico servico, Produtor produtor, Propriedade propriedade, 
+                TipoServico tipoServico, String dtPrevistaConclusao, 
+                String qtdHrsPrevista) throws SQLException, ClassNotFoundException{
+        
+        servico.setData_prevista_conclusao(new Date(dtPrevistaConclusao));
+        servico.setQtd_hrs_prevista(Double.parseDouble(qtdHrsPrevista));
+        servico.setProdutor(produtor);
+        servico.setPropriedade(propriedade);
+        servico.setTipoServico(tipoServico);
+        
+        gdServico.alterar(servico);
     }
     
     public int consultarServico(){

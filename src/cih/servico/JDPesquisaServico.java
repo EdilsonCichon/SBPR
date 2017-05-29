@@ -343,6 +343,8 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             listaTipoServico.forEach((tipoServico) -> {
             jComboBoxTipoServico.addItem(tipoServico.toString());
             });
+            jComboBoxTipoServico.setSelectedIndex(0);
+            jComboBoxTipoServicoItemStateChanged(null);
         }     
     }
     

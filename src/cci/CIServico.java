@@ -35,7 +35,7 @@ public class CIServico {
     }
      
     public void instanciarTelaCadastroServico(Servico servico, Frame pai, int CENARIO){
-        agendarServico = new JDCadastroServico(pai, true, ciInterface, CENARIO);
+        agendarServico = new JDCadastroServico(pai, true, ciInterface, CENARIO, servico);
         agendarServico.setVisible(true);
     }
      
@@ -47,6 +47,7 @@ public class CIServico {
      public ServicoAgendado cadastrarServico(Produtor produtor, Propriedade propriedade, 
              TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) {
          try {
+             JOptionPane.showMessageDialog(agendarServico, "Cadastrado com sucesso!");
              return gtServico.cadastrarServico(produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
          } catch (Exception e) {
              JOptionPane.showMessageDialog(agendarServico, "Não foi possível agendar o serviço: "+e.getMessage());
@@ -54,8 +55,16 @@ public class CIServico {
          }
      }
      
-     public void alterarServico(){
-         int i = gtServico.alterarServico();
+     public boolean alterarServico(Servico servico, Produtor produtor, Propriedade propriedade, 
+            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista){
+        try {
+            gtServico.alterarServico(servico, produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
+            JOptionPane.showMessageDialog(agendarServico, "Alterado com sucesso!");
+            return true;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(agendarServico, "Erro ao alterar " + ex.getMessage());
+            return false;
+        }
      }
      
      public void consultarServico(){
