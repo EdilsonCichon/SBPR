@@ -1,13 +1,14 @@
 package cih.servico;
 
 import cci.CIInterface;
-import cci.CIServico;
 import cci.util.Cenario;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cdp.ServicoAgendado;
 import cdp.TipoServico;
 import java.awt.Frame;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -15,7 +16,6 @@ import javax.swing.JOptionPane;
 public class JDCadastroServico extends javax.swing.JDialog {
     
     private CIInterface ciInterface;
-    private CIServico ciServico;
     private int CENARIO;
     private Produtor produtorSelecionado;
     private Propriedade propriedadeSelecionada;
@@ -25,7 +25,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
     public JDCadastroServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(framePai, modal);
         this.ciInterface = ciInterface;
-        this.ciServico = ciInterface.getCiServico();
         this.CENARIO = CENARIO;
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
@@ -57,10 +56,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jTextFieldValorHora = new javax.swing.JTextField();
         jTextFieldTipoServico = new javax.swing.JTextField();
         jButtonSelecionarTipoSevico = new javax.swing.JButton();
-        jPanelRodape = new javax.swing.JPanel();
-        jButtonConfirmar = new javax.swing.JButton();
-        jButtonLimpar = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
         jPanelConcluir = new javax.swing.JPanel();
         jLabelDataConclusao = new javax.swing.JLabel();
         jFormattedTextFieldDataConclusao = new javax.swing.JFormattedTextField();
@@ -73,6 +68,10 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jFormattedTextFieldDataCancelamento = new javax.swing.JFormattedTextField();
         jLabelValorMulta = new javax.swing.JLabel();
         jTextFieldValorMulta = new javax.swing.JTextField();
+        jPanelRodape = new javax.swing.JPanel();
+        jButtonConfirmar = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agendar Serviço");
@@ -231,59 +230,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanelRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.setMaximumSize(new java.awt.Dimension(75, 23));
-        jButtonConfirmar.setMinimumSize(new java.awt.Dimension(75, 23));
-        jButtonConfirmar.setPreferredSize(new java.awt.Dimension(75, 23));
-        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarActionPerformed(evt);
-            }
-        });
-
-        jButtonLimpar.setText("Limpar");
-        jButtonLimpar.setMaximumSize(new java.awt.Dimension(75, 23));
-        jButtonLimpar.setMinimumSize(new java.awt.Dimension(75, 23));
-        jButtonLimpar.setPreferredSize(new java.awt.Dimension(75, 23));
-        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLimparActionPerformed(evt);
-            }
-        });
-
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
-        jPanelRodape.setLayout(jPanelRodapeLayout);
-        jPanelRodapeLayout.setHorizontalGroup(
-            jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
-        );
-        jPanelRodapeLayout.setVerticalGroup(
-            jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRodapeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jPanelConcluir.setBorder(javax.swing.BorderFactory.createTitledBorder("Concluir"));
 
         jLabelDataConclusao.setText("Data de conclusão:");
@@ -380,6 +326,59 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelRodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.setMaximumSize(new java.awt.Dimension(75, 23));
+        jButtonConfirmar.setMinimumSize(new java.awt.Dimension(75, 23));
+        jButtonConfirmar.setPreferredSize(new java.awt.Dimension(75, 23));
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpar.setText("Limpar");
+        jButtonLimpar.setMaximumSize(new java.awt.Dimension(75, 23));
+        jButtonLimpar.setMinimumSize(new java.awt.Dimension(75, 23));
+        jButtonLimpar.setPreferredSize(new java.awt.Dimension(75, 23));
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
+        jPanelRodape.setLayout(jPanelRodapeLayout);
+        jPanelRodapeLayout.setHorizontalGroup(
+            jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
+        );
+        jPanelRodapeLayout.setVerticalGroup(
+            jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRodapeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancelar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -416,12 +415,10 @@ public class JDCadastroServico extends javax.swing.JDialog {
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor((Frame) getOwner(), Cenario.SELECIONAR);
         produtorSelecionado = ciInterface.getCiProdutor().getProdutorSelecionado();
         jTextFieldNomeProdutor.setText(produtorSelecionado.getNome());
-        
         if (produtorSelecionado.getPropriedades() != null)
-            produtorSelecionado.getPropriedades()
-                    .forEach((propriedade) -> {
-                        jComboBoxPropriedades.addItem(propriedade.toString());
-                    });
+            produtorSelecionado.getPropriedades().forEach((propriedade) -> {
+                jComboBoxPropriedades.addItem(propriedade.toString());
+            });
     }//GEN-LAST:event_jButtonSelecionarProdutorActionPerformed
 
     private void jButtonSelecionarTipoSevicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoSevicoActionPerformed
@@ -452,13 +449,15 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         String dtPrevistaConclusao = jFormattedTextFieldDataPrevista.getText();
         String qtdHrsPrevista = jFormattedTextFieldQtHrsPrevista.getText().replace(':', '.');
+        boolean cenarioExecutado = false;
         
+        if ( !validacoes(dtPrevistaConclusao) )
+            return;
         switch (CENARIO) {
             case Cenario.AGENDAR:
-                servicoAgendado = ciServico.cadastrarServico(produtorSelecionado, propriedadeSelecionada, 
+                cenarioExecutado = ciInterface.getCiServico().cadastrarServico(produtorSelecionado, propriedadeSelecionada, 
                         tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
-                if (servicoAgendado != null) {
-                    JOptionPane.showMessageDialog(this, "Serviço agendado com sucesso!");
+                if ( cenarioExecutado ) {
                     modoSomenteLeitura(true);
                     jButtonCancelar.setText("Sair");
                 }
@@ -507,10 +506,10 @@ public class JDCadastroServico extends javax.swing.JDialog {
         setBounds(getX(), getY(), getWidth(), alturaSemPaineis);
         for (JPanel paineil : paineisCenario)
             if ( paineil.isEnabled() )
-                setBounds(getX(), getY(), getWidth(), alturaSemPaineis + paineil.getHeight());
+                setBounds(getX(), getY(), getWidth(), alturaSemPaineis += paineil.getHeight());
     }
     
-    public void modoSomenteLeitura(boolean condicao) {
+    private void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jFormattedTextFieldDataPrevista.setEnabled(condicao);
         jFormattedTextFieldQtHrsPrevista.setEnabled(condicao);
@@ -519,6 +518,23 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jButtonSelecionarTipoSevico.setEnabled(condicao);
         jButtonConfirmar.setEnabled(condicao);
         jButtonLimpar.setEnabled(condicao);
+    }
+    
+    private boolean validacoes(String dtPrevisaoConclusao) {
+        // Validação da data prevista para conclusao do serviço
+        Date dtPrevisaoConclusaoDate = new Date(dtPrevisaoConclusao);
+        Date dtAtual = Calendar.getInstance().getTime();
+        
+        Calendar dtPrevisaoConclusaoCalendar = Calendar.getInstance();
+        dtPrevisaoConclusaoCalendar.setTime(dtPrevisaoConclusaoDate);
+        Calendar dtAtualCalendar = Calendar.getInstance();
+        dtAtualCalendar.setTime(dtAtual);
+        
+        if ( dtPrevisaoConclusaoCalendar.getTimeInMillis() < dtAtualCalendar.getTimeInMillis() ) {
+            JOptionPane.showMessageDialog(this, "Data Prevista de conclusão menor que a data atual!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

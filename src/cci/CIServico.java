@@ -37,13 +37,15 @@ public class CIServico {
         }
     }
      
-     public ServicoAgendado cadastrarServico(Produtor produtor, Propriedade propriedade, 
+     public boolean cadastrarServico(Produtor produtor, Propriedade propriedade, 
              TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) {
          try {
-             return gtServico.cadastrarServico(produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
+             gtServico.cadastrarServico(produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
+             JOptionPane.showMessageDialog(agendarServico, "Serviço agendado com sucesso!");
+             return true;
          } catch (Exception e) {
              JOptionPane.showMessageDialog(agendarServico, "Não foi possível agendar o serviço: "+e.getMessage());
-             return null;
+             return false;
          }
      }
      
