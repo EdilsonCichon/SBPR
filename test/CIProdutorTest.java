@@ -14,10 +14,16 @@ public class CIProdutorTest {
     }
     
     @Test
-    public void testCadastrar() {
-        Produtor produtorEsperado = new Produtor("Moizes", "13953108743", new Date("10/10/1992"), "1234567890", "4463405", "12345678910", 'M');
-        Produtor produtor = ciProdutor.cadastrarProdutor("Moizes", "13953108743", "10/10/1992", "1234567890", "4463405", "12345678910", 'M');
+    public void testCadastrarDadosCorretos() {
+        Produtor produtorEsperado = new Produtor("Moizes", "13953108743", new Date("10/10/1992"), "1234567891", "5463405", "12345678911", 'M');
+        Produtor produtor = ciProdutor.cadastrarProdutor("Moizes", "13953108743", "10/10/1992", "1234567891", "5463405", "12345678911", 'M');
         assertEquals(produtorEsperado, produtor);
+    }
+    
+    @Test
+    public void testCadastrarDadosIncorretos() {
+        Produtor produtor = ciProdutor.cadastrarProdutor("Moizes", "23953108743", "1992/10/10", "1234567890", "4463405", "12345678910", 'M');
+        assertNull(produtor);
     }
     
     @Test
