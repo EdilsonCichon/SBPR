@@ -15,10 +15,9 @@ import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class CIServico {
-    
+
     private CIInterface ciInterface;
     private GTServico gtServico;
     private JDCadastroServico agendarServico;
@@ -28,59 +27,61 @@ public class CIServico {
         this.ciInterface = ciInterface;
         gtServico = new GTServico();
     }
-    
-     public void gerenciarServico(int CENARIO, JFrame pai) {
 
-        if(CENARIO == Cenario.AGENDAR)
+    public void gerenciarServico(int CENARIO, JFrame pai) {
+
+        if (CENARIO == Cenario.AGENDAR) {
             instanciarTelaCadastroServico(null, pai, CENARIO);
-        else
-            instanciarTelaFiltroServico(pai, CENARIO);    
+        } else {
+            instanciarTelaFiltroServico(pai, CENARIO);
+        }
     }
-     
-    public void instanciarTelaCadastroServico(Servico servico, Frame pai, int CENARIO){
+
+    public void instanciarTelaCadastroServico(Servico servico, Frame pai, int CENARIO) {
         agendarServico = new JDCadastroServico(pai, true, ciInterface, CENARIO, servico);
         agendarServico.setVisible(true);
     }
-     
-    public void instanciarTelaFiltroServico(Frame pai, int CENARIO){
+
+    public void instanciarTelaFiltroServico(Frame pai, int CENARIO) {
         pesquisaServico = new JDPesquisaServico(pai, true, ciInterface, CENARIO);
         pesquisaServico.setVisible(true);
     }
-    
-     public boolean cadastrarServico(Produtor produtor, Propriedade propriedade, 
-            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) {
-         try {
-            gtServico.cadastrarServico(produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
-            return true;
-         } catch (Exception e) {  
-             return false;
-         }
-     }
-     
-     public boolean alterarServico(Servico servico, Produtor produtor, Propriedade propriedade, 
-            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista){
+
+    public void cadastrarServico(Produtor produtor, Propriedade propriedade,
+            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) throws Exception {
         try {
-            gtServico.alterarServico(servico, produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);          
-            return true;
+            gtServico.cadastrarServico(produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
         } catch (Exception ex) {
-            return false;
+            throw ex;
         }
-     }
-     
-     public void consultarServico(){
-         int i = gtServico.consultarServico();
-     }
-     
-     public void cancelarServico(){
-         int i = gtServico.cancelarServico();
-     }
-     
-     public boolean concluirServico(Servico servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException{
-         gtServico.concluirServico(servico, dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
-         return true;
-     }
-     
-     public List<ServicoAgendado> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
+    }
+
+    public void alterarServico(Servico servico, Produtor produtor, Propriedade propriedade,
+            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) throws Exception {
+        try {
+            gtServico.alterarServico(servico, produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public void consultarServico() {
+        int i = gtServico.consultarServico();
+    }
+
+    public void cancelarServico() {
+        int i = gtServico.cancelarServico();
+    }
+
+    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException {
+        try {
+            gtServico.concluirServico(servico, dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public List<ServicoAgendado> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
         return gtServico.filtrarServico(produtor_id, propriedade_id, tipoServico_id);
-    }   
+    }
 }

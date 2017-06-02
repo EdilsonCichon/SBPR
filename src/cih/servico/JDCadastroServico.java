@@ -8,6 +8,7 @@ import cdp.Maquina;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cdp.Servico;
+import cdp.ServicoAgendado;
 import cdp.ServicoCancelado;
 import cdp.ServicoConcluido;
 import cdp.TipoServico;
@@ -20,7 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class JDCadastroServico extends javax.swing.JDialog {
-    
+
     private CIInterface ciInterface;
     private CIServico ciServico;
     private int CENARIO;
@@ -30,7 +31,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private Funcionario funcionarioSelecionado;
     private Maquina maquinaSelecionada;
     private Servico servico;
-   
+
     public JDCadastroServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO, Servico servico) {
         super(framePai, modal);
         this.ciInterface = ciInterface;
@@ -477,30 +478,30 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSelecionarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarProdutorActionPerformed
-        
+
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor((Frame) getOwner(), Cenario.SELECIONAR);
         produtorSelecionado = ciInterface.getCiProdutor().getProdutorSelecionado();
         jTextFieldNomeProdutor.setText(produtorSelecionado.getNome());
-        
-        if (produtorSelecionado.getPropriedades() != null){
+
+        if (produtorSelecionado.getPropriedades() != null) {
             jComboBoxPropriedades.setEnabled(true);
             produtorSelecionado.getPropriedades()
-            .forEach((propriedade) -> {
-                jComboBoxPropriedades.addItem(propriedade.toString());
-            });
+                    .forEach((propriedade) -> {
+                        jComboBoxPropriedades.addItem(propriedade.toString());
+                    });
             jComboBoxPropriedades.setSelectedIndex(1);
             jComboBoxPropriedadesItemStateChanged(null);
-        }else{
+        } else {
             jComboBoxPropriedades.setEnabled(false);
-            jComboBoxPropriedades.setSelectedIndex(0);  
-        }        
+            jComboBoxPropriedades.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_jButtonSelecionarProdutorActionPerformed
 
     private void jButtonSelecionarTipoSevicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoSevicoActionPerformed
         ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico((Frame) getOwner(), Cenario.SELECIONAR);
         tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
         jTextFieldTipoServico.setText(tipoServicoSelecionado.getNome());
-        jTextFieldValorHora.setText( String.valueOf(tipoServicoSelecionado.getValor_hr()) );
+        jTextFieldValorHora.setText(String.valueOf(tipoServicoSelecionado.getValor_hr()));
     }//GEN-LAST:event_jButtonSelecionarTipoSevicoActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
@@ -522,66 +523,60 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-       
+
         String dtPrevistaConclusao = jFormattedTextFieldDataPrevista.getText();
         String qtdHrsPrevista = jFormattedTextFieldQtHrsPrevista.getText().replace(':', '.');
-        
+
         switch (CENARIO) {
-            
+
             case Cenario.AGENDAR:
-                boolean agendado = ciServico.cadastrarServico(produtorSelecionado, propriedadeSelecionada, 
-                        tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
-                if (agendado) {
+                try {
+                    ciServico.cadastrarServico(produtorSelecionado, propriedadeSelecionada, tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
                     JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
-                    modoSomenteLeitura(true);
+                    modoSomenteLeituraAgendado(true);
                     jButtonCancelar.setText("Sair");
-                }else{
-                    JOptionPane.showMessageDialog(this, "Não foi possível agendar o serviço");
-                }
-                break;
-                
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao Agendar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                }break;
+
             case Cenario.ALTERAR:
-                boolean alterado = ciServico.alterarServico(servico, produtorSelecionado, propriedadeSelecionada, 
-                        tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
-                if(alterado){
-                    modoSomenteLeitura(true); 
+                try {
+                    ciServico.alterarServico(servico, produtorSelecionado, propriedadeSelecionada, tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
+                    modoSomenteLeituraAgendado(true);
                     jButtonCancelar.setText("Sair");
                     JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
-                }else{
-                     JOptionPane.showMessageDialog(this, "Não foi possível alterar o serviço");
-                }break;
-                
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao Alterar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                } break;
+
             case Cenario.CONSULTAR:
                 break;
-                
-            case Cenario.CANCELAR: 
+
+            case Cenario.CANCELAR:
                 break;
-                
+
             case Cenario.CONCLUIR:
+                
                 String dataConclusao = jFormattedTextFieldDataConclusao.getText();
                 String qtdHoras = jFormattedTextFieldQtHrsReais.getText();
                 String total = jTextFieldValorTotal.getText();
-                boolean concluido = false;
-                
+
                 try {
-                    concluido = ciInterface.getCiServico().concluirServico(servico, dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(JDCadastroServico.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if(concluido){
-                    modoSomenteLeitura(true); 
+                    ciInterface.getCiServico().concluirServico(((ServicoAgendado) servico), dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
+                    modoSomenteLeituraConcluido((ServicoConcluido) servico);
                     jButtonCancelar.setText("Sair");
                     JOptionPane.showMessageDialog(this, "Concluído com sucesso!");
-                }else{
-                    JOptionPane.showMessageDialog(this, "Não foi possível concluir o serviço");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao Concluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
                 }break;
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jComboBoxPropriedadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesItemStateChanged
         produtorSelecionado.getPropriedades().forEach((propriedade) -> {
-            if (jComboBoxPropriedades.getSelectedItem().toString() == propriedade.getNome_propriedade())
+            if (jComboBoxPropriedades.getSelectedItem().toString() == propriedade.getNome_propriedade()) {
                 propriedadeSelecionada = propriedade;
+            }
         });
     }//GEN-LAST:event_jComboBoxPropriedadesItemStateChanged
 
@@ -602,78 +597,102 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonMaquinaActionPerformed
 
     private void identificarCenario() {
-        
+
         switch (CENARIO) {
             case Cenario.AGENDAR:
                 redimensionarJanelaCenario();
                 break;
-                
+
             case Cenario.ALTERAR:
                 this.setTitle("Alterar Serviço");
                 setarCamposComInstancia(servico);
                 break;
-                
+
             case Cenario.CONSULTAR:
                 this.setTitle("Consultar Serviço");
-                modoSomenteLeitura(true);
                 jButtonCancelar.setText("Sair");
+                modoSomenteLeituraAgendado(true);
                 setarCamposComInstancia(servico);
+                identificarServicoFilho(servico);
                 redimensionarJanelaCenario();
                 break;
-                
+
             case Cenario.CANCELAR:
                 this.setTitle("Cancelar Serviço");
                 jPanelCancelar.setVisible(true);
-                modoSomenteLeitura(true);
+                modoSomenteLeituraAgendado(true);
                 jButtonConfirmar.setEnabled(true);
                 redimensionarJanelaCenario();
                 break;
-                
+
             case Cenario.CONCLUIR:
                 this.setTitle("Concluir Serviço");
                 jPanelConcluir.setVisible(true);
-                modoSomenteLeitura(true);
+                modoSomenteLeituraAgendado(true);
                 jButtonConfirmar.setEnabled(true);
                 redimensionarJanelaCenario();
                 break;
         }
     }
-    
+
     private void redimensionarJanelaCenario() {
-        
-        JPanel[] paineisCenario = new JPanel[] { jPanelAgendar, jPanelCancelar, jPanelConcluir };
+
+        JPanel[] paineisCenario = new JPanel[]{jPanelAgendar, jPanelCancelar, jPanelConcluir};
         int alturaPaineis = 0;
-        for (JPanel painel : paineisCenario)
+        for (JPanel painel : paineisCenario) {
             alturaPaineis += painel.getHeight();
+        }
         int alturaSemPaineis = getHeight() - alturaPaineis;
         setBounds(getX(), getY(), getWidth(), alturaSemPaineis);
-        for (JPanel paineil : paineisCenario)
-            if ( paineil.isEnabled() )
+        for (JPanel paineil : paineisCenario) {
+            if (paineil.isEnabled()) {
                 setBounds(getX(), getY(), getWidth(), alturaSemPaineis + paineil.getHeight());
+            }
+        }
     }
-    
-    public void setarCamposComInstancia(Servico servico){
-        
+
+    public void setarCamposComInstancia(Servico servico) {
+
         jTextFieldNomeProdutor.setText(servico.getProdutor().getNome());
         jComboBoxPropriedades.setSelectedItem(servico.getPropriedade());
         jTextFieldTipoServico.setText(servico.getTipoServico().getNome());
         jTextFieldValorHora.setText(String.valueOf(servico.getTipoServico().getValor_hr()));
         jFormattedTextFieldDataPrevista.setText(String.valueOf(servico.getData_prevista_conclusao()));
         jFormattedTextFieldQtHrsPrevista.setText(String.valueOf(servico.getQtd_hrs_prevista()));
-        
-        if(CENARIO == Cenario.CONSULTAR){
-            if(servico.getClass() == ServicoConcluido.class){
-                jPanelConcluir.setVisible(true);
-                //PREENCHER CAMPOS DA TELA COM ATRIBUTOS DE SERVICO
-            }else if(servico.getClass() == ServicoCancelado.class){
-                jPanelCancelar.setVisible(true);
-                //PREENCHER CAMPOS DA TELA COM ATRIBUTOS DE SERVICO
-            }
+    }
+
+    public void identificarServicoFilho(Servico servico) {
+        if (servico.getClass() == ServicoConcluido.class) {
+            modoSomenteLeituraConcluido((ServicoConcluido) servico);
+        } else if (servico.getClass() == ServicoCancelado.class) {
+            modoSomenteLeituraCancelado((ServicoCancelado) servico);
         }
     }
-    
-    public void modoSomenteLeitura(boolean condicao) {
-        
+
+    public void modoSomenteLeituraConcluido(ServicoConcluido servico) {
+        jPanelConcluir.setVisible(true);
+        jTextFieldValorTotal.setEnabled(false);
+        jFormattedTextFieldDataConclusao.setEnabled(false);
+        jFormattedTextFieldQtHrsReais.setEnabled(false);
+        jButtonFuncionario.setEnabled(false);
+        jButtonMaquina.setEnabled(false);
+        jTextFieldValorTotal.setText(String.valueOf(servico.getValor_total()));
+        jFormattedTextFieldDataConclusao.setText(String.valueOf(servico.getData_conclusao()));
+        jFormattedTextFieldQtHrsReais.setText(String.valueOf(servico.getQtd_hrs_real()));
+        jTextFieldExecutor.setText(servico.getFuncionario().getNome());
+        jTextFieldMaquina.setText(servico.getMaquina().getPlaca());
+    }
+
+    public void modoSomenteLeituraCancelado(ServicoCancelado servico) {
+        jPanelCancelar.setVisible(true);
+        jFormattedTextFieldDataCancelamento.setEnabled(false);
+        jTextFieldValorMulta.setEnabled(false);
+        jFormattedTextFieldDataCancelamento.setText(String.valueOf(servico.getData_cancelamento()));
+        jTextFieldValorMulta.setText(String.valueOf(servico.getValor_multa()));
+    }
+
+    public void modoSomenteLeituraAgendado(boolean condicao) {
+
         condicao = !condicao;
         jFormattedTextFieldDataPrevista.setEnabled(condicao);
         jFormattedTextFieldQtHrsPrevista.setEnabled(condicao);

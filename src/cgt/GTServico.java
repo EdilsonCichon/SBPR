@@ -10,7 +10,6 @@ import cdp.ServicoConcluido;
 import cdp.TipoServico;
 import cgd.GDServico;
 import java.sql.SQLException;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -60,7 +59,7 @@ public class GTServico {
         return 0;
     } 
     
-    public void concluirServico(Servico servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException{
+    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException{
         
         ServicoConcluido servicoConcluido = new ServicoConcluido();
         
@@ -76,6 +75,7 @@ public class GTServico {
         servicoConcluido.setTipoServico(servico.getTipoServico());
         servicoConcluido.setValor_total(Double.parseDouble(total));
         
+        gdServico.excluir(servico);
         gdServico.cadastrar(servicoConcluido);
     } 
     
