@@ -115,6 +115,14 @@ public abstract class Servico implements Serializable {
         this.tipoServico = tipoServico;
     }   
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return tipoServico.getNome();

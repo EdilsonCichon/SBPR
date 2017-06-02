@@ -1,6 +1,8 @@
 package cci;
 
 import cci.util.Cenario;
+import cdp.Funcionario;
+import cdp.Maquina;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cdp.Servico;
@@ -10,6 +12,7 @@ import cgt.GTServico;
 import cih.servico.JDCadastroServico;
 import cih.servico.JDPesquisaServico;
 import java.awt.Frame;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -44,25 +47,22 @@ public class CIServico {
         pesquisaServico.setVisible(true);
     }
     
-     public ServicoAgendado cadastrarServico(Produtor produtor, Propriedade propriedade, 
-             TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) {
+     public boolean cadastrarServico(Produtor produtor, Propriedade propriedade, 
+            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) {
          try {
-             JOptionPane.showMessageDialog(agendarServico, "Cadastrado com sucesso!");
-             return gtServico.cadastrarServico(produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
-         } catch (Exception e) {
-             JOptionPane.showMessageDialog(agendarServico, "Não foi possível agendar o serviço: "+e.getMessage());
-             return null;
+            gtServico.cadastrarServico(produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
+            return true;
+         } catch (Exception e) {  
+             return false;
          }
      }
      
      public boolean alterarServico(Servico servico, Produtor produtor, Propriedade propriedade, 
             TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista){
         try {
-            gtServico.alterarServico(servico, produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
-            JOptionPane.showMessageDialog(agendarServico, "Alterado com sucesso!");
+            gtServico.alterarServico(servico, produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);          
             return true;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(agendarServico, "Erro ao alterar " + ex.getMessage());
             return false;
         }
      }
@@ -75,8 +75,9 @@ public class CIServico {
          int i = gtServico.cancelarServico();
      }
      
-     public void concluirServico(){
-         int i = gtServico.concluirServico();
+     public boolean concluirServico(Servico servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException{
+         gtServico.concluirServico(servico, dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
+         return true;
      }
      
      public List<ServicoAgendado> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
