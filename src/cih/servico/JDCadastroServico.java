@@ -209,36 +209,15 @@ public class JDCadastroServico extends javax.swing.JDialog {
             jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAgendarLayout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelDataPrevista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabelDuracao))
-=======
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
->>>>>>> 4f7e35c8fef36efee5e08aa57f169e9384db1af4
-                    .addGroup(jPanelAgendarLayout.createSequentialGroup()
-                        .addComponent(jLabelTipoServico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-<<<<<<< HEAD
-                        .addComponent(jTextFieldTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSelecionarTipoSevico)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelAgendarLayout.createSequentialGroup()
-                        .addComponent(jFormattedTextFieldQtHrsPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-=======
                         .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelQtdPrevistaHrs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFormattedTextFieldQtHrsPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
->>>>>>> 4f7e35c8fef36efee5e08aa57f169e9384db1af4
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelTipoServico)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -570,6 +549,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 } break;
 
             case Cenario.CONSULTAR:
+                this.dispose();
                 break;
 
             case Cenario.CANCELAR:
@@ -652,6 +632,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 jButtonConfirmar.setEnabled(true);
                 redimensionarJanelaCenario();
                 break;
+
             case Cenario.CONCLUIR:
                 this.setTitle("Concluir Serviço");
                 jPanelConcluir.setVisible(true);
@@ -682,8 +663,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jTextFieldValorHora.setText(String.valueOf(servico.getTipoServico().getValor_hr()));
         jFormattedTextFieldDataPrevista.setText(String.valueOf(servico.getData_prevista_conclusao()));
         jFormattedTextFieldQtHrsPrevista.setText(String.valueOf(servico.getQtd_hrs_prevista()));
-        
-        
     }
 
     public void identificarServicoFilho(Servico servico) {
