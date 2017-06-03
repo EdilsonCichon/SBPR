@@ -49,4 +49,8 @@ public class ServicoCancelado extends Servico {
     public void setValor_multa(double valor_multa) {
         this.valor_multa = valor_multa;
     }
+    
+     public Object[] toArray() {
+        return new Object[] { this, getData_prevista_conclusao(), getQtd_hrs_prevista(), "CANCELADO" };
+    } 
 }

@@ -68,7 +68,11 @@ public class GTServico {
         return 0;
     } 
     
-    public List<ServicoAgendado> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
-        return gdServico.filtrar(produtor_id, propriedade_id, tipoServico_id);
+    public List<Servico> filtrarServicoTipo(int tipoServico_id) {
+        return gdServico.filtrarTipo(tipoServico_id);
+    }
+    
+    public List<Servico> filtrarServico(int produtor_id, int propriedade_id) {
+        return gdServico.filtrar(produtor_id, propriedade_id);
     }
 }

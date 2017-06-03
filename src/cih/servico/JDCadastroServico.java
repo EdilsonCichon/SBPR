@@ -191,17 +191,17 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
-                        .addComponent(jLabelTipoServico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelDataPrevista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelDuracao)
-                    .addComponent(jButtonSelecionarTipoSevico))
+                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabelDuracao))
+                    .addGroup(jPanelAgendarLayout.createSequentialGroup()
+                        .addComponent(jLabelTipoServico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSelecionarTipoSevico)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
@@ -511,6 +511,10 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 jPanelCancelar.setVisible(true);
                 redimensionarJanelaCenario();
                 break;
+            case Cenario.CONSULTAR:
+                
+                break;
+                
             case Cenario.CONCLUIR:
                 setTitle("Concluir Serviço");
                 jPanelConcluir.setVisible(true);
@@ -538,6 +542,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jTextFieldValorHora.setText(String.valueOf(servico.getTipoServico().getValor_hr()));
         jFormattedTextFieldDataPrevista.setText(String.valueOf(servico.getData_prevista_conclusao()));
         jFormattedTextFieldQtHrsPrevista.setText(String.valueOf(servico.getQtd_hrs_prevista()));
+        
+        
     }
     
     public void modoSomenteLeitura(boolean condicao) {

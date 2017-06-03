@@ -94,4 +94,8 @@ public class ServicoConcluido extends Servico {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
+    
+     public Object[] toArray() {
+        return new Object[] { this, getData_prevista_conclusao(), getQtd_hrs_prevista(), "CONCLUIDO" };
+    } 
 }

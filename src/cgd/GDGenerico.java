@@ -50,6 +50,7 @@ public abstract class GDGenerico {
     public List consultar(Class classe) {
         
         List lista;
+        sessao = criarSessao();
         sessao.beginTransaction();
         
         Criteria cons = sessao.createCriteria(classe);

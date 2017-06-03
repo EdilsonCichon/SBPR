@@ -79,7 +79,10 @@ public class CIServico {
          int i = gtServico.concluirServico();
      }
      
-     public List<ServicoAgendado> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
-        return gtServico.filtrarServico(produtor_id, propriedade_id, tipoServico_id);
+     public List<Servico> filtrarServicoTipo(int tipoServico_id) {
+        return gtServico.filtrarServicoTipo(tipoServico_id);
+     }   
+     public List<Servico> filtrarServico(int produtor_id, int propriedade_id) {
+        return gtServico.filtrarServico(produtor_id, propriedade_id);
     }   
 }

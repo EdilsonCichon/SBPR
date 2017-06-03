@@ -119,4 +119,8 @@ public abstract class Servico implements Serializable {
     public String toString() {
         return tipoServico.getNome();
     }
+    
+    public Object[] toArray() {
+        return new Object[] { this, getData_prevista_conclusao(), getQtd_hrs_prevista()};
+    }
 }
