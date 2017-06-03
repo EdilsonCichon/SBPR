@@ -20,7 +20,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private Produtor produtorSelecionado;
     private Propriedade propriedadeSelecionada;
     private TipoServico tipoServicoSelecionado;
-    private ServicoAgendado servicoAgendado;
    
     public JDCadastroServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(framePai, modal);
@@ -50,7 +49,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jLabelTipoServico = new javax.swing.JLabel();
         jLabelDataPrevista = new javax.swing.JLabel();
         jFormattedTextFieldDataPrevista = new javax.swing.JFormattedTextField();
-        jLabelDuracao = new javax.swing.JLabel();
+        jLabelQtdPrevistaHrs = new javax.swing.JLabel();
         jFormattedTextFieldQtHrsPrevista = new javax.swing.JFormattedTextField();
         jLabelValorHora = new javax.swing.JLabel();
         jTextFieldValorHora = new javax.swing.JTextField();
@@ -97,10 +96,10 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabelNomeProdutor)
                 .addGap(18, 18, 18)
-                .addComponent(jTextFieldNomeProdutor)
+                .addComponent(jTextFieldNomeProdutor, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSelecionarProdutor)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPesquisarProdutorLayout.setVerticalGroup(
             jPanelPesquisarProdutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,6 +123,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 jComboBoxPropriedadesItemStateChanged(evt);
             }
         });
+        jComboBoxPropriedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPropriedadesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelSelecaoPropriedadeLayout = new javax.swing.GroupLayout(jPanelSelecaoPropriedade);
         jPanelSelecaoPropriedade.setLayout(jPanelSelecaoPropriedadeLayout);
@@ -133,7 +137,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabelPropriedade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxPropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxPropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelSelecaoPropriedadeLayout.setVerticalGroup(
@@ -157,8 +161,13 @@ public class JDCadastroServico extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextFieldDataPrevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldDataPrevistaActionPerformed(evt);
+            }
+        });
 
-        jLabelDuracao.setText("Duração:");
+        jLabelQtdPrevistaHrs.setText("Quantidade prevista de horas:");
 
         try {
             jFormattedTextFieldQtHrsPrevista.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -186,30 +195,26 @@ public class JDCadastroServico extends javax.swing.JDialog {
             jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAgendarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelAgendarLayout.createSequentialGroup()
-                        .addComponent(jLabelTipoServico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelDataPrevista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelDuracao)
-                    .addComponent(jButtonSelecionarTipoSevico))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelQtdPrevistaHrs)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldQtHrsPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
-                        .addComponent(jFormattedTextFieldQtHrsPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelAgendarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelTipoServico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSelecionarTipoSevico)
+                        .addGap(33, 33, 33)
                         .addComponent(jLabelValorHora)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelAgendarLayout.setVerticalGroup(
             jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +230,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDataPrevista)
                     .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDuracao)
+                    .addComponent(jLabelQtdPrevistaHrs)
                     .addComponent(jFormattedTextFieldQtHrsPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -359,24 +364,24 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jPanelRodape.setLayout(jPanelRodapeLayout);
         jPanelRodapeLayout.setHorizontalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelRodapeLayout.createSequentialGroup()
+                .addGap(69, 69, 69)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelRodapeLayout.setVerticalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRodapeLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -414,6 +419,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private void jButtonSelecionarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarProdutorActionPerformed
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor((Frame) getOwner(), Cenario.SELECIONAR);
         produtorSelecionado = ciInterface.getCiProdutor().getProdutorSelecionado();
+        jComboBoxPropriedades.removeAllItems();
         jTextFieldNomeProdutor.setText(produtorSelecionado.getNome());
         if (produtorSelecionado.getPropriedades() != null)
             produtorSelecionado.getPropriedades().forEach((propriedade) -> {
@@ -451,8 +457,9 @@ public class JDCadastroServico extends javax.swing.JDialog {
         String qtdHrsPrevista = jFormattedTextFieldQtHrsPrevista.getText().replace(':', '.');
         boolean cenarioExecutado = false;
         
-        if ( !validacoes(dtPrevistaConclusao) )
+        if ( !validacoes() )
             return;
+        
         switch (CENARIO) {
             case Cenario.AGENDAR:
                 cenarioExecutado = ciInterface.getCiServico().cadastrarServico(produtorSelecionado, propriedadeSelecionada, 
@@ -472,11 +479,20 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jComboBoxPropriedadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesItemStateChanged
-        produtorSelecionado.getPropriedades().forEach((propriedade) -> {
-            if (jComboBoxPropriedades.getSelectedItem().toString() == propriedade.getNome_propriedade())
-                propriedadeSelecionada = propriedade;
-        });
+        if ( jComboBoxPropriedades.getItemCount() > 0 )
+            produtorSelecionado.getPropriedades().forEach((propriedade) -> {
+                if (jComboBoxPropriedades.getSelectedItem().toString() == propriedade.getNome_propriedade())
+                    propriedadeSelecionada = propriedade;
+            });
     }//GEN-LAST:event_jComboBoxPropriedadesItemStateChanged
+
+    private void jComboBoxPropriedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPropriedadesActionPerformed
+
+    private void jFormattedTextFieldDataPrevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataPrevistaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldDataPrevistaActionPerformed
 
     private void identificarCenario() {
         switch (CENARIO) {
@@ -520,20 +536,41 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jButtonLimpar.setEnabled(condicao);
     }
     
-    private boolean validacoes(String dtPrevisaoConclusao) {
+    private boolean validacoes() {
+        if ( produtorSelecionado == null ) {
+            JOptionPane.showMessageDialog(this, "Favor informar um Produtor!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if ( propriedadeSelecionada == null ) {
+            JOptionPane.showMessageDialog(this, "Favor informar uma Propriedade!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if ( tipoServicoSelecionado == null ) {
+            JOptionPane.showMessageDialog(this, "Favor informar um Tipo de Serviço!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         // Validação da data prevista para conclusao do serviço
-        Date dtPrevisaoConclusaoDate = new Date(dtPrevisaoConclusao);
+        String dtPrevConclusao = jFormattedTextFieldDataPrevista.getText();
+        String qtdPrevHoras = jFormattedTextFieldQtHrsPrevista.getText();
+        if ( dtPrevConclusao.replace("/", "").trim().equals("") ) {
+            JOptionPane.showMessageDialog(this, "Favor informar a data prevista de conclusão!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        Date dtPrevisaoConclusaoDate = new Date(dtPrevConclusao);
         Date dtAtual = Calendar.getInstance().getTime();
-        
         Calendar dtPrevisaoConclusaoCalendar = Calendar.getInstance();
         dtPrevisaoConclusaoCalendar.setTime(dtPrevisaoConclusaoDate);
         Calendar dtAtualCalendar = Calendar.getInstance();
         dtAtualCalendar.setTime(dtAtual);
-        
         if ( dtPrevisaoConclusaoCalendar.getTimeInMillis() < dtAtualCalendar.getTimeInMillis() ) {
             JOptionPane.showMessageDialog(this, "Data Prevista de conclusão menor que a data atual!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if ( qtdPrevHoras.replace(":", "").trim().equals("") ) {
+            JOptionPane.showMessageDialog(this, "Favor informar a tempo previsto de duração!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        
         return true;
     }
 
@@ -553,9 +590,9 @@ public class JDCadastroServico extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelDataCancelamento;
     private javax.swing.JLabel jLabelDataConclusao;
     private javax.swing.JLabel jLabelDataPrevista;
-    private javax.swing.JLabel jLabelDuracao;
     private javax.swing.JLabel jLabelNomeProdutor;
     private javax.swing.JLabel jLabelPropriedade;
+    private javax.swing.JLabel jLabelQtdPrevistaHrs;
     private javax.swing.JLabel jLabelTipoServico;
     private javax.swing.JLabel jLabelValorHora;
     private javax.swing.JLabel jLabelValorMulta;
