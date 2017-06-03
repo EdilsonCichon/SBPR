@@ -22,6 +22,7 @@ public class CIFuncionario {
     private GTFuncionario gtFuncionario;
     private JDCadastroFuncionario cadastroFuncionario;
     private JDPesquisaFuncionario pesquisaFuncionario;
+    private Funcionario funcionarioSelecionado;
 
     public CIFuncionario(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -105,5 +106,13 @@ public class CIFuncionario {
             JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
             return false;
         }
+    }
+
+    public Funcionario getFuncionarioSelecionado() {
+        return funcionarioSelecionado;
+    }
+
+    public void setFuncionarioSelecionado(Funcionario funcionarioSelecionado) {
+        this.funcionarioSelecionado = funcionarioSelecionado;
     }
 }

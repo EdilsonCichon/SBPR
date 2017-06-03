@@ -3,6 +3,7 @@ package cih.funcionario;
 import javax.swing.ImageIcon;
 
 import cci.CIInterface;
+import cci.util.Cenario;
 import cci.util.JTableUtil;
 import cdp.Funcionario;
 import java.awt.Frame;
@@ -180,8 +181,13 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
         try {
-            Funcionario funcionarioAtual = (Funcionario) JTableUtil.getDadosLinhaSelecionada(jTableFuncionario);
-            ciInterface.getCiFuncionario().instanciarTelaCadastroFuncionario(funcionarioAtual, pai, CENARIO);
+            Funcionario funcionarioSelecionado = (Funcionario) JTableUtil.getDadosLinhaSelecionada(jTableFuncionario);
+            
+            if(CENARIO == Cenario.SELECIONAR){
+                ciInterface.getCiFuncionario().setFuncionarioSelecionado(funcionarioSelecionado);
+                dispose();
+            }else
+                ciInterface.getCiFuncionario().instanciarTelaCadastroFuncionario(funcionarioSelecionado, pai, CENARIO);
                       
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione um funcionário", "ERRO", JOptionPane.ERROR_MESSAGE);

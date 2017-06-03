@@ -2,6 +2,7 @@ package cih.maquina;
 
 import javax.swing.ImageIcon;
 import cci.CIInterface;
+import cci.util.Cenario;
 import cci.util.JTableUtil;
 import cdp.Maquina;
 import java.awt.Frame;
@@ -163,8 +164,13 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
         try {
-            Maquina maquina = (Maquina) JTableUtil.getDadosLinhaSelecionada(jTableMaquina);
-            ciInterface.getCiMaquina().instanciarTelaCadastroMaquina(maquina, pai, CENARIO);
+            Maquina maquinaSelecionada = (Maquina) JTableUtil.getDadosLinhaSelecionada(jTableMaquina);
+            
+            if(CENARIO == Cenario.SELECIONAR){
+                ciInterface.getCiMaquina().setMaquinaSelecionada(maquinaSelecionada);
+                this.dispose();
+            }else
+                ciInterface.getCiMaquina().instanciarTelaCadastroMaquina(maquinaSelecionada, pai, CENARIO);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Selecione uma máquina", "ERRO", JOptionPane.ERROR_MESSAGE);
         }         
