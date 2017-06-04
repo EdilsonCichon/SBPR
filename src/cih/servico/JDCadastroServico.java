@@ -652,11 +652,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
         setBounds(getX(), getY(), getWidth(), alturaSemPaineis);
 
         for (JPanel paineil : paineisCenario)
-            if ( paineil.isEnabled() )
+            if ( paineil.isVisible() )
                 setBounds(getX(), getY(), getWidth(), alturaSemPaineis += paineil.getHeight());
     }
 
-    public void setarCamposComInstancia(Servico servico) {
+    private void setarCamposComInstancia(Servico servico) {
         jTextFieldNomeProdutor.setText(servico.getProdutor().getNome());
         jComboBoxPropriedades.setSelectedItem(servico.getPropriedade());
         jTextFieldTipoServico.setText(servico.getTipoServico().getNome());
@@ -665,7 +665,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jFormattedTextFieldQtHrsPrevista.setText(String.valueOf(servico.getQtd_hrs_prevista()));
     }
 
-    public void identificarServicoFilho(Servico servico) {
+    private void identificarServicoFilho(Servico servico) {
         if (servico.getClass() == ServicoConcluido.class) {
             modoSomenteLeituraConcluido((ServicoConcluido) servico);
         } else if (servico.getClass() == ServicoCancelado.class) {
@@ -673,7 +673,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         }
     }
 
-    public void modoSomenteLeituraConcluido(ServicoConcluido servico) {
+    private void modoSomenteLeituraConcluido(ServicoConcluido servico) {
         jPanelConcluir.setVisible(true);
         jTextFieldValorTotal.setEnabled(false);
         jFormattedTextFieldDataConclusao.setEnabled(false);
@@ -687,7 +687,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jTextFieldMaquina.setText(servico.getMaquina().getPlaca());
     }
 
-    public void modoSomenteLeituraCancelado(ServicoCancelado servico) {
+    private void modoSomenteLeituraCancelado(ServicoCancelado servico) {
         jPanelCancelar.setVisible(true);
         jFormattedTextFieldDataCancelamento.setEnabled(false);
         jTextFieldValorMulta.setEnabled(false);
@@ -695,7 +695,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jTextFieldValorMulta.setText(String.valueOf(servico.getValor_multa()));
     }
 
-    public void modoSomenteLeituraAgendado(boolean condicao) {
+    private void modoSomenteLeituraAgendado(boolean condicao) {
         condicao = !condicao;
         jFormattedTextFieldDataPrevista.setEnabled(condicao);
         jFormattedTextFieldQtHrsPrevista.setEnabled(condicao);
