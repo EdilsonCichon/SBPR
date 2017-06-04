@@ -11,6 +11,7 @@ import cdp.ServicoAgendado;
 import cdp.ServicoCancelado;
 import cdp.ServicoConcluido;
 import cdp.TipoServico;
+import cih.exception.ValidacaoException;
 import java.util.Date;
 import java.awt.Frame;
 import java.util.Calendar;
@@ -152,7 +153,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addComponent(jLabelPropriedade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxPropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelSelecaoPropriedadeLayout.setVerticalGroup(
             jPanelSelecaoPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +214,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelDataPrevista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelQtdPrevistaHrs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,7 +319,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
                     .addGroup(jPanelConcluirLayout.createSequentialGroup()
                         .addComponent(jLabelDataConclusao)
                         .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextFieldDataConclusao, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldDataConclusao, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addGap(2, 2, 2)
@@ -370,8 +371,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
             .addGroup(jPanelCancelarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelDataCancelamento)
-                .addGap(18, 18, 18)
-                .addComponent(jFormattedTextFieldDataCancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFormattedTextFieldDataCancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelValorMulta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -486,11 +487,9 @@ public class JDCadastroServico extends javax.swing.JDialog {
                     .forEach((propriedade) -> {
                         jComboBoxPropriedades.addItem(propriedade.toString());
                     });
-            jComboBoxPropriedades.setSelectedIndex(1);
             jComboBoxPropriedadesItemStateChanged(null);
         } else {
             jComboBoxPropriedades.setEnabled(false);
-            jComboBoxPropriedades.setSelectedIndex(0);
         }
     }//GEN-LAST:event_jButtonSelecionarProdutorActionPerformed
 
@@ -523,29 +522,32 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         String dtPrevistaConclusao = jFormattedTextFieldDataPrevista.getText();
         String qtdHrsPrevista = jFormattedTextFieldQtHrsPrevista.getText().replace(':', '.');
-        
-        if ( !validacoes() )
-            return;
-		
+        	
         switch (CENARIO) {
             case Cenario.AGENDAR:
                 try {
+                    validacoesAgendar();
                     ciInterface.getCiServico().cadastrarServico(produtorSelecionado, propriedadeSelecionada, tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
                     JOptionPane.showMessageDialog(this, "Serviço agendado com sucesso!");
                     modoSomenteLeituraAgendado(true);
                     jButtonCancelar.setText("Sair");
+                } catch (ValidacaoException ve) {
+                    JOptionPane.showMessageDialog(this, ve.getMessage(), "Validação dos dados", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erro ao Agendar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-                }break;
+                    JOptionPane.showMessageDialog(this, "Erro ao Agendar Serviço: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                } break;
 
             case Cenario.ALTERAR:
                 try {
+                    validacoesAgendar();
                     ciInterface.getCiServico().alterarServico(servico, produtorSelecionado, propriedadeSelecionada, tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
                     modoSomenteLeituraAgendado(true);
                     jButtonCancelar.setText("Sair");
                     JOptionPane.showMessageDialog(this, "Serviço alterado com sucesso!");
+                } catch (ValidacaoException ve) {
+                    JOptionPane.showMessageDialog(this, ve.getMessage(), "Validação dos dados", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erro ao Alterar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Erro ao Alterar Serviço: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
                 } break;
 
             case Cenario.CONSULTAR:
@@ -553,7 +555,21 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 break;
 
             case Cenario.CANCELAR:
-                break;
+                
+                String dataCancelamento = jFormattedTextFieldDataCancelamento.getText();
+                String valorMulta = jTextFieldValorTotal.getText();
+
+                try {
+                    validacoesCancelar();
+                    ciInterface.getCiServico().cancelarServico(((ServicoAgendado) servico), dataCancelamento, valorMulta);
+                    modoSomenteLeituraConcluido((ServicoConcluido) servico);
+                    jButtonCancelar.setText("Sair");
+                    JOptionPane.showMessageDialog(this, "Serviço cancelado com sucesso!");
+                } catch (ValidacaoException ve) {
+                    JOptionPane.showMessageDialog(this, ve.getMessage(), "Validação dos dados", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao Cancelar Serviço: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                } break;
 
             case Cenario.CONCLUIR:
                 
@@ -562,12 +578,15 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 String total = jTextFieldValorTotal.getText();
 
                 try {
+                    validacoesConcluir();
                     ciInterface.getCiServico().concluirServico(((ServicoAgendado) servico), dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
                     modoSomenteLeituraConcluido((ServicoConcluido) servico);
                     jButtonCancelar.setText("Sair");
                     JOptionPane.showMessageDialog(this, "Serviço concluído com sucesso!");
+                } catch (ValidacaoException ve) {
+                    JOptionPane.showMessageDialog(this, ve.getMessage(), "Validação dos dados", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erro ao Concluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Erro ao Concluir Serviço: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
                 }break;
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
@@ -706,42 +725,47 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jButtonLimpar.setEnabled(condicao);
     }
     
-    private boolean validacoes() {
-        if ( produtorSelecionado == null ) {
-            JOptionPane.showMessageDialog(this, "Favor informar um Produtor!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        if ( propriedadeSelecionada == null ) {
-            JOptionPane.showMessageDialog(this, "Favor informar uma Propriedade!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        if ( tipoServicoSelecionado == null ) {
-            JOptionPane.showMessageDialog(this, "Favor informar um Tipo de Serviço!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        // Validação da data prevista para conclusao do serviço
+    private void validacoesAgendar() throws ValidacaoException {
         String dtPrevConclusao = jFormattedTextFieldDataPrevista.getText();
-        String qtdPrevHoras = jFormattedTextFieldQtHrsPrevista.getText();
-        if ( dtPrevConclusao.replace("/", "").trim().equals("") ) {
-            JOptionPane.showMessageDialog(this, "Favor informar a data prevista de conclusão!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        Date dtPrevisaoConclusaoDate = new Date(dtPrevConclusao);
-        Date dtAtual = Calendar.getInstance().getTime();
-        Calendar dtPrevisaoConclusaoCalendar = Calendar.getInstance();
-        dtPrevisaoConclusaoCalendar.setTime(dtPrevisaoConclusaoDate);
-        Calendar dtAtualCalendar = Calendar.getInstance();
-        dtAtualCalendar.setTime(dtAtual);
-        if ( dtPrevisaoConclusaoCalendar.getTimeInMillis() < dtAtualCalendar.getTimeInMillis() ) {
-            JOptionPane.showMessageDialog(this, "Data Prevista de conclusão menor que a data atual!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        if ( qtdPrevHoras.replace(":", "").trim().equals("") ) {
-            JOptionPane.showMessageDialog(this, "Favor informar a tempo previsto de duração!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        
-        return true;
+        String qtdPrevHoras = jFormattedTextFieldQtHrsPrevista.getText().replace(":", "").trim();
+        if ( produtorSelecionado == null )
+            throw new ValidacaoException("Favor informar um Produtor!");
+        if ( propriedadeSelecionada == null )
+            throw new ValidacaoException("Favor informar uma Propriedade!");
+        if ( tipoServicoSelecionado == null )
+            throw new ValidacaoException("Favor informar um Tipo de Serviço!");
+        if ( dtPrevConclusao.replace("/", "").trim().equals("") )
+            throw new ValidacaoException("Favor informar a data prevista de conclusão!");
+        Date dataPrevConclusaoDate = new Date(dtPrevConclusao);
+        Date dataHoje = Calendar.getInstance().getTime();
+        if ( !dataPrevConclusaoDate.after(dataHoje) )
+            throw new ValidacaoException("Data Prevista de conclusão menor que a data atual!");
+        if ( qtdPrevHoras.equals("") )
+            throw new ValidacaoException("Favor informar a tempo previsto de duração!");
+    }
+    
+    private void validacoesCancelar() throws ValidacaoException {
+        if ( jFormattedTextFieldDataCancelamento.getText().replace("/", "").trim().equals("") )
+            throw new ValidacaoException("Favor informar a data de cancelamento!");
+        if ( jTextFieldValorMulta.getText().equals("") )
+            throw new ValidacaoException("Favor informar o valor da multa!");
+        Date dataCancelamento = new Date(jFormattedTextFieldDataCancelamento.getText());
+        if ( !dataCancelamento.after(servico.getData_agendamento()) )
+            throw new ValidacaoException("Data de cancelamento não pode ser menor que a data do agendamento!");
+    }
+    
+    private void validacoesConcluir() throws ValidacaoException {
+        if ( jFormattedTextFieldDataConclusao.getText().replace("/", "").trim().equals("") )
+            throw new ValidacaoException("Favor informar a data de conclusão!");
+        if ( jFormattedTextFieldQtHrsReais.getText().replace(":", "").trim().equals("") )
+            throw new ValidacaoException("Favor informar a quantidade de horas gastas!");
+        Date dataConclusao = new Date(jFormattedTextFieldDataConclusao.getText());
+        if ( !dataConclusao.after(servico.getData_agendamento()) )
+            throw new ValidacaoException("Data de conclusão não pode ser menor que a data do agendamento!");
+        if ( funcionarioSelecionado == null )
+            throw new ValidacaoException("Favor informar o funcionário que executou o serviço!");
+        if ( maquinaSelecionada == null )
+            throw new ValidacaoException("Favor informar a máquina que executou o serviço!");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
