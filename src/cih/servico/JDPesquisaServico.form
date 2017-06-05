@@ -61,9 +61,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelFiltrarPor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jTextFieldFiltro" max="32767" attributes="0"/>
+                  <Component id="jTextFieldNomeProdutor" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButtonFiltrar" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonFiltrarProdutor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jCheckBoxFiltroProdutor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -77,9 +77,9 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jCheckBoxFiltroProdutor" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldNomeProdutor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelFiltrarPor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonFiltrarProdutor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -88,7 +88,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextFieldFiltro">
+        <Component class="javax.swing.JTextField" name="jTextFieldNomeProdutor">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -98,15 +98,18 @@
             <Property name="text" type="java.lang.String" value="Produtor:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonFiltrar">
+        <Component class="javax.swing.JButton" name="jButtonFiltrarProdutor">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFiltrarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFiltrarProdutorActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBoxFiltroProdutor">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxFiltroProdutorActionPerformed"/>
           </Events>
@@ -175,6 +178,9 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBoxFiltroPropriedade">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxFiltroPropriedadeActionPerformed"/>
           </Events>
@@ -278,6 +284,8 @@
                 <StringItem index="3" value="CONCLU&#xcd;DO"/>
               </StringArray>
             </Property>
+            <Property name="selectedIndex" type="int" value="1"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxSituacaoItemStateChanged"/>
@@ -299,6 +307,7 @@
         <Component class="javax.swing.JButton" name="jButtonFiltrarTipoServico">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFiltrarTipoServicoActionPerformed"/>

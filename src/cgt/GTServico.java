@@ -79,14 +79,7 @@ public class GTServico {
         gdServico.cadastrar(servicoConcluido);
     } 
     
-    public List<Servico> filtrarServicoTipo(int tipoServico_id) {
-        return gdServico.filtrarTipo(tipoServico_id);
-    }
-    
-    public List<Servico> filtrarServico(int produtor_id, int propriedade_id) {
-        return gdServico.filtrar(produtor_id, propriedade_id);
-    }
-    public List<Servico> filtrarServico(int produtor_id, int propriedade_id, int tipoServico_id) {
-        return gdServico.filtrar(produtor_id, propriedade_id);
+    public List filtrarServico(String coluna, int id, Class classe) {
+        return gdServico.filtrar(coluna, id, classe);
     }
 }
