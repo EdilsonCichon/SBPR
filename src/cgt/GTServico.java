@@ -6,6 +6,7 @@ import cdp.Produtor;
 import cdp.Propriedade;
 import cdp.Servico;
 import cdp.ServicoAgendado;
+import cdp.ServicoCancelado;
 import cdp.ServicoConcluido;
 import cdp.TipoServico;
 import cgd.GDServico;
@@ -48,15 +49,22 @@ public class GTServico {
         
         gdServico.alterar(servico);
     }
-    
-    public int consultarServico(){
-        //gdServico.consultar();
-        return 0;
-    }
-    
-    public int cancelarServico(){
-        //gdServico.cancelar();
-        return 0;
+
+    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException{
+        
+        ServicoCancelado servicoCancelado = new ServicoCancelado();
+        servicoCancelado.setId(servico.getId());
+        servicoCancelado.setProdutor(servico.getProdutor());
+        servicoCancelado.setPropriedade(servicoCancelado.getPropriedade());
+        servicoCancelado.setData_agendamento(servico.getData_agendamento());
+        servicoCancelado.setData_prevista_conclusao(servico.getData_prevista_conclusao());
+        servicoCancelado.setQtd_hrs_prevista(servico.getQtd_hrs_prevista());
+        servicoCancelado.setTipoServico(servico.getTipoServico());
+        servicoCancelado.setData_cancelamento(new Date(dataCancelamento));
+        servicoCancelado.setValor_multa(Double.parseDouble(valorMulta));
+        
+        gdServico.excluir(servico);
+        gdServico.cadastrar(servicoCancelado);
     } 
     
     public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException{
@@ -81,5 +89,5 @@ public class GTServico {
     
     public List filtrarServico(String coluna, int id, Class classe) {
         return gdServico.filtrar(coluna, id, classe);
-    }
+    }    
 }

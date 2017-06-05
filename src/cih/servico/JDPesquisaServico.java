@@ -8,6 +8,8 @@ import cci.util.JTableUtil;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cdp.Servico;
+import cdp.ServicoAgendado;
+import cdp.ServicoConcluido;
 import cdp.TipoServico;
 import java.awt.Frame;
 import java.util.List;
@@ -173,8 +175,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
 
         jLabelSituacaoServico.setText("Situação:");
 
-        jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "AGENDADO", "CANCELADO", "CONCLUÍDO" }));
-        jComboBoxSituacao.setSelectedIndex(1);
+        jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "AGENDADO", "CONCLUÍDO", "CANCELADO" }));
         jComboBoxSituacao.setEnabled(false);
         jComboBoxSituacao.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -308,17 +309,20 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         produtor = ciInterface.getCiProdutor().getProdutorSelecionado();
         jTextFieldNomeProdutor.setText(produtor.getNome());
         
+        jComboBoxPropriedades.removeAllItems();
+        
         if (produtor.getPropriedades() != null) {
+            
             produtor.getPropriedades().forEach((propriedade) -> {
                 jComboBoxPropriedades.addItem(propriedade.toString());
             });
+        }else{
+            JOptionPane.showMessageDialog(this, "PRODUTOR SEM PROPRIEDADES");
         }
     }//GEN-LAST:event_jButtonFiltrarProdutorActionPerformed
 
     private void jComboBoxPropriedadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesItemStateChanged
-       
-        jTableServico.removeAll();
-        
+
         produtor.getPropriedades().forEach((propriedade) -> {
             if (jComboBoxPropriedades.getSelectedItem().toString() == propriedade.getNome_propriedade())
                 propriedadeSelecionada = propriedade;
@@ -327,29 +331,8 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         int id = propriedadeSelecionada.getId();
         String coluna = "propriedade_id";
         
-        listaServicos = ciInterface.getCiServico().filtrarServico(coluna, id, Servico.class);
-       
-        if(CENARIO == Cenario.CONSULTAR){
-
-            if(listaServicos != null){
-                listaServicos.forEach((servico) -> {
-                JTableUtil.addLinha(jTableServico, servico.toArray() );
-                });
-            }else{
-                JOptionPane.showMessageDialog(this, "Não existe serviço para esta propriedade.");
-            }
-            
-        }else{
-            
-            if(listaServicos != null){
-                listaServicos.forEach((servicoAgendado) -> {
-                JTableUtil.addLinha(jTableServico, servicoAgendado.toArray() );
-                });
-                
-            }else{
-                JOptionPane.showMessageDialog(this, "Não existe serviço agendados para esta propriedade.");
-            }
-        }
+        listaServicos = ciInterface.getCiServico().filtrarServico(coluna, id, Servico.class); 
+        jComboBoxSituacaoItemStateChanged(null);
     }//GEN-LAST:event_jComboBoxPropriedadesItemStateChanged
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -384,45 +367,46 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jCheckBoxFiltroProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFiltroProdutorActionPerformed
+        
         if(jCheckBoxFiltroProdutor.getSelectedObjects() != null){
             jCheckBoxFiltroPropriedade.setSelected(true);
             jCheckBoxFiltroServico.setSelected(false);
-            trataClickCheck(true);
+            tratarClickCheck(true);
         }else{
             jCheckBoxFiltroPropriedade.setSelected(false);
             jCheckBoxFiltroServico.setSelected(true);
-            trataClickCheck(false);
+            tratarClickCheck(false);
         }
     }//GEN-LAST:event_jCheckBoxFiltroProdutorActionPerformed
 
     private void jCheckBoxFiltroPropriedadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFiltroPropriedadeActionPerformed
+        
         if(jCheckBoxFiltroPropriedade.getSelectedObjects() != null){
             jCheckBoxFiltroProdutor.setSelected(true);
             jCheckBoxFiltroServico.setSelected(false);
-            trataClickCheck(true);
+            tratarClickCheck(true);
         }else{
             jCheckBoxFiltroProdutor.setSelected(false);
             jCheckBoxFiltroServico.setSelected(true);
-            trataClickCheck(false);
+            tratarClickCheck(false);
         }
     }//GEN-LAST:event_jCheckBoxFiltroPropriedadeActionPerformed
 
     private void jCheckBoxFiltroServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFiltroServicoActionPerformed
+        
         if(jCheckBoxFiltroServico.getSelectedObjects() != null){
             jCheckBoxFiltroProdutor.setSelected(false);
             jCheckBoxFiltroPropriedade.setSelected(false);
-            trataClickCheck(false);
+            tratarClickCheck(false);
         }else{
             jCheckBoxFiltroProdutor.setSelected(true);
             jCheckBoxFiltroPropriedade.setSelected(true);
-            trataClickCheck(true);
+            tratarClickCheck(true);
         }
     }//GEN-LAST:event_jCheckBoxFiltroServicoActionPerformed
 
     private void jButtonFiltrarTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoActionPerformed
         
-        jTableServico.removeAll();
-
         ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico(pai, Cenario.SELECIONAR);
         tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
         jTextFieldTipoServico.setText(tipoServicoSelecionado.getNome());
@@ -431,59 +415,33 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         String coluna = "tipo_servico_id";
         
         listaServicos = ciInterface.getCiServico().filtrarServico(coluna, id, Servico.class);
+        jComboBoxSituacaoItemStateChanged(null);
         
-        if(CENARIO == Cenario.CONSULTAR){
-            jComboBoxSituacao.setSelectedIndex(0);
-            if(listaServicos != null){
-                listaServicos.forEach((servico) -> {
-                JTableUtil.addLinha(jTableServico, servico.toArray() );
-                });
-            }else{
-                JOptionPane.showMessageDialog(this, "Não existe serviço deste tipo.");
-            }
-        }else{
-            if(listaServicos != null){
-                listaServicos.forEach((servicoAgendado) -> {//não sei se esta certo
-                JTableUtil.addLinha(jTableServico, servicoAgendado.toArray() );
-                });
-            }else{
-                JOptionPane.showMessageDialog(this, "Não existe serviço agendados deste tipo.");
-            }
-        }
     }//GEN-LAST:event_jButtonFiltrarTipoServicoActionPerformed
 
     private void jComboBoxSituacaoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSituacaoItemStateChanged
         
-        if (listaServicos != null) {
-            
-            switch (jComboBoxSituacao.getSelectedIndex()) {
-                
-                case 0:
-                    jTableServico.removeAll();
-                    listaServicos.forEach((servico) -> {
-                        JTableUtil.addLinha(jTableServico, servico.toArray());
-                    });
-                    break;
-                case 1:
-                    jTableServico.removeAll();
-                    listaServicos.forEach((servicoAgendado) -> {
-                        JTableUtil.addLinha(jTableServico, servicoAgendado.toArray());
-                    });
-                    break;
-                case 2:
-                    jTableServico.removeAll();
-                    listaServicos.forEach((servicoCancelado) -> {
-                        JTableUtil.addLinha(jTableServico, servicoCancelado.toArray());
-                    });
-                    break;
-                case 3:
-                    jTableServico.removeAll();
-                    listaServicos.forEach((servicoConcluido) -> {
-                        JTableUtil.addLinha(jTableServico, servicoConcluido.toArray());
-                    });
-                    break;
-            }
-        }  
+        switch (jComboBoxSituacao.getSelectedIndex()) {
+
+            case 0:
+                preencherTabelaServico(0);
+                break;
+
+            case 1:
+                preencherTabelaServico(1);
+                break;
+
+            case 2:
+                preencherTabelaServico(2);
+                break;
+
+            case 3:
+                preencherTabelaServico(3);
+                break;
+
+            default:
+                break;
+        }
     }//GEN-LAST:event_jComboBoxSituacaoItemStateChanged
 
     public void identificarCenario() {
@@ -493,8 +451,41 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             jComboBoxSituacao.setEnabled(true);
         }
     }
+    
+    public void preencherTabelaServico(int situacao){
 
-    public void trataClickCheck(boolean habilita){
+        if (listaServicos != null) {
+            jTableServico.removeAll();
+            
+            listaServicos.forEach((servico) -> {
+               
+                if (situacao == 0) {
+                    if (servico.getClass() == ServicoAgendado.class) {
+                        JTableUtil.addLinha(jTableServico, servico.toArray("AGENDADO"));
+                    } else if (servico.getClass() == ServicoConcluido.class) {
+                        JTableUtil.addLinha(jTableServico, servico.toArray("CONCLUÍDO"));
+                    } else {
+                        JTableUtil.addLinha(jTableServico, servico.toArray("CANCELADO"));
+                    }
+
+                } else if (situacao == 1) {
+                    if (servico.getClass() == ServicoAgendado.class)
+                        JTableUtil.addLinha(jTableServico, servico.toArray("AGENDADO"));
+                    
+                } else if (situacao == 2) {
+                    if (servico.getClass() == ServicoConcluido.class)
+                        JTableUtil.addLinha(jTableServico, servico.toArray("CONCLUÍDO"));
+                    
+                } else {
+                    JTableUtil.addLinha(jTableServico, servico.toArray("CANCELADO"));
+                }
+            });
+        }else{
+            JOptionPane.showMessageDialog(this, "LISTA VAZIA");
+        }         
+    }
+
+    public void tratarClickCheck(boolean habilita){
         jComboBoxPropriedades.setEnabled(habilita);
         jButtonFiltrarTipoServico.setEnabled(!habilita);
         

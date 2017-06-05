@@ -64,13 +64,13 @@ public class CIServico {
             throw ex;
         }
     }
-     
-    public void consultarServico() {
-        int i = gtServico.consultarServico();
-    }
 
-    public void cancelarServico() {
-        int i = gtServico.cancelarServico();
+    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException {
+        try {
+            gtServico.cancelarServico(servico, dataCancelamento, valorMulta);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
     public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException {
