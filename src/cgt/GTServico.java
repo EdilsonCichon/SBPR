@@ -89,9 +89,5 @@ public class GTServico {
     
     public List filtrarServico(String coluna, int id, Class classe) {
         return gdServico.filtrar(coluna, id, classe);
-    }  
-    
-    public List<ServicoAgendado> filtrarServico(int id) {
-        return gdServico.filtrarAgendados(id);
-    }   
+    }    
 }

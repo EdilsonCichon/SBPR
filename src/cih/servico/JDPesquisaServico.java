@@ -9,9 +9,11 @@ import cdp.Produtor;
 import cdp.Propriedade;
 import cdp.Servico;
 import cdp.ServicoAgendado;
+import cdp.ServicoCancelado;
 import cdp.ServicoConcluido;
 import cdp.TipoServico;
 import java.awt.Frame;
+import java.awt.event.ItemEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -305,30 +307,27 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonFiltrarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarProdutorActionPerformed
-       
+        identificarCenario();
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, Cenario.SELECIONAR);
         produtorSelecionado = ciInterface.getCiProdutor().getProdutorSelecionado();
-        jTextFieldNomeProdutor.setText(produtorSelecionado.getNome());
-        
-        if (produtorSelecionado.getPropriedades() != null) {
-            jComboBoxPropriedades.setModel(new DefaultComboBoxModel(produtorSelecionado.getPropriedades().toArray()));
-            
-        }else{
-            jComboBoxPropriedades.setEnabled(false);
-            JOptionPane.showMessageDialog(this, "PRODUTOR SEM PROPRIEDADES");
-        }
+        if (produtorSelecionado != null) {
+            jTextFieldNomeProdutor.setText(produtorSelecionado.getNome());
+
+            if (produtorSelecionado.getPropriedades() != null) {
+                jComboBoxPropriedades.setModel(new DefaultComboBoxModel(produtorSelecionado.getPropriedades().toArray()));
+                identificarPropriedadeSelecionada();
+            } else {
+                jComboBoxPropriedades.setEnabled(false);
+                JOptionPane.showMessageDialog(this, "PRODUTOR SEM PROPRIEDADES");
+            }
+        } 
     }//GEN-LAST:event_jButtonFiltrarProdutorActionPerformed
 
     private void jComboBoxPropriedadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesItemStateChanged
-
-        propriedadeSelecionada = (Propriedade) jComboBoxPropriedades.getSelectedItem();
         
-        int id = propriedadeSelecionada.getId();
-        String coluna = "propriedade_id";
-        
-        List<ServicoAgendado> listaAgendados = ciInterface.getCiServico().filtrarServico(id); 
-        jComboBoxSituacaoItemStateChanged(null);
-        
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            identificarPropriedadeSelecionada();       
+        }   
     }//GEN-LAST:event_jComboBoxPropriedadesItemStateChanged
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -351,6 +350,8 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 
                 try {
                     Servico servico = (Servico) JTableUtil.getDadosLinhaSelecionada(jTableServico);
+                    servico.setProdutor(produtorSelecionado);
+                    servico.setPropriedade(propriedadeSelecionada);
                     ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
             
                 } catch (Exception ex) {
@@ -400,20 +401,42 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jCheckBoxFiltroServicoActionPerformed
 
     private void jButtonFiltrarTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoActionPerformed
-        
+        identificarCenario();
         ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico(pai, Cenario.SELECIONAR);
         tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
-        jTextFieldTipoServico.setText(tipoServicoSelecionado.getNome());
         
-        int id = tipoServicoSelecionado.getId();
-        String coluna = "tipo_servico_id";
-        
-        listaServicos = ciInterface.getCiServico().filtrarServico(coluna, id, Servico.class);
-        jComboBoxSituacaoItemStateChanged(null);
-        
+        if(tipoServicoSelecionado != null){
+            jTextFieldTipoServico.setText(tipoServicoSelecionado.getNome());
+            identificarTipoServicoSelecionado();      
+        }      
     }//GEN-LAST:event_jButtonFiltrarTipoServicoActionPerformed
 
     private void jComboBoxSituacaoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSituacaoItemStateChanged
+        
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            identificarSituacao();
+        } 
+    }//GEN-LAST:event_jComboBoxSituacaoItemStateChanged
+
+    public void identificarPropriedadeSelecionada(){
+        propriedadeSelecionada = (Propriedade) jComboBoxPropriedades.getSelectedItem();
+        
+        int id = propriedadeSelecionada.getId();
+        String coluna = "propriedade.id";
+        
+        listaServicos = ciInterface.getCiServico().filtrarServico(coluna, id, Servico.class);
+        identificarSituacao();
+    }
+    
+    public void identificarTipoServicoSelecionado(){
+        int id = tipoServicoSelecionado.getId();
+        String coluna = "tipoServico.id";
+        
+        listaServicos = ciInterface.getCiServico().filtrarServico(coluna, id, Servico.class);
+        identificarSituacao();
+    }
+    
+    public void identificarSituacao(){
         
         switch (jComboBoxSituacao.getSelectedIndex()) {
 
@@ -432,8 +455,8 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             default:
                 break;
         }
-    }//GEN-LAST:event_jComboBoxSituacaoItemStateChanged
-
+    }
+    
     public void identificarCenario() {
        
         if(CENARIO == Cenario.CONSULTAR){
@@ -445,35 +468,35 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     public void preencherTabelaServico(int situacao){
 
         if (listaServicos != null) {
-            System.out.println("LISTA PREENCHIDA");
-            jTableServico.removeAll();
+            JTableUtil.limparTabela(jTableServico);
             
             listaServicos.forEach((servico) -> {
                
-                if (situacao == 0) {
-                    if (servico.getClass() == ServicoAgendado.class) {
-                        JTableUtil.addLinha(jTableServico, servico.toArray("AGENDADO"));
-                    } else if (servico.getClass() == ServicoConcluido.class) {
-                        JTableUtil.addLinha(jTableServico, servico.toArray("CONCLUÍDO"));
-                    } else {
-                        JTableUtil.addLinha(jTableServico, servico.toArray("CANCELADO"));
-                    }
-
-                } else if (situacao == 1) {
-                    if (servico.getClass() == ServicoAgendado.class)
-                        JTableUtil.addLinha(jTableServico, servico.toArray("AGENDADO"));
+                switch (situacao) {
                     
-                } else if (situacao == 2) {
-                    if (servico.getClass() == ServicoConcluido.class)
-                        JTableUtil.addLinha(jTableServico, servico.toArray("CONCLUÍDO"));
-                    
-                } else {
-                    JTableUtil.addLinha(jTableServico, servico.toArray("CANCELADO"));
+                    case 0:
+                        if (servico.getClass() == ServicoAgendado.class) {
+                            JTableUtil.addLinha(jTableServico, servico.toArray("AGENDADO"));
+                        } else if (servico.getClass() == ServicoConcluido.class) {
+                            JTableUtil.addLinha(jTableServico, servico.toArray("CONCLUÍDO"));
+                        } else {
+                            JTableUtil.addLinha(jTableServico, servico.toArray("CANCELADO"));
+                        }   break;
+                    case 1:
+                        if (servico.getClass() == ServicoAgendado.class)
+                            JTableUtil.addLinha(jTableServico, servico.toArray("AGENDADO"));
+                        break;
+                    case 2:
+                        if (servico.getClass() == ServicoConcluido.class)
+                            JTableUtil.addLinha(jTableServico, servico.toArray("CONCLUÍDO"));
+                        break;
+                    default:
+                        if (servico.getClass() == ServicoCancelado.class)
+                            JTableUtil.addLinha(jTableServico, servico.toArray("CANCELADO"));
+                        break;
                 }
             });
-        }else{
-            JOptionPane.showMessageDialog(this, "LISTA VAZIA");
-        }         
+        }      
     }
 
     public void tratarClickCheck(boolean habilita){
