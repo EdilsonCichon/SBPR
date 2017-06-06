@@ -13,13 +13,14 @@ import cdp.ServicoConcluido;
 import cdp.TipoServico;
 import java.awt.Frame;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class JDPesquisaServico extends javax.swing.JDialog {
 
     private CIInterface ciInterface;
     private CIServico ciServico;
-    private Produtor produtor;
+    private Produtor produtorSelecionado;
     private TipoServico tipoServicoSelecionado;
     private Propriedade propriedadeSelecionada;
     private List<Servico> listaServicos;
@@ -175,7 +176,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
 
         jLabelSituacaoServico.setText("Situação:");
 
-        jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "AGENDADO", "CONCLUÍDO", "CANCELADO" }));
+        jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "AGENDADO", "CONCLUIDO", "CANCELADO" }));
         jComboBoxSituacao.setEnabled(false);
         jComboBoxSituacao.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -306,33 +307,28 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     private void jButtonFiltrarProdutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarProdutorActionPerformed
        
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, Cenario.SELECIONAR);
-        produtor = ciInterface.getCiProdutor().getProdutorSelecionado();
-        jTextFieldNomeProdutor.setText(produtor.getNome());
+        produtorSelecionado = ciInterface.getCiProdutor().getProdutorSelecionado();
+        jTextFieldNomeProdutor.setText(produtorSelecionado.getNome());
         
-        jComboBoxPropriedades.removeAllItems();
-        
-        if (produtor.getPropriedades() != null) {
+        if (produtorSelecionado.getPropriedades() != null) {
+            jComboBoxPropriedades.setModel(new DefaultComboBoxModel(produtorSelecionado.getPropriedades().toArray()));
             
-            produtor.getPropriedades().forEach((propriedade) -> {
-                jComboBoxPropriedades.addItem(propriedade.toString());
-            });
         }else{
+            jComboBoxPropriedades.setEnabled(false);
             JOptionPane.showMessageDialog(this, "PRODUTOR SEM PROPRIEDADES");
         }
     }//GEN-LAST:event_jButtonFiltrarProdutorActionPerformed
 
     private void jComboBoxPropriedadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesItemStateChanged
 
-        produtor.getPropriedades().forEach((propriedade) -> {
-            if (jComboBoxPropriedades.getSelectedItem().toString() == propriedade.getNome_propriedade())
-                propriedadeSelecionada = propriedade;
-        });
+        propriedadeSelecionada = (Propriedade) jComboBoxPropriedades.getSelectedItem();
         
         int id = propriedadeSelecionada.getId();
         String coluna = "propriedade_id";
         
-        listaServicos = ciInterface.getCiServico().filtrarServico(coluna, id, Servico.class); 
+        List<ServicoAgendado> listaAgendados = ciInterface.getCiServico().filtrarServico(id); 
         jComboBoxSituacaoItemStateChanged(null);
+        
     }//GEN-LAST:event_jComboBoxPropriedadesItemStateChanged
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -340,28 +336,26 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        
         if(jCheckBoxFiltroProdutor.getSelectedObjects() != null && jTextFieldNomeProdutor.getText() == null){
             JOptionPane.showMessageDialog(this, "Selecione um produtor.");
-        }else if(jCheckBoxFiltroPropriedade.getSelectedObjects() != null && jComboBoxPropriedades.getSelectedObjects() == null){//não sei se é esse metodo
+        }else if(jCheckBoxFiltroPropriedade.getSelectedObjects() != null && jComboBoxPropriedades.getSelectedObjects() == null){
             JOptionPane.showMessageDialog(this, "Selecione uma propriedade.");
-        }else{
-            try {
-                Servico servico = (Servico) JTableUtil.getDadosLinhaSelecionada(jTableServico);
-                ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
             
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Selecione um serviço", "ERRO", JOptionPane.ERROR_MESSAGE);
-            } 
-        }
-        if(jCheckBoxFiltroServico.getSelectedObjects() != null && jTextFieldTipoServico.getText() == null ){
-            JOptionPane.showMessageDialog(this, "Selecione um tipo de serviço.");
         }else{
-            try {
-                Servico servico = (Servico) JTableUtil.getDadosLinhaSelecionada(jTableServico);
-                ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
             
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Selecione um serviço", "ERRO", JOptionPane.ERROR_MESSAGE);
+            if(jCheckBoxFiltroServico.getSelectedObjects() != null && jTextFieldTipoServico.getText() == null ){
+                JOptionPane.showMessageDialog(this, "Selecione um tipo de serviço.");
+                
+            }else{
+                
+                try {
+                    Servico servico = (Servico) JTableUtil.getDadosLinhaSelecionada(jTableServico);
+                    ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
+            
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Selecione um serviço", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
@@ -423,20 +417,16 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         
         switch (jComboBoxSituacao.getSelectedIndex()) {
 
-            case 0:
-                preencherTabelaServico(0);
+            case 0: preencherTabelaServico(0);
                 break;
 
-            case 1:
-                preencherTabelaServico(1);
+            case 1: preencherTabelaServico(1);
                 break;
 
-            case 2:
-                preencherTabelaServico(2);
+            case 2: preencherTabelaServico(2);
                 break;
 
-            case 3:
-                preencherTabelaServico(3);
+            case 3: preencherTabelaServico(3);
                 break;
 
             default:
@@ -455,6 +445,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     public void preencherTabelaServico(int situacao){
 
         if (listaServicos != null) {
+            System.out.println("LISTA PREENCHIDA");
             jTableServico.removeAll();
             
             listaServicos.forEach((servico) -> {
@@ -486,6 +477,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     }
 
     public void tratarClickCheck(boolean habilita){
+        
         jComboBoxPropriedades.setEnabled(habilita);
         jButtonFiltrarTipoServico.setEnabled(!habilita);
         

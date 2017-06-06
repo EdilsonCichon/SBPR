@@ -411,7 +411,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
                 break;
-            default://EXCLUIR
+            default:
                 setTitle("Excluir Produtor");
                 modoSomenteLeitura(true);
                 habilitarBotoesPropriedade(false);

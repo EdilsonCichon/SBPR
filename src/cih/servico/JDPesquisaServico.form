@@ -280,7 +280,7 @@
               <StringArray count="4">
                 <StringItem index="0" value="TODOS"/>
                 <StringItem index="1" value="AGENDADO"/>
-                <StringItem index="2" value="CONCLU&#xcd;DO"/>
+                <StringItem index="2" value="CONCLUIDO"/>
                 <StringItem index="3" value="CANCELADO"/>
               </StringArray>
             </Property>

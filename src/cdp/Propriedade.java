@@ -83,4 +83,8 @@ public class Propriedade implements Serializable {
     public Object[] toArrayProdutor() {
         return new Object[] { this, getReferencia() };
     }
+    
+    public Object[] toArrayServico() {
+        return new Object[] {this};
+    }
 }

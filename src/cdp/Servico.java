@@ -27,13 +27,13 @@ public abstract class Servico implements Serializable {
     @Column(nullable = false, precision = 2)
     private double qtd_hrs_prevista;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produtor_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Produtor produtor;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "propriedade_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)

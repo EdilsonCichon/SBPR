@@ -84,4 +84,8 @@ public class CIServico {
     public List filtrarServico(String coluna, int id, Class classe) {
         return gtServico.filtrarServico(coluna, id, classe);
     }
+    
+    public List<ServicoAgendado> filtrarServico(int id) {
+        return gtServico.filtrarServico(id);
+    }
 }
