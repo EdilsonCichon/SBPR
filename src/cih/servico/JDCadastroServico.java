@@ -15,6 +15,7 @@ import cih.exception.ValidacaoException;
 import java.util.Date;
 import java.awt.Frame;
 import java.util.Calendar;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -130,17 +131,10 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jLabelPropriedade.setText("Propriedade:");
 
-        jComboBoxPropriedades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a propriedade..." }));
         jComboBoxPropriedades.setToolTipText("");
-        jComboBoxPropriedades.setEnabled(false);
         jComboBoxPropriedades.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxPropriedadesItemStateChanged(evt);
-            }
-        });
-        jComboBoxPropriedades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxPropriedadesActionPerformed(evt);
             }
         });
 
@@ -152,8 +146,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabelPropriedade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxPropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jComboBoxPropriedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelSelecaoPropriedadeLayout.setVerticalGroup(
             jPanelSelecaoPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,15 +204,15 @@ public class JDCadastroServico extends javax.swing.JDialog {
             jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAgendarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelDataPrevista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFormattedTextFieldDataPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(39, 39, 39)
                         .addComponent(jLabelQtdPrevistaHrs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldQtHrsPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jFormattedTextFieldQtHrsPrevista))
                     .addGroup(jPanelAgendarLayout.createSequentialGroup()
                         .addComponent(jLabelTipoServico)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -228,8 +222,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
                         .addGap(53, 53, 53)
                         .addComponent(jLabelValorHora)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextFieldValorHora)))
+                .addContainerGap())
         );
         jPanelAgendarLayout.setVerticalGroup(
             jPanelAgendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -603,10 +597,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jTextFieldValorTotal.setText(String.valueOf(servico.getTipoServico().getValor_hr() * Double.valueOf(jTextFieldValorTotal.getText())));
     }//GEN-LAST:event_jFormattedTextFieldQtHrsReaisKeyPressed
 
-    private void jComboBoxPropriedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPropriedadesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxPropriedadesActionPerformed
-
     private void jFormattedTextFieldDataPrevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataPrevistaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldDataPrevistaActionPerformed
@@ -676,11 +666,18 @@ public class JDCadastroServico extends javax.swing.JDialog {
     }
 
     private void setarCamposComInstancia(Servico servico) {
+        
+        produtorSelecionado = servico.getProdutor();
+        propriedadeSelecionada = servico.getPropriedade();
+        tipoServicoSelecionado = servico.getTipoServico();
+        
         jTextFieldNomeProdutor.setText(servico.getProdutor().getNome());
+        jComboBoxPropriedades.setModel(new DefaultComboBoxModel(servico.getProdutor().getPropriedades().toArray()));
         jComboBoxPropriedades.setSelectedItem(servico.getPropriedade());
         jTextFieldTipoServico.setText(servico.getTipoServico().getNome());
         jTextFieldValorHora.setText(String.valueOf(servico.getTipoServico().getValor_hr()));
-        jFormattedTextFieldDataPrevista.setText(String.valueOf(servico.getData_prevista_conclusao()));
+         
+        jFormattedTextFieldDataPrevista.setText(servico.getData_prevista_conclusao("dd/MM/yyyy"));
         jFormattedTextFieldQtHrsPrevista.setText(String.valueOf(servico.getQtd_hrs_prevista()));
     }
 

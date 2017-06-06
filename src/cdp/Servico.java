@@ -1,6 +1,7 @@
 package cdp;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
@@ -67,6 +68,11 @@ public abstract class Servico implements Serializable {
         this.tipoServico = tipoServico;
     }
 
+    public String getData_prevista_conclusao(String formato) {
+        SimpleDateFormat fmt = new SimpleDateFormat(formato);
+        return fmt.format(getData_prevista_conclusao());
+    }
+    
     public Date getData_prevista_conclusao() {
         return data_prevista_conclusao;
     }

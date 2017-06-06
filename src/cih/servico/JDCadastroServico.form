@@ -126,8 +126,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelPropriedade" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jComboBoxPropriedades" min="-2" pref="373" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jComboBoxPropriedades" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -153,16 +153,12 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxPropriedades">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="Selecione a propriedade..."/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxPropriedadesItemStateChanged"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxPropriedadesActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -184,15 +180,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabelDataPrevista" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jFormattedTextFieldDataPrevista" min="-2" pref="63" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="jLabelQtdPrevistaHrs" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jFormattedTextFieldQtHrsPrevista" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldQtHrsPrevista" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabelTipoServico" min="-2" max="-2" attributes="0"/>
@@ -203,10 +199,10 @@
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="jLabelValorHora" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextFieldValorHora" min="-2" pref="75" max="-2" attributes="0"/>
+                          <Component id="jTextFieldValorHora" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

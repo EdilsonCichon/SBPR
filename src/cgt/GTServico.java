@@ -11,6 +11,8 @@ import cdp.ServicoConcluido;
 import cdp.TipoServico;
 import cgd.GDServico;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,16 +34,20 @@ public class GTServico {
         servicoAgendado.setPropriedade(propriedade);
         servicoAgendado.setTipoServico(tipoServico);
         servicoAgendado.setData_agendamento(Calendar.getInstance().getTime());
-        servicoAgendado.setData_prevista_conclusao(new Date(dtPrevistaConclusao));
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = formato.parse(dtPrevistaConclusao);
+        servicoAgendado.setData_prevista_conclusao(data);
         servicoAgendado.setQtd_hrs_prevista(Double.parseDouble(qtdHrsPrevista));
         gdServico.cadastrar(servicoAgendado);
     }
     
     public void alterarServico(Servico servico, Produtor produtor, Propriedade propriedade, 
                 TipoServico tipoServico, String dtPrevistaConclusao, 
-                String qtdHrsPrevista) throws SQLException, ClassNotFoundException{
+                String qtdHrsPrevista) throws SQLException, ClassNotFoundException, ParseException{
         
-        servico.setData_prevista_conclusao(new Date(dtPrevistaConclusao));
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = formato.parse(dtPrevistaConclusao);
+        servico.setData_prevista_conclusao(data);
         servico.setQtd_hrs_prevista(Double.parseDouble(qtdHrsPrevista));
         servico.setProdutor(produtor);
         servico.setPropriedade(propriedade);
