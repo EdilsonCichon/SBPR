@@ -59,17 +59,17 @@ public class GTServico {
         gdServico.alterar(servico);
     }
 
-    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException, ParseException{
+    public void cancelarServico(ServicoAgendado servicoAgendado, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException, ParseException{
         
         ServicoCancelado servicoCancelado = new ServicoCancelado();
         
-        servicoCancelado.setId(servico.getId());
-        servicoCancelado.setProdutor(servico.getProdutor());
-        servicoCancelado.setPropriedade(servicoCancelado.getPropriedade());
-        servicoCancelado.setData_agendamento(servico.getData_agendamento());
-        servicoCancelado.setData_prevista_conclusao(servico.getData_prevista_conclusao());
-        servicoCancelado.setQtd_hrs_prevista(servico.getQtd_hrs_prevista());
-        servicoCancelado.setTipoServico(servico.getTipoServico());
+        servicoCancelado.setId(servicoAgendado.getId());
+        servicoCancelado.setProdutor(servicoAgendado.getProdutor());
+        servicoCancelado.setPropriedade(servicoAgendado.getPropriedade());
+        servicoCancelado.setData_agendamento(servicoAgendado.getData_agendamento());
+        servicoCancelado.setData_prevista_conclusao(servicoAgendado.getData_prevista_conclusao());
+        servicoCancelado.setQtd_hrs_prevista(servicoAgendado.getQtd_hrs_prevista());
+        servicoCancelado.setTipoServico(servicoAgendado.getTipoServico());
         
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(dataCancelamento);
@@ -77,7 +77,7 @@ public class GTServico {
         servicoCancelado.setData_cancelamento(data);
         servicoCancelado.setValor_multa(Double.parseDouble(valorMulta));
         
-        gdServico.cancelarServico(servico, servicoCancelado);   
+        gdServico.cancelarServico(servicoAgendado, servicoCancelado);   
     } 
     
     public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException, ParseException{

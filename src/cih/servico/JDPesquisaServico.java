@@ -173,7 +173,15 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             new String [] {
                 "Tipo do Serviço", "Data Conclusão", "Tempo previsto", "Situação"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTableServico);
 
         jLabelSituacaoServico.setText("Situação:");

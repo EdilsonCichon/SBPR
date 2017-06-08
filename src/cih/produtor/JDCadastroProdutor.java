@@ -464,7 +464,12 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         try {
             
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            ciInterface.getCiPropriedade().excluirPropriedade(propriedade);
+            
+            int excluido = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            
+            if(excluido == 0){
+                ciInterface.getCiPropriedade().excluirPropriedade(propriedade);
+            }
             
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);

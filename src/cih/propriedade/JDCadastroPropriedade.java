@@ -190,40 +190,43 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             validarCampos(nome, referencia);
             
             switch (CENARIO) {
+                
                 case Cenario.CADASTRAR: {
                     boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(produtorAtual, nome, referencia);
                     if (resposta) {
                         modoSomenteLeitura(resposta);
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");
-                    }
-                    break;
-                }
-                case Cenario.ALTERAR:
+                    }                   
+                }break;
+                
+                case Cenario.ALTERAR:{
                     boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia, produtorAtual);
                     if (alterado)
                         this.dispose();
-                    break;
+                }break;
+                    
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
-                case Cenario.EXCLUIR:
+                    
+                case Cenario.EXCLUIR:{
                     int confirmado = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
                     if ( confirmado == 0 ) {
                         boolean excluido = ciInterface.getCiPropriedade().excluirPropriedade(propriedadeVazia);
                         if ( excluido )
                             this.dispose();
                     }
-                    break;
+                }break;
+                
                 case Cenario.ADICIONAR: {
                     propriedadeVazia.setNome_propriedade(nome);
                     propriedadeVazia.setReferencia(referencia);
-                    boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia);
+                    boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia);                  
                     if ( resposta )
-                        ciInterface.getCiProdutor().getProdutorSelecionado().setPropriedade(propriedadeVazia);
-                        this.dispose();
-                    break;
-                }
+                        this.dispose();                
+                } break;
+                
                 default:
                     break;
             }
