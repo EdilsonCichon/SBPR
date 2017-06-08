@@ -23,4 +23,8 @@ public class ServicoAgendado extends Servico {
         
         super(data_solicitacao, data_agendamento, qtd_hrs_prevista, produtor, propriedade, tipoServico);
     }
+    
+    public Object[] toArray() {
+        return new Object[] { this, getData_prevista_conclusao(), getQtd_hrs_prevista(), "AGENDADO" };
+    } 
 }

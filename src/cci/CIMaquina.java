@@ -16,7 +16,8 @@ public class CIMaquina {
     private CIInterface ciInterface;
     private GTMaquina gtMaquina;
     private JDCadastroMaquina cadastroMaquina;
-    private JDPesquisarMaquina pesquisaMaquina; 
+    private JDPesquisarMaquina pesquisaMaquina;
+    private Maquina maquinaSelecionada;
 
     public CIMaquina(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -75,5 +76,13 @@ public class CIMaquina {
             JOptionPane.showMessageDialog(null, "Erro ao excluir maquina: " + e.getMessage());
             return false;
         }
-    }    
+    }
+
+    public Maquina getMaquinaSelecionada() {
+        return maquinaSelecionada;
+    }
+
+    public void setMaquinaSelecionada(Maquina maquinaSelecionada) {
+        this.maquinaSelecionada = maquinaSelecionada;
+    }
 }

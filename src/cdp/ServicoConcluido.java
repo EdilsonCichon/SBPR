@@ -1,5 +1,6 @@
 package cdp;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
@@ -58,6 +59,11 @@ public class ServicoConcluido extends Servico {
     public Date getData_conclusao() {
         return data_conclusao;
     }
+    
+    public String getData_conclusao(String formato) {
+        SimpleDateFormat fmt = new SimpleDateFormat(formato);
+        return fmt.format(getData_prevista_conclusao());
+    }
 
     public void setData_conclusao(Date data_conclusao) {
         this.data_conclusao = data_conclusao;
@@ -94,4 +100,8 @@ public class ServicoConcluido extends Servico {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
+    
+     public Object[] toArray() {
+        return new Object[] { this, getData_prevista_conclusao(), getQtd_hrs_prevista(), "CONCLUIDO" };
+    } 
 }

@@ -28,9 +28,8 @@ public class GTTipoServico {
         gdTipoServico.alterar(tipoServico);
     }
     
-    public int consultarTipoServico(){
-        //gdTipoServico.consultar();
-        return 0;
+    public List<TipoServico> consultarTipoServico(){
+        return gdTipoServico.consultar(TipoServico.class);
     }
     
     public void excluirTipoServico(TipoServico tipoServico) throws SQLException, ClassNotFoundException {

@@ -48,7 +48,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
         jLabelFiltrar.setText("Filtrar por:");
 
-        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Produtor" }));
+        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "ID Produtor" }));
 
         jTablePropriedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,15 +83,15 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
             .addGroup(jPanelPesquisarPropriedadeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPesquisarPropriedadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(jScrollPanePropriedades)
                     .addGroup(jPanelPesquisarPropriedadeLayout.createSequentialGroup()
                         .addComponent(jLabelFiltrar)
                         .addGap(10, 10, 10)
-                        .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldFiltro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButtonFiltrar)))
                 .addContainerGap())
         );
         jPanelPesquisarPropriedadeLayout.setVerticalGroup(
@@ -168,10 +168,19 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
         
-        List<Propriedade> listaProdutores = ciInterface.getCiPropriedade().filtrarPropriedade(colunaFiltro, filtro);
+        List<Propriedade> listaPropriedades = null;
+        
+        if(jComboBoxFiltro.getSelectedIndex() == 1){
+            colunaFiltro = "responsavel.id";
+            int id = Integer.valueOf(filtro);
+            listaPropriedades = ciInterface.getCiPropriedade().filtrarPorProdutor(colunaFiltro, id);
+        }else{
+            listaPropriedades = ciInterface.getCiPropriedade().filtrarPropriedades(colunaFiltro, filtro);
+        }
+            
         JTableUtil.limparTabela(jTablePropriedades);
         
-        listaProdutores.forEach((propriedade) -> {
+        listaPropriedades.forEach((propriedade) -> {
             JTableUtil.addLinha(jTablePropriedades, propriedade.toArray() );
         });
     }//GEN-LAST:event_jButtonFiltrarActionPerformed

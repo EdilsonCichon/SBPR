@@ -24,7 +24,12 @@ public class SBPRException extends Exception {
         // Erros de Tipo de Serviço
         msgsErro[7] = "Campo VALOR inválido"; 
         
-        msgsErro[20] = "Campo NOME DO CARGO inválido";    
+        //Cargo
+        msgsErro[20] = "Campo NOME DO CARGO inválido";
+        
+        //SERVIÇO 50 - 100
+        msgsErro[50] = "Propriedade vinculada a Serviço(s)!";
+        
     }
     
     @Override

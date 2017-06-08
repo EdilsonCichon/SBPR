@@ -57,9 +57,9 @@ public class CIPropriedade {
         return gtPropriedade.instanciarPropriedadeVazia(produtor);
     }
 
-    public boolean alterarPropriedade(Propriedade propriedade) {
+    public boolean alterarPropriedade(Propriedade propriedade, Produtor produtorSelecionado) {
         try {
-            gtPropriedade.alterarPropriedade(propriedade);
+            gtPropriedade.alterarPropriedade(propriedade, produtorSelecionado);
             JOptionPane.showMessageDialog(cadastroPropriedade, "Alterada com sucesso!");
             return true;
         } catch (Exception e) {
@@ -79,8 +79,12 @@ public class CIPropriedade {
         }
     }
 
-    public List<Propriedade> filtrarPropriedade(String colunaFiltro, String filtro) {
-        return gtPropriedade.filtrarPropriedade(colunaFiltro, filtro);
+    public List<Propriedade> filtrarPropriedades(String colunaFiltro, String filtro) {
+        return gtPropriedade.filtrarPropriedades(colunaFiltro, filtro);
+    }
+    
+    public List<Propriedade> filtrarPorProdutor(String colunaFiltro, int filtro) {
+        return gtPropriedade.filtrarPorProdutor(colunaFiltro, filtro);
     }
   
 }

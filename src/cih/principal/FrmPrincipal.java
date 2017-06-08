@@ -14,7 +14,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
-        jButtonInicioActionPerformed(null);
+        jButtonInicioActionPerformed(null); 
     }
     
     public void trocarPanel(JPanel jPanel) {

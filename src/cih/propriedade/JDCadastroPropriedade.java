@@ -200,7 +200,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                     break;
                 }
                 case Cenario.ALTERAR:
-                    boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia);
+                    boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia, produtorAtual);
                     if (alterado)
                         this.dispose();
                     break;
@@ -208,7 +208,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                     this.dispose();
                     break;
                 case Cenario.EXCLUIR:
-                    int confirmado = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.INFORMATION_MESSAGE);
+                    int confirmado = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
                     if ( confirmado == 0 ) {
                         boolean excluido = ciInterface.getCiPropriedade().excluirPropriedade(propriedadeVazia);
                         if ( excluido )
@@ -246,7 +246,6 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, Cenario.SELECIONAR);
         produtorAtual = ciInterface.getCiProdutor().getProdutorSelecionado();
         jTextFieldResponsavel.setText(produtorAtual.getNome());
-        propriedadeVazia.setResponsavel(produtorAtual);
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
     private void identificarCenario() {
@@ -277,7 +276,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                         break;
                         
                     case Cenario.CADASTRAR:
-                        setTitle("Consultar Propriedade"); // ANALISAR ISSO FUTURAMENTE
+                        setTitle("Consultar Propriedade");
                         jButtonPesquisarProdutor.setEnabled(true);
                         jButtonConfirmar.setEnabled(false);
                         jButtonCancelar.setText("Sair");

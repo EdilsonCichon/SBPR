@@ -156,5 +156,5 @@ public class CIGeral {
     }   
     public Cep consultarCep(String cep){
         return gtGeral.consultarCep(cep);
-    }
+    } 
 }

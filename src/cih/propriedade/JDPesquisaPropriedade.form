@@ -55,15 +55,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jScrollPanePropriedades" pref="500" max="32767" attributes="0"/>
+                      <Component id="jScrollPanePropriedades" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jLabelFiltrar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Component id="jComboBoxFiltro" min="-2" pref="89" max="-2" attributes="0"/>
+                          <Component id="jComboBoxFiltro" min="-2" pref="81" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextFieldFiltro" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButtonFiltrar" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="jTextFieldFiltro" min="-2" pref="298" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          <Component id="jButtonFiltrar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
                 <StringItem index="0" value="Nome"/>
-                <StringItem index="1" value="Produtor"/>
+                <StringItem index="1" value="ID Produtor"/>
               </StringArray>
             </Property>
           </Properties>

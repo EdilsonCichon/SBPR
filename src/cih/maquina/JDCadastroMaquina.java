@@ -205,8 +205,8 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
-        String modelo = jTextFieldModelo.getText();
-        String placa = jFormattedTextFieldPlaca.getText().replace("-", "");
+        String modelo = jTextFieldModelo.getText().toUpperCase();
+        String placa = jFormattedTextFieldPlaca.getText().toUpperCase().replace("-", "");
         
         try {
             

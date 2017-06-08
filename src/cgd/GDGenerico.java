@@ -13,7 +13,7 @@ public abstract class GDGenerico {
     private final int EXCLUIR = 3;
     
     public GDGenerico() {
-
+        
     }
     
     private void persistir(Object obj, int cenario) throws SQLException, ClassNotFoundException{

@@ -1,6 +1,7 @@
 package cdp;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
@@ -27,13 +28,13 @@ public abstract class Servico implements Serializable {
     @Column(nullable = false, precision = 2)
     private double qtd_hrs_prevista;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produtor_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Produtor produtor;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "propriedade_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -67,6 +68,11 @@ public abstract class Servico implements Serializable {
         this.tipoServico = tipoServico;
     }
 
+    public String getData_prevista_conclusao(String formato) {
+        SimpleDateFormat fmt = new SimpleDateFormat(formato);
+        return fmt.format(getData_prevista_conclusao());
+    }
+    
     public Date getData_prevista_conclusao() {
         return data_prevista_conclusao;
     }
@@ -113,5 +119,22 @@ public abstract class Servico implements Serializable {
 
     public void setTipoServico(TipoServico tipoServico) {
         this.tipoServico = tipoServico;
-    }    
+    }   
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return tipoServico.getNome();
+    }
+    
+    public Object[] toArray(String situacao) {
+        return new Object[] { this, getData_prevista_conclusao(), getQtd_hrs_prevista(), situacao.toUpperCase()};
+    }
 }

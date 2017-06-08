@@ -52,7 +52,6 @@ public class GDEndereco extends GDGenerico{
     }
     
     public Bairro consultarBairroCidade(String b, int idCidade){
-        
         Criteria crit = criarSessao().createCriteria(Bairro.class);
         crit.add(Restrictions.eq("nome", b));
         crit.add(Restrictions.eq("cidade.id", idCidade));

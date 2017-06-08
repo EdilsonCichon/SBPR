@@ -94,7 +94,7 @@ public class TipoServico implements Serializable {
     public Object[] toArray() {
         return new Object[] { this, getValor_hr(), getDescricao()};
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

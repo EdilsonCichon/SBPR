@@ -63,8 +63,8 @@ public class CITipoServico {
         }
     }
     
-    public void consultarTipoServico(){
-        int i = gtTipoServico.consultarTipoServico();
+    public List<TipoServico> consultarTipoServico(){
+        return gtTipoServico.consultarTipoServico();
     }
     
     public boolean excluirTipoServico(TipoServico tipoServico) {
