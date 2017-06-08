@@ -73,7 +73,7 @@ public class CITipoServico {
             JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
             return true;
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + e.getMessage());
             return false;
         } 
     } 

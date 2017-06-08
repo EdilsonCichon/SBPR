@@ -13,7 +13,7 @@ public class SBPRException extends Exception {
 
         msgsErro[0] = "Código de erro inválido!";
         
-        // Erros de produtor:
+        // Produtor:
         msgsErro[1] = "Campo NOME inválido";
         msgsErro[2] = "Campo CPF inválido";
         msgsErro[3] = "Campo DATA inválido";
@@ -21,13 +21,14 @@ public class SBPRException extends Exception {
         msgsErro[5] = "Campo TELEFONE inválido";  
         msgsErro[6] = "Campo INSCRIÇÃO ESTADUAL inválido";    
         
-        // Erros de Tipo de Serviço
+        //Tipo de Serviço 7 - 20
         msgsErro[7] = "Campo VALOR inválido"; 
+        msgsErro[8] = "Tipo de Serviço vinculado a Serviço(s)!";
         
         //Cargo
         msgsErro[20] = "Campo NOME DO CARGO inválido";
         
-        //SERVIÇO 50 - 100
+        //Serviço 50 - 100
         msgsErro[50] = "Propriedade vinculada a Serviço(s)!";
         
     }

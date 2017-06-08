@@ -1,8 +1,10 @@
 package cgt;
 
 import cci.SBPRException;
+import cdp.Servico;
 import cdp.TipoMaquina;
 import cdp.TipoServico;
+import cgd.GDServico;
 import cgd.GDTipoServico;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
@@ -10,11 +12,13 @@ import java.util.List;
 
 public class GTTipoServico {
     
+    private GDServico gdServico;
     private GDTipoServico gdTipoServico;
     private TipoServico tipoServico;
 
     public GTTipoServico() {
         gdTipoServico = new GDTipoServico();
+        gdServico = new GDServico();
     }
     
     public void cadastrarTipoServico(String nome, String valor, String descricao, TipoMaquina tipoMaquina) throws SQLException, ClassNotFoundException, SBPRException{
@@ -32,8 +36,14 @@ public class GTTipoServico {
         return gdTipoServico.consultar(TipoServico.class);
     }
     
-    public void excluirTipoServico(TipoServico tipoServico) throws SQLException, ClassNotFoundException {
-        gdTipoServico.excluir(tipoServico);
+    public void excluirTipoServico(TipoServico tipoServico) throws SQLException, ClassNotFoundException, SBPRException {
+        
+        List servicos = gdServico.filtrar("tipoServico.id", tipoServico.getId(), Servico.class);
+        if ( servicos.isEmpty() )
+            gdTipoServico.excluir(tipoServico);
+        else 
+            throw new SBPRException(8);
+        
     }
     
     private void validarCampos(String valor) throws SBPRException{
