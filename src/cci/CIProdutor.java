@@ -8,7 +8,6 @@ import cih.produtor.JDPesquisaProdutor;
 import java.util.List;
 import java.awt.Frame;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class CIProdutor {
     
@@ -45,26 +44,21 @@ public class CIProdutor {
         return gtProdutor.instanciarProdutorVazio();
     }
 
-    public Produtor cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
+    public void cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws Exception{
         
         try{   
           Produtor produtor = gtProdutor.cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo); 
-          JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-          return produtor;
+          ciInterface.getCiProdutor().setProdutorSelecionado(produtor);
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return null;
+            throw e;
         }  
     }
     
-    public boolean alterarProdutor(Produtor produtor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) {
+    public void alterarProdutor(Produtor produtor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws Exception {
         try {
             gtProdutor.alterarProdutor(produtor, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
-            return false;
+            throw e;
         }
     }
     
@@ -72,15 +66,12 @@ public class CIProdutor {
        return gtProdutor.filtrarProdutor(colunaFiltro, filtro);
     }
     
-    public boolean excluirProdutor(Produtor produtor){
+    public void excluirProdutor(Produtor produtor) throws Exception{
         
         try{   
-            gtProdutor.excluirProdutor(produtor);
-            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
-            return true;
+            gtProdutor.excluirProdutor(produtor); 
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
-            return false;
+            throw e;
         }    
     }
 

@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
 
 public class JDCadastroProdutor extends javax.swing.JDialog {
     
-    private final CIInterface ciInterface;
-    private final JFrame pai;
-    private final int CENARIO;
+    private CIInterface ciInterface;
+    private JFrame pai;
+    private int CENARIO;
     private Produtor produtorAtual;
 
     public JDCadastroProdutor(java.awt.Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtor) {
@@ -324,43 +324,30 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         try {
             
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
-            boolean respostaOperacao;
+            
             switch (CENARIO) {
+                
                 case Cenario.CADASTRAR:
-                    produtorAtual = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-                    if(produtorAtual != null){
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(true);
-                        habilitarBotoesPropriedade(true);
-                    }   break;
-                    
+                    cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                    break;
+                
                 case Cenario.ALTERAR:
-                    respostaOperacao = ciInterface.getCiProdutor().alterarProdutor(produtorAtual, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-                    if (respostaOperacao) {
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(true);
-                    }   break;
-                    
+                    alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                    break;
+                             
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
                     
                 case Cenario.EXCLUIR:
-                    int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-                    if ( confirmacao == 0 ) {
-                        respostaOperacao = ciInterface.getCiProdutor().excluirProdutor(produtorAtual);
-                        if (respostaOperacao)
-                            this.dispose();
-                    }
+                    excluirProdutor();
                     break;
-                    
+                
                 default:
                     break;
             }          
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -380,37 +367,82 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
-    public void identificarCenario() {
+    private void identificarCenario() {
         
+        habilitarBotoesPropriedade(false);
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:
-                habilitarBotoesPropriedade(false);
                 break;
+                
             case Cenario.ALTERAR:
                 setTitle("Alterar Produtor");
                 modoSomenteLeitura(false);
                 habilitarBotoesPropriedade(true);
                 setarCamposComInstancia(produtorAtual);
                 break;
+                
             case Cenario.CONSULTAR:
                 setTitle("Consultar Produtor");
                 modoSomenteLeitura(true);
-                habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtorAtual);
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
                 break;
+                
             default:
                 setTitle("Excluir Produtor");
                 modoSomenteLeitura(true);
-                habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtorAtual);
                 break;
         }
     }
     
-    public void modoSomenteLeitura(boolean condicao) {
+    private void cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) {
+        
+        try {
+            ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            produtorAtual = ciInterface.getCiProdutor().getProdutorSelecionado();
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            modoSomenteLeitura(true);
+            habilitarBotoesPropriedade(true);
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+        }
+    }
+    
+    private void alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
+        
+        try {
+            ciInterface.getCiProdutor().alterarProdutor(produtorAtual, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            modoSomenteLeitura(true);
+            JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
+        }
+    }
+    
+    private void excluirProdutor(){
+        
+        try {
+            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            if (confirmacao == 0) {
+                ciInterface.getCiProdutor().excluirProdutor(produtorAtual);
+                JOptionPane.showMessageDialog(this, "Excluído com sucesso!");
+                this.dispose(); 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir " + e.getMessage());
+        }
+    }
+    
+    private void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jTextFieldNome.setEditable(condicao);
         jFormattedTextFieldCpf.setEditable(condicao);
@@ -423,7 +455,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonLimpar.setEnabled(condicao);
     }
     
-    public void setarCamposComInstancia(Produtor produtor) {
+    private void setarCamposComInstancia(Produtor produtor) {
         jTextFieldNome.setText(produtor.getNome());
         jFormattedTextFieldCpf.setText(produtor.getCpf());
         jFormattedTextFieldRg.setText(produtor.getRg());
@@ -440,7 +472,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         }
     }
     
-    public void habilitarBotoesPropriedade(boolean resposta){
+    private void habilitarBotoesPropriedade(boolean resposta){
         jButtonAdicionar.setEnabled(resposta);
         jButtonExcluir.setEnabled(resposta);
     }
@@ -476,7 +508,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         }  
     }//GEN-LAST:event_jButtonExcluirActionPerformed
    
-    public void validarCampos(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone) throws Exception{
+    private void validarCampos(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone) throws Exception{
         if (nome.equals("") || cpf.equals("") || data_nasc.equals("") || inscricao.equals("") || rg.equals("") || telefone.equals(""))
             throw new Exception("Campos Vazios");
     }

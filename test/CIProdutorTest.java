@@ -14,9 +14,10 @@ public class CIProdutorTest {
     }
     
     @Test
-    public void testCadastrar() {
+    public void testCadastrar() throws Exception {
         Produtor produtorEsperado = new Produtor("Moizes", "13953108743", new Date("10/10/1992"), "1234567890", "4463405", "12345678910", 'M');
-        Produtor produtor = ciProdutor.cadastrarProdutor("Moizes", "13953108743", "10/10/1992", "1234567890", "4463405", "12345678910", 'M');
+        ciProdutor.cadastrarProdutor("Moizes", "13953108743", "10/10/1992", "1234567890", "4463405", "12345678910", 'M');
+        Produtor produtor = ciProdutor.getProdutorSelecionado();
         assertEquals(produtorEsperado, produtor);
     }
     
