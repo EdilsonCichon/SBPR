@@ -283,8 +283,9 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
 
     private void jButtonSelecionarTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoMaquinaActionPerformed
         ciInterface.getCiTipoMaquina().instanciarTelaFiltroTipoMaquina(pai, Cenario.SELECIONAR);
-        String tipoMaquina = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada().getNome();
-        jTextFieldTipoMaquina.setText(tipoMaquina);
+        TipoMaquina tipoMaquina = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada();
+        if ( tipoMaquina != null )
+            jTextFieldTipoMaquina.setText(tipoMaquina.getNome());
     }//GEN-LAST:event_jButtonSelecionarTipoMaquinaActionPerformed
 
     public void validarCampos(String nome, String valor, String descricao) throws Exception {

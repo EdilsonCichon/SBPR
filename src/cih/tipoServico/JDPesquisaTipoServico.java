@@ -179,7 +179,14 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
     private void jButtonFiltrarTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoActionPerformed
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
-        
+        if ( colunaFiltro.equals("valor hora") )  {
+            try {
+                Double.parseDouble(filtro);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Valor da hora deve ser numerico!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
         List<TipoServico> listaTipoServicos = ciInterface.getCiTipoServico().filtrarTipoServico(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableTipoServico);
         
