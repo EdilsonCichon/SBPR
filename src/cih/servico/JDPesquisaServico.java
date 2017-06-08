@@ -179,6 +179,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         jLabelSituacaoServico.setText("Situação:");
 
         jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "AGENDADO", "CONCLUIDO", "CANCELADO" }));
+        jComboBoxSituacao.setSelectedIndex(1);
         jComboBoxSituacao.setEnabled(false);
         jComboBoxSituacao.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {

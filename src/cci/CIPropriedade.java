@@ -79,8 +79,12 @@ public class CIPropriedade {
         }
     }
 
-    public List<Propriedade> filtrarPropriedade(String colunaFiltro, String filtro) {
-        return gtPropriedade.filtrarPropriedade(colunaFiltro, filtro);
+    public List<Propriedade> filtrarPropriedades(String colunaFiltro, String filtro) {
+        return gtPropriedade.filtrarPropriedades(colunaFiltro, filtro);
+    }
+    
+    public List<Propriedade> filtrarPorProdutor(String colunaFiltro, int filtro) {
+        return gtPropriedade.filtrarPorProdutor(colunaFiltro, filtro);
     }
   
 }

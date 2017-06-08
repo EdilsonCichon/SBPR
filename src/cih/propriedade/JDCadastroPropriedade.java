@@ -246,7 +246,6 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         ciInterface.getCiProdutor().instanciarTelaFiltroProdutor(pai, Cenario.SELECIONAR);
         produtorAtual = ciInterface.getCiProdutor().getProdutorSelecionado();
         jTextFieldResponsavel.setText(produtorAtual.getNome());
-        propriedadeVazia.setResponsavel(produtorAtual);
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
     private void identificarCenario() {

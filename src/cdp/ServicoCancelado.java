@@ -1,5 +1,6 @@
 package cdp;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -38,6 +39,11 @@ public class ServicoCancelado extends Servico {
         return data_cancelamento;
     }
 
+    public String getData_cancelamento(String formato) {
+        SimpleDateFormat fmt = new SimpleDateFormat(formato);
+        return fmt.format(getData_prevista_conclusao());
+    }
+    
     public void setData_cancelamento(Date data_cancelamento) {
         this.data_cancelamento = data_cancelamento;
     }

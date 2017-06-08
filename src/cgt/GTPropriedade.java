@@ -35,7 +35,11 @@ public class GTPropriedade {
         
     } 
     
-    public List<Propriedade> filtrarPropriedade(String colunaFiltro, String valorFiltro) {
+    public List<Propriedade> filtrarPropriedades(String colunaFiltro, String valorFiltro) {
         return gdPropriedade.filtrar(colunaFiltro, valorFiltro);
+    }
+    
+    public List<Propriedade> filtrarPorProdutor(String colunaFiltro, int valorFiltro) {
+        return gdPropriedade.filtrarPorProdutor(colunaFiltro, valorFiltro);
     }
 }

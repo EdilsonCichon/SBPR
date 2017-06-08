@@ -48,7 +48,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
         jLabelFiltrar.setText("Filtrar por:");
 
-        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Produtor" }));
+        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "ID Produtor" }));
 
         jTablePropriedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,10 +168,19 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
         
-        List<Propriedade> listaProdutores = ciInterface.getCiPropriedade().filtrarPropriedade(colunaFiltro, filtro);
+        List<Propriedade> listaPropriedades = null;
+        
+        if(jComboBoxFiltro.getSelectedIndex() == 1){
+            colunaFiltro = "responsavel.id";
+            int id = Integer.valueOf(filtro);
+            listaPropriedades = ciInterface.getCiPropriedade().filtrarPorProdutor(colunaFiltro, id);
+        }else{
+            listaPropriedades = ciInterface.getCiPropriedade().filtrarPropriedades(colunaFiltro, filtro);
+        }
+            
         JTableUtil.limparTabela(jTablePropriedades);
         
-        listaProdutores.forEach((propriedade) -> {
+        listaPropriedades.forEach((propriedade) -> {
             JTableUtil.addLinha(jTablePropriedades, propriedade.toArray() );
         });
     }//GEN-LAST:event_jButtonFiltrarActionPerformed

@@ -14,4 +14,12 @@ public class GDPropriedade extends GDGenerico{
         sessao.close();
         return lista;
     }
+    
+    public List filtrarPorProdutor(String colunaFiltro, int valorFiltro) {
+        Criteria crit = criarSessao().createCriteria(Propriedade.class);
+        crit.add( Restrictions.eq(colunaFiltro, valorFiltro) );
+        List lista = crit.list();
+        sessao.close();
+        return lista;
+    }
 }

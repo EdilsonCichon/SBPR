@@ -34,8 +34,10 @@ public class GTServico {
         servicoAgendado.setPropriedade(propriedade);
         servicoAgendado.setTipoServico(tipoServico);
         servicoAgendado.setData_agendamento(Calendar.getInstance().getTime());
+        
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(dtPrevistaConclusao);
+        
         servicoAgendado.setData_prevista_conclusao(data);
         servicoAgendado.setQtd_hrs_prevista(Double.parseDouble(qtdHrsPrevista));
         gdServico.cadastrar(servicoAgendado);
@@ -47,6 +49,7 @@ public class GTServico {
         
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(dtPrevistaConclusao);
+        
         servico.setData_prevista_conclusao(data);
         servico.setQtd_hrs_prevista(Double.parseDouble(qtdHrsPrevista));
         servico.setProdutor(produtor);
@@ -56,9 +59,10 @@ public class GTServico {
         gdServico.alterar(servico);
     }
 
-    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException{
+    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException, ParseException{
         
         ServicoCancelado servicoCancelado = new ServicoCancelado();
+        
         servicoCancelado.setId(servico.getId());
         servicoCancelado.setProdutor(servico.getProdutor());
         servicoCancelado.setPropriedade(servicoCancelado.getPropriedade());
@@ -66,22 +70,29 @@ public class GTServico {
         servicoCancelado.setData_prevista_conclusao(servico.getData_prevista_conclusao());
         servicoCancelado.setQtd_hrs_prevista(servico.getQtd_hrs_prevista());
         servicoCancelado.setTipoServico(servico.getTipoServico());
-        servicoCancelado.setData_cancelamento(new Date(dataCancelamento));
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = formato.parse(dataCancelamento);
+        
+        servicoCancelado.setData_cancelamento(data);
         servicoCancelado.setValor_multa(Double.parseDouble(valorMulta));
         
-        gdServico.excluir(servico);
-        gdServico.cadastrar(servicoCancelado);
+        gdServico.cancelarServico(servico, servicoCancelado);   
     } 
     
-    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException{
+    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException, ParseException{
         
         ServicoConcluido servicoConcluido = new ServicoConcluido();
         
         servicoConcluido.setId(servico.getId());
         servicoConcluido.setProdutor(servico.getProdutor());
-        servicoConcluido.setPropriedade(servicoConcluido.getPropriedade());
+        servicoConcluido.setPropriedade(servico.getPropriedade());
         servicoConcluido.setData_agendamento(servico.getData_agendamento());
-        servicoConcluido.setData_conclusao(new Date(dataConclusao));
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = formato.parse(dataConclusao);
+        
+        servicoConcluido.setData_conclusao(data);
         servicoConcluido.setData_prevista_conclusao(servico.getData_prevista_conclusao());
         servicoConcluido.setFuncionario(funcionarioSelecionado);
         servicoConcluido.setMaquina(maquinaSelecionada);
@@ -89,8 +100,7 @@ public class GTServico {
         servicoConcluido.setTipoServico(servico.getTipoServico());
         servicoConcluido.setValor_total(Double.parseDouble(total));
         
-        gdServico.excluir(servico);
-        gdServico.cadastrar(servicoConcluido);
+        gdServico.concluirServico(servico, servicoConcluido);
     } 
     
     public List filtrarServico(String coluna, int id, Class classe) {

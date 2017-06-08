@@ -65,7 +65,7 @@ public class CIServico {
         }
     }
 
-    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException {
+    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException, Exception {
         try {
             gtServico.cancelarServico(servico, dataCancelamento, valorMulta);
         } catch (Exception ex) {
@@ -73,7 +73,7 @@ public class CIServico {
         }
     }
 
-    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException {
+    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException, Exception {
         try {
             gtServico.concluirServico(servico, dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
         } catch (Exception ex) {
