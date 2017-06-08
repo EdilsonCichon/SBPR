@@ -57,9 +57,9 @@ public class CIPropriedade {
         return gtPropriedade.instanciarPropriedadeVazia(produtor);
     }
 
-    public boolean alterarPropriedade(Propriedade propriedade) {
+    public boolean alterarPropriedade(Propriedade propriedade, Produtor produtorSelecionado) {
         try {
-            gtPropriedade.alterarPropriedade(propriedade);
+            gtPropriedade.alterarPropriedade(propriedade, produtorSelecionado);
             JOptionPane.showMessageDialog(cadastroPropriedade, "Alterada com sucesso!");
             return true;
         } catch (Exception e) {

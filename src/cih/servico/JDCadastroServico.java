@@ -657,6 +657,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
             case Cenario.ALTERAR:
                 this.setTitle("Alterar Serviço");
                 setarCamposServicoAgendado(servico);
+                redimensionarJanelaCenario();
                 break;
 
             case Cenario.CONSULTAR:

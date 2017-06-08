@@ -31,7 +31,8 @@ public class GTPropriedade {
         return propriedade;
     }
     
-    public void alterarPropriedade(Propriedade propriedade) throws SQLException, ClassNotFoundException {
+    public void alterarPropriedade(Propriedade propriedade, Produtor produtorSelecionado) throws SQLException, ClassNotFoundException {
+        propriedade.setResponsavel(produtorSelecionado);
         gdPropriedade.alterar(propriedade);
     }
       

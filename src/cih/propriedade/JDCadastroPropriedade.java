@@ -200,7 +200,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                     break;
                 }
                 case Cenario.ALTERAR:
-                    boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia);
+                    boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia, produtorAtual);
                     if (alterado)
                         this.dispose();
                     break;

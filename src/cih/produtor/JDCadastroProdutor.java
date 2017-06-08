@@ -55,7 +55,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonAdicionar = new javax.swing.JButton();
         jScrollPanePropriedades = new javax.swing.JScrollPane();
         jTablePropriedades = new javax.swing.JTable();
-        jButtonAlterar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonCancelar = new javax.swing.JButton();
@@ -225,13 +224,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         });
         jScrollPanePropriedades.setViewportView(jTablePropriedades);
 
-        jButtonAlterar.setText("Alterar");
-        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAlterarActionPerformed(evt);
-            }
-        });
-
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,7 +240,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -256,12 +247,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jPanelPropriedadesLayout.setVerticalGroup(
             jPanelPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPropriedadesLayout.createSequentialGroup()
+                .addGap(0, 17, Short.MAX_VALUE)
                 .addComponent(jButtonAdicionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAlterar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonExcluir)
-                .addContainerGap())
+                .addGap(23, 23, 23))
             .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -452,7 +442,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     
     public void habilitarBotoesPropriedade(boolean resposta){
         jButtonAdicionar.setEnabled(resposta);
-        jButtonAlterar.setEnabled(resposta);
         jButtonExcluir.setEnabled(resposta);
     }
     
@@ -469,16 +458,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         });
         
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
-
-    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        try {
-            Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, Cenario.ALTERAR);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro: "+ e.getMessage(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         
@@ -499,7 +478,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
-    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonExcluir;
