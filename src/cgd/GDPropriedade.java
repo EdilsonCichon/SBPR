@@ -1,6 +1,7 @@
 package cgd;
 
 import cdp.Propriedade;
+import java.sql.SQLException;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
