@@ -3,6 +3,7 @@ package cih.principal;
 import cci.CIInterface;
 import cci.util.JTableUtil;
 import cdp.Habilitacao;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -48,10 +49,21 @@ public class JDHabilitacao extends javax.swing.JDialog {
 
         jLabelHabilitacao.setText("Categoria:");
 
+        jTextFieldHabilitacao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldHabilitacaoKeyPressed(evt);
+            }
+        });
+
         jButtonCadastrar.setText("Cadastrar");
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastrarActionPerformed(evt);
+            }
+        });
+        jButtonCadastrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCadastrarKeyPressed(evt);
             }
         });
 
@@ -77,6 +89,11 @@ public class JDHabilitacao extends javax.swing.JDialog {
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSairActionPerformed(evt);
+            }
+        });
+        jButtonSair.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonSairKeyPressed(evt);
             }
         });
 
@@ -141,6 +158,24 @@ public class JDHabilitacao extends javax.swing.JDialog {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
        this.dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jTextFieldHabilitacaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldHabilitacaoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonCadastrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldHabilitacaoKeyPressed
+
+    private void jButtonCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCadastrarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonCadastrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonCadastrarKeyPressed
+
+    private void jButtonSairKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonSairKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonSairKeyPressed
 
     public void validarCampos(String categoria) throws Exception{ 
         if(categoria.equals("")){

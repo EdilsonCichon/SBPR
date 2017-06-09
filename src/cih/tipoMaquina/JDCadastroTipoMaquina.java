@@ -4,6 +4,7 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.TipoMaquina;
 import java.awt.Frame;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
@@ -52,6 +53,11 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
+            }
+        });
 
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.setMaximumSize(new java.awt.Dimension(79, 23));
@@ -62,6 +68,11 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
                 jButtonLimparActionPerformed(evt);
             }
         });
+        jButtonLimpar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonLimparKeyPressed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setMaximumSize(new java.awt.Dimension(79, 23));
@@ -70,6 +81,11 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
+            }
+        });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
             }
         });
 
@@ -214,6 +230,24 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonLimparKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonLimparKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonLimparActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonLimparKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     public void identificarCenario() {
         switch ( CENARIO ) {

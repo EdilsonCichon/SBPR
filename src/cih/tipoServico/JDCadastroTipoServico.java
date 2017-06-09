@@ -6,6 +6,7 @@ import cci.util.Cenario;
 import cdp.TipoMaquina;
 import cdp.TipoServico;
 import java.awt.Frame;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class JDCadastroTipoServico extends javax.swing.JDialog {
@@ -115,6 +116,11 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                 jButtonSelecionarTipoMaquinaActionPerformed(evt);
             }
         });
+        jButtonSelecionarTipoMaquina.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonSelecionarTipoMaquinaKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTipoServicoLayout = new javax.swing.GroupLayout(jPanelTipoServico);
         jPanelTipoServico.setLayout(jPanelTipoServicoLayout);
@@ -174,6 +180,11 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                 jButtonCancelarActionPerformed(evt);
             }
         });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
+            }
+        });
 
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,9 +192,24 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
+            }
+        });
 
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.setPreferredSize(new java.awt.Dimension(57, 23));
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
+        jButtonLimpar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonLimparKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -287,6 +313,38 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         if ( tipoMaquina != null )
             jTextFieldTipoMaquina.setText(tipoMaquina.getNome());
     }//GEN-LAST:event_jButtonSelecionarTipoMaquinaActionPerformed
+
+    private void jButtonSelecionarTipoMaquinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoMaquinaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonSelecionarTipoMaquinaActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonSelecionarTipoMaquinaKeyPressed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonLimparKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonLimparKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonLimparActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonLimparKeyPressed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        jTextFieldNome.setText("");
+        jTextFieldValorHora.setText("");
+        jTextFieldTipoMaquina.setText("");
+        jTextAreaDescricao.setText("");
+        ciInterface.getCiTipoServico().setTipoServicoSelecionado(null);
+    }//GEN-LAST:event_jButtonLimparActionPerformed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     public void validarCampos(String nome, String valor, String descricao) throws Exception {
         
