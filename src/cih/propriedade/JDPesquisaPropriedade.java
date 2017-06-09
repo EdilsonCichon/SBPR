@@ -3,6 +3,7 @@ package cih.propriedade;
 import cci.CIInterface;
 import cdp.Propriedade;
 import cci.util.JTableUtil;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -48,7 +49,13 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
 
         jLabelFiltrar.setText("Filtrar por:");
 
-        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Produtor" }));
+        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "ID Produtor" }));
+
+        jTextFieldFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldFiltroKeyPressed(evt);
+            }
+        });
 
         jTablePropriedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,6 +80,11 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFiltrarActionPerformed(evt);
+            }
+        });
+        jButtonFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonFiltrarKeyPressed(evt);
             }
         });
 
@@ -115,11 +127,21 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
+            }
+        });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
             }
         });
 
@@ -168,12 +190,25 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
         
-        List<Propriedade> listaProdutores = ciInterface.getCiPropriedade().filtrarPropriedade(colunaFiltro, filtro);
+        List<Propriedade> listaPropriedades = null;
+        
+        if(jComboBoxFiltro.getSelectedIndex() == 1){
+            if(jTextFieldFiltro.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Insira um ID de produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
+            }else{
+                listaPropriedades = listaPropriedades = ciInterface.getCiPropriedade().filtrarPropriedades(colunaFiltro, filtro); 
+            }       
+        }else{
+            listaPropriedades = listaPropriedades = ciInterface.getCiPropriedade().filtrarPropriedades(colunaFiltro, filtro);
+        }
+        
         JTableUtil.limparTabela(jTablePropriedades);
         
-        listaProdutores.forEach((propriedade) -> {
+        if(listaPropriedades != null){
+            listaPropriedades.forEach((propriedade) -> {
             JTableUtil.addLinha(jTablePropriedades, propriedade.toArray() );
-        });
+            });
+        }
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -190,6 +225,30 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Selecione uma propriedade", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jTextFieldFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFiltroKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonFiltrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldFiltroKeyPressed
+
+    private void jButtonFiltrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonFiltrarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonFiltrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonFiltrarKeyPressed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonCancelarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

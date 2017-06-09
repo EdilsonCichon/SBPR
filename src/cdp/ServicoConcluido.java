@@ -1,9 +1,8 @@
 package cdp;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "servico_concluido")
@@ -22,12 +21,10 @@ public class ServicoConcluido extends Servico {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "maquina_id", nullable = false)
-    @Cascade(CascadeType.SAVE_UPDATE)
     private Maquina maquina;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "funcionario_id", nullable = false)
-    @Cascade(CascadeType.SAVE_UPDATE)
     private Funcionario funcionario;
     
     public ServicoConcluido() {
@@ -57,6 +54,11 @@ public class ServicoConcluido extends Servico {
 
     public Date getData_conclusao() {
         return data_conclusao;
+    }
+    
+    public String getData_conclusao(String formato) {
+        SimpleDateFormat fmt = new SimpleDateFormat(formato);
+        return fmt.format(getData_prevista_conclusao());
     }
 
     public void setData_conclusao(Date data_conclusao) {

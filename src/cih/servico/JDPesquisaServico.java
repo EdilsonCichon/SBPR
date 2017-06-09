@@ -173,12 +173,21 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             new String [] {
                 "Tipo do Serviço", "Data Conclusão", "Tempo previsto", "Situação"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTableServico);
 
         jLabelSituacaoServico.setText("Situação:");
 
         jComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "AGENDADO", "CONCLUIDO", "CANCELADO" }));
+        jComboBoxSituacao.setSelectedIndex(1);
         jComboBoxSituacao.setEnabled(false);
         jComboBoxSituacao.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {

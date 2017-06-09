@@ -7,9 +7,12 @@ import org.hibernate.criterion.Restrictions;
 
 public class GDMaquina extends GDGenerico{
     
-    public List filtrar(String colunaFiltro, String valorFiltro) {
+    public List filtrar(String colunaFiltro, Object valorFiltro) {
         Criteria crit = criarSessao().createCriteria(Maquina.class);
-        crit.add( Restrictions.like(colunaFiltro, "%"+valorFiltro+"%") );
+        if (valorFiltro instanceof String)
+            crit.add( Restrictions.like(colunaFiltro, "%"+valorFiltro+"%") );
+        else if (valorFiltro instanceof Integer)
+            crit.add( Restrictions.eq(colunaFiltro, valorFiltro) );
         List lista = crit.list();
         sessao.close();
         return lista;

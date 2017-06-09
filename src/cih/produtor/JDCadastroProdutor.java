@@ -5,6 +5,7 @@ import cdp.Propriedade;
 import cci.CIInterface;
 import cci.util.Cenario;
 import cci.util.JTableUtil;
+import com.sun.glass.events.KeyEvent;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -12,9 +13,9 @@ import javax.swing.JOptionPane;
 
 public class JDCadastroProdutor extends javax.swing.JDialog {
     
-    private final CIInterface ciInterface;
-    private final JFrame pai;
-    private final int CENARIO;
+    private CIInterface ciInterface;
+    private JFrame pai;
+    private int CENARIO;
     private Produtor produtorAtual;
 
     public JDCadastroProdutor(java.awt.Frame pai, boolean modal, CIInterface ciInterface, int CENARIO, Produtor produtor) {
@@ -55,7 +56,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonAdicionar = new javax.swing.JButton();
         jScrollPanePropriedades = new javax.swing.JScrollPane();
         jTablePropriedades = new javax.swing.JTable();
-        jButtonAlterar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonCancelar = new javax.swing.JButton();
@@ -206,6 +206,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 jButtonAdicionarActionPerformed(evt);
             }
         });
+        jButtonAdicionar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonAdicionarKeyPressed(evt);
+            }
+        });
 
         jTablePropriedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -225,17 +230,15 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         });
         jScrollPanePropriedades.setViewportView(jTablePropriedades);
 
-        jButtonAlterar.setText("Alterar");
-        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAlterarActionPerformed(evt);
-            }
-        });
-
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
+            }
+        });
+        jButtonExcluir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonExcluirKeyPressed(evt);
             }
         });
 
@@ -248,7 +251,6 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -256,12 +258,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jPanelPropriedadesLayout.setVerticalGroup(
             jPanelPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPropriedadesLayout.createSequentialGroup()
+                .addGap(0, 17, Short.MAX_VALUE)
                 .addComponent(jButtonAdicionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAlterar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonExcluir)
-                .addContainerGap())
+                .addGap(23, 23, 23))
             .addComponent(jScrollPanePropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -276,11 +277,21 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 jButtonCancelarActionPerformed(evt);
             }
         });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
+            }
+        });
 
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarActionPerformed(evt);
+            }
+        });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
             }
         });
 
@@ -289,6 +300,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLimparActionPerformed(evt);
+            }
+        });
+        jButtonLimpar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonLimparKeyPressed(evt);
             }
         });
 
@@ -334,43 +350,30 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         try {
             
             validarCampos(nome, cpf, data_nasc, inscricao, rg, telefone);
-            boolean respostaOperacao;
+            
             switch (CENARIO) {
+                
                 case Cenario.CADASTRAR:
-                    produtorAtual = ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-                    if(produtorAtual != null){
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(true);
-                        habilitarBotoesPropriedade(true);
-                    }   break;
-                    
+                    cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                    break;
+                
                 case Cenario.ALTERAR:
-                    respostaOperacao = ciInterface.getCiProdutor().alterarProdutor(produtorAtual, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
-                    if (respostaOperacao) {
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(true);
-                    }   break;
-                    
+                    alterarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+                    break;
+                             
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
                     
                 case Cenario.EXCLUIR:
-                    int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-                    if ( confirmacao == 0 ) {
-                        respostaOperacao = ciInterface.getCiProdutor().excluirProdutor(produtorAtual);
-                        if (respostaOperacao)
-                            this.dispose();
-                    }
+                    excluirProdutor();
                     break;
-                    
+                
                 default:
                     break;
             }          
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -390,37 +393,82 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
-    public void identificarCenario() {
+    private void identificarCenario() {
         
+        habilitarBotoesPropriedade(false);
         switch (CENARIO) {
             
             case Cenario.CADASTRAR:
-                habilitarBotoesPropriedade(false);
                 break;
+                
             case Cenario.ALTERAR:
                 setTitle("Alterar Produtor");
                 modoSomenteLeitura(false);
                 habilitarBotoesPropriedade(true);
                 setarCamposComInstancia(produtorAtual);
                 break;
+                
             case Cenario.CONSULTAR:
                 setTitle("Consultar Produtor");
                 modoSomenteLeitura(true);
-                habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtorAtual);
                 jButtonConfirmar.setEnabled(false);
                 jButtonCancelar.setText("Sair");
                 break;
+                
             default:
                 setTitle("Excluir Produtor");
                 modoSomenteLeitura(true);
-                habilitarBotoesPropriedade(false);
                 setarCamposComInstancia(produtorAtual);
                 break;
         }
     }
     
-    public void modoSomenteLeitura(boolean condicao) {
+    private void cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) {
+        
+        try {
+            ciInterface.getCiProdutor().cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            produtorAtual = ciInterface.getCiProdutor().getProdutorSelecionado();
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            modoSomenteLeitura(true);
+            habilitarBotoesPropriedade(true);
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+        }
+    }
+    
+    private void alterarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
+        
+        try {
+            ciInterface.getCiProdutor().alterarProdutor(produtorAtual, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            modoSomenteLeitura(true);
+            JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
+        }
+    }
+    
+    private void excluirProdutor(){
+        
+        try {
+            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            if (confirmacao == 0) {
+                ciInterface.getCiProdutor().excluirProdutor(produtorAtual);
+                JOptionPane.showMessageDialog(this, "Excluído com sucesso!");
+                this.dispose(); 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir " + e.getMessage());
+        }
+    }
+    
+    private void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jTextFieldNome.setEditable(condicao);
         jFormattedTextFieldCpf.setEditable(condicao);
@@ -433,7 +481,7 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonLimpar.setEnabled(condicao);
     }
     
-    public void setarCamposComInstancia(Produtor produtor) {
+    private void setarCamposComInstancia(Produtor produtor) {
         jTextFieldNome.setText(produtor.getNome());
         jFormattedTextFieldCpf.setText(produtor.getCpf());
         jFormattedTextFieldRg.setText(produtor.getRg());
@@ -450,9 +498,8 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         }
     }
     
-    public void habilitarBotoesPropriedade(boolean resposta){
+    private void habilitarBotoesPropriedade(boolean resposta){
         jButtonAdicionar.setEnabled(resposta);
-        jButtonAlterar.setEnabled(resposta);
         jButtonExcluir.setEnabled(resposta);
     }
     
@@ -470,36 +517,60 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
-    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        try {
-            Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, Cenario.ALTERAR);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro: "+ e.getMessage(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_jButtonAlterarActionPerformed
-
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         
         try {
             
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            ciInterface.getCiPropriedade().excluirPropriedade(propriedade);
+            
+            int excluido = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            
+            if(excluido == 0){
+                ciInterface.getCiPropriedade().excluirPropriedade(propriedade);
+            }
             
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);
         }  
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonLimparKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonLimparKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonLimparActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonLimparKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
+
+    private void jButtonAdicionarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonAdicionarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonAdicionarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonAdicionarKeyPressed
+
+    private void jButtonExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonExcluirKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonExcluirActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonExcluirKeyPressed
    
-    public void validarCampos(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone) throws Exception{
+    private void validarCampos(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone) throws Exception{
         if (nome.equals("") || cpf.equals("") || data_nasc.equals("") || inscricao.equals("") || rg.equals("") || telefone.equals(""))
             throw new Exception("Campos Vazios");
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
-    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonExcluir;

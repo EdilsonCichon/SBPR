@@ -86,7 +86,7 @@ public class CIFuncionario {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
             return false;
         }
     }

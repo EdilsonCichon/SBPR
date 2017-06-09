@@ -3,6 +3,7 @@ package cih.principal;
 import cci.CIInterface;
 import cci.util.JTableUtil;
 import cdp.Cargo;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -49,6 +50,12 @@ public class JDCargo extends javax.swing.JDialog {
 
         jLabelNome.setText("Cargo:");
 
+        jTextFieldNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldNomeKeyPressed(evt);
+            }
+        });
+
         jTableCargo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -73,11 +80,21 @@ public class JDCargo extends javax.swing.JDialog {
                 jButtonCadastrarActionPerformed(evt);
             }
         });
+        jButtonCadastrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCadastrarKeyPressed(evt);
+            }
+        });
 
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSairActionPerformed(evt);
+            }
+        });
+        jButtonSair.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonSairKeyPressed(evt);
             }
         });
 
@@ -143,6 +160,24 @@ public class JDCargo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
+
+    private void jTextFieldNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNomeKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonCadastrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldNomeKeyPressed
+
+    private void jButtonCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCadastrarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonCadastrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonCadastrarKeyPressed
+
+    private void jButtonSairKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonSairKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonSairKeyPressed
     
     public void validarCampos(String nomeCargo) throws Exception{ 
         if(nomeCargo.equals("")){

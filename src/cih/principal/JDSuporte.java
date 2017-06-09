@@ -1,6 +1,7 @@
 package cih.principal;
 
 import cci.CIInterface;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -45,8 +46,18 @@ public class JDSuporte extends javax.swing.JDialog {
                 jButtonEnviarActionPerformed(evt);
             }
         });
+        jButtonEnviar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonEnviarKeyPressed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
+            }
+        });
 
         jTextAreaMensagem.setColumns(20);
         jTextAreaMensagem.setRows(5);
@@ -125,6 +136,18 @@ public class JDSuporte extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Erro ao enviar o e-mail: " + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonEnviarActionPerformed
+
+    private void jButtonEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonEnviarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonEnviarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonEnviarKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

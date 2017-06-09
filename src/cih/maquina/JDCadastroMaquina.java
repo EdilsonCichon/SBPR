@@ -5,6 +5,7 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.Maquina;
 import cdp.TipoMaquina;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -107,11 +108,21 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
+            }
+        });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
             }
         });
 
@@ -205,8 +216,8 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
-        String modelo = jTextFieldModelo.getText();
-        String placa = jFormattedTextFieldPlaca.getText().replace("-", "");
+        String modelo = jTextFieldModelo.getText().toUpperCase();
+        String placa = jFormattedTextFieldPlaca.getText().toUpperCase().replace("-", "");
         
         try {
             
@@ -256,6 +267,18 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
             tipoMaquina = (TipoMaquina) jComboBoxTipoMaquina.getSelectedItem();
             jTextAreaDescricao.setText(tipoMaquina.getDescricao());
     }//GEN-LAST:event_jComboBoxTipoMaquinaItemStateChanged
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     public void identificarCenario(){
         

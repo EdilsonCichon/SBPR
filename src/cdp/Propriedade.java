@@ -20,7 +20,6 @@ public class Propriedade implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "produtor_id", nullable = false)
-    @Cascade(CascadeType.SAVE_UPDATE)
     private Produtor responsavel;
 
     public Propriedade() {

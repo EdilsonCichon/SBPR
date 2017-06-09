@@ -67,7 +67,8 @@ public class JTableUtil {
      * @param jTable
      */
     public static void removeLinhaSelecionada(JTable jTable) {
-        getModel(jTable).removeRow(getIndiceLinhaSelecionada(jTable));
+        if (getIndiceLinhaSelecionada(jTable) >= 0)
+            getModel(jTable).removeRow(getIndiceLinhaSelecionada(jTable));
     }
     
     /**
