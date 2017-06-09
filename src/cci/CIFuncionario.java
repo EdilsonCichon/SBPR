@@ -4,7 +4,6 @@ import cci.util.Cenario;
 import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
-import cdp.TipoServico;
 import cdp.Usuario;
 import cdp.endereco.Cep;
 import cgt.GTFuncionario;
@@ -12,7 +11,6 @@ import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
 import java.awt.Frame;
-import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -68,6 +66,7 @@ public class CIFuncionario {
           return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -89,6 +88,14 @@ public class CIFuncionario {
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar " + e.getMessage());
+            
+            /**
+             * APAGAR!!
+             */
+            e.printStackTrace();
+            /**
+             * APAGAR!!
+             */
             return false;
         }
     }

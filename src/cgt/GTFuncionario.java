@@ -12,7 +12,6 @@ import cgd.GDFuncionario;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 public class GTFuncionario {
@@ -114,6 +113,9 @@ public class GTFuncionario {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
         Date dtNascFormatada = new Date(data_nasc);
+        Usuario usuario = (funcionario.getUsuario() != null) ? funcionario.getUsuario() : new Usuario();
+        usuario.setLogin(login);
+        usuario.setSenha(senha);
         
         funcionario.setCargo(cargo);
         funcionario.setCpf(cpf);
@@ -124,8 +126,7 @@ public class GTFuncionario {
         funcionario.setRg(rg);
         funcionario.setSexo(sexo);
         funcionario.setTelefone(telefone);
-        funcionario.getUsuario().setLogin(login);
-        funcionario.getUsuario().setSenha(senha);
+        funcionario.setUsuario(usuario);
         funcionario.getEndereco().setNumero(numero);
         funcionario.getEndereco().setComplemento(complemento);
         funcionario.setTipoServicos(tipoServicos);
