@@ -261,11 +261,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextFieldQtHrsReais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldQtHrsReaisActionPerformed(evt);
-            }
-        });
         jFormattedTextFieldQtHrsReais.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jFormattedTextFieldQtHrsReaisKeyPressed(evt);
@@ -617,10 +612,6 @@ public class JDCadastroServico extends javax.swing.JDialog {
         maquinaSelecionada = ciInterface.getCiMaquina().getMaquinaSelecionada();
         jTextFieldMaquina.setText(maquinaSelecionada.getPlaca());
     }//GEN-LAST:event_jButtonMaquinaActionPerformed
-
-    private void jFormattedTextFieldQtHrsReaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldQtHrsReaisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldQtHrsReaisActionPerformed
 
     private void identificarCenario() {
 
