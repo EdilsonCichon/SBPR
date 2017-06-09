@@ -4,6 +4,7 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cdp.Produtor;
 import cdp.Propriedade;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Frame;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -56,12 +57,18 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jLabelResponsavel.setText("Responsável:");
 
         jTextFieldResponsavel.setEditable(false);
+        jTextFieldResponsavel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldResponsavelKeyPressed(evt);
+            }
+        });
 
         jLabelNomePropriedade.setText("Nome da Propriedadade:");
 
         jLabelReferencia.setText("Referência:");
 
         jTextAreaReferencia.setColumns(20);
+        jTextAreaReferencia.setLineWrap(true);
         jTextAreaReferencia.setRows(5);
         jScrollPaneReferencia.setViewportView(jTextAreaReferencia);
 
@@ -70,6 +77,11 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jButtonPesquisarProdutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPesquisarProdutorActionPerformed(evt);
+            }
+        });
+        jButtonPesquisarProdutor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonPesquisarProdutorKeyPressed(evt);
             }
         });
 
@@ -123,11 +135,21 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                 jButtonCancelarActionPerformed(evt);
             }
         });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
+            }
+        });
 
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarActionPerformed(evt);
+            }
+        });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
             }
         });
 
@@ -136,6 +158,11 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLimparActionPerformed(evt);
+            }
+        });
+        jButtonLimpar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonLimparKeyPressed(evt);
             }
         });
 
@@ -191,41 +218,25 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
             
             switch (CENARIO) {
                 
-                case Cenario.CADASTRAR: {
-                    boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(produtorAtual, nome, referencia);
-                    if (resposta) {
-                        modoSomenteLeitura(resposta);
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                    }                   
-                }break;
+                case Cenario.CADASTRAR:
+                    cadastrarPropriedade(nome, referencia);
+                    break;
                 
-                case Cenario.ALTERAR:{
-                    boolean alterado = ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia, produtorAtual);
-                    if (alterado)
-                        this.dispose();
-                }break;
+                case Cenario.ALTERAR:
+                    alterarPropriedade();
+                    break;
                     
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
                     
-                case Cenario.EXCLUIR:{
-                    int confirmado = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-                    if ( confirmado == 0 ) {
-                        boolean excluido = ciInterface.getCiPropriedade().excluirPropriedade(propriedadeVazia);
-                        if ( excluido )
-                            this.dispose();
-                    }
-                }break;
+                case Cenario.EXCLUIR:
+                    excluirPropriedade();
+                    break;
                 
-                case Cenario.ADICIONAR: {
-                    propriedadeVazia.setNome_propriedade(nome);
-                    propriedadeVazia.setReferencia(referencia);
-                    boolean resposta = ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia);                  
-                    if ( resposta )
-                        this.dispose();                
-                } break;
+                case Cenario.ADICIONAR: 
+                    adicionarPropriedade(nome, referencia);
+                    break;
                 
                 default:
                     break;
@@ -251,6 +262,83 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jTextFieldResponsavel.setText(produtorAtual.getNome());
     }//GEN-LAST:event_jButtonPesquisarProdutorActionPerformed
 
+    private void jTextFieldResponsavelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldResponsavelKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonPesquisarProdutorActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldResponsavelKeyPressed
+
+    private void jButtonPesquisarProdutorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonPesquisarProdutorKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonPesquisarProdutorActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonPesquisarProdutorKeyPressed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonLimparKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonLimparKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonLimparActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonLimparKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonCancelarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
+
+    private void cadastrarPropriedade(String nome, String referencia){
+        try{
+            ciInterface.getCiPropriedade().cadastrarPropriedade(produtorAtual, nome, referencia);
+            modoSomenteLeitura(true);
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            JOptionPane.showMessageDialog(this, "Cadastrada com sucesso!");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+        }
+    }
+    
+    private void adicionarPropriedade(String nome, String referencia){
+        try{
+            propriedadeVazia.setNome_propriedade(nome);
+            propriedadeVazia.setReferencia(referencia);
+            ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia); 
+            JOptionPane.showMessageDialog(this, " Propriedade Adicionada com sucesso!");
+            this.dispose();    
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao adicionar: " + e.getMessage());
+        }
+    }
+    
+    private void alterarPropriedade(){
+        try{
+            ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia, produtorAtual);
+            JOptionPane.showMessageDialog(this, "Alterada com sucesso!");
+            this.dispose();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
+        }
+    }
+    
+    private void excluirPropriedade(){
+        try{
+            int confirmado = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            if ( confirmado == 0 ) {
+                ciInterface.getCiPropriedade().excluirPropriedade(propriedadeVazia);
+                JOptionPane.showMessageDialog(this, "Propriedade excluída com sucesso");
+                this.dispose();
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao excluir propriedade: " + e.getMessage());
+        }
+    }
+    
     private void identificarCenario() {
 
         if (propriedadeVazia == null) {
@@ -302,7 +390,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         }
     }
     
-    public void desabilitarCampos(boolean condicao){
+    private void desabilitarCampos(boolean condicao){
         condicao = !condicao;
         jTextFieldNomePropriedade.setEnabled(condicao);
         jTextAreaReferencia.setEnabled(condicao);
@@ -310,13 +398,13 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jButtonConfirmar.setEnabled(condicao);
     }
 
-    public void setarCamposComInstancia() {
+    private void setarCamposComInstancia() {
         jTextFieldResponsavel.setText(propriedadeVazia.getResponsavel().getNome());
         jTextFieldNomePropriedade.setText(propriedadeVazia.getNome_propriedade());
         jTextAreaReferencia.setText(propriedadeVazia.getReferencia());
     }
 
-    public void modoSomenteLeitura(boolean condicao) {
+    private void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jTextFieldNomePropriedade.setEditable(condicao);
         jTextFieldResponsavel.setEditable(condicao);
@@ -325,7 +413,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jButtonLimpar.setEnabled(condicao);
     }
 
-    public void validarCampos(String nome, String referencia) throws Exception {
+    private void validarCampos(String nome, String referencia) throws Exception {
 
         if (nome.equals("") || referencia.equals("")) {
             throw new Exception("Campos Vazios");

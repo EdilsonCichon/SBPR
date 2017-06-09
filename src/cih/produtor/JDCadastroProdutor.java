@@ -5,6 +5,7 @@ import cdp.Propriedade;
 import cci.CIInterface;
 import cci.util.Cenario;
 import cci.util.JTableUtil;
+import com.sun.glass.events.KeyEvent;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
@@ -205,6 +206,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 jButtonAdicionarActionPerformed(evt);
             }
         });
+        jButtonAdicionar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonAdicionarKeyPressed(evt);
+            }
+        });
 
         jTablePropriedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -228,6 +234,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
+            }
+        });
+        jButtonExcluir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonExcluirKeyPressed(evt);
             }
         });
 
@@ -266,11 +277,21 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
                 jButtonCancelarActionPerformed(evt);
             }
         });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
+            }
+        });
 
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarActionPerformed(evt);
+            }
+        });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
             }
         });
 
@@ -279,6 +300,11 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
         jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLimparActionPerformed(evt);
+            }
+        });
+        jButtonLimpar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonLimparKeyPressed(evt);
             }
         });
 
@@ -507,6 +533,36 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);
         }  
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonLimparKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonLimparKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonLimparActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonLimparKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
+
+    private void jButtonAdicionarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonAdicionarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonAdicionarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonAdicionarKeyPressed
+
+    private void jButtonExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonExcluirKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonExcluirActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonExcluirKeyPressed
    
     private void validarCampos(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone) throws Exception{
         if (nome.equals("") || cpf.equals("") || data_nasc.equals("") || inscricao.equals("") || rg.equals("") || telefone.equals(""))

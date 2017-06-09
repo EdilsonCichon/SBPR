@@ -41,15 +41,11 @@ public class CIPropriedade {
         pesquisaPropriedade.setVisible(true);
     }
 
-    public boolean cadastrarPropriedade(Produtor responsavel, String nome, String referencia) {
-
+    public void cadastrarPropriedade(Produtor responsavel, String nome, String referencia) throws Exception {
         try {
-            gtPropriedade.cadastrarPropriedade(responsavel, nome, referencia);
-            JOptionPane.showMessageDialog(null, "Cadastrada com sucesso!");
-            return true;
+            gtPropriedade.cadastrarPropriedade(responsavel, nome, referencia); 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return false;
+            throw e;
         }
     }
 
@@ -57,34 +53,23 @@ public class CIPropriedade {
         return gtPropriedade.instanciarPropriedadeVazia(produtor);
     }
 
-    public boolean alterarPropriedade(Propriedade propriedade, Produtor produtorSelecionado) {
+    public void alterarPropriedade(Propriedade propriedade, Produtor produtorSelecionado) throws Exception {
         try {
             gtPropriedade.alterarPropriedade(propriedade, produtorSelecionado);
-            JOptionPane.showMessageDialog(cadastroPropriedade, "Alterada com sucesso!");
-            return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(cadastroPropriedade, "Erro ao alterar: " + e.getMessage());
-            return false;
+            throw e;
         }
     }
 
-    public boolean excluirPropriedade(Propriedade propriedade) {
+    public void excluirPropriedade(Propriedade propriedade) throws Exception {
         try {
-            gtPropriedade.excluirPropriedade(propriedade);
-            JOptionPane.showMessageDialog(null, "Propriedade excluída com sucesso");
-            return true;
+            gtPropriedade.excluirPropriedade(propriedade);    
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir propriedade: " + e.getMessage());
-            return false;
+            throw e;
         }
     }
 
     public List<Propriedade> filtrarPropriedades(String colunaFiltro, String filtro) {
         return gtPropriedade.filtrarPropriedades(colunaFiltro, filtro);
     }
-    
-    public List<Propriedade> filtrarPorProdutor(String colunaFiltro, int filtro) {
-        return gtPropriedade.filtrarPorProdutor(colunaFiltro, filtro);
-    }
-  
 }
