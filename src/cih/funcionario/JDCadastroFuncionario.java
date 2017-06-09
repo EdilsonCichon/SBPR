@@ -751,6 +751,9 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private void jButtonAddTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTipoServicoActionPerformed
         ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico((Frame)getOwner(), Cenario.SELECIONAR);
         TipoServico tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
+        if (tipoServicoSelecionado == null)
+            return;
+        ciInterface.getCiTipoServico().setTipoServicoSelecionado(null);
         boolean jaVinculado = false;
         
         for (Object tipoServicoFuncionario : JTableUtil.toList(jTableTiposServicos))

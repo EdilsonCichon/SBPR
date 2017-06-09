@@ -66,7 +66,6 @@ public class CIFuncionario {
           return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            e.printStackTrace();
             return false;
         }
     }
@@ -87,15 +86,7 @@ public class CIFuncionario {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar " + e.getMessage());
-            
-            /**
-             * APAGAR!!
-             */
-            e.printStackTrace();
-            /**
-             * APAGAR!!
-             */
+            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
             return false;
         }
     }
