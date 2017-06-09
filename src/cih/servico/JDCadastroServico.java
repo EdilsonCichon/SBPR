@@ -677,13 +677,13 @@ public class JDCadastroServico extends javax.swing.JDialog {
     
     private void concluirServico() {
         
-        calcularValorTotal();
         String dataConclusao = jFormattedTextFieldDataConclusao.getText();
         String qtdHoras = jFormattedTextFieldQtHrsReais.getText().replace(":", ".");
         String total = jTextFieldValorTotal.getText();
 
         try {
             validacoesConcluir();
+            calcularValorTotal();
             ciInterface.getCiServico().concluirServico(((ServicoAgendado) servico), dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
             modoSomenteLeituraConcluido(true);
             jButtonConfirmar.setEnabled(false);
