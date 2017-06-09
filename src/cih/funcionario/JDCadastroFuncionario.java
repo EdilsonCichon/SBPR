@@ -634,79 +634,28 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         cargo = (Cargo) jComboBoxCargo.getSelectedItem();
         habilitacao = (Habilitacao) jComboBoxHabilitacao.getSelectedItem();
         List tiposServicos = JTableUtil.toList(jTableTiposServicos);
-        String cep = "";
-        String tipoLogradouro = "";
-        String logradouro = "";
-        String bairro = "";
-        String cidade = "";
-        String estado = "";
-        boolean cenarioExecutado = false;
+        
 
         try {
 
             switch (CENARIO) {
 
-                case Cenario.CADASTRAR: {
-
-                    Usuario usuario = null;
-                    if (jCheckBoxAcessarSistema.isSelected()) {
-                        usuario = ciInterface.getCiFuncionario().instanciarUsuario(login, senha);
-                    }
-
-                    cep = jFormattedTextFieldCep.getText();
-                    tipoLogradouro = jTextFieldTipoLogradouro.getText();
-                    logradouro = jTextFieldLogradouro.getText();
-                    bairro = jTextFieldBairro.getText();
-                    cidade = jTextFieldCidade.getText();
-                    estado = jTextFieldEstado.getText();
-                    
-                    validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, login, senha);
-                    consultarCep();
-                    cenarioExecutado = ciInterface.getCiFuncionario().cadastrarFuncionario(
-                            nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
-                            habilitacao, usuario, cep, logradouro, numero,
-                            bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
-
-                    if (cenarioExecutado) {
-                        modoConcluido(cenarioExecutado);
-                    }
-
+                case Cenario.CADASTRAR:
+                    cadastrarFuncionario(nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, habilitacao, 
+                            login, senha, numero, complemento, tiposServicos);
                     break;
-                }
+                
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
 
                 case Cenario.ALTERAR:
-
-                    cep = jFormattedTextFieldCep.getText();
-                    tipoLogradouro = jTextFieldTipoLogradouro.getText();
-                    logradouro = jTextFieldLogradouro.getText();
-                    bairro = jTextFieldBairro.getText();
-                    cidade = jTextFieldCidade.getText();
-                    estado = jTextFieldEstado.getText();
-
-                    validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, login, senha);
-                    consultarCep();
-                    cenarioExecutado = ciInterface.getCiFuncionario().alterarFuncionario(funcionarioAtual,
-                            nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
-                            habilitacao, login, senha, cep, logradouro, numero,
-                            bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
-
-                    if (cenarioExecutado) {
-                        modoConcluido(cenarioExecutado);
-                    }
+                    alterarFuncionario(nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, habilitacao, 
+                            login, senha, numero, complemento, tiposServicos);
                     break;
 
                 case Cenario.EXCLUIR:
-                    int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-                    if (confirmacao == 0) {
-                        cenarioExecutado = ciInterface.getCiFuncionario().excluirFuncionario(funcionarioAtual);
-                    }
-
-                    if (cenarioExecutado) {
-                        this.dispose();
-                    }
+                    excluirFuncionario();
                     break;
 
                 default:
@@ -791,7 +740,83 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonRemoverTipoServicoKeyPressed
 
-    public void identificarCenario() {
+    private void cadastrarFuncionario(String nome, String cpf, String rg, String email,
+            String data_nasc, String telefone, char sexo, Cargo cargo,
+            Habilitacao habilitacao, String login, String senha,
+            String numero, String complemento, List tiposServicos) {
+        
+        try {
+            
+            Usuario usuario = null;
+            if (jCheckBoxAcessarSistema.isSelected()) {
+                usuario = ciInterface.getCiFuncionario().instanciarUsuario(login, senha);
+            }
+            
+            String cep = jFormattedTextFieldCep.getText();
+            String tipoLogradouro = jTextFieldTipoLogradouro.getText();
+            String logradouro = jTextFieldLogradouro.getText();
+            String bairro = jTextFieldBairro.getText();
+            String cidade = jTextFieldCidade.getText();
+            String estado = jTextFieldEstado.getText();
+
+            validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, login, senha);
+            consultarCep();
+            
+            ciInterface.getCiFuncionario().cadastrarFuncionario(
+                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
+                    habilitacao, usuario, cep, logradouro, numero,
+                    bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
+
+            modoConcluido(true);
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+        }
+    }
+    
+    private void alterarFuncionario(String nome, String cpf, String rg, String email,
+            String data_nasc, String telefone, char sexo, Cargo cargo,
+            Habilitacao habilitacao, String login, String senha,
+            String numero, String complemento, List tipoServicos){
+        
+        try {
+            
+            String cep = jFormattedTextFieldCep.getText();
+            String tipoLogradouro = jTextFieldTipoLogradouro.getText();
+            String logradouro = jTextFieldLogradouro.getText();
+            String bairro = jTextFieldBairro.getText();
+            String cidade = jTextFieldCidade.getText();
+            String estado = jTextFieldEstado.getText();
+
+            validarCampos(nome, cpf, data_nasc, rg, telefone, email, cep, numero, login, senha);
+            consultarCep();
+            
+            ciInterface.getCiFuncionario().alterarFuncionario(funcionarioAtual,
+                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
+                    habilitacao, login, senha, cep, logradouro, numero,
+                    bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tipoServicos);
+
+            modoConcluido(true);
+            JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
+        }
+    }
+    
+    private void excluirFuncionario() {
+        try {
+            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            if (confirmacao == 0) {
+                ciInterface.getCiFuncionario().excluirFuncionario(funcionarioAtual);
+                JOptionPane.showMessageDialog(this, "Excluído com sucesso!");
+                this.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir " + e.getMessage());
+        }
+    }
+    
+    private void identificarCenario() {
 
         switch (CENARIO) {
 
@@ -825,7 +850,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         }
     }
 
-    public void modoSomenteLeitura(boolean condicao) {
+    private void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jTextFieldNome.setEditable(condicao);
         jTextFieldEmail.setEditable(condicao);
@@ -856,13 +881,13 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jButtonRemoverTipoServico.setEnabled(condicao);
     }
 
-    public void modoConcluido(boolean resposta) {
+    private void modoConcluido(boolean resposta) {
         jButtonConfirmar.setEnabled(!resposta);
         jButtonCancelar.setText("Sair");
         modoSomenteLeitura(resposta);
     }
 
-    public void setarCamposComInstancia(Funcionario funcionario) {
+    private void setarCamposComInstancia(Funcionario funcionario) {
 
         jTextFieldNome.setText(funcionario.getNome());
         jFormattedTextFieldCpf.setText(funcionario.getCpf());
@@ -892,7 +917,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         });
     }
 
-    public void preencherEnderecoCep(Cep cep) {
+    private void preencherEnderecoCep(Cep cep) {
         jTextFieldBairro.setText(cep.getLogradouro().getBairro().getNome());
         jTextFieldCidade.setText(cep.getLogradouro().getBairro().getCidade().getNome());
         jTextFieldEstado.setText(cep.getLogradouro().getBairro().getCidade().getEstado().getNome());
@@ -901,7 +926,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldCep.setText(cep.getNome());
     }
 
-    public void preencherEnderecoWeb(WebServiceCep webServiceCep) {
+    private void preencherEnderecoWeb(WebServiceCep webServiceCep) {
         jTextFieldBairro.setText(webServiceCep.getBairro());
         jTextFieldCidade.setText(webServiceCep.getCidade());
         jTextFieldTipoLogradouro.setText(webServiceCep.getLogradouroType());
@@ -909,7 +934,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jTextFieldEstado.setText(webServiceCep.getUf());
     }
 
-    public void limparEndereco() {
+    private void limparEndereco() {
         jTextFieldBairro.setText("");
         jTextFieldCidade.setText("");
         jTextFieldEstado.setText("");
@@ -917,7 +942,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jTextFieldLogradouro.setText("");
     }
 
-    public void consultarCep() throws Exception {
+    private void consultarCep() throws Exception {
 
         String numeroCep = jFormattedTextFieldCep.getText().replace("-", "");
         cepAtual = ciInterface.getCiGeral().consultarCep(numeroCep);
@@ -936,17 +961,17 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         }
     }
 
-    public void preencherComboCargo() {
+    private void preencherComboCargo() {
         List<Cargo> listaCargos = ciInterface.getCiGeral().consultarCargos();
         jComboBoxCargo.setModel(new DefaultComboBoxModel(listaCargos.toArray()));
     }
 
-    public void preencherComboHabilitacao() {
+    private void preencherComboHabilitacao() {
         List<Habilitacao> listaHabilitacoes = ciInterface.getCiGeral().consultarHabilitacoes();
         jComboBoxHabilitacao.setModel(new DefaultComboBoxModel(listaHabilitacoes.toArray()));
     }
 
-    public void validarCampos(
+    private void validarCampos(
             String nome, String cpf, String data_nasc, String rg, String telefone, String email,
             String cep, String numero, String usuario, String senha) throws Exception {
 
