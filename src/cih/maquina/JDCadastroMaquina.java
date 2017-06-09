@@ -16,7 +16,6 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
     private int CENARIO;
     private Maquina maquinaAtual;
     private TipoMaquina tipoMaquina;
-    private boolean resposta;
     
     public JDCadastroMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Maquina maquina) {
         super(parent, modal);
@@ -221,36 +220,26 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         
         try {
             
-            validarCampos(tipoMaquina, modelo, placa);
             switch (CENARIO) {
+                
                 case Cenario.CADASTRAR:
-
-                    resposta = ciInterface.getCiMaquina().cadastrarMaquina(modelo, placa, tipoMaquina);
-                    if (resposta) {
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(true);
-                    }
+                    validarCampos(tipoMaquina, modelo, placa);    
+                    cadastrarMaquina(modelo, placa);
                     break;
                     
                 case Cenario.ALTERAR:
-                    resposta = ciInterface.getCiMaquina().alterarMaquina(maquinaAtual, modelo, placa, tipoMaquina);
-                    if(resposta){
-                        modoSomenteLeitura(true);
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                    }   break;
+                    validarCampos(tipoMaquina, modelo, placa);
+                    alterarMaquina(modelo, placa);
+                    break;
                     
                 case Cenario.CONSULTAR:
                     this.dispose();
                     break;
+                    
                 case Cenario.EXCLUIR:
-                    JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
-                    boolean excluido = ciInterface.getCiMaquina().excluirMaquina(maquinaAtual);
-                    if (excluido) {
-                        this.dispose();
-                    }
+                    excluirMaquina();
                     break;
+                    
                 default:
                     break;               
             }
@@ -280,7 +269,44 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
 
-    public void identificarCenario(){
+    private void cadastrarMaquina(String modelo, String placa){
+        try{
+            ciInterface.getCiMaquina().cadastrarMaquina(modelo, placa, tipoMaquina);
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            modoSomenteLeitura(true);
+            JOptionPane.showMessageDialog(this, "Cadastrada com sucesso!");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+        }
+    }
+    
+    private void alterarMaquina(String modelo, String placa){
+        try{
+            ciInterface.getCiMaquina().alterarMaquina(maquinaAtual, modelo, placa, tipoMaquina);
+            modoSomenteLeitura(true);
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            JOptionPane.showMessageDialog(this, "Alterada com sucesso!");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
+        }
+    }
+    
+    private void excluirMaquina(){
+        try{
+            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            if ( confirmacao == 0 ) {
+                ciInterface.getCiMaquina().excluirMaquina(maquinaAtual);
+                JOptionPane.showMessageDialog(this, "Maquina excluída com sucesso");
+                this.dispose();
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao excluir maquina: " + e.getMessage());
+        }
+    }
+    
+    private void identificarCenario(){
         
         switch (CENARIO) {
             
@@ -309,12 +335,12 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         }
     }
     
-    public void preencherCombo(){
+    private void preencherCombo(){
         List<TipoMaquina> listaTipoMaquina = ciInterface.getCiTipoMaquina().consultarTipoMaquina();
         jComboBoxTipoMaquina.setModel( new DefaultComboBoxModel( listaTipoMaquina.toArray()));
     }
     
-    public void setarCamposComInstancia(Maquina maquinaAtual){
+    private void setarCamposComInstancia(Maquina maquinaAtual){
         
         jTextFieldModelo.setText(maquinaAtual.getModelo());
         jFormattedTextFieldPlaca.setText(maquinaAtual.getPlaca()); 
@@ -324,7 +350,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         } 
     }
     
-    public void modoSomenteLeitura(boolean condicao) {
+    private void modoSomenteLeitura(boolean condicao) {
         condicao = !condicao;
         jComboBoxTipoMaquina.setEnabled(condicao);
         jTextFieldModelo.setEditable(condicao);

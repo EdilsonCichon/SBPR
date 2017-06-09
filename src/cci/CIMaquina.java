@@ -9,7 +9,6 @@ import cih.maquina.JDCadastroMaquina;
 import cih.maquina.JDPesquisarMaquina;
 import java.awt.Frame;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class CIMaquina {
     
@@ -41,25 +40,19 @@ public class CIMaquina {
         pesquisaMaquina.setVisible(true);
     }
 
-    public boolean cadastrarMaquina(String modelo, String placa, TipoMaquina tipoMaquina){
+    public void cadastrarMaquina(String modelo, String placa, TipoMaquina tipoMaquina) throws Exception{
         try{  
             gtMaquina.cadastrarMaquina(modelo, placa, tipoMaquina);
-            JOptionPane.showMessageDialog(null, "Cadastrada com sucesso!");
-            return true;
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return false;
+           throw e;   
         }
     }
     
-    public boolean alterarMaquina(Maquina maquina, String modelo, String placa, TipoMaquina tipoMaquina){
+    public void alterarMaquina(Maquina maquina, String modelo, String placa, TipoMaquina tipoMaquina) throws Exception{
         try{  
             gtMaquina.alterarMaquina(maquina, modelo, placa, tipoMaquina);
-            JOptionPane.showMessageDialog(cadastroMaquina, "Alterada com sucesso!");
-            return true;
         }catch(Exception e){
-            JOptionPane.showMessageDialog(cadastroMaquina, "Erro ao alterar: " + e.getMessage());
-            return false;
+            throw e;
         }
     }
     
@@ -67,14 +60,11 @@ public class CIMaquina {
        return gtMaquina.filtrarMaquina(colunaFiltro, filtro);
     }
     
-    public boolean excluirMaquina( Maquina maquina){
+    public void excluirMaquina( Maquina maquina) throws Exception{
         try {
-            gtMaquina.excluirMaquina(maquina);
-            JOptionPane.showMessageDialog(null, "Maquina excluída com sucesso");
-            return true;
+            gtMaquina.excluirMaquina(maquina);     
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir maquina: " + e.getMessage());
-            return false;
+           throw e;  
         }
     }
 

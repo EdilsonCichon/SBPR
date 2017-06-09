@@ -9,7 +9,6 @@ import cih.tipoServico.JDCadastroTipoServico;
 import cih.tipoServico.JDPesquisaTipoServico;
 import java.awt.Frame;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class CITipoServico {
     

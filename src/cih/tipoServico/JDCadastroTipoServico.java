@@ -331,6 +331,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     private void cadastrarTipoServico(String nome, String valor, String descricao){
+        
         try {
             ciInterface.getCiTipoServico().cadastrarTipoServico(nome, valor, descricao, tipoMaquinaSelecionada);
             modoSomenteLeitura(true);
@@ -368,7 +369,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         }
     }
     
-    public void validarCampos(String nome, String valor, String descricao) throws Exception {
+    private void validarCampos(String nome, String valor, String descricao) throws Exception {
         
         if(nome.equals("") || (valor.equals("")) || (descricao.equals(""))){
             throw new Exception("Verifique se todos os campos estão preenchidos!");
