@@ -14,6 +14,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private TipoServico tipoServicoAtual;
+    private TipoMaquina tipoMaquinaSelecionada;
     private Frame pai;
     
     public JDCadastroTipoServico(java.awt.Frame FramePai, boolean modal, CIInterface ciInterface, int CENARIO, TipoServico tipoServicoInformado) {
@@ -49,7 +50,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                 modoSomenteLeitura(true);
                 setarCamposComInstancia(tipoServicoAtual);
                 break;
-            default: //CENARIO DESCONHECIDO
+            default: 
                 break;
         }
     }
@@ -258,40 +259,23 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         String nome = jTextFieldNome.getText();
         String valor = jTextFieldValorHora.getText();
         String descricao = jTextAreaDescricao.getText();
-        TipoMaquina tipoMaquina = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada();
-        boolean respostaOperacao;
+        tipoMaquinaSelecionada = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada();
         
         try {
             switch (CENARIO) {
+                
                 case Cenario.CADASTRAR:
                     validarCampos(nome, valor, descricao);
-                    respostaOperacao = ciInterface.getCiTipoServico().cadastrarTipoServico(nome, valor, descricao, tipoMaquina);
-                    if (respostaOperacao) {
-                        modoSomenteLeitura(respostaOperacao);
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                    }
+                    cadastrarTipoServico(nome, valor, descricao);
                     break;
+                    
                 case Cenario.ALTERAR:
                     validarCampos(nome, valor, descricao);
-                    //tipoServicoAtual.setTipoMaquina(tipoMaquina);
-                    tipoServicoAtual.setNome(nome);
-                    tipoServicoAtual.setValor_hr(Double.parseDouble(valor));
-                    tipoServicoAtual.setDescricao(descricao);
-                    respostaOperacao = ciInterface.getCiTipoServico().alterarTipoServico(tipoServicoAtual);
-                    if (respostaOperacao) {
-                        jButtonConfirmar.setEnabled(false);
-                        jButtonCancelar.setText("Sair");
-                        modoSomenteLeitura(true);
-                    }
+                    alterarTipoServico(nome, valor, descricao);
                     break;
+                    
                 case Cenario.EXCLUIR:
-                    int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-                    if ( confirmacao == 0 ) {
-                        respostaOperacao = ciInterface.getCiTipoServico().excluirTipoServico(tipoServicoAtual);
-                        if(respostaOperacao)
-                            this.dispose();
-                    }
+                    excluirTipoServico();
                     break;
                 
                 default:
@@ -309,9 +293,9 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
 
     private void jButtonSelecionarTipoMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoMaquinaActionPerformed
         ciInterface.getCiTipoMaquina().instanciarTelaFiltroTipoMaquina(pai, Cenario.SELECIONAR);
-        TipoMaquina tipoMaquina = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada();
-        if ( tipoMaquina != null )
-            jTextFieldTipoMaquina.setText(tipoMaquina.getNome());
+        tipoMaquinaSelecionada = ciInterface.getCiTipoMaquina().getTipoMaquinaSelecionada();
+        if ( tipoMaquinaSelecionada != null )
+            jTextFieldTipoMaquina.setText(tipoMaquinaSelecionada.getNome());
     }//GEN-LAST:event_jButtonSelecionarTipoMaquinaActionPerformed
 
     private void jButtonSelecionarTipoMaquinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoMaquinaKeyPressed
@@ -346,11 +330,52 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
 
+    private void cadastrarTipoServico(String nome, String valor, String descricao){
+        try {
+            ciInterface.getCiTipoServico().cadastrarTipoServico(nome, valor, descricao, tipoMaquinaSelecionada);
+            modoSomenteLeitura(true);
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+        }
+    }
+    
+    private void alterarTipoServico(String nome, String valor, String descricao){
+        try {
+            ciInterface.getCiTipoServico().alterarTipoServico(tipoServicoAtual, tipoMaquinaSelecionada, nome, valor, descricao);
+            jButtonConfirmar.setEnabled(false);
+            jButtonCancelar.setText("Sair");
+            modoSomenteLeitura(true);
+            JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
+        }
+    }
+    
+    private void excluirTipoServico(){
+        try{
+            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            if ( confirmacao == 0 ) {
+                ciInterface.getCiTipoServico().excluirTipoServico(tipoServicoAtual);
+                JOptionPane.showMessageDialog(this, "Excluído com sucesso!");
+                this.dispose();
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao excluir " + e.getMessage());
+        }
+    }
+    
     public void validarCampos(String nome, String valor, String descricao) throws Exception {
         
         if(nome.equals("") || (valor.equals("")) || (descricao.equals(""))){
             throw new Exception("Verifique se todos os campos estão preenchidos!");
-        }    
+        }
+        if(tipoMaquinaSelecionada == null){
+            throw new Exception ("Selecione um Tipo de Máquina");
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

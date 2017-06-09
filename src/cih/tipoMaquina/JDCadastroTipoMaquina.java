@@ -262,14 +262,14 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
     
     private void excluirTipoMaquina(){
         try{
-            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", WIDTH);
+            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
             if ( confirmacao == 0 ) {
                 ciInterface.getCiTipoMaquina().excluirTipoMaquina(tipoMaquinaAtual);
+                JOptionPane.showMessageDialog(this, "Excluído com sucesso!");
                 this.dispose();
-            }
-            JOptionPane.showMessageDialog(this, "Excluído com sucesso!");
+            } 
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao excluir " + e.getMessage());
         }
     }
     
