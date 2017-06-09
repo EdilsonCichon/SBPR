@@ -8,7 +8,6 @@ import cih.tipoMaquina.JDPesquisarTipoMaquina;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class CITipoMaquina {
     
@@ -30,25 +29,19 @@ public class CITipoMaquina {
             instanciarTelaFiltroTipoMaquina(pai, CENARIO);
     }
         
-    public boolean cadastrarTipoMaquina(String nome, String descricao) {
+    public void cadastrarTipoMaquina(String nome, String descricao) throws Exception {
         try {
-            gtTipoMaquina.cadastrarTipoMaquina(nome, descricao);
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-            return true;
+            gtTipoMaquina.cadastrarTipoMaquina(nome, descricao); 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return false;
+            throw e;
         }
     }
     
-    public boolean alterarTipoMaquina(TipoMaquina tipoMaquina, String nome, String descricao) {
+    public void alterarTipoMaquina(TipoMaquina tipoMaquina, String nome, String descricao) throws Exception {
         try {
-            gtTipoMaquina.alterarTipoMaquina(tipoMaquina, nome, descricao);
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return true;
+            gtTipoMaquina.alterarTipoMaquina(tipoMaquina, nome, descricao);    
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + e.getMessage());
-            return false;
+            throw e;   
         }
     }
     
@@ -60,14 +53,10 @@ public class CITipoMaquina {
        return gtTipoMaquina.consultarTipoMaquina();
     }
     
-    public boolean excluirTipoMaquina(TipoMaquina tipoMaquina){
+    public void excluirTipoMaquina(TipoMaquina tipoMaquina){
         try {
             gtTipoMaquina.excluirTipoMaquina(tipoMaquina);
-            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
-            return true;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
-            return false;
+        } catch (Exception e) {     
         }  
     }
     
