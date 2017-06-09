@@ -562,7 +562,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jPanelRodapeLayout.setVerticalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar)
@@ -751,6 +751,9 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private void jButtonAddTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTipoServicoActionPerformed
         ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico((Frame)getOwner(), Cenario.SELECIONAR);
         TipoServico tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
+        if (tipoServicoSelecionado == null)
+            return;
+        ciInterface.getCiTipoServico().setTipoServicoSelecionado(null);
         boolean jaVinculado = false;
         
         for (Object tipoServicoFuncionario : JTableUtil.toList(jTableTiposServicos))
