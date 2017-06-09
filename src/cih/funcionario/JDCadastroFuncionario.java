@@ -340,11 +340,21 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                 jButtonRemoverTipoServicoActionPerformed(evt);
             }
         });
+        jButtonRemoverTipoServico.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonRemoverTipoServicoKeyPressed(evt);
+            }
+        });
 
         jButtonAddTipoServico.setText("Adicionar");
         jButtonAddTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddTipoServicoActionPerformed(evt);
+            }
+        });
+        jButtonAddTipoServico.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonAddTipoServicoKeyPressed(evt);
             }
         });
 
@@ -562,7 +572,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jPanelRodapeLayout.setVerticalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar)
@@ -765,6 +775,18 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private void jButtonRemoverTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverTipoServicoActionPerformed
         JTableUtil.removeLinhaSelecionada(jTableTiposServicos);
     }//GEN-LAST:event_jButtonRemoverTipoServicoActionPerformed
+
+    private void jButtonAddTipoServicoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonAddTipoServicoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonAddTipoServicoActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonAddTipoServicoKeyPressed
+
+    private void jButtonRemoverTipoServicoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonRemoverTipoServicoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonRemoverTipoServicoActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonRemoverTipoServicoKeyPressed
 
     public void identificarCenario() {
 

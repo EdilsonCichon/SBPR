@@ -6,6 +6,7 @@ import cci.util.Cenario;
 import cci.util.JTableUtil;
 import cdp.TipoServico;
 import java.awt.Frame;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -50,6 +51,12 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
 
         jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Valor Hora" }));
 
+        jTextFieldFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldFiltroKeyPressed(evt);
+            }
+        });
+
         jTableTipoServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -72,6 +79,11 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         jButtonFiltrarTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFiltrarTipoServicoActionPerformed(evt);
+            }
+        });
+        jButtonFiltrarTipoServico.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonFiltrarTipoServicoKeyPressed(evt);
             }
         });
 
@@ -114,11 +126,21 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
+            }
+        });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
             }
         });
 
@@ -198,6 +220,30 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTextFieldFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFiltroKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonFiltrarTipoServicoActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldFiltroKeyPressed
+
+    private void jButtonFiltrarTipoServicoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonFiltrarTipoServicoActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonFiltrarTipoServicoKeyPressed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

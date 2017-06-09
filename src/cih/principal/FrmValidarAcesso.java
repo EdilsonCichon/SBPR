@@ -1,6 +1,7 @@
 package cih.principal;
 
 import cci.CIInterface;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 public class FrmValidarAcesso extends javax.swing.JFrame {
@@ -41,10 +42,21 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
 
         jLabelSenha.setText("Senha:");
 
+        jPasswordFieldSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordFieldSenhaKeyPressed(evt);
+            }
+        });
+
         jButtonEntrar.setText("Entrar");
         jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEntrarActionPerformed(evt);
+            }
+        });
+        jButtonEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonEntrarKeyPressed(evt);
             }
         });
 
@@ -96,6 +108,18 @@ public class FrmValidarAcesso extends javax.swing.JFrame {
         
         ciInterface.getCiGeral().validarAcesso(usuario, senha);
     }//GEN-LAST:event_jButtonEntrarActionPerformed
+
+    private void jPasswordFieldSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonEntrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jPasswordFieldSenhaKeyPressed
+
+    private void jButtonEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonEntrarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonEntrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonEntrarKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -103,6 +103,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 jButtonSelecionarProdutorActionPerformed(evt);
             }
         });
+        jButtonSelecionarProdutor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonSelecionarProdutorKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPesquisarProdutorLayout = new javax.swing.GroupLayout(jPanelPesquisarProdutor);
         jPanelPesquisarProdutor.setLayout(jPanelPesquisarProdutorLayout);
@@ -193,6 +198,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 jButtonSelecionarTipoSevicoActionPerformed(evt);
             }
         });
+        jButtonSelecionarTipoSevico.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonSelecionarTipoSevicoKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelAgendarLayout = new javax.swing.GroupLayout(jPanelAgendar);
         jPanelAgendar.setLayout(jPanelAgendarLayout);
@@ -277,6 +287,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 jButtonFuncionarioActionPerformed(evt);
             }
         });
+        jButtonFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonFuncionarioKeyPressed(evt);
+            }
+        });
 
         jLabelMaquina.setText("Máquina:");
 
@@ -286,6 +301,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
         jButtonMaquina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMaquinaActionPerformed(evt);
+            }
+        });
+        jButtonMaquina.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonMaquinaKeyPressed(evt);
             }
         });
 
@@ -394,6 +414,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
+            }
+        });
 
         jButtonLimpar.setText("Limpar");
         jButtonLimpar.setMaximumSize(new java.awt.Dimension(75, 23));
@@ -404,11 +429,21 @@ public class JDCadastroServico extends javax.swing.JDialog {
                 jButtonLimparActionPerformed(evt);
             }
         });
+        jButtonLimpar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonLimparKeyPressed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
+            }
+        });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
             }
         });
 
@@ -567,6 +602,48 @@ public class JDCadastroServico extends javax.swing.JDialog {
         maquinaSelecionada = ciInterface.getCiMaquina().getMaquinaSelecionada();
         jTextFieldMaquina.setText(maquinaSelecionada.getPlaca());
     }//GEN-LAST:event_jButtonMaquinaActionPerformed
+
+    private void jButtonSelecionarProdutorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonSelecionarProdutorKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonSelecionarProdutorActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonSelecionarProdutorKeyPressed
+
+    private void jButtonSelecionarTipoSevicoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonSelecionarTipoSevicoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonSelecionarTipoSevicoActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonSelecionarTipoSevicoKeyPressed
+
+    private void jButtonFuncionarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonFuncionarioKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonFuncionarioActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonFuncionarioKeyPressed
+
+    private void jButtonMaquinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonMaquinaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonMaquinaActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonMaquinaKeyPressed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonLimparKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonLimparKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonLimparActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonLimparKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     private void agendarServico(String dtPrevistaConclusao, String qtdHrsPrevista) {
         

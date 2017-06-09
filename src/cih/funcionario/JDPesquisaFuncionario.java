@@ -6,6 +6,7 @@ import cci.CIInterface;
 import cci.util.Cenario;
 import cci.util.JTableUtil;
 import cdp.Funcionario;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -51,6 +52,12 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
 
         jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "CPF", "RG", "Cargo" }));
 
+        jTextFieldFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldFiltroKeyPressed(evt);
+            }
+        });
+
         jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -73,6 +80,11 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFiltrarActionPerformed(evt);
+            }
+        });
+        jButtonFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonFiltrarKeyPressed(evt);
             }
         });
 
@@ -115,11 +127,21 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
+        jButtonConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonConfirmarKeyPressed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
+            }
+        });
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCancelarKeyPressed(evt);
             }
         });
 
@@ -167,7 +189,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
 
-        String tipoFiltro = (String)jComboBoxFiltro.getSelectedItem();
+        String tipoFiltro = (String)jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String texto = jTextFieldFiltro.getText();
         
         List<Funcionario> listaFuncionarios = ciInterface.getCiFuncionario().filtrarFuncionario(tipoFiltro, texto);
@@ -197,6 +219,30 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTextFieldFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFiltroKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonFiltrarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldFiltroKeyPressed
+
+    private void jButtonFiltrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonFiltrarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonFiltrarKeyPressed(null);
+        }
+    }//GEN-LAST:event_jButtonFiltrarKeyPressed
+
+    private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jButtonConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonConfirmarKeyPressed
+
+    private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
