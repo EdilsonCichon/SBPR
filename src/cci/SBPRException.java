@@ -30,7 +30,7 @@ public class SBPRException extends Exception {
         
         //Serviço 50 - 100
         msgsErro[50] = "Propriedade vinculada a Serviço(s)!";
-        
+        msgsErro[51] = "Todas as máquinas estão agendadas para essa data!";
     }
     
     @Override

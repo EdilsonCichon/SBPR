@@ -1,5 +1,6 @@
 package cgd;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -42,6 +43,14 @@ public class GDServico extends GDGenerico {
         Criteria crit = criarSessao().createCriteria(classe);
         crit.add(Restrictions.eq(coluna, id));
         List listaServico =  crit.list();
+        sessao.close();
+        return listaServico;
+    }
+    
+    public List filtrarPorTipoEPeriodo(int tipoServicoId, String colunaFiltro, Date dataMinima, Date dataMaxima, Class classe) {
+        Criteria crit = criarSessao().createCriteria(classe);
+        crit.add(Restrictions.between(colunaFiltro, dataMinima, dataMaxima));
+        List listaServico = crit.list();
         sessao.close();
         return listaServico;
     }

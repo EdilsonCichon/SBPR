@@ -1,5 +1,6 @@
 package cgt;
 
+import cci.SBPRException;
 import cdp.Funcionario;
 import cdp.Maquina;
 import cdp.Produtor;
@@ -9,7 +10,9 @@ import cdp.ServicoAgendado;
 import cdp.ServicoCancelado;
 import cdp.ServicoConcluido;
 import cdp.TipoServico;
+import cgd.GDMaquina;
 import cgd.GDServico;
+import cgt.util.Uteis;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,14 +23,22 @@ import java.util.List;
 public class GTServico {
     
     private GDServico gdServico;
+    private GDMaquina gdMaquina;
 
     public GTServico() {
         gdServico = new GDServico();
+        gdMaquina = new GDMaquina();
     }
     
     public void cadastrarServico(Produtor produtor, Propriedade propriedade, 
             TipoServico tipoServico, String dtPrevistaConclusao,
             String qtdHrsPrevista) throws Exception {
+        //Lógica p/ verificar se existe máquina disponível na data prevista de conclusão
+        List<Maquina> maquinas = gdMaquina.filtrar("tipoMaquina.id", tipoServico.getTipoMaquina().getId());
+        Date dtPrevConclusaoDate = Uteis.formataData("dd/MM/yyyy", dtPrevistaConclusao);
+        List<Servico> servicos = gdServico.filtrarPorTipoEPeriodo(tipoServico.getId(), "data_prevista_conclusao", dtPrevConclusaoDate, dtPrevConclusaoDate, Servico.class);
+        if ( servicos.size() >= maquinas.size() )
+            throw new SBPRException(51);
         
         ServicoAgendado servicoAgendado = new ServicoAgendado();
         servicoAgendado.setProdutor(produtor);

@@ -27,7 +27,12 @@ public class GTTipoServico {
         gdTipoServico.cadastrar(tipoServico);  
     }
     
-    public void alterarTipoServico(TipoServico tipoServico) throws SBPRException, SQLException, ClassNotFoundException{
+    public void alterarTipoServico(TipoServico tipoServico, TipoMaquina tipoMaquina, String nome, String valor, String descricao) throws SBPRException, SQLException, ClassNotFoundException{
+        
+        tipoServico.setTipoMaquina(tipoMaquina);
+        tipoServico.setNome(nome);
+        tipoServico.setValor_hr(Double.parseDouble(valor));
+        tipoServico.setDescricao(descricao);
         validarCampos(String.valueOf(tipoServico.getValor_hr()));
         gdTipoServico.alterar(tipoServico);
     }

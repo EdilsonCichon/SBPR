@@ -4,7 +4,6 @@ import cci.util.Cenario;
 import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
-import cdp.TipoServico;
 import cdp.Usuario;
 import cdp.endereco.Cep;
 import cgt.GTFuncionario;
@@ -12,9 +11,7 @@ import javax.swing.JFrame;
 import cih.funcionario.JDCadastroFuncionario;
 import cih.funcionario.JDPesquisaFuncionario;
 import java.awt.Frame;
-import java.util.LinkedList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class CIFuncionario {
     
@@ -51,45 +48,39 @@ public class CIFuncionario {
         pesquisaFuncionario.setVisible(true);
     }
     
-    public boolean cadastrarFuncionario(
+    public void cadastrarFuncionario(
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, Usuario usuario,
             String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual, List tiposServicos) {
+            String bairro, String cidade, String estado, String tipoLogradouro, 
+            String complemento, Cep cepAtual, List tiposServicos) throws Exception {
         
         try {
           gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, cep, logradouro, numero,
                    bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
-            
-          JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-          return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
-            return false;
+            throw e;
         }
     }
     
-    public boolean alterarFuncionario(Funcionario funcionario,
+    public void alterarFuncionario(Funcionario funcionario,
             String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
             Habilitacao habilitacao, String login, String senha,
             String cep, String logradouro, String numero,
-            String bairro, String cidade, String estado, String tipoLogradouro, String complemento, Cep cepAtual, List tipoServicos){
+            String bairro, String cidade, String estado, String tipoLogradouro, 
+            String complemento, Cep cepAtual, List tipoServicos) throws Exception{
         
         try {
             gtFuncionario.alterarFuncionario(funcionario,
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, login, senha, cep, logradouro, numero,
-                   bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tipoServicos);
-            
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            return true;
+                   bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tipoServicos); 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar " + e.getMessage());
-            return false;
+            throw e;
         }
     }
     
@@ -97,14 +88,11 @@ public class CIFuncionario {
         return gtFuncionario.filtrarFuncionario(tipoFiltro, texto);
     }
     
-    public boolean excluirFuncionario(Funcionario funcionario) {
+    public void excluirFuncionario(Funcionario funcionario) throws Exception {
         try {
             gtFuncionario.excluirFuncionario(funcionario);
-            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
-            return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir " + e.getMessage());
-            return false;
+            throw e;
         }
     }
 
