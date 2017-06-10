@@ -100,6 +100,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         jLabelResponsavel.setText("Nome:");
 
         jTextAreaDescricao.setColumns(20);
+        jTextAreaDescricao.setLineWrap(true);
         jTextAreaDescricao.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescricao);
 

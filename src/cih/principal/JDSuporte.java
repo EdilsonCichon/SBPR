@@ -60,6 +60,7 @@ public class JDSuporte extends javax.swing.JDialog {
         });
 
         jTextAreaMensagem.setColumns(20);
+        jTextAreaMensagem.setLineWrap(true);
         jTextAreaMensagem.setRows(5);
         jScrollPane2.setViewportView(jTextAreaMensagem);
 

@@ -65,6 +65,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
 
         jTextAreaDescricao.setEditable(false);
         jTextAreaDescricao.setColumns(20);
+        jTextAreaDescricao.setLineWrap(true);
         jTextAreaDescricao.setRows(5);
         jTextAreaDescricao.setEnabled(false);
         jScrollPane2.setViewportView(jTextAreaDescricao);

@@ -118,6 +118,7 @@ public class JDCadastroTipoMaquina extends javax.swing.JDialog {
         jLabelDescricao.setText("Descrição:");
 
         jTextAreaDescricao.setColumns(20);
+        jTextAreaDescricao.setLineWrap(true);
         jTextAreaDescricao.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescricao);
 
