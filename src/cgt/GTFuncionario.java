@@ -12,7 +12,6 @@ import cgd.GDFuncionario;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 public class GTFuncionario {
@@ -43,62 +42,14 @@ public class GTFuncionario {
         Date dtNascFormatada = new Date(data_nasc);
         
         String numeroCep = nCep.replace("-", "");
-        Endereco endereco;
-        Estado estado;
-        Cidade cidade;
-        Bairro bairro;
-        Logradouro logradouro;
-        Cep cep;
+        Endereco endereco = null;
+        Estado estado = null;
+        Cidade cidade = null;
+        Bairro bairro = null;
+        Logradouro logradouro = null;
+        Cep cep = null;
 
-        if (cepAtual == null) {
-            
-            estado = gdEndereco.consultarEstado(nomeEstado);
-            
-            if (estado == null) {
-                
-                estado = new Estado(nomeEstado);
-                cidade = new Cidade(nomeCidade, estado);
-                bairro = new Bairro(nomeBairro, cidade);
-                logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
-                cep = new Cep(numeroCep, logradouro);
-                endereco = new Endereco(numero, complemento, cep);
-
-            }else{  
-                cidade = gdEndereco.consultarCidade(nomeCidade);
-                
-                if (cidade == null){
-                    cidade = new Cidade(nomeCidade, estado);
-                    bairro = new Bairro(nomeBairro, cidade);
-                    logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
-                    cep = new Cep(numeroCep, logradouro);
-                    endereco = new Endereco(numero, complemento, cep);
-                    
-                }else{
-                    
-                    bairro = gdEndereco.consultarBairroCidade(nomeBairro, cidade.getId());
-                    if(bairro == null){
-                        bairro = new Bairro(nomeBairro, cidade);
-                        logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
-                        cep = new Cep(numeroCep, logradouro);
-                        endereco = new Endereco(numero, complemento, cep);
-                        
-                    }else{
-                        
-                        logradouro = gdEndereco.consultarLogradouroBairro(nomeLogradouro, bairro.getId());
-                        if(logradouro == null){
-                            logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
-                            cep = new Cep(numeroCep, logradouro);
-                            endereco = new Endereco(numero, complemento, cep);
-                        }else{
-                            cep = new Cep(numeroCep, logradouro);
-                            endereco = new Endereco(numero, complemento, cep);
-                        }
-                    }
-                }
-            }
-        }else{
-            endereco = new Endereco(numero, complemento, cepAtual);
-        }
+        construirEndereco(cepAtual, estado, cidade, bairro, logradouro, cep, endereco, null, nomeEstado, nomeCidade, nomeBairro, nomeLogradouro, tipoLogradouro, numeroCep, numero, complemento);
        
         List<TipoServico> tipoServicos = pTiposServicos;
         
@@ -130,60 +81,13 @@ public class GTFuncionario {
         funcionario.getEndereco().setComplemento(complemento);
         funcionario.setTipoServicos(tipoServicos);
         
-        Estado estado;
-        Cidade cidade;
-        Bairro bairro;
-        Logradouro logradouro;
-        Cep cep;
-        
-        if(cepAtual == null){
-            
-            estado = gdEndereco.consultarEstado(nomeEstado);
-            if (estado == null) {
-                
-                estado = new Estado(nomeEstado);
-                cidade = new Cidade(nomeCidade, estado);
-                bairro = new Bairro(nomeBairro, cidade);
-                logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
-                cep = new Cep(numeroCep, logradouro);
-                funcionario.getEndereco().setCep(cep);
+        Estado estado = null;
+        Cidade cidade = null;
+        Bairro bairro = null;
+        Logradouro logradouro = null;
+        Cep cep = null;
 
-            }else{  
-                cidade = gdEndereco.consultarCidade(nomeCidade);
-                
-                if (cidade == null){
-                    cidade = new Cidade(nomeCidade, estado);
-                    bairro = new Bairro(nomeBairro, cidade);
-                    logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
-                    cep = new Cep(numeroCep, logradouro);
-                    funcionario.getEndereco().setCep(cep);
-                    
-                }else{
-                    
-                    bairro = gdEndereco.consultarBairroCidade(nomeBairro, cidade.getId());
-                    if(bairro == null){
-                        bairro = new Bairro(nomeBairro, cidade);
-                        logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
-                        cep = new Cep(numeroCep, logradouro);
-                        funcionario.getEndereco().setCep(cep);
-                        
-                    }else{
-                        
-                        logradouro = gdEndereco.consultarLogradouroBairro(nomeLogradouro, bairro.getId());
-                        if(logradouro == null){
-                            logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
-                            cep = new Cep(numeroCep, logradouro);
-                            funcionario.getEndereco().setCep(cep);
-                        }else{
-                            cep = new Cep(numeroCep, logradouro);
-                            funcionario.getEndereco().setCep(cep);
-                        }
-                    }
-                }
-            }         
-        }else{
-            funcionario.getEndereco().setCep(cepAtual);
-        }
+        construirEndereco(cepAtual, estado, cidade, bairro, logradouro, cep, null, funcionario, nomeEstado, nomeCidade, nomeBairro, nomeLogradouro, tipoLogradouro, numeroCep, numero, complemento);
         gdFuncionario.alterar(funcionario);
     }
     
@@ -206,5 +110,77 @@ public class GTFuncionario {
             throw new SBPRException(4);
         if(!ValidaCampos.validarTelefone(telefone))
             throw new SBPRException(5);
+    }
+    
+    private void construirEndereco(Cep cepAtual, Estado estado, Cidade cidade, Bairro bairro, Logradouro logradouro, 
+            Cep cep, Endereco endereco, Funcionario funcionario, String nomeEstado, String nomeCidade, String nomeBairro, 
+            String nomeLogradouro, String tipoLogradouro, String numeroCep, String numero, String complemento) {
+        
+        if (cepAtual == null) {
+
+            estado = gdEndereco.consultarEstado(nomeEstado);
+
+            if (estado == null) {
+
+                estado = new Estado(nomeEstado);
+                cidade = new Cidade(nomeCidade, estado);
+                bairro = new Bairro(nomeBairro, cidade);
+                logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
+                cep = new Cep(numeroCep, logradouro);
+                
+                identificarEndereco(funcionario, endereco, cep, numero, complemento);
+
+            } else {
+
+                cidade = gdEndereco.consultarCidade(nomeCidade);
+
+                if (cidade == null) {
+                    cidade = new Cidade(nomeCidade, estado);
+                    bairro = new Bairro(nomeBairro, cidade);
+                    logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
+                    cep = new Cep(numeroCep, logradouro);
+
+                    identificarEndereco(funcionario, endereco, cep, numero, complemento);
+
+                } else {
+
+                    bairro = gdEndereco.consultarBairroCidade(nomeBairro, cidade.getId());
+                    if (bairro == null) {
+                        bairro = new Bairro(nomeBairro, cidade);
+                        logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
+                        cep = new Cep(numeroCep, logradouro);
+
+                        endereco = new Endereco(numero, complemento, cep);
+                        funcionario.getEndereco().setCep(cep);
+
+                    } else {
+
+                        logradouro = gdEndereco.consultarLogradouroBairro(nomeLogradouro, bairro.getId());
+                        if (logradouro == null) {
+                            logradouro = new Logradouro(nomeLogradouro, tipoLogradouro, bairro);
+                            cep = new Cep(numeroCep, logradouro);
+
+                            identificarEndereco(funcionario, endereco, cep, numero, complemento);
+
+                        } else {
+                            cep = new Cep(numeroCep, logradouro);
+
+                            identificarEndereco(funcionario, endereco, cep, numero, complemento);
+                        }
+                    }
+                }
+            }
+        } else {
+            identificarEndereco(funcionario, endereco, cepAtual, numero, complemento);
+        }
+    }
+    
+    private void identificarEndereco(Funcionario funcionario, Endereco endereco, Cep cep, String numero, String complemento){
+        
+        if(funcionario == null){
+            endereco = new Endereco(numero, complemento, cep);
+        }else{
+            funcionario.getEndereco().setCep(cep);
+        }
     }
 }
