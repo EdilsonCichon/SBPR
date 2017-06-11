@@ -1,4 +1,4 @@
-package cci;
+package cgt.util;
 
 public class SBPRException extends Exception {
 

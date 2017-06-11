@@ -2,12 +2,10 @@ package cgt;
 
 import cdp.Produtor;
 import cgd.GDProdutor;
-import cci.SBPRException;
-import cgt.util.ValidaCampos;
+import cgt.util.*;
 import java.sql.SQLException;
 import java.util.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class GTProdutor {
@@ -27,8 +25,7 @@ public class GTProdutor {
             
         validarCampos(nome, cpf, data_nasc, rg, telefone, inscricao);
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(data_nasc);
+        Date data = Uteis.formatarData("dd/MM/yyyy", data_nasc);
         
         Produtor produtor = new Produtor(nome, cpf, data, inscricao, rg, telefone, sexo);
         gdProdutor.cadastrar(produtor);
@@ -41,8 +38,7 @@ public class GTProdutor {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone, inscricao);
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(data_nasc);
+        Date data = Uteis.formatarData("dd/MM/yyyy", data_nasc);
         
         produtor.setCpf(cpf);
         produtor.setDt_nasc(data);

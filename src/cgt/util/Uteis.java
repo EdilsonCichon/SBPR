@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Uteis {
     
-    public static Date formataData(String formato, String data) throws ParseException {
+    public static Date formatarData(String formato, String data) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat(formato);
         return formatter.parse(data);
     }

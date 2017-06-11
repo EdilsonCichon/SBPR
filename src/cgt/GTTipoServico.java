@@ -1,6 +1,6 @@
 package cgt;
 
-import cci.SBPRException;
+import cgt.util.SBPRException;
 import cdp.Servico;
 import cdp.TipoMaquina;
 import cdp.TipoServico;

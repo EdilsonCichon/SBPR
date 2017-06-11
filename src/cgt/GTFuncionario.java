@@ -1,6 +1,6 @@
 package cgt;
 
-import cci.SBPRException;
+import cgt.util.*;
 import cdp.Cargo;
 import cdp.Usuario;
 import cdp.Funcionario;
@@ -9,7 +9,6 @@ import cdp.TipoServico;
 import cdp.endereco.*;
 import cgd.GDEndereco;
 import cgd.GDFuncionario;
-import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -39,14 +38,14 @@ public class GTFuncionario {
             List pTiposServicos) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
-        Date dtNascFormatada = new Date(data_nasc);
+        Date data = Uteis.formatarData("dd/MM/yyyy", data_nasc);
         
         String numeroCep = nCep.replace("-", "");
 
         Endereco endereco = construirEndereco(cepAtual, null, nomeEstado, nomeCidade, nomeBairro, nomeLogradouro, tipoLogradouro, numeroCep, numero, complemento);
         List<TipoServico> tipoServicos = pTiposServicos;
         
-        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, dtNascFormatada, cpf, rg, sexo, telefone, tipoServicos);
+        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, data, cpf, rg, sexo, telefone, tipoServicos);
         gdFuncionario.cadastrar(funcionario);
     }
     
@@ -57,14 +56,14 @@ public class GTFuncionario {
             String nomeBairro, String nomeCidade, String nomeEstado, String tipoLogradouro, String complemento, Cep cepAtual, List tipoServicos ) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
-        Date dtNascFormatada = new Date(data_nasc);
+        Date data = Uteis.formatarData("dd/MM/yyyy", data_nasc);
         Usuario usuario = (funcionario.getUsuario() != null) ? funcionario.getUsuario() : new Usuario();
         usuario.setLogin(login);
         usuario.setSenha(senha);
         
         funcionario.setCargo(cargo);
         funcionario.setCpf(cpf);
-        funcionario.setDt_nasc(dtNascFormatada);
+        funcionario.setDt_nasc(data);
         funcionario.setEmail(email);
         funcionario.setHabilitacao(habilitacao);
         funcionario.setNome(nome);

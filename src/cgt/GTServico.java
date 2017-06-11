@@ -1,6 +1,6 @@
 package cgt;
 
-import cci.SBPRException;
+import cgt.util.SBPRException;
 import cdp.Funcionario;
 import cdp.Maquina;
 import cdp.Produtor;
@@ -15,7 +15,6 @@ import cgd.GDServico;
 import cgt.util.Uteis;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +34,7 @@ public class GTServico {
             String qtdHrsPrevista) throws Exception {
         //Lógica p/ verificar se existe máquina disponível na data prevista de conclusão
         List<Maquina> maquinas = gdMaquina.filtrar("tipoMaquina.id", tipoServico.getTipoMaquina().getId());
-        Date dtPrevConclusaoDate = Uteis.formataData("dd/MM/yyyy", dtPrevistaConclusao);
+        Date dtPrevConclusaoDate = Uteis.formatarData("dd/MM/yyyy", dtPrevistaConclusao);
         List<Servico> servicos = gdServico.filtrarPorTipoEPeriodo(tipoServico.getId(), "data_prevista_conclusao", dtPrevConclusaoDate, dtPrevConclusaoDate, Servico.class);
         if ( servicos.size() >= maquinas.size() )
             throw new SBPRException(51);
@@ -46,8 +45,7 @@ public class GTServico {
         servicoAgendado.setTipoServico(tipoServico);
         servicoAgendado.setData_agendamento(Calendar.getInstance().getTime());
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(dtPrevistaConclusao);
+        Date data = Uteis.formatarData("dd/MM/yyyy", dtPrevistaConclusao);
         
         servicoAgendado.setData_prevista_conclusao(data);
         servicoAgendado.setQtd_hrs_prevista(Double.parseDouble(qtdHrsPrevista));
@@ -58,8 +56,7 @@ public class GTServico {
                 TipoServico tipoServico, String dtPrevistaConclusao, 
                 String qtdHrsPrevista) throws SQLException, ClassNotFoundException, ParseException{
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(dtPrevistaConclusao);
+        Date data = Uteis.formatarData("dd/MM/yyyy", dtPrevistaConclusao);
         
         servico.setData_prevista_conclusao(data);
         servico.setQtd_hrs_prevista(Double.parseDouble(qtdHrsPrevista));
@@ -82,8 +79,7 @@ public class GTServico {
         servicoCancelado.setQtd_hrs_prevista(servicoAgendado.getQtd_hrs_prevista());
         servicoCancelado.setTipoServico(servicoAgendado.getTipoServico());
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(dataCancelamento);
+        Date data = Uteis.formatarData("dd/MM/yyyy", dataCancelamento);
         
         servicoCancelado.setData_cancelamento(data);
         servicoCancelado.setValor_multa(Double.parseDouble(valorMulta));
@@ -100,8 +96,7 @@ public class GTServico {
         servicoConcluido.setPropriedade(servico.getPropriedade());
         servicoConcluido.setData_agendamento(servico.getData_agendamento());
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(dataConclusao);
+        Date data = Uteis.formatarData("dd/MM/yyyy", dataConclusao);
         
         servicoConcluido.setData_conclusao(data);
         servicoConcluido.setData_prevista_conclusao(servico.getData_prevista_conclusao());

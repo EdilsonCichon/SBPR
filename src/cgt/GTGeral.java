@@ -1,6 +1,6 @@
 package cgt;
 
-import cci.SBPRException;
+import cgt.util.SBPRException;
 import cdp.Cargo;
 import cdp.Habilitacao;
 import cdp.endereco.Cep;

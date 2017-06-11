@@ -1,6 +1,6 @@
 package cgt;
 
-import cci.SBPRException;
+import cgt.util.SBPRException;
 import cdp.Produtor;
 import cdp.Propriedade;
 import cdp.Servico;
