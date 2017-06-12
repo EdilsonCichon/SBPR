@@ -56,7 +56,7 @@ public class CIMaquina {
         }
     }
     
-    public List<Maquina> filtrarMaquina(String colunaFiltro, String filtro){
+    public List filtrarMaquina(String colunaFiltro, String filtro){
        return gtMaquina.filtrarMaquina(colunaFiltro, filtro);
     }
     

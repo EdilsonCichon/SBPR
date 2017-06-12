@@ -49,6 +49,7 @@ public class GDServico extends GDGenerico {
     
     public List filtrarPorTipoEPeriodo(int tipoServicoId, String colunaFiltro, Date dataMinima, Date dataMaxima, Class classe) {
         Criteria crit = criarSessao().createCriteria(classe);
+        crit.add(Restrictions.eq("tipoServico.id", tipoServicoId));
         crit.add(Restrictions.between(colunaFiltro, dataMinima, dataMaxima));
         List listaServico = crit.list();
         sessao.close();

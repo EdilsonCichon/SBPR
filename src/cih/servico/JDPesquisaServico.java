@@ -364,7 +364,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                     ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
             
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Selecione um serviço", "ERRO", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Erro ao exibir o Serviço:", "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }

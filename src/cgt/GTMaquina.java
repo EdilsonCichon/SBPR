@@ -26,7 +26,7 @@ public class GTMaquina {
         gdMaquina.alterar(maquina);
     }
     
-    public List<Maquina> filtrarMaquina(String colunaFiltro, String filtro){
+    public List filtrarMaquina(String colunaFiltro, String filtro){
         return gdMaquina.filtrar(colunaFiltro, filtro);
     }
     

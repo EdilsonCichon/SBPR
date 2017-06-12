@@ -13,11 +13,10 @@ import cdp.TipoServico;
 import cgd.GDMaquina;
 import cgd.GDServico;
 import cgt.util.Uteis;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 public class GTServico {
     
@@ -38,16 +37,12 @@ public class GTServico {
         List<Servico> servicos = gdServico.filtrarPorTipoEPeriodo(tipoServico.getId(), "data_prevista_conclusao", dtPrevConclusaoDate, dtPrevConclusaoDate, Servico.class);
         if ( servicos.size() >= maquinas.size() )
             throw new SBPRException(51);
-        
         ServicoAgendado servicoAgendado = new ServicoAgendado();
         servicoAgendado.setProdutor(produtor);
         servicoAgendado.setPropriedade(propriedade);
         servicoAgendado.setTipoServico(tipoServico);
-        servicoAgendado.setData_agendamento(Calendar.getInstance().getTime());
-        
-        Date data = Uteis.formatarData("dd/MM/yyyy", dtPrevistaConclusao);
-        
-        servicoAgendado.setData_prevista_conclusao(data);
+        servicoAgendado.setData_agendamento(Uteis.getDataAtual());
+        servicoAgendado.setData_prevista_conclusao(dtPrevConclusaoDate);
         servicoAgendado.setQtd_hrs_prevista(Double.parseDouble(qtdHrsPrevista));
         gdServico.cadastrar(servicoAgendado);
     }
