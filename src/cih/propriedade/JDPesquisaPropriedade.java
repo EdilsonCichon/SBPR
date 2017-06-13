@@ -194,7 +194,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         
         if(jComboBoxFiltro.getSelectedIndex() == 1){
             if(jTextFieldFiltro.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Insira um ID de produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Insira um ID de produtor", "ERRO", JOptionPane.INFORMATION_MESSAGE);
             }else{
                 listaPropriedades = listaPropriedades = ciInterface.getCiPropriedade().filtrarPropriedades(colunaFiltro, filtro); 
             }       

@@ -56,9 +56,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" pref="426" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="jLabelNome" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxFiltro" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextFieldFiltro" max="32767" attributes="0"/>
+                          <Component id="jTextFieldFiltro" min="-2" pref="306" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButtonFiltrar" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
@@ -72,9 +72,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" pref="122" max="32767" attributes="0"/>
@@ -103,11 +103,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabelNome">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nome:"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldFiltro">
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldFiltroKeyPressed"/>
@@ -121,6 +116,18 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFiltrarActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jButtonFiltrarKeyPressed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxFiltro">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Nome"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

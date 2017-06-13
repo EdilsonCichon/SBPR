@@ -16,7 +16,7 @@ public class GDTipoServico extends GDGenerico {
         colunaFiltro = colunaFiltro.toLowerCase();
         
         if ( colunaFiltro.equals("valor_hr") )
-            crit.add( Restrictions.gt(colunaFiltro, Double.parseDouble(valorFiltro)) );
+            crit.add( Restrictions.eq(colunaFiltro, Double.parseDouble(valorFiltro)) );
         else
             crit.add( Restrictions.like(colunaFiltro, "%"+valorFiltro+"%") );
         

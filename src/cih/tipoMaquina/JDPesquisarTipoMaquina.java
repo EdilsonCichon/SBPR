@@ -33,9 +33,9 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         jPanelTipoMaquina = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTipoDeMaquina = new javax.swing.JTable();
-        jLabelNome = new javax.swing.JLabel();
         jTextFieldFiltro = new javax.swing.JTextField();
         jButtonFiltrar = new javax.swing.JButton();
+        jComboBoxFiltro = new javax.swing.JComboBox<>();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -55,8 +55,6 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTableTipoDeMaquina);
 
-        jLabelNome.setText("Nome:");
-
         jTextFieldFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldFiltroKeyPressed(evt);
@@ -75,6 +73,8 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
             }
         });
 
+        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome" }));
+
         javax.swing.GroupLayout jPanelTipoMaquinaLayout = new javax.swing.GroupLayout(jPanelTipoMaquina);
         jPanelTipoMaquina.setLayout(jPanelTipoMaquinaLayout);
         jPanelTipoMaquinaLayout.setHorizontalGroup(
@@ -84,9 +84,9 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
                 .addGroup(jPanelTipoMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                     .addGroup(jPanelTipoMaquinaLayout.createSequentialGroup()
-                        .addComponent(jLabelNome)
+                        .addComponent(jComboBoxFiltro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldFiltro)
+                        .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -96,9 +96,9 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTipoMaquinaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTipoMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNome)
                     .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonFiltrar))
+                    .addComponent(jButtonFiltrar)
+                    .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addContainerGap())
@@ -187,7 +187,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         
-        String colunaFiltro = "nome";
+        String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
         
         List<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().filtrarTipoMaquina(colunaFiltro, filtro);
@@ -230,7 +230,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonFiltrar;
-    private javax.swing.JLabel jLabelNome;
+    private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelTipoMaquina;
     private javax.swing.JScrollPane jScrollPane1;

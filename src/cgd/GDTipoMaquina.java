@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 public class GDTipoMaquina extends GDGenerico{
     
     public List filtrar(String colunaFiltro, String valorFiltro) {
+        colunaFiltro = colunaFiltro.toLowerCase();
         Criteria crit = criarSessao().createCriteria(TipoMaquina.class);
         crit.add( Restrictions.like(colunaFiltro, "%"+valorFiltro+"%") );
         List lista = crit.list();

@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 public class GDPropriedade extends GDGenerico{
      
     public List filtrar(String colunaFiltro, String valorFiltro) {
-        
+        colunaFiltro = colunaFiltro.toLowerCase();
         colunaFiltro = colunaFiltro.replace("id produtor", "responsavel.id");
         Criteria crit = criarSessao().createCriteria(Propriedade.class);
         
