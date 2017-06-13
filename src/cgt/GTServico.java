@@ -13,6 +13,7 @@ import cdp.TipoServico;
 import cgd.GDMaquina;
 import cgd.GDServico;
 import cgt.util.Uteis;
+import cgt.util.ValidaCampos;
 import java.util.Date;
 import java.util.List;
 import java.sql.SQLException;
@@ -31,12 +32,14 @@ public class GTServico {
     public void cadastrarServico(Produtor produtor, Propriedade propriedade, 
             TipoServico tipoServico, String dtPrevistaConclusao,
             String qtdHrsPrevista) throws Exception {
-        //Lógica p/ verificar se existe máquina disponível na data prevista de conclusão
+        
         List<Maquina> maquinas = gdMaquina.filtrar("tipoMaquina.id", tipoServico.getTipoMaquina().getId());
         Date dtPrevConclusaoDate = Uteis.formatarData("dd/MM/yyyy", dtPrevistaConclusao);
         List<Servico> servicos = gdServico.filtrarPorTipoEPeriodo(tipoServico.getId(), "data_prevista_conclusao", dtPrevConclusaoDate, dtPrevConclusaoDate, Servico.class);
+        
         if ( servicos.size() >= maquinas.size() )
             throw new SBPRException(51);
+        
         ServicoAgendado servicoAgendado = new ServicoAgendado();
         servicoAgendado.setProdutor(produtor);
         servicoAgendado.setPropriedade(propriedade);
@@ -62,7 +65,7 @@ public class GTServico {
         gdServico.alterar(servico);
     }
 
-    public void cancelarServico(ServicoAgendado servicoAgendado, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException, ParseException{
+    public void cancelarServico(ServicoAgendado servicoAgendado, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException, ParseException, SBPRException{
         
         ServicoCancelado servicoCancelado = new ServicoCancelado();
         
@@ -75,14 +78,17 @@ public class GTServico {
         servicoCancelado.setTipoServico(servicoAgendado.getTipoServico());
         
         Date data = Uteis.formatarData("dd/MM/yyyy", dataCancelamento);
-        
         servicoCancelado.setData_cancelamento(data);
-        servicoCancelado.setValor_multa(Double.parseDouble(valorMulta));
+        
+        if(ValidaCampos.validarValor(valorMulta))
+            servicoCancelado.setValor_multa(Double.parseDouble(valorMulta));
+        else
+            throw new SBPRException(52);
         
         gdServico.cancelarServico(servicoAgendado, servicoCancelado);   
     } 
     
-    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException, ParseException{
+    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException, ParseException, SBPRException{
         
         ServicoConcluido servicoConcluido = new ServicoConcluido();
         
@@ -99,7 +105,11 @@ public class GTServico {
         servicoConcluido.setMaquina(maquinaSelecionada);
         servicoConcluido.setQtd_hrs_prevista(servico.getQtd_hrs_prevista());
         servicoConcluido.setTipoServico(servico.getTipoServico());
-        servicoConcluido.setValor_total(Double.parseDouble(total));
+        
+        if(ValidaCampos.validarValor(total))
+            servicoConcluido.setValor_total(Double.parseDouble(total));
+        else
+            throw new SBPRException(53);
         
         gdServico.concluirServico(servico, servicoConcluido);
     } 

@@ -44,6 +44,7 @@ public class GTTipoServico {
     public void excluirTipoServico(TipoServico tipoServico) throws SQLException, ClassNotFoundException, SBPRException {
         
         List servicos = gdServico.filtrar("tipoServico.id", tipoServico.getId(), Servico.class);
+        
         if ( servicos.isEmpty() )
             gdTipoServico.excluir(tipoServico);
         else 

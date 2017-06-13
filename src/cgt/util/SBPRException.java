@@ -22,7 +22,7 @@ public class SBPRException extends Exception {
         msgsErro[6] = "Campo INSCRIÇÃO ESTADUAL inválido";    
         
         //Tipo de Serviço 7 - 20
-        msgsErro[7] = "Campo VALOR inválido"; 
+        msgsErro[7] = "Campo valor do tipo de serviço inválido"; 
         msgsErro[8] = "Tipo de Serviço vinculado a Serviço(s)!";
         
         //Cargo
@@ -31,6 +31,9 @@ public class SBPRException extends Exception {
         //Serviço 50 - 100
         msgsErro[50] = "Propriedade vinculada a Serviço(s)!";
         msgsErro[51] = "Todas as máquinas estão agendadas para essa data!";
+        msgsErro[52] = "Valor da multa inválido!";
+        msgsErro[53] = "Valor total inválido!";
+        
     }
     
     @Override

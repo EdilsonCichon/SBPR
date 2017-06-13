@@ -12,6 +12,8 @@ public class GDTipoServico extends GDGenerico {
         
         colunaFiltro = colunaFiltro.replace("valor hora", "valor_hr");
         Criteria crit = criarSessao().createCriteria(TipoServico.class);
+        valorFiltro = valorFiltro.toLowerCase();
+        colunaFiltro = colunaFiltro.toLowerCase();
         
         if ( colunaFiltro.equals("valor_hr") )
             crit.add( Restrictions.gt(colunaFiltro, Double.parseDouble(valorFiltro)) );

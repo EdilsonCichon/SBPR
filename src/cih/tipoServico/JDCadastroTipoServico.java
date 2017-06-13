@@ -378,6 +378,13 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         if(tipoMaquinaSelecionada == null){
             throw new Exception ("Selecione um Tipo de Máquina");
         }
+        
+        try {
+            Double.parseDouble(valor);
+        } catch (NumberFormatException e) {
+            throw new Exception ("Valor inválido!");
+        }
+
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

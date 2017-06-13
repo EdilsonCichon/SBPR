@@ -199,8 +199,10 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonFiltrarTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoActionPerformed
+        
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
+        
         if ( colunaFiltro.equals("valor hora") )  {
             try {
                 Double.parseDouble(filtro);

@@ -875,6 +875,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
         Date dataCancelamento = new Date(jFormattedTextFieldDataCancelamento.getText());
         if ( !dataCancelamento.after(servico.getData_agendamento()) )
             throw new ValidacaoException("Data de cancelamento não pode ser menor que a data do agendamento!");
+        try {
+            Double.parseDouble(jTextFieldValorMulta.getText());
+        } catch (NumberFormatException e) {
+            throw new ValidacaoException ("Valor da multa inválido!");
+        }
     }
     
     private void validacoesConcluir() throws ValidacaoException {

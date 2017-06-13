@@ -96,8 +96,13 @@ public abstract class ValidaCampos {
             return false;
         if (!validarPadrao(valor, "[A-z]"))
             return false;
-        
-        return true;
+
+        try{
+           Double.parseDouble(valor);
+           return true;
+        } catch(Exception e){
+           return false;
+        }
     }
     
     public static boolean validarPadrao(String nome, String pattern){
