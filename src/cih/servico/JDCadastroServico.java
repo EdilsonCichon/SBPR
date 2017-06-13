@@ -267,6 +267,11 @@ public class JDCadastroServico extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextFieldQtHrsReais.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFormattedTextFieldQtHrsReaisFocusLost(evt);
+            }
+        });
         jFormattedTextFieldQtHrsReais.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jFormattedTextFieldQtHrsReaisKeyPressed(evt);
@@ -644,6 +649,10 @@ public class JDCadastroServico extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
+
+    private void jFormattedTextFieldQtHrsReaisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldQtHrsReaisFocusLost
+        calcularValorTotal();
+    }//GEN-LAST:event_jFormattedTextFieldQtHrsReaisFocusLost
 
     private void agendarServico(String dtPrevistaConclusao, String qtdHrsPrevista) {
         

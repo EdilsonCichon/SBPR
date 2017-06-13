@@ -431,6 +431,11 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextFieldCep.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFormattedTextFieldCepFocusLost(evt);
+            }
+        });
         jFormattedTextFieldCep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jFormattedTextFieldCepKeyPressed(evt);
@@ -680,7 +685,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
 
     private void jFormattedTextFieldCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCepKeyPressed
 
-        if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_TAB)) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             try {
                 consultarCep();
             } catch (Exception ex) {
@@ -739,6 +744,14 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             jButtonRemoverTipoServicoActionPerformed(null);
         }
     }//GEN-LAST:event_jButtonRemoverTipoServicoKeyPressed
+
+    private void jFormattedTextFieldCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCepFocusLost
+        try {
+            consultarCep();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jFormattedTextFieldCepFocusLost
 
     private void cadastrarFuncionario(String nome, String cpf, String rg, String email,
             String data_nasc, String telefone, char sexo, Cargo cargo,
