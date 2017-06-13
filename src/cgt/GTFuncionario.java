@@ -38,14 +38,15 @@ public class GTFuncionario {
             List pTiposServicos) throws Exception {
         
         validarCampos(nome, cpf, data_nasc, rg, telefone);
-        Date data = Uteis.formatarData("dd/MM/yyyy", data_nasc);
+        Date dataNascDate = Uteis.formatarData("dd/MM/yyyy", data_nasc);
         
         String numeroCep = nCep.replace("-", "");
 
         Endereco endereco = construirEndereco(cepAtual, null, nomeEstado, nomeCidade, nomeBairro, nomeLogradouro, tipoLogradouro, numeroCep, numero, complemento);
         List<TipoServico> tipoServicos = pTiposServicos;
         
-        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, data, cpf, rg, sexo, telefone, tipoServicos);
+        Funcionario funcionario = new Funcionario(endereco, habilitacao, usuario, email, cargo, nome, dataNascDate, cpf, rg, sexo, telefone, tipoServicos);
+        
         gdFuncionario.cadastrar(funcionario);
     }
     

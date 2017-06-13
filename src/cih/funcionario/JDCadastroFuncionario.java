@@ -895,8 +895,8 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldDataNascimento.setText(funcionario.getDt_nasc("dd/MM/yyyy"));
         jFormattedTextFieldTelefone.setText(funcionario.getTelefone());
         jTextFieldEmail.setText(funcionario.getEmail());
-        jComboBoxCargo.setSelectedItem(funcionario.getCargo());
-        jComboBoxHabilitacao.setSelectedItem(funcionario.getHabilitacao());
+        jComboBoxCargo.getModel().setSelectedItem(funcionario.getCargo());
+        jComboBoxHabilitacao.getModel().setSelectedItem(funcionario.getHabilitacao());
 
         if (funcionario.getUsuario() != null) {
             jCheckBoxAcessarSistema.setSelected(true);
