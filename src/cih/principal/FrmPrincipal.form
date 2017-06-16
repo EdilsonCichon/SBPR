@@ -266,21 +266,17 @@
 
       <Layout>
         <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+          <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace pref="525" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabelUsuario" min="-2" pref="44" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabelNomeUsuario" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabelNomeUsuario" min="-2" pref="83" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jLabelVersao" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelData" min="-2" pref="58" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabelHora" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelVersao" alignment="1" min="-2" pref="83" max="-2" attributes="0"/>
+                      <Component id="jLabelData" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -297,10 +293,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelVersao" min="-2" pref="19" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelData" alignment="3" max="32767" attributes="0"/>
-                      <Component id="jLabelHora" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabelData" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -320,11 +313,6 @@
         <Component class="javax.swing.JLabel" name="jLabelData">
           <Properties>
             <Property name="text" type="java.lang.String" value="00/00/0000"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelHora">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="00:00"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNomeUsuario">

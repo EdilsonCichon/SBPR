@@ -1,6 +1,8 @@
 package cih.principal;
 
 import cci.CIInterface;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -14,7 +16,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
         ImageIcon icone = ciInterface.setarIconesJanela();
         setIconImage(icone.getImage());
-        jButtonInicioActionPerformed(null); 
+        jButtonInicioActionPerformed(null);
+        atualizarInfoSistema();
     }
     
     public void trocarPanel(JPanel jPanel) {
@@ -22,7 +25,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanelPrincipal.add(jPanel);
         jPanelPrincipal.validate();
     }
-
+    
+    private void atualizarInfoSistema(){
+        Date dataAtual = Calendar.getInstance().getTime();
+        //jLabelNomeUsuario.setText("");
+        jLabelData.setText(String.valueOf(dataAtual));
+    }    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,7 +55,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabelUsuario = new javax.swing.JLabel();
         jLabelVersao = new javax.swing.JLabel();
         jLabelData = new javax.swing.JLabel();
-        jLabelHora = new javax.swing.JLabel();
         jLabelNomeUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -226,26 +234,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jLabelData.setText("00/00/0000");
 
-        jLabelHora.setText("00:00");
-
         jLabelNomeUsuario.setText("Usuário");
 
         javax.swing.GroupLayout jPanelInfoSistemaLayout = new javax.swing.GroupLayout(jPanelInfoSistema);
         jPanelInfoSistema.setLayout(jPanelInfoSistemaLayout);
         jPanelInfoSistemaLayout.setHorizontalGroup(
-            jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoSistemaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanelInfoSistemaLayout.createSequentialGroup()
+                .addContainerGap(525, Short.MAX_VALUE)
                 .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelInfoSistemaLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoSistemaLayout.createSequentialGroup()
                         .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNomeUsuario))
-                    .addComponent(jLabelVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelInfoSistemaLayout.createSequentialGroup()
-                        .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelHora)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelVersao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelInfoSistemaLayout.setVerticalGroup(
@@ -258,9 +261,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelHora))
+                .addComponent(jLabelData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -333,7 +334,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTipoMaquina;
     private javax.swing.JButton jButtonTipoServico;
     private javax.swing.JLabel jLabelData;
-    private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelNomeUsuario;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JLabel jLabelVersao;

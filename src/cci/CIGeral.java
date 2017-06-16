@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Permissao;
 import cdp.Cargo;
 import cdp.Habilitacao;
 import cdp.endereco.Cep;
@@ -35,6 +36,7 @@ public class CIGeral {
     private JDSuporte suporte;
     private JDCargo cargo;
     private JDHabilitacao habilitacao;
+    private int permissao;
 
     public CIGeral(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
@@ -85,13 +87,17 @@ public class CIGeral {
             }        
     }
     
-    public void validarAcesso(String usuario, String senha) {
+    public void validarAcesso(String login, String senha) {
  
-        if(gtGeral.validarAcesso(usuario, senha)){
+        int permissao = gtGeral.validarAcesso(login, senha);
+        setPermissao(permissao);
+        
+        if(permissao == Permissao.PERMISSAO_NEGADA){
+            JOptionPane.showMessageDialog(frmValidarAcesso, "Acesso Negado", "ERRO", JOptionPane.ERROR_MESSAGE);
+            
+        }else{
             instanciarFramePrincipal();
             frmValidarAcesso.dispose(); 
-        }else{
-            JOptionPane.showMessageDialog(frmValidarAcesso, "Acesso Negado");
         } 
     }
     
@@ -153,8 +159,17 @@ public class CIGeral {
     
     public void enviarEmail(String emailDestinatario, String mensagem, String telefone) throws MessagingException {
         gtGeral.enviarEmail(emailDestinatario, mensagem, telefone);
-    }   
+    }  
+    
     public Cep consultarCep(String cep){
         return gtGeral.consultarCep(cep);
     } 
+
+    public int getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(int permissao) {
+        this.permissao = permissao;
+    }
 }

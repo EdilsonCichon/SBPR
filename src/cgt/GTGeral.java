@@ -2,7 +2,9 @@ package cgt;
 
 import cgt.util.SBPRException;
 import cdp.Cargo;
+import cdp.Funcionario;
 import cdp.Habilitacao;
+import cdp.Usuario;
 import cdp.endereco.Cep;
 import cgd.Config;
 import cgd.GDEndereco;
@@ -53,11 +55,30 @@ public class GTGeral {
     }
     
     public void inciarBancoDeDados(){ 
-         config = new Config();
+        config = new Config();
     }
     
-    public boolean validarAcesso(String usuario, String senha){ 
-       return gdGeral.validarAcesso(usuario, senha);    
+    public int validarAcesso(String login, String senha){ 
+       
+        Usuario usuario = gdGeral.validarAcesso(login, senha);
+        if(usuario == null){
+            return 0;
+           
+        }else{
+           
+            Funcionario funcionario = gdGeral.identificarFuncionario(usuario.getId());
+            if(funcionario == null){
+                return 0;
+            }else{
+                if(funcionario.getCargo().getNome().equals("Gerente")){
+                    return 1;
+                }else if (funcionario.getCargo().getNome().equals("Atendente")){
+                    return 2;
+                }else{
+                    return 0;
+                }
+            }    
+        }
     }
     
      public Cep consultarCep(String cep){
