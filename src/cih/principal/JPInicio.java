@@ -2,7 +2,7 @@ package cih.principal;
 
 import cci.CIInterface;
 import cci.util.Modulo;
-import cci.util.Permissao;
+import cgt.util.Permissao;
 
 public class JPInicio extends javax.swing.JPanel {
       

@@ -1,7 +1,8 @@
 package cci;
 
-import cci.util.Permissao;
+import cgt.util.Permissao;
 import cdp.Cargo;
+import cdp.Funcionario;
 import cdp.Habilitacao;
 import cdp.endereco.Cep;
 import cgt.GTGeral;
@@ -37,7 +38,8 @@ public class CIGeral {
     private JDCargo cargo;
     private JDHabilitacao habilitacao;
     private int permissao;
-
+    private Funcionario funcionarioLogado;
+    
     public CIGeral(CIInterface ciInterface) {
         this.ciInterface = ciInterface;
         this.gtGeral = new GTGeral();
@@ -96,6 +98,7 @@ public class CIGeral {
             JOptionPane.showMessageDialog(frmValidarAcesso, "Acesso Negado", "ERRO", JOptionPane.ERROR_MESSAGE);
             
         }else{
+            funcionarioLogado = gtGeral.getFuncionarioLogado();
             instanciarFramePrincipal();
             frmValidarAcesso.dispose(); 
         } 
@@ -168,8 +171,12 @@ public class CIGeral {
     public int getPermissao() {
         return permissao;
     }
-
+    
     public void setPermissao(int permissao) {
         this.permissao = permissao;
+    }
+    
+    public Funcionario getFuncionarioLogado() {
+        return funcionarioLogado;
     }
 }

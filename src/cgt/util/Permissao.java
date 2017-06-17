@@ -1,4 +1,4 @@
-package cci.util;
+package cgt.util;
 
 public abstract class Permissao {
     

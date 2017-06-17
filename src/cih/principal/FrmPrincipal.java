@@ -1,6 +1,8 @@
 package cih.principal;
 
 import cci.CIInterface;
+import cdp.Funcionario;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -27,9 +29,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
     
     private void atualizarInfoSistema(){
+        Funcionario funcionarioLogado = ciInterface.getCiGeral().getFuncionarioLogado();
         Date dataAtual = Calendar.getInstance().getTime();
-        //jLabelNomeUsuario.setText("");
-        jLabelData.setText(String.valueOf(dataAtual));
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String data = formatter.format(dataAtual);
+        jLabelNomeUsuario.setText(funcionarioLogado.getNome());
+        jLabelData.setText(data);
     }    
     
     @SuppressWarnings("unchecked")
@@ -241,14 +246,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanelInfoSistemaLayout.setHorizontalGroup(
             jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanelInfoSistemaLayout.createSequentialGroup()
-                .addContainerGap(525, Short.MAX_VALUE)
-                .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoSistemaLayout.createSequentialGroup()
+                        .addContainerGap(548, Short.MAX_VALUE)
                         .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelVersao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoSistemaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelData))))
                 .addContainerGap())
         );
         jPanelInfoSistemaLayout.setVerticalGroup(

@@ -2,7 +2,8 @@ package cih.principal;
 
 import cci.util.Cenario;
 import cci.CIInterface;
-import cci.util.Permissao;
+import cci.util.Modulo;
+import cgt.util.Permissao;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 
@@ -92,6 +93,10 @@ public class JPCrud extends javax.swing.JPanel {
     private void identificarPermissao(){
         if(ciInterface.getCiGeral().getPermissao() == Permissao.PERMISSAO_USER){
             jButtonExcluir.setEnabled(false);
+            if(MODULO == Modulo.FUNCIONARIO){
+                jButtonCadastrar.setEnabled(false);
+                jButtonAlterar.setEnabled(false);
+            }
         }
     }
     
