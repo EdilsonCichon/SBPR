@@ -57,7 +57,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jPanelPrincipal = new javax.swing.JPanel();
         jPanelInfoSistema = new javax.swing.JPanel();
-        jLabelUsuario = new javax.swing.JLabel();
         jLabelVersao = new javax.swing.JLabel();
         jLabelData = new javax.swing.JLabel();
         jLabelNomeUsuario = new javax.swing.JLabel();
@@ -233,44 +232,36 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanelInfoSistema.setMinimumSize(new java.awt.Dimension(684, 94));
         jPanelInfoSistema.setPreferredSize(new java.awt.Dimension(684, 94));
 
-        jLabelUsuario.setText("Usuário:");
-
+        jLabelVersao.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelVersao.setText("SBPR v.1.0");
 
         jLabelData.setText("00/00/0000");
 
-        jLabelNomeUsuario.setText("Usuário");
+        jLabelNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelNomeUsuario.setText("...");
 
         javax.swing.GroupLayout jPanelInfoSistemaLayout = new javax.swing.GroupLayout(jPanelInfoSistema);
         jPanelInfoSistema.setLayout(jPanelInfoSistemaLayout);
         jPanelInfoSistemaLayout.setHorizontalGroup(
             jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanelInfoSistemaLayout.createSequentialGroup()
-                .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoSistemaLayout.createSequentialGroup()
-                        .addContainerGap(548, Short.MAX_VALUE)
-                        .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoSistemaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelData))))
+                .addGap(0, 534, Short.MAX_VALUE)
+                .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelData))
                 .addContainerGap())
         );
         jPanelInfoSistemaLayout.setVerticalGroup(
             jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInfoSistemaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelInfoSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNomeUsuario))
+                .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelData, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
                 .addComponent(jLabelVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelInfoSistema);
@@ -343,7 +334,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTipoServico;
     private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelNomeUsuario;
-    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JLabel jLabelVersao;
     private javax.swing.JPanel jPanelInfoSistema;
     private javax.swing.JPanel jPanelMenuPrincipal;

@@ -2,7 +2,6 @@ package cih.principal;
 
 import cci.CIInterface;
 import cci.util.Modulo;
-import cgt.util.Permissao;
 
 public class JPInicio extends javax.swing.JPanel {
       
@@ -13,7 +12,7 @@ public class JPInicio extends javax.swing.JPanel {
         initComponents();
         this.ciInterface = ciInterface;
         this.frmPrincipal = frmPrincipal;
-        identificarPermissao();
+        ciInterface.getCiGeral().identificarPermissaoJPInicio(jButtonConfiguracoes);
     }
 
     @SuppressWarnings("unchecked")
@@ -155,13 +154,7 @@ public class JPInicio extends javax.swing.JPanel {
     private void jButtonConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfiguracoesActionPerformed
         frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPConfiguracoes(frmPrincipal));
     }//GEN-LAST:event_jButtonConfiguracoesActionPerformed
-
-    private void identificarPermissao(){
-        if(ciInterface.getCiGeral().getPermissao() == Permissao.PERMISSAO_USER){
-            jButtonConfiguracoes.setEnabled(false);
-        }
-    }
-    
+ 
     public void setjButtonProdutor(java.awt.event.ActionEvent evt) {
         jButtonProdutorActionPerformed(evt);
     }

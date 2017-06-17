@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Modulo;
 import cgt.util.Permissao;
 import cdp.Cargo;
 import cdp.Funcionario;
@@ -20,6 +21,7 @@ import cih.principal.JPInicio;
 import cih.principal.JPServico;
 import java.util.List;
 import javax.mail.MessagingException;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class CIGeral {
@@ -81,12 +83,12 @@ public class CIGeral {
     }
     
     public void encerrarSessao() {
-        
+
         int confirmacao = JOptionPane.showConfirmDialog(frmPrincipal, "Deseja Sair ?", "Sair", JOptionPane.YES_NO_OPTION);
-            if ( confirmacao == 0 ){
-                instanciarFrameValidarAcesso();
-                frmPrincipal.dispose();   
-            }        
+        if (confirmacao == 0) {
+            instanciarFrameValidarAcesso();
+            frmPrincipal.dispose();
+        }
     }
     
     public void validarAcesso(String login, String senha) {
@@ -102,6 +104,22 @@ public class CIGeral {
             instanciarFramePrincipal();
             frmValidarAcesso.dispose(); 
         } 
+    }
+    
+    public void identificarPermissaoJPCrud(JButton excluir, JButton alterar, JButton cadastrar, int MODULO) {
+        if (this.getPermissao() == Permissao.PERMISSAO_USER) {
+            excluir.setEnabled(false);
+            if (MODULO == Modulo.FUNCIONARIO) {
+                cadastrar.setEnabled(false);
+                alterar.setEnabled(false);
+            }
+        }
+    }
+    
+    public void identificarPermissaoJPInicio(JButton configuracao){
+        if(this.getPermissao() == Permissao.PERMISSAO_USER){
+            configuracao.setEnabled(false);
+        }
     }
     
     public void instanciarFrameValidarAcesso(){

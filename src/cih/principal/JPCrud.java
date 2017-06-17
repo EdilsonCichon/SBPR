@@ -2,8 +2,6 @@ package cih.principal;
 
 import cci.util.Cenario;
 import cci.CIInterface;
-import cci.util.Modulo;
-import cgt.util.Permissao;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 
@@ -18,7 +16,7 @@ public class JPCrud extends javax.swing.JPanel {
         this.MODULO = MODULO;
         this.ciInterface = ciInterface;
         this.ciInterface.iniciarCrud(MODULO, this);
-        identificarPermissao();
+        ciInterface.getCiGeral().identificarPermissaoJPCrud(jButtonExcluir, jButtonAlterar, jButtonCadastrar, MODULO);
     }
   
     @SuppressWarnings("unchecked")
@@ -89,17 +87,7 @@ public class JPCrud extends javax.swing.JPanel {
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
        ciInterface.identificarModulo(pai, MODULO, Cenario.CONSULTAR);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
-
-    private void identificarPermissao(){
-        if(ciInterface.getCiGeral().getPermissao() == Permissao.PERMISSAO_USER){
-            jButtonExcluir.setEnabled(false);
-            if(MODULO == Modulo.FUNCIONARIO){
-                jButtonCadastrar.setEnabled(false);
-                jButtonAlterar.setEnabled(false);
-            }
-        }
-    }
-    
+ 
     public void setIconAlterar(Icon icone) {
         this.jButtonAlterar.setIcon(icone);
     }
