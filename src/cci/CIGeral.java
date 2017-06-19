@@ -21,7 +21,6 @@ import cih.principal.JPInicio;
 import cih.principal.JPServico;
 import java.util.List;
 import javax.mail.MessagingException;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class CIGeral {
@@ -106,20 +105,24 @@ public class CIGeral {
         } 
     }
     
-    public void identificarPermissaoJPCrud(JButton excluir, JButton alterar, JButton cadastrar, int MODULO) {
+    public boolean identificarPermissaoJPCrud(int MODULO) {
         if (this.getPermissao() == Permissao.PERMISSAO_USER) {
-            excluir.setEnabled(false);
-            if (MODULO == Modulo.FUNCIONARIO) {
-                cadastrar.setEnabled(false);
-                alterar.setEnabled(false);
+            
+            if (MODULO == Modulo.FUNCIONARIO){
+                return false;
+            }else{
+                return true;
             }
+        }else{
+            return true;
         }
     }
     
-    public void identificarPermissaoJPInicio(JButton configuracao){
+    public boolean identificarPermissaoJPInicio(){
         if(this.getPermissao() == Permissao.PERMISSAO_USER){
-            configuracao.setEnabled(false);
+            return false;
         }
+        return true;
     }
     
     public void instanciarFrameValidarAcesso(){

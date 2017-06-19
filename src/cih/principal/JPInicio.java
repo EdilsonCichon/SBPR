@@ -12,7 +12,7 @@ public class JPInicio extends javax.swing.JPanel {
         initComponents();
         this.ciInterface = ciInterface;
         this.frmPrincipal = frmPrincipal;
-        ciInterface.getCiGeral().identificarPermissaoJPInicio(jButtonConfiguracoes);
+        identificarPermissaoJPInicio();
     }
 
     @SuppressWarnings("unchecked")
@@ -155,6 +155,10 @@ public class JPInicio extends javax.swing.JPanel {
         frmPrincipal.trocarPanel(ciInterface.getCiGeral().instanciarJPConfiguracoes(frmPrincipal));
     }//GEN-LAST:event_jButtonConfiguracoesActionPerformed
  
+    private void identificarPermissaoJPInicio(){
+        jButtonConfiguracoes.setEnabled(ciInterface.getCiGeral().identificarPermissaoJPInicio());
+    }
+    
     public void setjButtonProdutor(java.awt.event.ActionEvent evt) {
         jButtonProdutorActionPerformed(evt);
     }

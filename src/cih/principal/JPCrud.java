@@ -16,7 +16,7 @@ public class JPCrud extends javax.swing.JPanel {
         this.MODULO = MODULO;
         this.ciInterface = ciInterface;
         this.ciInterface.iniciarCrud(MODULO, this);
-        ciInterface.getCiGeral().identificarPermissaoJPCrud(jButtonExcluir, jButtonAlterar, jButtonCadastrar, MODULO);
+        identificarPermissaoJPCrud();
     }
   
     @SuppressWarnings("unchecked")
@@ -88,6 +88,12 @@ public class JPCrud extends javax.swing.JPanel {
        ciInterface.identificarModulo(pai, MODULO, Cenario.CONSULTAR);
     }//GEN-LAST:event_jButtonConsultarActionPerformed
  
+    private void identificarPermissaoJPCrud(){
+        jButtonCadastrar.setEnabled(ciInterface.getCiGeral().identificarPermissaoJPCrud(MODULO));
+        jButtonAlterar.setEnabled(ciInterface.getCiGeral().identificarPermissaoJPCrud(MODULO));
+        jButtonExcluir.setEnabled(ciInterface.getCiGeral().identificarPermissaoJPCrud(MODULO));
+    }
+    
     public void setIconAlterar(Icon icone) {
         this.jButtonAlterar.setIcon(icone);
     }
