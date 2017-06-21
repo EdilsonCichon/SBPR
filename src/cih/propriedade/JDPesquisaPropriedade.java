@@ -82,7 +82,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         });
         jScrollPanePropriedades.setViewportView(jTablePropriedades);
 
-        jButtonFiltrar.setText("...");
+        jButtonFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonFiltrar.setToolTipText("Buscar");
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

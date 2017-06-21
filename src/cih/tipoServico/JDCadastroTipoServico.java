@@ -112,7 +112,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
 
         jTextFieldTipoMaquina.setEditable(false);
 
-        jButtonSelecionarTipoMaquina.setText("...");
+        jButtonSelecionarTipoMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonSelecionarTipoMaquina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelecionarTipoMaquinaActionPerformed(evt);

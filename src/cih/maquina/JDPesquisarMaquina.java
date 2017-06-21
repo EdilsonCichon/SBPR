@@ -73,7 +73,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
             }
         });
 
-        jButtonFiltrar.setText("...");
+        jButtonFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFiltrarActionPerformed(evt);

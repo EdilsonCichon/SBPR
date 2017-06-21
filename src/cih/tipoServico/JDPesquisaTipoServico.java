@@ -82,7 +82,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jTableTipoServico);
 
-        jButtonFiltrar.setText("...");
+        jButtonFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFiltrarActionPerformed(evt);

@@ -102,7 +102,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSelecionarProdutor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/cih/icones/icone-pesquisar-reduzido.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelecionarProdutorActionPerformed"/>
@@ -278,7 +280,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSelecionarTipoSevico">
           <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/cih/icones/icone-pesquisar-reduzido.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelecionarTipoSevicoActionPerformed"/>
@@ -410,7 +414,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonFuncionario">
           <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/cih/icones/icone-pesquisar-reduzido.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFuncionarioActionPerformed"/>
@@ -429,7 +435,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonMaquina">
           <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/cih/icones/icone-pesquisar-reduzido.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMaquinaActionPerformed"/>

@@ -82,7 +82,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         });
         jScrollPaneProdutores.setViewportView(jTableProdutor);
 
-        jButtonFiltrar.setText("...");
+        jButtonFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonFiltrar.setToolTipText("Filtrar");
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

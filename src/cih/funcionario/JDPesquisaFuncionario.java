@@ -83,7 +83,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         });
         jScrollPane.setViewportView(jTableFuncionario);
 
-        jButtonFiltrar.setText("...");
+        jButtonFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFiltrarActionPerformed(evt);

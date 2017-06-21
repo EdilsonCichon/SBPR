@@ -76,7 +76,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
 
         jLabelFiltrarPor.setText("Produtor:");
 
-        jButtonFiltrarProdutor.setText("...");
+        jButtonFiltrarProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonFiltrarProdutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFiltrarProdutorActionPerformed(evt);
@@ -203,7 +203,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
 
         jTextFieldTipoServico.setEnabled(false);
 
-        jButtonFiltrarTipoServico.setText("...");
+        jButtonFiltrarTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonFiltrarTipoServico.setEnabled(false);
         jButtonFiltrarTipoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -97,7 +97,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jLabelNomeProdutor.setText("Produtor:");
 
-        jButtonSelecionarProdutor.setText("...");
+        jButtonSelecionarProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonSelecionarProdutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelecionarProdutorActionPerformed(evt);
@@ -192,7 +192,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jTextFieldTipoServico.setEditable(false);
 
-        jButtonSelecionarTipoSevico.setText("...");
+        jButtonSelecionarTipoSevico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonSelecionarTipoSevico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSelecionarTipoSevicoActionPerformed(evt);
@@ -286,7 +286,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jTextFieldExecutor.setEnabled(false);
 
-        jButtonFuncionario.setText("...");
+        jButtonFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFuncionarioActionPerformed(evt);
@@ -302,7 +302,7 @@ public class JDCadastroServico extends javax.swing.JDialog {
 
         jTextFieldMaquina.setEnabled(false);
 
-        jButtonMaquina.setText("...");
+        jButtonMaquina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonMaquina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMaquinaActionPerformed(evt);

@@ -72,7 +72,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         jTextAreaReferencia.setRows(5);
         jScrollPaneReferencia.setViewportView(jTextAreaReferencia);
 
-        jButtonPesquisarProdutor.setText("...");
+        jButtonPesquisarProdutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-pesquisar-reduzido.png"))); // NOI18N
         jButtonPesquisarProdutor.setEnabled(false);
         jButtonPesquisarProdutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

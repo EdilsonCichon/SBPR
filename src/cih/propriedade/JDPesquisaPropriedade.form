@@ -157,7 +157,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="jButtonFiltrar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/cih/icones/icone-pesquisar-reduzido.png"/>
+            </Property>
             <Property name="toolTipText" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
