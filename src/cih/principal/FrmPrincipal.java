@@ -63,6 +63,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabelNomeUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SBPR - Software de Beneficiamento ao Produtor Rural");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(705, 495));
         setResizable(false);
