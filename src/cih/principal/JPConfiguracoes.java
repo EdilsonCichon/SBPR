@@ -42,7 +42,7 @@ public class JPConfiguracoes extends javax.swing.JPanel {
         });
         add(jButtonHabilitacao);
 
-        jButtonClick.setText("Click");
+        jButtonClick.setText("Options");
         jButtonClick.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonClickActionPerformed(evt);
@@ -60,7 +60,7 @@ public class JPConfiguracoes extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonHabilitacaoActionPerformed
 
     private void jButtonClickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClickActionPerformed
-        JOptionPane.showMessageDialog(pai, "Volte Sempre!");
+
     }//GEN-LAST:event_jButtonClickActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

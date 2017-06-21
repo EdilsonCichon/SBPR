@@ -1,5 +1,6 @@
 package cci;
 
+import cci.util.Modulo;
 import cgt.util.Permissao;
 import cdp.Cargo;
 import cdp.Funcionario;
@@ -81,12 +82,12 @@ public class CIGeral {
     }
     
     public void encerrarSessao() {
-        
+
         int confirmacao = JOptionPane.showConfirmDialog(frmPrincipal, "Deseja Sair ?", "Sair", JOptionPane.YES_NO_OPTION);
-            if ( confirmacao == 0 ){
-                instanciarFrameValidarAcesso();
-                frmPrincipal.dispose();   
-            }        
+        if (confirmacao == 0) {
+            instanciarFrameValidarAcesso();
+            frmPrincipal.dispose();
+        }
     }
     
     public void validarAcesso(String login, String senha) {
@@ -102,6 +103,26 @@ public class CIGeral {
             instanciarFramePrincipal();
             frmValidarAcesso.dispose(); 
         } 
+    }
+    
+    public boolean identificarPermissaoJPCrud(int MODULO) {
+        if (this.getPermissao() == Permissao.PERMISSAO_USER) {
+            
+            if (MODULO == Modulo.FUNCIONARIO){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+    
+    public boolean identificarPermissaoJPInicio(){
+        if(this.getPermissao() == Permissao.PERMISSAO_USER){
+            return false;
+        }
+        return true;
     }
     
     public void instanciarFrameValidarAcesso(){
