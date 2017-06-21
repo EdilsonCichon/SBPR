@@ -305,13 +305,13 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
     }
     
     private void adicionarPropriedade(String nome, String referencia){
-        try{
+        try {
             propriedadeVazia.setNome_propriedade(nome);
             propriedadeVazia.setReferencia(referencia);
             ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia); 
             JOptionPane.showMessageDialog(this, " Propriedade Adicionada com sucesso!");
             this.dispose();    
-        }catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao adicionar: " + e.getMessage());
         }
     }

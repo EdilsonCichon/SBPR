@@ -36,13 +36,20 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
         jLabelFiltro = new javax.swing.JLabel();
         jComboBoxFiltro = new javax.swing.JComboBox<>();
         jTextFieldFiltro = new javax.swing.JTextField();
-        jButtonPesquisarMaquina = new javax.swing.JButton();
+        jButtonFiltrar = new javax.swing.JButton();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Máquinas");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jPanelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisa"));
 
@@ -66,15 +73,15 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
             }
         });
 
-        jButtonPesquisarMaquina.setText("...");
-        jButtonPesquisarMaquina.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFiltrar.setText("...");
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPesquisarMaquinaActionPerformed(evt);
+                jButtonFiltrarActionPerformed(evt);
             }
         });
-        jButtonPesquisarMaquina.addKeyListener(new java.awt.event.KeyAdapter() {
+        jButtonFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButtonPesquisarMaquinaKeyPressed(evt);
+                jButtonFiltrarKeyPressed(evt);
             }
         });
 
@@ -95,7 +102,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonPesquisarMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelPesquisaLayout.setVerticalGroup(
@@ -106,7 +113,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
                     .addComponent(jLabelFiltro)
                     .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPesquisarMaquina))
+                    .addComponent(jButtonFiltrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -198,7 +205,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
         }         
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-    private void jButtonPesquisarMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarMaquinaActionPerformed
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
@@ -209,7 +216,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
         listaMaquinas.forEach ((maquina) -> {
             JTableUtil.addLinha(jTableMaquina, maquina.toArray());
         });       
-    }//GEN-LAST:event_jButtonPesquisarMaquinaActionPerformed
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.dispose();
@@ -217,15 +224,15 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
 
     private void jTextFieldFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFiltroKeyPressed
        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            jButtonPesquisarMaquinaActionPerformed(null);
+            jButtonFiltrarActionPerformed(null);
         }
     }//GEN-LAST:event_jTextFieldFiltroKeyPressed
 
-    private void jButtonPesquisarMaquinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonPesquisarMaquinaKeyPressed
+    private void jButtonFiltrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonFiltrarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            jButtonPesquisarMaquinaKeyPressed(null);
+            jButtonFiltrarKeyPressed(null);
         }
-    }//GEN-LAST:event_jButtonPesquisarMaquinaKeyPressed
+    }//GEN-LAST:event_jButtonFiltrarKeyPressed
 
     private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
@@ -239,10 +246,14 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
 
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        jButtonFiltrarActionPerformed(null);
+    }//GEN-LAST:event_formWindowGainedFocus
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JButton jButtonPesquisarMaquina;
+    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltro;
     private javax.swing.JPanel jPanelBotoes;

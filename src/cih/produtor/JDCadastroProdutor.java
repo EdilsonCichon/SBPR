@@ -505,33 +505,29 @@ public class JDCadastroProdutor extends javax.swing.JDialog {
     
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
         
-        Propriedade propriedadeVazia = ciInterface.getCiPropriedade().instanciarPropriedadeVazia(produtorAtual);
-        ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedadeVazia, pai, Cenario.ADICIONAR);
-         
+        Propriedade propriedadeNova = ciInterface.getCiPropriedade().instanciarPropriedadeVazia(produtorAtual);
+        ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedadeNova, pai, Cenario.ADICIONAR);
         List<Propriedade> listaPropriedades = (List<Propriedade>) produtorAtual.getPropriedades();
+        listaPropriedades.add(propriedadeNova);
         JTableUtil.limparTabela(jTablePropriedades);
         
         listaPropriedades.forEach((propriedadeAtual) -> {
             JTableUtil.addLinha(jTablePropriedades, propriedadeAtual.toArrayProdutor());
         });
-        
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         
         try {
-            
             Propriedade propriedade = (Propriedade) JTableUtil.getDadosLinhaSelecionada(jTablePropriedades);
-            
             int excluido = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-            
-            if(excluido == 0){
+            if (excluido == 0) {
                 ciInterface.getCiPropriedade().excluirPropriedade(propriedade);
+                JTableUtil.removeLinhaSelecionada(jTablePropriedades);
             }
-            
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Selecione uma linha.", "ERRO Alterar", JOptionPane.ERROR_MESSAGE);
-        }  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível excluir: "+ e.getMessage(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed

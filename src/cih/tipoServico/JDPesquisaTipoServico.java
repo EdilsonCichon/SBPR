@@ -36,7 +36,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         jTextFieldFiltro = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTipoServico = new javax.swing.JTable();
-        jButtonFiltrarTipoServico = new javax.swing.JButton();
+        jButtonFiltrar = new javax.swing.JButton();
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -44,6 +44,13 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Tipo de Serviço");
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jPanelPesquisarTipoServico.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
@@ -75,15 +82,15 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jTableTipoServico);
 
-        jButtonFiltrarTipoServico.setText("...");
-        jButtonFiltrarTipoServico.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFiltrar.setText("...");
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFiltrarTipoServicoActionPerformed(evt);
+                jButtonFiltrarActionPerformed(evt);
             }
         });
-        jButtonFiltrarTipoServico.addKeyListener(new java.awt.event.KeyAdapter() {
+        jButtonFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButtonFiltrarTipoServicoKeyPressed(evt);
+                jButtonFiltrarKeyPressed(evt);
             }
         });
 
@@ -101,7 +108,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonFiltrarTipoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -112,7 +119,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                     .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelFiltrar)
                     .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonFiltrarTipoServico))
+                    .addComponent(jButtonFiltrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
@@ -198,7 +205,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-    private void jButtonFiltrarTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoActionPerformed
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
@@ -217,7 +224,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         listaTipoServicos.forEach((tipoServico) -> {
             JTableUtil.addLinha(jTableTipoServico, tipoServico.toArray() );
         });
-    }//GEN-LAST:event_jButtonFiltrarTipoServicoActionPerformed
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         dispose();
@@ -225,15 +232,15 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
 
     private void jTextFieldFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFiltroKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            jButtonFiltrarTipoServicoActionPerformed(null);
+            jButtonFiltrarActionPerformed(null);
         }
     }//GEN-LAST:event_jTextFieldFiltroKeyPressed
 
-    private void jButtonFiltrarTipoServicoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoKeyPressed
+    private void jButtonFiltrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonFiltrarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            jButtonFiltrarTipoServicoActionPerformed(null);
+            jButtonFiltrarActionPerformed(null);
         }
-    }//GEN-LAST:event_jButtonFiltrarTipoServicoKeyPressed
+    }//GEN-LAST:event_jButtonFiltrarKeyPressed
 
     private void jButtonConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonConfirmarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
@@ -247,10 +254,14 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
 
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        jButtonFiltrarActionPerformed(null);
+    }//GEN-LAST:event_formWindowGainedFocus
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JButton jButtonFiltrarTipoServico;
+    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JPanel jPanelPesquisarTipoServico;

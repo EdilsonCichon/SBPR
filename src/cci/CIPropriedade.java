@@ -9,7 +9,6 @@ import cih.propriedade.JDPesquisaPropriedade;
 import java.awt.Frame;
 import javax.swing.JFrame;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class CIPropriedade {
 
