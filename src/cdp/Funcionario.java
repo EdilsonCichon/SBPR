@@ -28,7 +28,7 @@ public class Funcionario extends Pessoa implements Serializable {
     @Cascade(CascadeType.SAVE_UPDATE)
     private Usuario usuario;
         
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     
     @OneToOne(fetch = FetchType.EAGER)
