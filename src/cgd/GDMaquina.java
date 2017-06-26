@@ -11,7 +11,6 @@ public class GDMaquina extends GDGenerico{
         
         Criteria crit = criarSessao().createCriteria(Maquina.class);
         //colunaFiltro = colunaFiltro.toLowerCase();
-        
         if (valorFiltro instanceof String)
             crit.add( Restrictions.like(colunaFiltro, "%"+valorFiltro+"%") );
         else if (valorFiltro instanceof Integer)
