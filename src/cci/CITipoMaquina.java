@@ -29,19 +29,21 @@ public class CITipoMaquina {
             instanciarTelaFiltroTipoMaquina(pai, CENARIO);
     }
         
-    public void cadastrarTipoMaquina(String nome, String descricao) throws Exception {
+    public void cadastrarTipoMaquina(String nome, String descricao){
         try {
-            gtTipoMaquina.cadastrarTipoMaquina(nome, descricao); 
+            gtTipoMaquina.cadastrarTipoMaquina(nome, descricao);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroTipoMaquina, "Cadastrado com sucesso!");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroTipoMaquina, e.getMessage());
         }
     }
     
-    public void alterarTipoMaquina(TipoMaquina tipoMaquina, String nome, String descricao) throws Exception {
+    public void alterarTipoMaquina(TipoMaquina tipoMaquina, String nome, String descricao){
         try {
-            gtTipoMaquina.alterarTipoMaquina(tipoMaquina, nome, descricao);    
+            gtTipoMaquina.alterarTipoMaquina(tipoMaquina, nome, descricao);  
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroTipoMaquina, "Alterado com sucesso!");
         } catch (Exception e) {
-            throw e;   
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroTipoMaquina, e.getMessage());
         }
     }
     
@@ -56,7 +58,9 @@ public class CITipoMaquina {
     public void excluirTipoMaquina(TipoMaquina tipoMaquina){
         try {
             gtTipoMaquina.excluirTipoMaquina(tipoMaquina);
-        } catch (Exception e) {     
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroTipoMaquina, "Excluído com sucesso!");
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroTipoMaquina, e.getMessage());
         }  
     }
     

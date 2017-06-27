@@ -8,7 +8,6 @@ import cdp.TipoServico;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class JDPesquisaTipoServico extends javax.swing.JDialog {
     
@@ -201,7 +200,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
             else
                 ciInterface.getCiTipoServico().instanciarTelaCadastroTipoServico(tipoServicoSelecionado, framePai, CENARIO);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Selecione um tipo de serviço", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, "Selecione um tipo de serviço.");
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -214,7 +213,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
             try {
                 Double.parseDouble(filtro);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Valor da hora deve ser numerico!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                ciInterface.getCiMensagem().exibirMensagemAviso(this, "Valor da hora deve ser numerico!");
                 return;
             }
         }

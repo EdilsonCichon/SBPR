@@ -8,7 +8,6 @@ import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     
@@ -188,7 +187,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
             }else
                ciInterface.getCiTipoMaquina().instanciarTelaCadastroTipoMaquina(tipoMaquina, pai, CENARIO);     
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Selecione um Tipo de Maquina", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, "Selecione um Tipo de Maquina");
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 

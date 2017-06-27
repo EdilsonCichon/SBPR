@@ -54,7 +54,7 @@ public class CIFuncionario {
             Habilitacao habilitacao, Usuario usuario,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado, String tipoLogradouro, 
-            String complemento, Cep cepAtual, List tiposServicos) throws Exception {
+            String complemento, Cep cepAtual, List tiposServicos){
         
         try {
             gtFuncionario.cadastrarFuncionario(
@@ -73,7 +73,7 @@ public class CIFuncionario {
             Habilitacao habilitacao, String login, String senha,
             String cep, String logradouro, String numero,
             String bairro, String cidade, String estado, String tipoLogradouro, 
-            String complemento, Cep cepAtual, List tipoServicos) throws Exception{
+            String complemento, Cep cepAtual, List tipoServicos){
         
         try {
             gtFuncionario.alterarFuncionario(funcionario,
@@ -90,7 +90,7 @@ public class CIFuncionario {
         return gtFuncionario.filtrarFuncionario(tipoFiltro, texto);
     }
     
-    public void excluirFuncionario(Funcionario funcionario) throws Exception {
+    public void excluirFuncionario(Funcionario funcionario){
         try {
             gtFuncionario.excluirFuncionario(funcionario);
             ciInterface.getCiMensagem().exibirMensagemConfirmacao(cadastroFuncionario, "Excluído com sucesso!");

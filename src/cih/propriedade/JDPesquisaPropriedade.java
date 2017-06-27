@@ -7,7 +7,6 @@ import com.sun.glass.events.KeyEvent;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
 public class JDPesquisaPropriedade extends javax.swing.JDialog {
@@ -201,7 +200,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         
         if(jComboBoxFiltro.getSelectedIndex() == 1){
             if(jTextFieldFiltro.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Insira um ID de produtor", "ERRO", JOptionPane.INFORMATION_MESSAGE);
+                ciInterface.getCiMensagem().exibirMensagemAviso(this, "Insira um ID de produtor");
             }else{
                 listaPropriedades = listaPropriedades = ciInterface.getCiPropriedade().filtrarPropriedades(colunaFiltro, filtro); 
             }       
@@ -229,7 +228,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
             ciInterface.getCiPropriedade().instanciarTelaCadastroPropriedade(propriedade, pai, CENARIO);
            
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Selecione uma propriedade", "ERRO", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Selecione uma propriedade!");
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 

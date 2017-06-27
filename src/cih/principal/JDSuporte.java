@@ -3,7 +3,6 @@ package cih.principal;
 import cci.CIInterface;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class JDSuporte extends javax.swing.JDialog {
     
@@ -129,13 +128,8 @@ public class JDSuporte extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
-        try {
-            ciInterface.getCiGeral().enviarEmail(jTextFieldEmail.getText(), jTextAreaMensagem.getText(), jTextFieldTelefone.getText());
-            JOptionPane.showMessageDialog(this, "Aguarde e confie que nosso suporte entrará em contato! ;)");
-            this.dispose();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao enviar o e-mail: " + ex.getMessage());
-        }
+        ciInterface.getCiGeral().enviarEmail(jTextFieldEmail.getText(), jTextAreaMensagem.getText(), jTextFieldTelefone.getText());
+        this.dispose();
     }//GEN-LAST:event_jButtonEnviarActionPerformed
 
     private void jButtonEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonEnviarKeyPressed

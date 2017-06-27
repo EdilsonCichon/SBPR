@@ -812,14 +812,11 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     }
     
     private void excluirFuncionario() {
-        try {
-            int confirmacao = ciInterface.getCiMensagem().exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
-            if (confirmacao == 0) {
-                ciInterface.getCiFuncionario().excluirFuncionario(funcionarioAtual);
-                this.dispose();
-            }
-        } catch (Exception e) {
-            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
+
+        int confirmacao = ciInterface.getCiMensagem().exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
+        if (confirmacao == 0) {
+            ciInterface.getCiFuncionario().excluirFuncionario(funcionarioAtual);
+            this.dispose();
         }
     }
     

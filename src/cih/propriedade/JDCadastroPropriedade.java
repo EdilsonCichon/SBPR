@@ -8,7 +8,6 @@ import com.sun.glass.events.KeyEvent;
 import java.awt.Frame;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class JDCadastroPropriedade extends javax.swing.JDialog {
 
@@ -242,7 +241,7 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
                     break;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao confirmar a operação: " +e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -292,50 +291,30 @@ public class JDCadastroPropriedade extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
 
-    private void cadastrarPropriedade(String nome, String referencia){
-        try{
-            ciInterface.getCiPropriedade().cadastrarPropriedade(produtorAtual, nome, referencia);
-            modoSomenteLeitura(true);
-            jButtonConfirmar.setEnabled(false);
-            jButtonCancelar.setText("Sair");
-            JOptionPane.showMessageDialog(this, "Cadastrada com sucesso!");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
-        }
+    private void cadastrarPropriedade(String nome, String referencia) {
+        ciInterface.getCiPropriedade().cadastrarPropriedade(produtorAtual, nome, referencia, "Cadastrada com sucesso!");
+        modoSomenteLeitura(true);
+        jButtonConfirmar.setEnabled(false);
+        jButtonCancelar.setText("Sair");
     }
     
-    private void adicionarPropriedade(String nome, String referencia){
-        try {
-            propriedadeVazia.setNome_propriedade(nome);
-            propriedadeVazia.setReferencia(referencia);
-            ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia); 
-            JOptionPane.showMessageDialog(this, " Propriedade Adicionada com sucesso!");
-            this.dispose();    
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao adicionar: " + e.getMessage());
-        }
+    private void adicionarPropriedade(String nome, String referencia) {
+        propriedadeVazia.setNome_propriedade(nome);
+        propriedadeVazia.setReferencia(referencia);
+        ciInterface.getCiPropriedade().cadastrarPropriedade(propriedadeVazia.getResponsavel(), nome, referencia, "Adicionada com sucesso!");
+        this.dispose();
     }
     
-    private void alterarPropriedade(){
-        try{
-            ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia, produtorAtual);
-            JOptionPane.showMessageDialog(this, "Alterada com sucesso!");
+    private void alterarPropriedade() {
+        ciInterface.getCiPropriedade().alterarPropriedade(propriedadeVazia, produtorAtual);
+        this.dispose();
+    }
+    
+    private void excluirPropriedade() {
+        int confirmado = ciInterface.getCiMensagem().exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
+        if (confirmado == 0) {
+            ciInterface.getCiPropriedade().excluirPropriedade(propriedadeVazia);
             this.dispose();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
-        }
-    }
-    
-    private void excluirPropriedade(){
-        try{
-            int confirmado = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-            if ( confirmado == 0 ) {
-                ciInterface.getCiPropriedade().excluirPropriedade(propriedadeVazia);
-                JOptionPane.showMessageDialog(this, "Propriedade excluída com sucesso");
-                this.dispose();
-            }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao excluir propriedade: " + e.getMessage());
         }
     }
     

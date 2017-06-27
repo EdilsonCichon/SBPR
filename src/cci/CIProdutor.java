@@ -44,21 +44,23 @@ public class CIProdutor {
         return gtProdutor.instanciarProdutorVazio();
     }
 
-    public void cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws Exception{
+    public void cadastrarProdutor(String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
         
         try{   
-          Produtor produtor = gtProdutor.cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo); 
-          ciInterface.getCiProdutor().setProdutorSelecionado(produtor);
+            Produtor produtor = gtProdutor.cadastrarProdutor(nome, cpf, data_nasc, inscricao, rg, telefone, sexo); 
+            ciInterface.getCiProdutor().setProdutorSelecionado(produtor);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroProdutor, "Cadastrado com sucesso!");
         }catch(Exception e){
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroProdutor, e.getMessage());
         }  
     }
     
-    public void alterarProdutor(Produtor produtor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo) throws Exception {
+    public void alterarProdutor(Produtor produtor, String nome, String cpf, String data_nasc, String inscricao, String rg, String telefone, char sexo){
         try {
             gtProdutor.alterarProdutor(produtor, nome, cpf, data_nasc, inscricao, rg, telefone, sexo);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroProdutor, "Alterado com sucesso!");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroProdutor, e.getMessage());
         }
     }
     
@@ -66,12 +68,13 @@ public class CIProdutor {
        return gtProdutor.filtrarProdutor(colunaFiltro, filtro);
     }
     
-    public void excluirProdutor(Produtor produtor) throws Exception{
+    public void excluirProdutor(Produtor produtor){
         
         try{   
             gtProdutor.excluirProdutor(produtor); 
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroProdutor, "Excluído com sucesso!");
         }catch(Exception e){
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroProdutor, e.getMessage());
         }    
     }
 

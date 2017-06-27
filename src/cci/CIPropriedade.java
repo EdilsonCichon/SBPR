@@ -40,11 +40,12 @@ public class CIPropriedade {
         pesquisaPropriedade.setVisible(true);
     }
 
-    public void cadastrarPropriedade(Produtor responsavel, String nome, String referencia) throws Exception {
+    public void cadastrarPropriedade(Produtor responsavel, String nome, String referencia, String mensagem)  {
         try {
             gtPropriedade.cadastrarPropriedade(responsavel, nome, referencia); 
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroPropriedade, mensagem);
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroPropriedade, e.getMessage());
         }
     }
 
@@ -52,19 +53,21 @@ public class CIPropriedade {
         return gtPropriedade.instanciarPropriedadeVazia(produtor);
     }
 
-    public void alterarPropriedade(Propriedade propriedade, Produtor produtorSelecionado) throws Exception {
+    public void alterarPropriedade(Propriedade propriedade, Produtor produtorSelecionado){
         try {
             gtPropriedade.alterarPropriedade(propriedade, produtorSelecionado);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroPropriedade, "Alterada com sucesso!");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroPropriedade, e.getMessage());
         }
     }
 
-    public void excluirPropriedade(Propriedade propriedade) throws Exception {
+    public void excluirPropriedade(Propriedade propriedade){
         try {
-            gtPropriedade.excluirPropriedade(propriedade);    
+            gtPropriedade.excluirPropriedade(propriedade);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroPropriedade, "Excluída com sucesso!");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroPropriedade, e.getMessage());
         }
     }
 

@@ -12,7 +12,6 @@ import cgt.GTServico;
 import cih.servico.JDCadastroServico;
 import cih.servico.JDPesquisaServico;
 import java.awt.Frame;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JFrame;
 
@@ -48,36 +47,40 @@ public class CIServico {
     }
 
     public void cadastrarServico(Produtor produtor, Propriedade propriedade,
-            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) throws Exception {
+            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista){
         try {
             gtServico.cadastrarServico(produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
-        } catch (Exception ex) {
-            throw ex;
+            ciInterface.getCiMensagem().exibirMensagemSucesso(agendarServico, "Serviço agendado com sucesso!");
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(agendarServico, e.getMessage());
         }
     }
 
     public void alterarServico(Servico servico, Produtor produtor, Propriedade propriedade,
-            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista) throws Exception {
+            TipoServico tipoServico, String dtPrevistaConclusao, String qtdHrsPrevista){
         try {
             gtServico.alterarServico(servico, produtor, propriedade, tipoServico, dtPrevistaConclusao, qtdHrsPrevista);
-        } catch (Exception ex) {
-            throw ex;
+            ciInterface.getCiMensagem().exibirMensagemSucesso(agendarServico, "Serviço alterado com sucesso!");
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(agendarServico, e.getMessage());
         }
     }
 
-    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta) throws SQLException, ClassNotFoundException, Exception {
+    public void cancelarServico(ServicoAgendado servico, String dataCancelamento, String valorMulta){
         try {
             gtServico.cancelarServico(servico, dataCancelamento, valorMulta);
-        } catch (Exception ex) {
-            throw ex;
+            ciInterface.getCiMensagem().exibirMensagemSucesso(agendarServico, "Serviço cancelado com sucesso!");
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(agendarServico, e.getMessage());
         }
     }
 
-    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada) throws SQLException, ClassNotFoundException, Exception {
+    public void concluirServico(ServicoAgendado servico, String dataConclusao, String qtdHoras, String total, Funcionario funcionarioSelecionado, Maquina maquinaSelecionada){
         try {
             gtServico.concluirServico(servico, dataConclusao, qtdHoras, total, funcionarioSelecionado, maquinaSelecionada);
-        } catch (Exception ex) {
-            throw ex;
+            ciInterface.getCiMensagem().exibirMensagemSucesso(agendarServico, "Serviço concluído com sucesso!");
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(agendarServico, e.getMessage());
         }
     }
 

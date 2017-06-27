@@ -16,7 +16,6 @@ import java.awt.Frame;
 import java.awt.event.ItemEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 
 public class JDPesquisaServico extends javax.swing.JDialog {
 
@@ -327,7 +326,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 identificarPropriedadeSelecionada();
             } else {
                 jComboBoxPropriedades.setEnabled(false);
-                JOptionPane.showMessageDialog(this, "PRODUTOR SEM PROPRIEDADES");
+                ciInterface.getCiMensagem().exibirMensagemAviso(this, "PRODUTOR SEM PROPRIEDADES");
             }
         } 
     }//GEN-LAST:event_jButtonFiltrarProdutorActionPerformed
@@ -346,14 +345,14 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         
         if(jCheckBoxFiltroProdutor.getSelectedObjects() != null && jTextFieldNomeProdutor.getText() == null){
-            JOptionPane.showMessageDialog(this, "Selecione um produtor.");
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, "Selecione um produtor.");
         }else if(jCheckBoxFiltroPropriedade.getSelectedObjects() != null && jComboBoxPropriedades.getSelectedObjects() == null){
-            JOptionPane.showMessageDialog(this, "Selecione uma propriedade.");
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, "Selecione uma propriedade.");
             
         }else{
             
             if(jCheckBoxFiltroServico.getSelectedObjects() != null && jTextFieldTipoServico.getText() == null ){
-                JOptionPane.showMessageDialog(this, "Selecione um tipo de serviço.");
+                ciInterface.getCiMensagem().exibirMensagemAviso(this, "Selecione um tipo de serviço.");
                 
             }else{
                 
@@ -364,7 +363,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                     ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
             
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erro ao exibir o Serviço:", "ERRO", JOptionPane.ERROR_MESSAGE);
+                    ciInterface.getCiMensagem().exibirMensagemErro(this, ex.getMessage());
                 }
             }
         }

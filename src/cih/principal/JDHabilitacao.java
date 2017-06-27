@@ -6,7 +6,6 @@ import cdp.Habilitacao;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class JDHabilitacao extends javax.swing.JDialog {
 
@@ -150,7 +149,7 @@ public class JDHabilitacao extends javax.swing.JDialog {
                 preencherTabela();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }
         
     }//GEN-LAST:event_jButtonCadastrarActionPerformed

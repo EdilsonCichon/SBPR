@@ -8,7 +8,6 @@ import cdp.TipoMaquina;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 
 public final class JDCadastroMaquina extends javax.swing.JDialog {
 
@@ -245,7 +244,7 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
                     break;               
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }      
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -270,40 +269,25 @@ public final class JDCadastroMaquina extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
 
-    private void cadastrarMaquina(String modelo, String placa){
-        try{
-            ciInterface.getCiMaquina().cadastrarMaquina(modelo, placa, tipoMaquina);
-            jButtonConfirmar.setEnabled(false);
-            jButtonCancelar.setText("Sair");
-            modoSomenteLeitura(true);
-            JOptionPane.showMessageDialog(this, "Cadastrada com sucesso!");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
-        }
+    private void cadastrarMaquina(String modelo, String placa) {
+        ciInterface.getCiMaquina().cadastrarMaquina(modelo, placa, tipoMaquina);
+        jButtonConfirmar.setEnabled(false);
+        jButtonCancelar.setText("Sair");
+        modoSomenteLeitura(true);
     }
     
-    private void alterarMaquina(String modelo, String placa){
-        try{
-            ciInterface.getCiMaquina().alterarMaquina(maquinaAtual, modelo, placa, tipoMaquina);
-            modoSomenteLeitura(true);
-            jButtonConfirmar.setEnabled(false);
-            jButtonCancelar.setText("Sair");
-            JOptionPane.showMessageDialog(this, "Alterada com sucesso!");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
-        }
+    private void alterarMaquina(String modelo, String placa) {
+        ciInterface.getCiMaquina().alterarMaquina(maquinaAtual, modelo, placa, tipoMaquina);
+        modoSomenteLeitura(true);
+        jButtonConfirmar.setEnabled(false);
+        jButtonCancelar.setText("Sair");
     }
     
-    private void excluirMaquina(){
-        try{
-            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-            if ( confirmacao == 0 ) {
-                ciInterface.getCiMaquina().excluirMaquina(maquinaAtual);
-                JOptionPane.showMessageDialog(this, "Maquina excluída com sucesso");
-                this.dispose();
-            }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao excluir maquina: " + e.getMessage());
+    private void excluirMaquina() {
+        int confirmacao = ciInterface.getCiMensagem().exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
+        if (confirmacao == 0) {
+            ciInterface.getCiMaquina().excluirMaquina(maquinaAtual);
+            this.dispose();
         }
     }
     

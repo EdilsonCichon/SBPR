@@ -19,7 +19,6 @@ import java.util.Calendar;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class JDCadastroServico extends javax.swing.JDialog {
     private CIInterface ciInterface;
@@ -654,38 +653,29 @@ public class JDCadastroServico extends javax.swing.JDialog {
         calcularValorTotal();
     }//GEN-LAST:event_jFormattedTextFieldQtHrsReaisFocusLost
 
-    private void agendarServico(String dtPrevistaConclusao, String qtdHrsPrevista) {
-        
+    private void agendarServico(String dtPrevistaConclusao, String qtdHrsPrevista) {    
         try {
             validacoesAgendar();
             ciInterface.getCiServico().cadastrarServico(produtorSelecionado, propriedadeSelecionada, tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
-            JOptionPane.showMessageDialog(this, "Serviço agendado com sucesso!");
             modoSomenteLeituraAgendado(true);
             jButtonCancelar.setText("Sair");
         } catch (ValidacaoException ve) {
-            JOptionPane.showMessageDialog(this, ve.getMessage(), "Validação dos dados", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao Agendar Serviço: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, ve.getMessage());
         }
     }
     
-    private void alterarServico(String dtPrevistaConclusao, String qtdHrsPrevista) {
-        
+    private void alterarServico(String dtPrevistaConclusao, String qtdHrsPrevista) {   
         try {
             validacoesAgendar();
             ciInterface.getCiServico().alterarServico(servico, produtorSelecionado, propriedadeSelecionada, tipoServicoSelecionado, dtPrevistaConclusao, qtdHrsPrevista);
             modoSomenteLeituraAgendado(true);
             jButtonCancelar.setText("Sair");
-            JOptionPane.showMessageDialog(this, "Serviço alterado com sucesso!");
         } catch (ValidacaoException ve) {
-            JOptionPane.showMessageDialog(this, ve.getMessage(), "Validação dos dados", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao Alterar Serviço: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-        }
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, ve.getMessage());
+        } 
     }
     
-    private void concluirServico() {
-        
+    private void concluirServico() {    
         String dataConclusao = jFormattedTextFieldDataConclusao.getText();
         String qtdHoras = jFormattedTextFieldQtHrsReais.getText().replace(":", ".");
         String total = jTextFieldValorTotal.getText();
@@ -697,16 +687,12 @@ public class JDCadastroServico extends javax.swing.JDialog {
             modoSomenteLeituraConcluido(true);
             jButtonConfirmar.setEnabled(false);
             jButtonCancelar.setText("Sair");
-            JOptionPane.showMessageDialog(this, "Serviço concluído com sucesso!");
         } catch (ValidacaoException ve) {
-            JOptionPane.showMessageDialog(this, ve.getMessage(), "Validação dos dados", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao Concluir Serviço: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, ve.getMessage());
         }
     }
     
-    private void cancelarServico() {
-        
+    private void cancelarServico() {  
         String dataCancelamento = jFormattedTextFieldDataCancelamento.getText();
         String valorMulta = jTextFieldValorMulta.getText();
 
@@ -716,11 +702,8 @@ public class JDCadastroServico extends javax.swing.JDialog {
             modoSomenteLeituraCancelado(true);
             jButtonCancelar.setText("Sair");
             jButtonConfirmar.setEnabled(false);
-            JOptionPane.showMessageDialog(this, "Serviço cancelado com sucesso!");
         } catch (ValidacaoException ve) {
-            JOptionPane.showMessageDialog(this, ve.getMessage(), "Validação dos dados", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao Cancelar Serviço: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, ve.getMessage());
         }
     }
     

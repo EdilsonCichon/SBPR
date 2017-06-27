@@ -8,7 +8,6 @@ import cdp.Maquina;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class JDPesquisarMaquina extends javax.swing.JDialog {
     
@@ -213,7 +212,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
             }else
                 ciInterface.getCiMaquina().instanciarTelaCadastroMaquina(maquinaSelecionada, pai, CENARIO);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Selecione uma máquina", "ERRO", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Selecione uma máquina");
         }         
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -265,11 +264,11 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
     private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
 
         if (listaMaquinas == null || listaMaquinas.isEmpty())
-            JOptionPane.showMessageDialog(this, "Não existe dados para imprimir!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
         try {
             ciInterface.getCRMaquina().listar(listaMaquinas);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao gerar o relatório: "+ e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }
     }//GEN-LAST:event_jButtonImprimirActionPerformed
 

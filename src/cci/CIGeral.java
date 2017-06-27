@@ -18,6 +18,8 @@ import cih.principal.JPCrud;
 import cih.principal.JPInicio;
 import cih.principal.JPServico;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.swing.JFrame;
 
@@ -179,8 +181,13 @@ public class CIGeral {
         habilitacao.setVisible(true);
     }
     
-    public void enviarEmail(String emailDestinatario, String mensagem, String telefone) throws MessagingException {
-        gtGeral.enviarEmail(emailDestinatario, mensagem, telefone);
+    public void enviarEmail(String emailDestinatario, String mensagem, String telefone){
+        try {
+            gtGeral.enviarEmail(emailDestinatario, mensagem, telefone);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(suporte, "Email enviado! Aguarde nossa resposta.");
+        } catch (MessagingException e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(servico, e.getMessage());
+        }
     }  
     
     public int getPermissao() {

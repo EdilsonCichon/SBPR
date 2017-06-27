@@ -7,7 +7,6 @@ import cdp.TipoMaquina;
 import cdp.TipoServico;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 
 public class JDCadastroTipoServico extends javax.swing.JDialog {
     
@@ -283,7 +282,7 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
                     break;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
@@ -331,42 +330,25 @@ public class JDCadastroTipoServico extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonCancelarKeyPressed
 
-    private void cadastrarTipoServico(String nome, String valor, String descricao){
-        
-        try {
-            ciInterface.getCiTipoServico().cadastrarTipoServico(nome, valor, descricao, tipoMaquinaSelecionada);
-            modoSomenteLeitura(true);
-            jButtonConfirmar.setEnabled(false);
-            jButtonCancelar.setText("Sair");
-            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
-        }
+    private void cadastrarTipoServico(String nome, String valor, String descricao) {
+        ciInterface.getCiTipoServico().cadastrarTipoServico(nome, valor, descricao, tipoMaquinaSelecionada);
+        modoSomenteLeitura(true);
+        jButtonConfirmar.setEnabled(false);
+        jButtonCancelar.setText("Sair");
     }
     
-    private void alterarTipoServico(String nome, String valor, String descricao){
-        try {
-            ciInterface.getCiTipoServico().alterarTipoServico(tipoServicoAtual, tipoMaquinaSelecionada, nome, valor, descricao);
-            jButtonConfirmar.setEnabled(false);
-            jButtonCancelar.setText("Sair");
-            modoSomenteLeitura(true);
-            JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
-        }
+    private void alterarTipoServico(String nome, String valor, String descricao) {
+        ciInterface.getCiTipoServico().alterarTipoServico(tipoServicoAtual, tipoMaquinaSelecionada, nome, valor, descricao);
+        jButtonConfirmar.setEnabled(false);
+        jButtonCancelar.setText("Sair");
+        modoSomenteLeitura(true);
     }
     
-    private void excluirTipoServico(){
-        try{
-            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
-            if ( confirmacao == 0 ) {
-                ciInterface.getCiTipoServico().excluirTipoServico(tipoServicoAtual);
-                JOptionPane.showMessageDialog(this, "Excluído com sucesso!");
-                this.dispose();
-            }
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao excluir " + e.getMessage());
+    private void excluirTipoServico() {
+        int confirmacao = ciInterface.getCiMensagem().exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
+        if (confirmacao == 0) {
+            ciInterface.getCiTipoServico().excluirTipoServico(tipoServicoAtual);
+            this.dispose();
         }
     }
     

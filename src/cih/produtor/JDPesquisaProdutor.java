@@ -8,7 +8,6 @@ import com.sun.glass.events.KeyEvent;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class JDPesquisaProdutor extends javax.swing.JDialog {
     
@@ -204,7 +203,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
                 ciInterface.getCiProdutor().instanciarTelaCadastroProdutor(produtorSelecionado, pai, CENARIO);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Selecione um produtor", "ERRO", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Selecione um produtor");
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 

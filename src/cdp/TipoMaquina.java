@@ -11,7 +11,7 @@ public class TipoMaquina implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
     @Column(nullable = false)
     private String descricao;

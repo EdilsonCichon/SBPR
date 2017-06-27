@@ -10,7 +10,7 @@ public class Habilitacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String categoria;
 
     public Habilitacao() {

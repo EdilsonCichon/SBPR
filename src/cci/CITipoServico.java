@@ -40,19 +40,21 @@ public class CITipoServico {
         pesquisaTipoServico.setVisible(true);
     }
     
-    public void cadastrarTipoServico(String nome, String valor, String descricao, TipoMaquina tipoMaquina) throws Exception{ 
+    public void cadastrarTipoServico(String nome, String valor, String descricao, TipoMaquina tipoMaquina){ 
         try {
             gtTipoServico.cadastrarTipoServico(nome, valor, descricao, tipoMaquina);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroTipoServico, "Cadastrado com sucesso!");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroTipoServico, e.getMessage());
         }
     }
     
-    public void alterarTipoServico(TipoServico tipoServico, TipoMaquina tipoMaquina, String nome, String valor, String descricao) throws Exception{
+    public void alterarTipoServico(TipoServico tipoServico, TipoMaquina tipoMaquina, String nome, String valor, String descricao){
         try {
             gtTipoServico.alterarTipoServico(tipoServico, tipoMaquina, nome, valor, descricao);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroTipoServico, "Alterado com sucesso!");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroTipoServico, e.getMessage());
         }
     }
     
@@ -60,11 +62,12 @@ public class CITipoServico {
         return gtTipoServico.consultarTipoServico();
     }
     
-    public void excluirTipoServico(TipoServico tipoServico) throws Exception {
+    public void excluirTipoServico(TipoServico tipoServico){
         try {
             gtTipoServico.excluirTipoServico(tipoServico);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroTipoServico, "Excluído com sucesso!");
         } catch(Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroTipoServico, e.getMessage());
         } 
     } 
     
