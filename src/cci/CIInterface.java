@@ -1,5 +1,6 @@
 package cci;
 
+import cci.relatorio.CRMaquina;
 import cih.principal.JPCrud;
 import cih.principal.JPServico;
 import cci.util.Modulo;
@@ -7,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
-public class CIInterface{
+public class CIInterface {
     
     private CIGeral ciGeral;
     private CIFuncionario ciFuncionario;
@@ -17,6 +18,8 @@ public class CIInterface{
     private CIServico ciServico;
     private CITipoMaquina ciTipoMaquina;
     private CITipoServico ciTipoServico;
+    
+    private CRMaquina CRMaquina;
 
     public CIInterface() {
         ciGeral = new CIGeral(this);
@@ -27,6 +30,9 @@ public class CIInterface{
         ciServico = new CIServico(this);
         ciTipoMaquina = new CITipoMaquina(this);
         ciTipoServico = new CITipoServico(this);
+        
+        CRMaquina = new CRMaquina();
+        //OUTROS CONTROLADORES DE RELATÓRIO AQUI...
         ciGeral.iniciarSistema();
     }
     
@@ -130,5 +136,9 @@ public class CIInterface{
 
     public CITipoServico getCiTipoServico() {
         return ciTipoServico;
+    }
+    
+    public CRMaquina getCRMaquina() {
+        return CRMaquina;
     }
 }

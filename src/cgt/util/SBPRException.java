@@ -13,7 +13,7 @@ public class SBPRException extends Exception {
 
         msgsErro[0] = "Código de erro inválido!";
         
-        // Produtor:
+        // Produtor 1 - 6
         msgsErro[1] = "Campo NOME inválido";
         msgsErro[2] = "Campo CPF inválido";
         msgsErro[3] = "Campo DATA inválido";
@@ -34,6 +34,8 @@ public class SBPRException extends Exception {
         msgsErro[52] = "Valor da multa inválido!";
         msgsErro[53] = "Valor total inválido!";
         
+        //Relatório 100 - 150
+        msgsErro[100] = "Não existe páginas para exibir.";
     }
     
     @Override

@@ -41,6 +41,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Funcionário");
@@ -152,16 +153,20 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setText("Imprimir");
+
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
         jPanelRodapeLayout.setHorizontalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRodapeLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRodapeLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18))
         );
         jPanelRodapeLayout.setVerticalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +174,8 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonConfirmar))
+                    .addComponent(jButtonConfirmar)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -256,6 +262,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowGainedFocus
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonFiltrar;

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c58e176-b365-4d90-9a87-31fdebe56bdc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="modelo" class="java.lang.String">
+		<fieldDescription><![CDATA[modelo]]></fieldDescription>
+	</field>
+	<field name="placa" class="java.lang.String">
+		<fieldDescription><![CDATA[placa]]></fieldDescription>
+	</field>
+	<field name="tipoMaquina" class="cdp.TipoMaquina">
+		<fieldDescription><![CDATA[tipoMaquina]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="22" width="163" height="28" uuid="628d56af-3d24-4ffd-b466-8356cd879045"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Lista de Máquinas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="2" width="100" height="20" uuid="80028f61-db36-4bef-9c38-a059926547bd"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="2" width="100" height="20" uuid="87fa146c-6905-4732-8ea9-3e42f05a6026"/>
+				<text><![CDATA[placa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="2" width="100" height="20" uuid="02c22c37-d151-4212-a3a2-095dcbe28ca0"/>
+				<text><![CDATA[modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="2" width="100" height="20" uuid="787e3735-5872-4ba6-b58d-a57844d42c8b"/>
+				<text><![CDATA[tipoMaquina]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="29" y="11" width="100" height="20" uuid="cf4d7fcf-7f1c-4d56-ab52-6fc765429298"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="22" width="100" height="20" uuid="2642e6af-882b-4ff1-9620-342f6056ca37"/>
+				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="25" width="100" height="20" uuid="075e44fe-7642-499e-b7b8-26e91a1c24ce"/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="25" width="100" height="20" uuid="a23bd089-ebe6-49e6-bb26-ace2074ac413"/>
+				<textFieldExpression><![CDATA[""+$F{tipoMaquina}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

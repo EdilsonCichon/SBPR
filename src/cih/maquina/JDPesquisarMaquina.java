@@ -15,6 +15,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private Frame pai;
+    private List<Maquina> listaMaquinas;
     
     public JDPesquisarMaquina(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
@@ -40,6 +41,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
         jPanelBotoes = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButtonImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Máquinas");
@@ -145,6 +147,13 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
             }
         });
 
+        jButtonImprimir.setText("Imprimir");
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
         jPanelBotoes.setLayout(jPanelBotoesLayout);
         jPanelBotoesLayout.setHorizontalGroup(
@@ -152,9 +161,11 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCancelar)
-                .addGap(9, 9, 9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonImprimir)
+                .addContainerGap())
         );
         jPanelBotoesLayout.setVerticalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +173,8 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonImprimir))
                 .addContainerGap())
         );
 
@@ -210,7 +222,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
         
-        List<Maquina> listaMaquinas = ciInterface.getCiMaquina().filtrarMaquina(colunaFiltro, filtro);
+        listaMaquinas = ciInterface.getCiMaquina().filtrarMaquina(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableMaquina);
         
         listaMaquinas.forEach ((maquina) -> {
@@ -250,10 +262,22 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
         jButtonFiltrarActionPerformed(null);
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+
+        if (listaMaquinas == null || listaMaquinas.isEmpty())
+            JOptionPane.showMessageDialog(this, "Não existe dados para imprimir!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            ciInterface.getCRMaquina().listagem(listaMaquinas);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao gerar o relatório: "+ e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonImprimirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonFiltrar;
+    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltro;
     private javax.swing.JPanel jPanelBotoes;
