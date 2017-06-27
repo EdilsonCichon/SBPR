@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CRMaquina extends CRGenerico {
     
-    public void listagem(List lista) {
+    public void listar(List lista) {
         try {
             gerarRelatorio("../../cih/maquina/JRListaMaquina.jasper", lista);
         } catch (JRException ex) {
