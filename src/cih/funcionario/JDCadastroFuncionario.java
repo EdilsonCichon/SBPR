@@ -11,7 +11,6 @@ import cdp.Habilitacao;
 import cdp.TipoServico;
 import cdp.Usuario;
 import cdp.endereco.Cep;
-import csw.WebServiceCep;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -25,7 +24,6 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private Funcionario funcionarioAtual;
     private Cargo cargo;
     private Habilitacao habilitacao;
-    private WebServiceCep webServiceCep;
     private Cep cepAtual;
 
     public JDCadastroFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO, Funcionario funcionario) {
@@ -939,12 +937,12 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         jFormattedTextFieldCep.setText(cep.getNome());
     }
 
-    private void preencherEnderecoWeb(WebServiceCep webServiceCep) {
-        jTextFieldBairro.setText(webServiceCep.getBairro());
-        jTextFieldCidade.setText(webServiceCep.getCidade());
-        jTextFieldTipoLogradouro.setText(webServiceCep.getLogradouroType());
-        jTextFieldLogradouro.setText(webServiceCep.getLogradouro());
-        jTextFieldEstado.setText(webServiceCep.getUf());
+    private void preencherEnderecoWeb() {
+        jTextFieldBairro.setText(ciInterface.getCiEndereco().getBairro());
+        jTextFieldCidade.setText(ciInterface.getCiEndereco().getCidade());
+        jTextFieldTipoLogradouro.setText(ciInterface.getCiEndereco().getTipoLogradouro());
+        jTextFieldLogradouro.setText(ciInterface.getCiEndereco().getLogradouro());
+        jTextFieldEstado.setText(ciInterface.getCiEndereco().getEstado());
     }
 
     private void limparEndereco() {
@@ -958,13 +956,14 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
     private void consultarCep() throws Exception {
 
         String numeroCep = jFormattedTextFieldCep.getText().replace("-", "");
-        cepAtual = ciInterface.getCiGeral().consultarCep(numeroCep);
+        cepAtual = ciInterface.getCiEndereco().consultarCepBanco(numeroCep);
 
         if (cepAtual == null) {
-            webServiceCep = WebServiceCep.searchCep(numeroCep);
+            
+            boolean cepEncontrado = ciInterface.getCiEndereco().consultarCepWeb(numeroCep);
 
-            if (webServiceCep.wasSuccessful()) {
-                preencherEnderecoWeb(webServiceCep);
+            if (cepEncontrado) {
+                preencherEnderecoWeb();
             } else {
                 limparEndereco();
                 throw new Exception("CEP INVÁLIDO");    

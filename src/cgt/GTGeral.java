@@ -5,12 +5,11 @@ import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
 import cdp.Usuario;
-import cdp.endereco.Cep;
 import cgd.Config;
 import cgd.GDEndereco;
 import cgd.GDGeral;
 import cgt.util.Permissao;
-import csw.WebServiceEmail;
+import cgt.webServices.WebServiceEmail;
 import cgt.util.ValidaCampos;
 import java.sql.SQLException;
 import java.util.List;
@@ -73,9 +72,9 @@ public class GTGeral {
                 return Permissao.PERMISSAO_NEGADA;
             }else{
                 setFuncionarioLogado(funcionario);
-                if(funcionario.getCargo().getNome().equals("Gerente")){
+                if(funcionario.getCargo().getNome().toLowerCase().equals("gerente")){
                     return Permissao.PERMISSAO_ADMIN;
-                }else if (funcionario.getCargo().getNome().equals("Atendente")){
+                }else if (funcionario.getCargo().getNome().toLowerCase().equals("atendente")){
                     return Permissao.PERMISSAO_USER;
                 }else{
                     return Permissao.PERMISSAO_NEGADA;
@@ -90,9 +89,5 @@ public class GTGeral {
 
     public void setFuncionarioLogado(Funcionario funcionarioLogado) {
         this.funcionarioLogado = funcionarioLogado;
-    }
-    
-     public Cep consultarCep(String cep){
-        return gdEndereco.consultarCep(cep);
     }
 }

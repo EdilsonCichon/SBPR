@@ -1,4 +1,4 @@
-package csw;
+package cgt.webServices;
 
 import java.net.MalformedURLException;
 import java.net.URL;

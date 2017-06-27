@@ -5,7 +5,6 @@ import cgt.util.Permissao;
 import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
-import cdp.endereco.Cep;
 import cgt.GTGeral;
 import javax.swing.JOptionPane;
 import cih.principal.FrmPrincipal;
@@ -185,10 +184,6 @@ public class CIGeral {
         gtGeral.enviarEmail(emailDestinatario, mensagem, telefone);
     }  
     
-    public Cep consultarCep(String cep){
-        return gtGeral.consultarCep(cep);
-    } 
-
     public int getPermissao() {
         return permissao;
     }
