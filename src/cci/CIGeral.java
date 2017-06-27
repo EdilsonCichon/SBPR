@@ -6,7 +6,6 @@ import cdp.Cargo;
 import cdp.Funcionario;
 import cdp.Habilitacao;
 import cgt.GTGeral;
-import javax.swing.JOptionPane;
 import cih.principal.FrmPrincipal;
 import cih.principal.FrmValidarAcesso;
 import cih.principal.JDAjuda;
@@ -53,10 +52,10 @@ public class CIGeral {
     public boolean cadastrarCargo(String nomeCargo){
         try{
             gtGeral.cadastrarCargo(nomeCargo);
-            JOptionPane.showMessageDialog(null, "Cargo Cadastrado!");
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cargo, "Cargo Cadastrado!");
             return true;
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(cargo, e.getMessage());
             return false;
         }
     }
@@ -64,10 +63,10 @@ public class CIGeral {
     public boolean cadastrarHabilitacao(String categoria){
         try{
             gtGeral.cadastrarHabilitacao(categoria);
-            JOptionPane.showMessageDialog(null, "Habilitação Cadastrada!");
+            ciInterface.getCiMensagem().exibirMensagemSucesso(habilitacao, "Habilitação Cadastrada!");
             return true;
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(habilitacao, e.getMessage());
             return false;
         }
     }
@@ -82,7 +81,7 @@ public class CIGeral {
     
     public void encerrarSessao() {
 
-        int confirmacao = JOptionPane.showConfirmDialog(frmPrincipal, "Deseja Sair ?", "Sair", JOptionPane.YES_NO_OPTION);
+        int confirmacao = ciInterface.getCiMensagem().exibirMensagemConfirmacao(frmPrincipal, "Deseja Sair ?");
         if (confirmacao == 0) {
             instanciarFrameValidarAcesso();
             frmPrincipal.dispose();
@@ -95,7 +94,7 @@ public class CIGeral {
         setPermissao(permissao);
         
         if(permissao == Permissao.PERMISSAO_NEGADA){
-            JOptionPane.showMessageDialog(frmValidarAcesso, "Acesso Negado", "ERRO", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemErro(ajuda, "Acesso Negado");
             
         }else{
             funcionarioLogado = gtGeral.getFuncionarioLogado();

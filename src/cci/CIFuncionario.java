@@ -57,12 +57,13 @@ public class CIFuncionario {
             String complemento, Cep cepAtual, List tiposServicos) throws Exception {
         
         try {
-          gtFuncionario.cadastrarFuncionario(
+            gtFuncionario.cadastrarFuncionario(
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, usuario, cep, logradouro, numero,
                    bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroFuncionario, "Cadastrado com Sucesso");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroFuncionario, e.getMessage());
         }
     }
     
@@ -79,8 +80,9 @@ public class CIFuncionario {
                    nome, cpf, rg, email, data_nasc, telefone, sexo, cargo, 
                    habilitacao, login, senha, cep, logradouro, numero,
                    bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tipoServicos); 
+            ciInterface.getCiMensagem().exibirMensagemSucesso(cadastroFuncionario, "Alterado com Sucesso");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroFuncionario, e.getMessage());
         }
     }
     
@@ -91,8 +93,9 @@ public class CIFuncionario {
     public void excluirFuncionario(Funcionario funcionario) throws Exception {
         try {
             gtFuncionario.excluirFuncionario(funcionario);
+            ciInterface.getCiMensagem().exibirMensagemConfirmacao(cadastroFuncionario, "Excluído com sucesso!");
         } catch (Exception e) {
-            throw e;
+            ciInterface.getCiMensagem().exibirMensagemErro(cadastroFuncionario, e.getMessage());
         }
     }
 

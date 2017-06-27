@@ -19,6 +19,7 @@ public class CIInterface {
     private CITipoMaquina ciTipoMaquina;
     private CITipoServico ciTipoServico;
     private CIEndereco ciEndereco;
+    private CIMensagem ciMensagem;
     
     private CRMaquina CRMaquina;
 
@@ -32,6 +33,7 @@ public class CIInterface {
         ciTipoMaquina = new CITipoMaquina(this);
         ciTipoServico = new CITipoServico(this);
         ciEndereco = new CIEndereco();
+        ciMensagem = new CIMensagem();
         CRMaquina = new CRMaquina();
         //OUTROS CONTROLADORES DE RELATÓRIO AQUI...
         ciGeral.iniciarSistema();
@@ -150,4 +152,12 @@ public class CIInterface {
     public void setCiEndereco(CIEndereco ciEndereco) {
         this.ciEndereco = ciEndereco;
     }
+
+    public CIMensagem getCiMensagem() {
+        return ciMensagem;
+    }
+
+    public void setCiMensagem(CIMensagem ciMensagem) {
+        this.ciMensagem = ciMensagem;
+    } 
 }

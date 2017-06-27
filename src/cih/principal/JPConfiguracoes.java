@@ -2,7 +2,6 @@ package cih.principal;
 
 import cci.CIInterface;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class JPConfiguracoes extends javax.swing.JPanel {
 

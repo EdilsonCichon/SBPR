@@ -15,7 +15,6 @@ import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 
 public class JDCadastroFuncionario extends javax.swing.JDialog {
 
@@ -665,7 +664,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     break;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -687,7 +686,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
             try {
                 consultarCep();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Erro: " + ex.getMessage());
+                ciInterface.getCiMensagem().exibirMensagemErro(this, ex.getMessage());
             }
         }
     }//GEN-LAST:event_jFormattedTextFieldCepKeyPressed
@@ -724,7 +723,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         if ( !jaVinculado )
             JTableUtil.addLinha(jTableTiposServicos, tipoServicoSelecionado.toArray());
         else
-            JOptionPane.showMessageDialog(this, "Tipo de Serviço já selecionado!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemAviso(this, "Tipo de Serviço já selecionado!");
     }//GEN-LAST:event_jButtonAddTipoServicoActionPerformed
 
     private void jButtonRemoverTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverTipoServicoActionPerformed
@@ -747,7 +746,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
         try {
             consultarCep();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro: " + ex.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(this, ex.getMessage());
         }
     }//GEN-LAST:event_jFormattedTextFieldCepFocusLost
 
@@ -777,11 +776,10 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                     habilitacao, usuario, cep, logradouro, numero,
                     bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tiposServicos);
-
             modoConcluido(true);
-            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }
     }
     
@@ -806,24 +804,22 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                     nome, cpf, rg, email, data_nasc, telefone, sexo, cargo,
                     habilitacao, login, senha, cep, logradouro, numero,
                     bairro, cidade, estado, tipoLogradouro, complemento, cepAtual, tipoServicos);
-
-            modoConcluido(true);
-            JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+            modoConcluido(true);     
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao alterar: " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }
     }
     
     private void excluirFuncionario() {
         try {
-            int confirmacao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_OPTION);
+            int confirmacao = ciInterface.getCiMensagem().exibirMensagemConfirmacao(this, "Confirmar Exclusão ?");
             if (confirmacao == 0) {
                 ciInterface.getCiFuncionario().excluirFuncionario(funcionarioAtual);
-                JOptionPane.showMessageDialog(this, "Excluído com sucesso!");
                 this.dispose();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao excluir " + e.getMessage());
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }
     }
     
@@ -852,7 +848,7 @@ public class JDCadastroFuncionario extends javax.swing.JDialog {
                 jButtonCancelar.setText("Sair");
                 jButtonLimpar.setEnabled(false);
                 break;
-            default: //EXCLUIR
+            default:
                 setTitle("Excluir Funcionário");
                 jButtonLimpar.setEnabled(false);
                 setarCamposComInstancia(funcionarioAtual);

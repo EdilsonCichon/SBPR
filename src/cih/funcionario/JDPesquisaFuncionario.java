@@ -9,7 +9,6 @@ import cdp.Funcionario;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Frame;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class JDPesquisaFuncionario extends javax.swing.JDialog {
 
@@ -225,7 +224,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                 ciInterface.getCiFuncionario().instanciarTelaCadastroFuncionario(funcionarioSelecionado, pai, CENARIO);
                       
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Selecione um funcionário", "ERRO", JOptionPane.ERROR_MESSAGE);
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Selecione um funcionário");
         }    
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
