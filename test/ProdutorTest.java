@@ -3,8 +3,6 @@ import cgd.GDProdutor;
 import cgt.GTProdutor;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,12 +19,15 @@ public class ProdutorTest {
     @Test
     public void testCadastrarDadosCorretos(){  
         Produtor produtorCadastrado = null;
-        Produtor produtorBanco = gdProdutor.filtrarProdutorUnico("CPF", "17624769670");
+        Produtor produtorBanco = null; 
         try {
             produtorCadastrado = gtProdutor.cadastrarProdutor("Teste", "17624769670", "10/10/1992", "1234567891", "5463405", "12345678911", 'M');
+            produtorBanco = gdProdutor.filtrarProdutorUnico("CPF", "17624769670");
             assertEquals(produtorCadastrado, produtorBanco);
         } catch (Exception ex) {
-            Logger.getLogger(ProdutorTest.class.getName()).log(Level.SEVERE, null, ex);
+            if(produtorBanco == null){
+                System.out.println("NAO CADASTROU NO BANCO");    
+            }
         }
     }
     
@@ -36,7 +37,6 @@ public class ProdutorTest {
         try {
             produtor = gtProdutor.cadastrarProdutor("Moizes", "12345678911", "1992/10/10", "1234567890", "4463405", "12345678910", 'M');
         } catch (Exception ex) {
-            Logger.getLogger(ProdutorTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         assertNull(produtor);
     }
