@@ -1,31 +1,44 @@
-import cci.CIProdutor;
 import cdp.Produtor;
+import cgd.GDProdutor;
+import cgt.GTProdutor;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ProdutorTest {
-    CIProdutor ciProdutor;
+    
+    GTProdutor gtProdutor;
+    GDProdutor gdProdutor;
             
     public ProdutorTest() {
-        ciProdutor = new CIProdutor(null);
+        gtProdutor = new GTProdutor();
+        gdProdutor = new GDProdutor();
     }
     
     @Test
-    public void testCadastrarDadosCorretos() {
-        Produtor produtorEsperado = new Produtor("Moizes", "13953108743", new Date("10/10/1992"), "1234567891", "5463405", "12345678911", 'M');
-//        Produtor produtor = ciProdutor.cadastrarProdutor("Moizes", "13953108743", "10/10/1992", "1234567891", "5463405", "12345678911", 'M');
-        
-        //FAZER UMA BUSCA PRA VERIFICAR SE ESTÁ NO BANCO.
-        
-//        assertEquals(produtorEsperado, produtor);
+    public void testCadastrarDadosCorretos(){  
+        Produtor produtorCadastrado = null;
+        Produtor produtorBanco = gdProdutor.filtrarProdutorUnico("CPF", "17624769670");
+        try {
+            produtorCadastrado = gtProdutor.cadastrarProdutor("Teste", "17624769670", "10/10/1992", "1234567891", "5463405", "12345678911", 'M');
+            assertEquals(produtorCadastrado, produtorBanco);
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Test
     public void testCadastrarDadosIncorretos() {
-//        Produtor produtor = ciProdutor.cadastrarProdutor("Moizes", "23953108743", "1992/10/10", "1234567890", "4463405", "12345678910", 'M');
-//        assertNull(produtor);
+        Produtor produtor = null;
+        try {
+            produtor = gtProdutor.cadastrarProdutor("Moizes", "12345678911", "1992/10/10", "1234567890", "4463405", "12345678910", 'M');
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertNull(produtor);
     }
     
     @Test
@@ -35,15 +48,12 @@ public class ProdutorTest {
     
     @Test
     public void testConsultar() {
-        List<Produtor> listaConsultada = ciProdutor.filtrarProdutor("CPF", "");
+        List<Produtor> listaConsultada = gtProdutor.filtrarProdutor("CPF", "");
         assertNotNull(listaConsultada);
     }
     
     @Test
     public void testExcluir() {
-        Produtor produtorCadastrado = new Produtor("Moizes", "13953108743", new Date("10/10/1992"), "1234567890", "4463405", "12345678910", 'M');
-        //assertTrue( ciProdutor.excluirProdutor(produtorCadastrado) );
-//        assertTrue( ciProdutor.excluirProdutor(produtorCadastrado) );
-        // Testar outros fluxos alternativos desse caso de uso...
+        Produtor produtorCadastrado = new Produtor("Teste", "13953108743", new Date("10/10/1992"), "1234567890", "4463405", "12345678910", 'M');
     }
 }
