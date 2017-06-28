@@ -1,4 +1,3 @@
-
 import cci.CIProdutor;
 import cdp.Produtor;
 import java.util.Date;
@@ -6,10 +5,10 @@ import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class CIProdutorTest {
+public class ProdutorTest {
     CIProdutor ciProdutor;
             
-    public CIProdutorTest() {
+    public ProdutorTest() {
         ciProdutor = new CIProdutor(null);
     }
     

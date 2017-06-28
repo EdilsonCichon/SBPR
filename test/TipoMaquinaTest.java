@@ -1,9 +1,8 @@
-
 import org.junit.Test;
 
-public class CIPropriedadeTest {
+public class TipoMaquinaTest {
             
-    public CIPropriedadeTest() {
+    public TipoMaquinaTest() {
         
     }
     
