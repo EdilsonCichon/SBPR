@@ -145,7 +145,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 .addComponent(jLabelPropriedade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxPropriedades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxFiltroPropriedade)
                 .addContainerGap())
         );
@@ -359,6 +359,11 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 try {
                     Servico servico = (Servico) JTableUtil.getDadosLinhaSelecionada(jTableServico);
                     ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
+                    
+                    if(jCheckBoxFiltroServico.isSelected())
+                        identificarTipoServicoSelecionado();
+                    else    
+                        identificarPropriedadeSelecionada();
             
                 } catch (Exception ex) {
                     ciInterface.getCiMensagem().exibirMensagemErro(this, ex.getMessage());
@@ -395,6 +400,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
 
     private void jCheckBoxFiltroServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFiltroServicoActionPerformed
         
+        JTableUtil.limparTabela(jTableServico);
         if(jCheckBoxFiltroServico.getSelectedObjects() != null){
             jCheckBoxFiltroProdutor.setSelected(false);
             jCheckBoxFiltroPropriedade.setSelected(false);
@@ -435,6 +441,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     }
     
     public void identificarTipoServicoSelecionado(){
+        
         int id = tipoServicoSelecionado.getId();
         String coluna = "tipoServico.id";
         
@@ -446,17 +453,13 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         
         switch (jComboBoxSituacao.getSelectedIndex()) {
 
-            case 0: preencherTabelaServico(0);
-                break;
+            case 0: preencherTabelaServico(0); break;
 
-            case 1: preencherTabelaServico(1);
-                break;
+            case 1: preencherTabelaServico(1); break;
 
-            case 2: preencherTabelaServico(2);
-                break;
+            case 2: preencherTabelaServico(2); break;
 
-            case 3: preencherTabelaServico(3);
-                break;
+            case 3: preencherTabelaServico(3); break;
 
             default:
                 break;

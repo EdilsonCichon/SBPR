@@ -62,8 +62,9 @@ public class GTProdutor {
     public void excluirProdutor(Produtor produtor) throws SQLException, ClassNotFoundException, SBPRException {
         
         List servicos = gdServico.filtrar("produtor.id", produtor.getId(), Servico.class);
+        
         if ( servicos.isEmpty() )
-        gdProdutor.excluir(produtor);
+            gdProdutor.excluir(produtor);
         else 
             throw new SBPRException(54);
     }

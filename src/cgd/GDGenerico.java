@@ -73,6 +73,8 @@ public abstract class GDGenerico {
     }
 
     public Session criarSessao() {
+        if ( sessao != null && sessao.isOpen())
+            sessao.close();
         sessao = cgd.hibernate.HibernateConfig.getSessionFactory().openSession();
         return sessao;
     }
