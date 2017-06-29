@@ -1,9 +1,8 @@
-
 import org.junit.Test;
 
-public class CIMaquinaTest {
-            
-    public CIMaquinaTest() {
+public class FuncionarioTest {
+    
+    public FuncionarioTest() {
         
     }
     
@@ -26,4 +25,5 @@ public class CIMaquinaTest {
     public void testExcluir() {
          
     }
+    
 }

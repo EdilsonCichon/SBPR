@@ -16,4 +16,14 @@ public class GDProdutor extends GDGenerico {
         sessao.close();
         return lista;
     }
+    
+    public Produtor filtrarProdutorUnico(String colunaFiltro, String valorFiltro) {
+        Criteria crit = criarSessao().createCriteria(Produtor.class);
+        colunaFiltro = colunaFiltro.toLowerCase();
+        crit.add( Restrictions.eq(colunaFiltro, valorFiltro));
+        crit.setMaxResults(1);
+        Produtor produtor = (Produtor) crit.uniqueResult();
+        sessao.close();
+        return produtor;
+    }
 }

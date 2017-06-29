@@ -1,9 +1,8 @@
-
 import org.junit.Test;
 
-public class CIPropriedadeTest {
-            
-    public CIPropriedadeTest() {
+public class ServicoTest {
+
+    public ServicoTest() {
         
     }
     
@@ -26,4 +25,5 @@ public class CIPropriedadeTest {
     public void testExcluir() {
          
     }
+    
 }

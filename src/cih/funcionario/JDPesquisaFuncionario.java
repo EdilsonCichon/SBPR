@@ -15,6 +15,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private Frame pai;
+    private List<Funcionario> listaFuncionarios;
 
     public JDPesquisaFuncionario(java.awt.Frame parent, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(parent, modal);
@@ -40,7 +41,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Funcionário");
@@ -152,7 +153,12 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Imprimir");
+        jButtonImprimir.setText("Imprimir");
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
@@ -164,7 +170,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonImprimir)
                 .addGap(18, 18, 18))
         );
         jPanelRodapeLayout.setVerticalGroup(
@@ -174,7 +180,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonConfirmar)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonImprimir))
                 .addContainerGap())
         );
 
@@ -204,7 +210,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         String tipoFiltro = (String)jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String texto = jTextFieldFiltro.getText();
         
-        List<Funcionario> listaFuncionarios = ciInterface.getCiFuncionario().filtrarFuncionario(tipoFiltro, texto);
+        listaFuncionarios = ciInterface.getCiFuncionario().filtrarFuncionario(tipoFiltro, texto);
         JTableUtil.limparTabela(jTableFuncionario);
         
         listaFuncionarios.forEach((funcionario) -> {
@@ -260,11 +266,23 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         jButtonFiltrarActionPerformed(null);
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+        
+        if (listaFuncionarios == null || listaFuncionarios.isEmpty())
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
+        try {
+            ciInterface.getCRFuncionario().listar("../../cih/funcionario/JRListaFuncionario.jasper", listaFuncionarios);
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
+        }
+        
+    }//GEN-LAST:event_jButtonImprimirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonFiltrar;
+    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JPanel jPanelPesquisarFuncionario;

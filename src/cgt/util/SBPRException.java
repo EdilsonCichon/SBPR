@@ -33,6 +33,7 @@ public class SBPRException extends Exception {
         msgsErro[51] = "Todas as máquinas estão agendadas para essa data!";
         msgsErro[52] = "Valor da multa inválido!";
         msgsErro[53] = "Valor total inválido!";
+        msgsErro[54] = "Produtor vinculado a Serviço(s)!";
         
         //Relatório 100 - 150
         msgsErro[100] = "Não existe páginas para exibir.";

@@ -43,7 +43,11 @@ public class GDServico extends GDGenerico {
         Criteria crit = criarSessao().createCriteria(classe);
         crit.add(Restrictions.eq(coluna, id));
         List listaServico =  crit.list();
-        //sessao.close();
+        /**
+         * A sessão não é fechada, para que não gere LazyException;
+         * Mas a sessão é fechada antes de abrir outra (GDGeneric::criarSessao()).
+         */
+        // sessao.close();
         return listaServico;
     }
     
