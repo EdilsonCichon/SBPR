@@ -14,7 +14,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private Frame pai;
-  
+    private List<Produtor> listaProdutores;
     public JDPesquisaProdutor(Frame pai, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(pai, modal);
         this.CENARIO = CENARIO;
@@ -39,6 +39,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButtonImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Produtor");
@@ -151,6 +152,13 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
             }
         });
 
+        jButtonImprimir.setText("Imprimir");
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
         jPanelRodapeLayout.setHorizontalGroup(
@@ -158,8 +166,10 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
             .addGroup(jPanelRodapeLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonImprimir)
                 .addContainerGap())
         );
         jPanelRodapeLayout.setVerticalGroup(
@@ -168,7 +178,8 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonConfirmar))
+                    .addComponent(jButtonConfirmar)
+                    .addComponent(jButtonImprimir))
                 .addContainerGap())
         );
 
@@ -212,7 +223,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
         
-        List<Produtor> listaProdutores = ciInterface.getCiProdutor().filtrarProdutor(colunaFiltro, filtro);
+        listaProdutores = ciInterface.getCiProdutor().filtrarProdutor(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableProdutor);
         
         listaProdutores.forEach((produtor) -> {
@@ -252,10 +263,21 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         jButtonFiltrarActionPerformed(null);
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+        if (listaProdutores == null || listaProdutores.isEmpty())
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
+        try {
+            ciInterface.getCRProdutor().listar(listaProdutores);
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonImprimirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonFiltrar;
+    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JPanel jPanelPesquisarProdutor;
