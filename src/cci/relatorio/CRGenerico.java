@@ -17,7 +17,7 @@ public abstract class CRGenerico {
     public CRGenerico() {
     }
     
-    public void gerarRelatorio(String caminho, List lista) throws JRException, SBPRException {
+    public void listar(String caminho, List lista) throws JRException, SBPRException {
         
         JDialog viewer = new JDialog(new javax.swing.JFrame(), "Visualização do Relatório", true);
         viewer.setSize(1000, 700);
