@@ -361,7 +361,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                     ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
                     
                     if(jCheckBoxFiltroServico.isSelected())
-                        identificarTipoServicoSelecionado();
+                        selecionarTipoServico();
                     else    
                         identificarPropriedadeSelecionada();
             
@@ -415,12 +415,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     private void jButtonFiltrarTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarTipoServicoActionPerformed
         identificarCenario();
         ciInterface.getCiTipoServico().instanciarTelaFiltroTipoServico(pai, Cenario.SELECIONAR);
-        tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
-        
-        if(tipoServicoSelecionado != null){
-            jTextFieldTipoServico.setText(tipoServicoSelecionado.getNome());
-            identificarTipoServicoSelecionado();      
-        }      
+        selecionarTipoServico();
     }//GEN-LAST:event_jButtonFiltrarTipoServicoActionPerformed
 
     private void jComboBoxSituacaoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSituacaoItemStateChanged
@@ -438,6 +433,15 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         
         listaServicos = ciInterface.getCiServico().filtrarServico(coluna, id, Servico.class);
         identificarSituacao();
+    }
+    
+    public void selecionarTipoServico(){
+        tipoServicoSelecionado = ciInterface.getCiTipoServico().getTipoServicoSelecionado();
+        
+        if(tipoServicoSelecionado != null){
+            jTextFieldTipoServico.setText(tipoServicoSelecionado.getNome());
+            identificarTipoServicoSelecionado();      
+        } 
     }
     
     public void identificarTipoServicoSelecionado(){

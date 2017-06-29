@@ -114,7 +114,11 @@ public class JPInicio extends javax.swing.JPanel {
         });
         add(jButtonFuncionario);
 
+        jButtonConfiguracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cih/icones/icone-configuracoes-reduzido.jpg"))); // NOI18N
         jButtonConfiguracoes.setText("Configurações");
+        jButtonConfiguracoes.setToolTipText("");
+        jButtonConfiguracoes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonConfiguracoes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfiguracoesActionPerformed(evt);

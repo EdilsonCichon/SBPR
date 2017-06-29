@@ -308,7 +308,7 @@
         <Component class="javax.swing.JLabel" name="jLabelNomeUsuario">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="..."/>
+            <Property name="text" type="java.lang.String" value="ADMIN"/>
           </Properties>
         </Component>
       </SubComponents>

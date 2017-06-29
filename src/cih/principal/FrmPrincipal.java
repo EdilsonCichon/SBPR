@@ -33,7 +33,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Date dataAtual = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String data = formatter.format(dataAtual);
-        jLabelNomeUsuario.setText(funcionarioLogado.getNome());
+        if(funcionarioLogado != null)
+            jLabelNomeUsuario.setText(funcionarioLogado.getNome());
         jLabelData.setText(data);
     }    
     
@@ -239,7 +240,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabelData.setText("00/00/0000");
 
         jLabelNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNomeUsuario.setText("...");
+        jLabelNomeUsuario.setText("ADMIN");
 
         javax.swing.GroupLayout jPanelInfoSistemaLayout = new javax.swing.GroupLayout(jPanelInfoSistema);
         jPanelInfoSistema.setLayout(jPanelInfoSistemaLayout);

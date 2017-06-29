@@ -59,27 +59,32 @@ public class GTGeral {
         config = new Config();
     }
     
-    public int validarAcesso(String login, String senha){ 
-       
+    public int validarAcesso(String login, String senha) {
+
         Usuario usuario = gdGeral.validarAcesso(login, senha);
-        if(usuario == null){
+        if (usuario == null) {
             return Permissao.PERMISSAO_NEGADA;
-           
-        }else{
-           
-            Funcionario funcionario = gdGeral.identificarFuncionario(usuario.getId());
-            if(funcionario == null){
-                return Permissao.PERMISSAO_NEGADA;
-            }else{
-                setFuncionarioLogado(funcionario);
-                if(funcionario.getCargo().getNome().toLowerCase().equals("gerente")){
-                    return Permissao.PERMISSAO_ADMIN;
-                }else if (funcionario.getCargo().getNome().toLowerCase().equals("atendente")){
-                    return Permissao.PERMISSAO_USER;
-                }else{
+
+        } else {
+            if (usuario.getLogin().toLowerCase().equals("admin")) {
+                return Permissao.PERMISSAO_ADMIN;
+            } else {
+                
+                Funcionario funcionario = gdGeral.identificarFuncionario(usuario.getId());
+                if (funcionario == null) {
                     return Permissao.PERMISSAO_NEGADA;
+                } else {
+                    setFuncionarioLogado(funcionario);
+                    if (funcionario.getCargo().getNome().toLowerCase().equals("gerente")) {
+                        return Permissao.PERMISSAO_ADMIN;
+                    } else if (funcionario.getCargo().getNome().toLowerCase().equals("atendente")) {
+                        return Permissao.PERMISSAO_USER;
+                    } else {
+                        return Permissao.PERMISSAO_NEGADA;
+                    }
                 }
-            }    
+            }
+
         }
     }
 
