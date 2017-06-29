@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fbcd8ea0-ec9c-438c-a1c6-2a618c2a1a52">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="tipoMaquina" class="cdp.TipoMaquina">
+		<fieldDescription><![CDATA[tipoMaquina]]></fieldDescription>
+	</field>
+	<field name="valor_hr" class="java.lang.Double">
+		<fieldDescription><![CDATA[valor_hr]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="17" y="13" width="59" height="54" uuid="a1ec331b-1b9c-4a73-ae28-54a49836f19f"/>
+				<imageExpression><![CDATA["C:\\Users\\Edilson\\Projects\\pessoais\\ifes\\SBPR\\src\\cih\\icones\\icone-tipo-servico-reduzido.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="178" y="26" width="193" height="28" uuid="d0e991a5-d2f7-44d8-b00c-598351f8cabe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Lista de Tipos de Serviços]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="1" width="30" height="20" uuid="1dc08c09-aa5c-490b-8d7b-b73e92cbb3e1"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="2" width="100" height="20" uuid="8bb52ee3-3555-43d6-9426-0e27d50e008a"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="2" width="100" height="20" uuid="c37ad145-a174-4634-8185-dd992f4473c7"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="2" width="100" height="20" uuid="38a2aa3a-7620-4385-b833-a865d3d42e89"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Tipo Máquina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="2" width="100" height="20" uuid="a5f6c41d-b41f-4813-ad38-6aa4b39d32b4"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Valor Hora]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="15" y="3" width="30" height="20" uuid="90558973-4eef-4f75-832e-c2cdc4d4b23b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="4" width="100" height="20" uuid="bdf8032a-bed4-4c82-bc02-4a9ad7d9f2f6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="4" width="100" height="20" uuid="cac8fde5-9fa3-4847-9081-ba6153dd972c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="4" width="100" height="20" uuid="a938cbd0-3454-4667-932c-ba85d1f258f3"/>
+				<textFieldExpression><![CDATA[""+$F{tipoMaquina}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="5" width="100" height="20" uuid="5bf914fc-54cf-4ff4-a349-16fefd6629ad"/>
+				<textFieldExpression><![CDATA[$F{valor_hr}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

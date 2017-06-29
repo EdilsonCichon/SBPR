@@ -65,6 +65,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButtonImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Serviço");
@@ -268,6 +269,13 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             }
         });
 
+        jButtonImprimir.setText("Imprimir");
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
         jPanelRodapeLayout.setHorizontalGroup(
@@ -277,7 +285,9 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonImprimir)
+                .addContainerGap())
         );
         jPanelRodapeLayout.setVerticalGroup(
             jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +295,8 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonImprimir))
                 .addContainerGap())
         );
 
@@ -425,6 +436,19 @@ public class JDPesquisaServico extends javax.swing.JDialog {
         } 
     }//GEN-LAST:event_jComboBoxSituacaoItemStateChanged
 
+    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+        List listTable = JTableUtil.toList(jTableServico);
+        if (listTable.isEmpty())
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
+        else {
+            try {
+                ciInterface.getCRServico().listar("../../cih/servico/JRListaServico.jasper", listTable);
+            } catch (Exception e) {
+                ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButtonImprimirActionPerformed
+
     public void identificarPropriedadeSelecionada(){
         propriedadeSelecionada = (Propriedade) jComboBoxPropriedades.getSelectedItem();
         
@@ -534,6 +558,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonFiltrarProdutor;
     private javax.swing.JButton jButtonFiltrarTipoServico;
+    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JCheckBox jCheckBoxFiltroProdutor;
     private javax.swing.JCheckBox jCheckBoxFiltroPropriedade;
     private javax.swing.JCheckBox jCheckBoxFiltroServico;

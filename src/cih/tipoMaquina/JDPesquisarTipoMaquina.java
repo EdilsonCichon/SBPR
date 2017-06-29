@@ -14,6 +14,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private Frame pai;
+    private List<TipoMaquina> listaTiposMaquinas;
     
     public JDPesquisarTipoMaquina(Frame pai, boolean modal, int CENARIO, CIInterface ciInterface) {
         super(pai, modal);
@@ -38,6 +39,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         jPanelBotoes = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButtonImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Tipo de Máquina");
@@ -106,7 +108,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
                     .addComponent(jButtonFiltrar)
                     .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -136,24 +138,34 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
             }
         });
 
+        jButtonImprimir.setText("Imprimir");
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
         jPanelBotoes.setLayout(jPanelBotoesLayout);
         jPanelBotoesLayout.setHorizontalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
+            .addGroup(jPanelBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonImprimir)
                 .addContainerGap())
         );
         jPanelBotoesLayout.setVerticalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonImprimir))
                 .addContainerGap())
         );
 
@@ -196,7 +208,7 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
         String colunaFiltro = jComboBoxFiltro.getSelectedItem().toString().toLowerCase();
         String filtro = jTextFieldFiltro.getText();
         
-        List<TipoMaquina> listaTiposMaquinas = ciInterface.getCiTipoMaquina().filtrarTipoMaquina(colunaFiltro, filtro);
+        listaTiposMaquinas = ciInterface.getCiTipoMaquina().filtrarTipoMaquina(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableTipoDeMaquina);
         
         listaTiposMaquinas.forEach((tipoMaquina) -> {
@@ -235,11 +247,22 @@ public class JDPesquisarTipoMaquina extends javax.swing.JDialog {
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         jButtonFiltrarActionPerformed(null);
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+        if (listaTiposMaquinas == null || listaTiposMaquinas.isEmpty())
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
+        try {
+            ciInterface.getCRTipoMaquina().listar("../../cih/tipoMaquina/JRListaTipoMaquina.jasper", listaTiposMaquinas);
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonImprimirActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonFiltrar;
+    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelTipoMaquina;

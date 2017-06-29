@@ -14,6 +14,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
     private CIInterface ciInterface;
     private int CENARIO;
     private Frame framePai;
+    private List<TipoServico> listaTipoServicos;
     
     public JDPesquisaTipoServico(Frame framePai, boolean modal, CIInterface ciInterface, int CENARIO) {
         super(framePai, modal);
@@ -39,6 +40,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         jPanelRodape = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButtonImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro de Tipo de Serviço");
@@ -150,6 +152,13 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
             }
         });
 
+        jButtonImprimir.setText("Imprimir");
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelRodapeLayout = new javax.swing.GroupLayout(jPanelRodape);
         jPanelRodape.setLayout(jPanelRodapeLayout);
         jPanelRodapeLayout.setHorizontalGroup(
@@ -159,6 +168,8 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonImprimir)
                 .addContainerGap())
         );
         jPanelRodapeLayout.setVerticalGroup(
@@ -167,7 +178,8 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonConfirmar))
+                    .addComponent(jButtonConfirmar)
+                    .addComponent(jButtonImprimir))
                 .addContainerGap())
         );
 
@@ -217,7 +229,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
                 return;
             }
         }
-        List<TipoServico> listaTipoServicos = ciInterface.getCiTipoServico().filtrarTipoServico(colunaFiltro, filtro);
+        listaTipoServicos = ciInterface.getCiTipoServico().filtrarTipoServico(colunaFiltro, filtro);
         JTableUtil.limparTabela(jTableTipoServico);
         
         listaTipoServicos.forEach((tipoServico) -> {
@@ -257,10 +269,21 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         jButtonFiltrarActionPerformed(null);
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+        if (listaTipoServicos == null || listaTipoServicos.isEmpty())
+            ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
+        try {
+            ciInterface.getCRTipoMaquina().listar("../../cih/tipoServico/JRListaTipoServico.jasper", listaTipoServicos);
+        } catch (Exception e) {
+            ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonImprimirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonFiltrar;
+    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JLabel jLabelFiltrar;
     private javax.swing.JPanel jPanelPesquisarTipoServico;

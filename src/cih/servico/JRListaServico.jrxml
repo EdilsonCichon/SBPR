@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c58e176-b365-4d90-9a87-31fdebe56bdc">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="data_agendamento" class="java.util.Date">
+		<fieldDescription><![CDATA[data_agendamento]]></fieldDescription>
+	</field>
+	<field name="data_prevista_conclusao" class="java.util.Date">
+		<fieldDescription><![CDATA[data_prevista_conclusao]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="produtor" class="cdp.Produtor">
+		<fieldDescription><![CDATA[produtor]]></fieldDescription>
+	</field>
+	<field name="propriedade" class="cdp.Propriedade">
+		<fieldDescription><![CDATA[propriedade]]></fieldDescription>
+	</field>
+	<field name="qtd_hrs_prevista" class="java.lang.Double">
+		<fieldDescription><![CDATA[qtd_hrs_prevista]]></fieldDescription>
+	</field>
+	<field name="tipoServico" class="cdp.TipoServico">
+		<fieldDescription><![CDATA[tipoServico]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="22" width="163" height="28" uuid="628d56af-3d24-4ffd-b466-8356cd879045"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Lista de Serviços]]></text>
+			</staticText>
+			<image>
+				<reportElement x="21" y="20" width="50" height="46" uuid="6e5a9cd9-b815-449e-aa4a-8ea9464c8430"/>
+				<imageExpression><![CDATA["C:\\Users\\Edilson\\Projects\\pessoais\\ifes\\SBPR\\src\\cih\\icones\\icone-servico-reduzido.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="242" y="0" width="73" height="20" uuid="e446b073-5814-422d-bf24-24d2d177e900"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Produtor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="0" width="79" height="20" uuid="5a794594-0dab-4f83-b20f-bb1e3c93dd91"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Dt. Agendamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="0" width="90" height="20" uuid="cd4a4c98-49ca-401c-be7d-b625e24bd2a5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Dt. Prev. Conclusão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="0" width="29" height="20" uuid="322b7c10-f27c-4a78-b21f-a4a4fb2d15a7"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="0" width="74" height="20" uuid="2bf280c7-6f52-4def-9c60-59bb943f9cbb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Propriedade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="0" width="73" height="20" uuid="516dad7b-fe6b-4c6d-a11f-6472d22ae58d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Tempo Previsto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="413" y="0" width="59" height="20" uuid="e3ad9749-f2e2-4bb4-9129-01d46c038cfd"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Tipo Serviço]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="1" width="29" height="20" uuid="b43231a2-10d4-45c1-8f82-0a14380c9f54"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="46" y="1" width="79" height="20" uuid="e1539611-59c1-4304-b60f-5f6138238940"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{data_agendamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="1" width="90" height="20" uuid="80585cce-c49d-4967-b6d7-89ccf1c77e1c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{data_prevista_conclusao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="1" width="73" height="20" uuid="e71cdd6e-0983-44a0-86dc-789f5f8f4be6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{qtd_hrs_prevista}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="413" y="0" width="59" height="20" uuid="155eb0d1-b78f-4b0f-8e0c-2b89c716a94c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+$F{tipoServico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="3" width="73" height="20" uuid="b79fbc60-6dba-4712-aa1c-cce40dbb1d22"/>
+				<textFieldExpression><![CDATA[""+$F{produtor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="3" width="74" height="20" uuid="1b308303-35c0-4ba6-879f-e8f5123934d1"/>
+				<textFieldExpression><![CDATA[""+$F{propriedade}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

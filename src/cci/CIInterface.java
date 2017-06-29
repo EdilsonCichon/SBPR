@@ -2,8 +2,11 @@ package cci;
 
 import cci.relatorio.CRFuncionario;
 import cci.relatorio.CRMaquina;
+import cci.relatorio.CRServico;
 import cci.relatorio.CRProdutor;
 import cci.relatorio.CRPropriedade;
+import cci.relatorio.CRTipoMaquina;
+import cci.relatorio.CRTipoServico;
 import cih.principal.JPCrud;
 import cih.principal.JPServico;
 import cci.util.Modulo;
@@ -23,11 +26,13 @@ public class CIInterface {
     private CITipoServico ciTipoServico;
     private CIEndereco ciEndereco;
     private CIMensagem ciMensagem;
-    
     private CRMaquina CRMaquina;
+    private CRServico CRServico;
     private CRProdutor CRProdutor;
     private CRPropriedade CRPropriedade;
     private CRFuncionario CRFuncionario;
+    private CRTipoMaquina CRTipoMaquina;
+    private CRTipoServico CRTipoServico;
     
     public CIInterface() {
         ciGeral = new CIGeral(this);
@@ -41,10 +46,12 @@ public class CIInterface {
         ciEndereco = new CIEndereco();
         ciMensagem = new CIMensagem();
         CRMaquina = new CRMaquina();
+        CRServico = new CRServico();
         CRProdutor = new CRProdutor();
         CRPropriedade = new CRPropriedade();
         CRFuncionario = new CRFuncionario();
-        //OUTROS CONTROLADORES DE RELATÓRIO AQUI...
+        CRTipoMaquina = new CRTipoMaquina();
+        CRTipoServico = new CRTipoServico();
         ciGeral.iniciarSistema();
     }
     
@@ -154,6 +161,10 @@ public class CIInterface {
         return CRMaquina;
     }
     
+    public CRServico getCRServico() {
+        return CRServico;
+    }
+    
     public CRProdutor getCRProdutor() {
         return CRProdutor;
     }
@@ -164,6 +175,14 @@ public class CIInterface {
 
     public CRFuncionario getCRFuncionario() {
         return CRFuncionario;
+    }
+    
+    public CRTipoMaquina getCRTipoMaquina() {
+        return CRTipoMaquina;
+    }
+    
+    public CRTipoServico getCRTipoServico() {
+        return CRTipoServico;
     }
     
     public CIEndereco getCiEndereco() {
