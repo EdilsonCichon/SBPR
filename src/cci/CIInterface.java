@@ -5,6 +5,8 @@ import cci.relatorio.CRMaquina;
 import cci.relatorio.CRServico;
 import cci.relatorio.CRProdutor;
 import cci.relatorio.CRPropriedade;
+import cci.relatorio.CRTipoMaquina;
+import cci.relatorio.CRTipoServico;
 import cih.principal.JPCrud;
 import cih.principal.JPServico;
 import cci.util.Modulo;
@@ -29,6 +31,9 @@ public class CIInterface {
     private CRProdutor CRProdutor;
     private CRPropriedade CRPropriedade;
     private CRFuncionario CRFuncionario;
+    private CRTipoMaquina CRTipoMaquina;
+    private CRTipoServico CRTipoServico;
+    
     public CIInterface() {
         ciGeral = new CIGeral(this);
         ciFuncionario = new CIFuncionario(this);
@@ -45,6 +50,8 @@ public class CIInterface {
         CRProdutor = new CRProdutor();
         CRPropriedade = new CRPropriedade();
         CRFuncionario = new CRFuncionario();
+        CRTipoMaquina = new CRTipoMaquina();
+        CRTipoServico = new CRTipoServico();
         ciGeral.iniciarSistema();
     }
     
@@ -168,6 +175,14 @@ public class CIInterface {
 
     public CRFuncionario getCRFuncionario() {
         return CRFuncionario;
+    }
+    
+    public CRTipoMaquina getCRTipoMaquina() {
+        return CRTipoMaquina;
+    }
+    
+    public CRTipoServico getCRTipoServico() {
+        return CRTipoServico;
     }
     
     public CIEndereco getCiEndereco() {

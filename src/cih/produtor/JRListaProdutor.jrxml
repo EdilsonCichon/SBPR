@@ -1,19 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83d12a36-bb6b-4cfe-b143-2e998ae248bc">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[cpf]]></fieldDescription>
+	</field>
+	<field name="dt_nasc" class="java.util.Date">
+		<fieldDescription><![CDATA[dt_nasc]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="inscricao_estadual" class="java.lang.String">
+		<fieldDescription><![CDATA[inscricao_estadual]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="propriedades" class="java.util.Collection">
+		<fieldDescription><![CDATA[propriedades]]></fieldDescription>
+	</field>
+	<field name="rg" class="java.lang.String">
+		<fieldDescription><![CDATA[rg]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[telefone]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="14" y="11" width="50" height="56" uuid="2dec7071-a5d5-49db-8b95-b340c20ff1e7"/>
+				<imageExpression><![CDATA["C:\\Users\\Edilson\\Projects\\pessoais\\ifes\\SBPR\\src\\cih\\icones\\icone-produtor-reduzido.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="192" y="24" width="168" height="27" uuid="23e3a407-c67f-4919-ab4c-cd665b3a9baf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Lista de Produtores]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="1" width="30" height="20" uuid="c9919d0c-e63c-464c-bd4d-d1db561e1c8f"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="1" width="100" height="20" uuid="08317784-ddc6-42b4-83d4-d1d75b774c72"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="1" width="100" height="20" uuid="2af20e6e-0b2e-4498-9656-4304644d5883"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="1" width="80" height="20" uuid="ec04bf51-cd79-4a43-ada4-1904a4aac517"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="1" width="100" height="20" uuid="f74a4e24-bca0-4fb0-ad9b-1f7464fc377e"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Inscricao Estadual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="1" width="81" height="20" uuid="bbca8cb8-8c17-4a59-b281-31d414616196"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Propriedades]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="149" y="1" width="100" height="20" uuid="3880ba31-88ac-454f-b0bc-8e7dbf1c2529"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="41" y="1" width="100" height="20" uuid="32c073d6-d068-4758-82e6-df6a15e96b66"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="1" width="80" height="20" uuid="92609f8e-765f-4b59-98b5-968d8e8c02bb"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="1" width="100" height="20" uuid="c7075131-f2cf-4b5e-b60f-bf639e276509"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{inscricao_estadual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="1" width="30" height="20" uuid="6a08300b-292c-4d2c-9eae-f2083d2584ae"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
