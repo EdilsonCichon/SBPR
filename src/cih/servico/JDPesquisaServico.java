@@ -358,8 +358,6 @@ public class JDPesquisaServico extends javax.swing.JDialog {
                 
                 try {
                     Servico servico = (Servico) JTableUtil.getDadosLinhaSelecionada(jTableServico);
-                    servico.setProdutor(produtorSelecionado);
-                    servico.setPropriedade(propriedadeSelecionada);
                     ciServico.instanciarTelaCadastroServico(servico, pai, CENARIO);
             
                 } catch (Exception ex) {

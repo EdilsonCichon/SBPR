@@ -43,7 +43,6 @@ public class GDServico extends GDGenerico {
         Criteria crit = criarSessao().createCriteria(classe);
         crit.add(Restrictions.eq(coluna, id));
         List listaServico =  crit.list();
-        sessao.close();
         return listaServico;
     }
     

@@ -1,7 +1,9 @@
 package cgt;
 
 import cdp.Produtor;
+import cdp.Servico;
 import cgd.GDProdutor;
+import cgd.GDServico;
 import cgt.util.*;
 import java.sql.SQLException;
 import java.util.Date;
@@ -11,9 +13,11 @@ import java.util.List;
 public class GTProdutor {
 
     private GDProdutor gdProdutor;
+    private GDServico gdServico;
 
     public GTProdutor() {
         gdProdutor = new GDProdutor();
+        gdServico = new GDServico();
     }
     
     public Produtor instanciarProdutorVazio(){    
@@ -55,8 +59,13 @@ public class GTProdutor {
         return gdProdutor.filtrar(colunaFiltro, valorFiltro);
     }
 
-    public void excluirProdutor(Produtor produtor) throws SQLException, ClassNotFoundException {
+    public void excluirProdutor(Produtor produtor) throws SQLException, ClassNotFoundException, SBPRException {
+        
+        List servicos = gdServico.filtrar("produtor.id", produtor.getId(), Servico.class);
+        if ( servicos.isEmpty() )
         gdProdutor.excluir(produtor);
+        else 
+            throw new SBPRException(54);
     }
 
     private void validarCampos(String nome, String cpf, String data, String rg, String telefone, String inscricao) throws Exception {
