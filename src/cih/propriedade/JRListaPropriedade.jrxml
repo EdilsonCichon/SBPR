@@ -1,19 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f82bf5b-9cd9-4eee-8e98-00c66f891b2b">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="nome_propriedade" class="java.lang.String">
+		<fieldDescription><![CDATA[nome_propriedade]]></fieldDescription>
+	</field>
+	<field name="referencia" class="java.lang.String">
+		<fieldDescription><![CDATA[referencia]]></fieldDescription>
+	</field>
+	<field name="responsavel" class="cdp.Produtor">
+		<fieldDescription><![CDATA[responsavel]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="29" y="19" width="49" height="44" uuid="e2543301-2560-4eed-9946-6252035d0d6e"/>
+				<imageExpression><![CDATA["C:\\Users\\Edilson\\Projects\\pessoais\\ifes\\SBPR\\src\\cih\\icones\\icone-propriedade-reduzido.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="200" y="19" width="169" height="31" uuid="3fd8cece-1aeb-4300-9613-f8ddfbef7f8c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Lista de Propriedades]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="54" y="1" width="24" height="20" uuid="1a968773-7956-4b8f-ae7a-c684be163872"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="1" width="126" height="20" uuid="c83dcf3b-d90c-4efb-bdfe-dfbdec1adda2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="1" width="100" height="20" uuid="e0634f34-121f-4b11-8edd-07ce5fc5e052"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Referência]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="357" y="1" width="100" height="20" uuid="bfadea09-59be-44d4-a3ae-bae1f7651854"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Responsável]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="54" y="8" width="24" height="20" uuid="80ed1ba9-8301-46a7-b8b6-24e778f908ac"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="8" width="126" height="20" uuid="8f3dac2b-8d0c-4dfd-b58e-b1aa60288132"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome_propriedade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="236" y="8" width="100" height="20" uuid="cebf281e-bb2e-49f6-bed2-e6e47f7c4824"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{referencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="357" y="8" width="100" height="20" uuid="9fbd7bfe-118f-4131-894e-2d70353b1020"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+$F{responsavel}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

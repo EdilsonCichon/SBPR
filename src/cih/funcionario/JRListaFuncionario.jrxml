@@ -1,19 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="080343db-9b8b-421d-850b-955402bc7a2d">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cargo" class="cdp.Cargo">
+		<fieldDescription><![CDATA[cargo]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[cpf]]></fieldDescription>
+	</field>
+	<field name="dt_nasc" class="java.util.Date">
+		<fieldDescription><![CDATA[dt_nasc]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<field name="endereco" class="cdp.endereco.Endereco">
+		<fieldDescription><![CDATA[endereco]]></fieldDescription>
+	</field>
+	<field name="habilitacao" class="cdp.Habilitacao">
+		<fieldDescription><![CDATA[habilitacao]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="rg" class="java.lang.String">
+		<fieldDescription><![CDATA[rg]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[telefone]]></fieldDescription>
+	</field>
+	<field name="tipoServicos" class="java.util.Collection">
+		<fieldDescription><![CDATA[tipoServicos]]></fieldDescription>
+	</field>
+	<field name="usuario" class="cdp.Usuario">
+		<fieldDescription><![CDATA[usuario]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="21" y="16" width="50" height="48" uuid="7b20b4f0-cf2f-41de-9f09-688f6f301cfb"/>
+				<imageExpression><![CDATA["C:\\Users\\Edilson\\Projects\\pessoais\\ifes\\SBPR\\src\\cih\\icones\\icone-funcionario-reduzido.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="199" y="29" width="154" height="20" uuid="daa738e3-4ff6-48de-9d36-9976f3f78fb4"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Lista de Funcionários]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="1" width="30" height="20" uuid="0dd64a9b-faed-4fc1-baec-bce7a7301f7c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="1" width="80" height="20" uuid="2fd3b94a-8580-4b18-85c3-5ecfdc41211d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="2" width="83" height="20" uuid="fc1168ac-6078-45b3-bd12-8f0528f14e9d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="2" width="59" height="20" uuid="0bc97966-a3e7-4526-af1f-7b6d034a3504"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[tipoServicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="2" width="58" height="20" uuid="94119c11-4ae4-42dd-8d32-283ee41ee792"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Usuário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="1" width="57" height="20" uuid="7f707d9e-5abd-4388-a344-169bfecb9443"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[RG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="1" width="61" height="20" uuid="7fdfc576-644f-4a98-be95-7e23ad189995"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="3" width="30" height="20" uuid="e4dcb56c-83d5-45c6-a399-bdea79e6e36b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="3" width="80" height="20" uuid="909c6c12-9ce3-4c6f-9019-996549c76a7a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="3" width="83" height="20" uuid="29ad6165-f8ae-4dd0-b4d1-b191bd1dec9e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="3" width="58" height="20" uuid="1d2e2867-4909-4fdf-9d30-b0e8944efe15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+$F{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="3" width="57" height="20" uuid="1fa23b14-b8b1-4423-a1b2-a72edf503b86"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rg}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
