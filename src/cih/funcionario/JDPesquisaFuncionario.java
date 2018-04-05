@@ -271,7 +271,7 @@ public class JDPesquisaFuncionario extends javax.swing.JDialog {
         if (listaFuncionarios == null || listaFuncionarios.isEmpty())
             ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
         try {
-            ciInterface.getCRFuncionario().listar("../../cih/funcionario/JRListaFuncionario.jasper", listaFuncionarios);
+            //ciInterface.getCRFuncionario().listar("../../cih/funcionario/JRListaFuncionario.jasper", listaFuncionarios);
         } catch (Exception e) {
             ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }

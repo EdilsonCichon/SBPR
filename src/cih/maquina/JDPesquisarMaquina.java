@@ -266,7 +266,7 @@ public class JDPesquisarMaquina extends javax.swing.JDialog {
         if (listaMaquinas == null || listaMaquinas.isEmpty())
             ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
         try {
-            ciInterface.getCRMaquina().listar("../../cih/maquina/JRListaMaquina.jasper", listaMaquinas);
+            //ciInterface.getCRMaquina().listar("../../cih/maquina/JRListaMaquina.jasper", listaMaquinas);
         } catch (Exception e) {
             ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }

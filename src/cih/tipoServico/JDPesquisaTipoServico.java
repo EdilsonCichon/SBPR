@@ -273,7 +273,7 @@ public class JDPesquisaTipoServico extends javax.swing.JDialog {
         if (listaTipoServicos == null || listaTipoServicos.isEmpty())
             ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
         try {
-            ciInterface.getCRTipoMaquina().listar("../../cih/tipoServico/JRListaTipoServico.jasper", listaTipoServicos);
+            //ciInterface.getCRTipoMaquina().listar("../../cih/tipoServico/JRListaTipoServico.jasper", listaTipoServicos);
         } catch (Exception e) {
             ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }

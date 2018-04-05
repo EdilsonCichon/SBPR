@@ -442,7 +442,7 @@ public class JDPesquisaServico extends javax.swing.JDialog {
             ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
         else {
             try {
-                ciInterface.getCRServico().listar("../../cih/servico/JRListaServico.jasper", listTable);
+                //ciInterface.getCRServico().listar("../../cih/servico/JRListaServico.jasper", listTable);
             } catch (Exception e) {
                 ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
             }

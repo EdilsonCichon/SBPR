@@ -267,7 +267,7 @@ public class JDPesquisaProdutor extends javax.swing.JDialog {
         if (listaProdutores == null || listaProdutores.isEmpty())
             ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
         try {
-            ciInterface.getCRProdutor().listar("../../cih/produtor/JRListaProdutor.jasper", listaProdutores);
+            //ciInterface.getCRProdutor().listar("../../cih/produtor/JRListaProdutor.jasper", listaProdutores);
         } catch (Exception e) {
             ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }

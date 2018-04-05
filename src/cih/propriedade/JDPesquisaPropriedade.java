@@ -277,7 +277,7 @@ public class JDPesquisaPropriedade extends javax.swing.JDialog {
         if (listaPropriedades == null || listaPropriedades.isEmpty())
             ciInterface.getCiMensagem().exibirMensagemErro(this, "Não existem dados para impressão!");
         try {
-            ciInterface.getCRPropriedade().listar("../../cih/propriedade/JRListaPropriedade.jasper", listaPropriedades);
+            //ciInterface.getCRPropriedade().listar("../../cih/propriedade/JRListaPropriedade.jasper", listaPropriedades);
         } catch (Exception e) {
             ciInterface.getCiMensagem().exibirMensagemErro(this, e.getMessage());
         }

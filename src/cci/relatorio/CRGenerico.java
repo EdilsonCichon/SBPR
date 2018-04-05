@@ -6,17 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JDialog;
-import net.sf.jasperreports.engine.JRException;
+/*import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.view.JasperViewer;*/
 
 public abstract class CRGenerico {
     
     public CRGenerico() {
     }
-    
+   /* 
     public void listar(String caminho, List lista) throws JRException, SBPRException {
         
         JDialog viewer = new JDialog(new javax.swing.JFrame(), "Visualização do Relatório", true);
@@ -35,5 +35,5 @@ public abstract class CRGenerico {
             viewer.setVisible(true);
         else
             throw new SBPRException(100);
-    }
+    }*/
 }
